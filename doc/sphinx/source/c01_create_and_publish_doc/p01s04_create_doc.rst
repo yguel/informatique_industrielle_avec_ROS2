@@ -9,6 +9,9 @@ Installer sphinx
 .. code-block:: bash
    
    sudo apt-get update
+
+.. code-block:: bash
+
    sudo apt-get install -f python3-sphinx
 
 Créer un répertoire pour la documentation:
@@ -32,8 +35,17 @@ Installer les dépendances:
 .. code-block:: bash
 
    cd ~/info_indus/info_indus_tutorial/doc/sphinx
+
+.. code-block:: bash
+
    python3 -m venv .venv
+
+.. code-block:: bash
+
    source .venv/bin/activate
+
+.. code-block:: bash
+
    pip install -r requirements.txt
 
 
@@ -46,6 +58,9 @@ Initialiser la documentation avec les outils sphinx:
 .. code-block:: bash
 
    cd ~/info_indus/info_indus_tutorial/doc
+
+.. code-block:: bash
+
    sphinx-quickstart sphinx
 
 Répondre aux questions posées par sphinx-quickstart.
@@ -101,6 +116,9 @@ Ajouter le fichier ``custom.css`` dans le répertoire ``_static/css``:
 .. code-block:: bash
 
    mkdir -p ~/info_indus/info_indus_tutorial/doc/sphinx/source/_static/css
+
+.. code-block:: bash
+
    touch ~/info_indus/info_indus_tutorial/doc/sphinx/source/_static/css/custom.css
 
 .. literalinclude:: ../_static/css/custom.css
@@ -118,6 +136,9 @@ Depuis le répertoire ``sphinx`` faire:
 .. code-block:: bash
 
    cd ~/info_indus/info_indus_tutorial/doc/sphinx
+
+.. code-block:: bash
+
    make html
 
 La documentation est un site statique html qui se trouve dans le répertoire ``build/html``.
@@ -143,7 +164,13 @@ Ajouter les fichiers de la documentation:
 .. code-block:: bash
 
    cd ~/info_indus/info_indus_tutorial/doc/sphinx
+
+.. code-block:: bash
+
    git add source
+
+.. code-block:: bash
+   
    git add Makefile make.bat requirements.txt
 
 Fair le commit des modifications:

@@ -50,6 +50,9 @@ Vous pouvez maintenant ajouter votre clé à l'agent ssh, cela vous évitera de 
 .. code-block:: bash
 
    ssh-agent /bin/bash
+
+.. code-block:: bash
+
    ssh-add ~/.ssh/id_ed25519_info_indus_tutorial
 
 
@@ -112,7 +115,13 @@ Effectuez les commandes suivantes:
 .. code-block:: bash
    
    git branch -a
+
+.. code-block:: bash
+
    git branch -M rolling
+
+.. code-block:: bash
+   
    git branch -a
 
 The branch commands permet de renommer la branche principale (appelée main ou master) en ``rolling`` en accord avec la politique de nommage de ROS2.
@@ -157,9 +166,21 @@ Créer un fichier sur cette branche nommée ``.gitkeep`` cela permet de garder l
 .. code-block:: bash
 
    touch .gitkeep
+
+.. code-block:: bash
+
    git add .gitkeep
+
+.. code-block:: bash
+
    git commit -m "First commit of the gh-pages branch"
+
+.. code-block:: bash
+
    git push -u origin gh-pages
+
+.. code-block:: bash
+
    git checkout rolling
 
 Nous allons créer un fichier spécial qui va dire à github de créer et de publier la documentation à chaque fois qu'un changement est fait sur la branche rolling
@@ -169,6 +190,9 @@ Créer le fichier ``.github/workflows/documentation.yml`` à la racine du projet
 .. code-block:: bash
 
    mkdir -p .github/workflows
+
+.. code-block:: bash
+   
    touch .github/workflows/documentation.yml
 
 Ajouter le contenu suivant dans le fichier ``.github/workflows/documentation.yml``:
