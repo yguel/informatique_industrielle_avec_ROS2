@@ -56,6 +56,9 @@ Git ne doit pas être configuré et il vous demande de mettre des variables à j
 .. code-block:: bash
 
    git config user.email "mon.email@insa-strasbourg.fr"
+
+.. code-block:: bash
+   
    git config user.name "Prénom NOM"
 
 
