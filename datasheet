@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Datasheet</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2>Menu</h2>
+    <a href="index.html">🏠 Accueil</a>
+    <a href="urdf.html">🤖 URDF</a>
+    <a href="simulation.html">🧪 Simulation</a>
+  </div>
+
+  <div class="content">
+    <h1>Datasheet</h1>
+    <p>Contenu de la datasheet ici.</p>
+  </div>
+
+</body>
+</html>

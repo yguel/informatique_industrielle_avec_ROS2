@@ -1,4 +1,4 @@
-# Cours d'informatique industrielle avec ROS2
+# coucou Cours d'informatique industrielle avec ROS2
 
 Ce dépôt contient les sources d'un cours francophone présentant le développement informatique industriel avec une mise en contexte dans le cadre du développement informatique pour la robotique dans l'environnement : ROS2.
 
