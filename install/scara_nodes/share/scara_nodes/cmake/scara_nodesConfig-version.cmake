@@ -1,0 +1,1 @@
+/home/mpr/info_indus/ros2_ws/build/scara_nodes/ament_cmake_core/scara_nodesConfig-version.cmake

@@ -1,0 +1,1 @@
+/home/mpr/info_indus/ros2_ws/build/scara_joint_velocity_controller/ament_cmake_export_dependencies/ament_cmake_export_dependencies-extras.cmake

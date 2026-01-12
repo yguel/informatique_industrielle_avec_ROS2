@@ -1,0 +1,1 @@
+/home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_nodes/scripts/trajectory_publisher.py

@@ -1,0 +1,54 @@
+[0.036s] Invoking command in '/home/mpr/info_indus/ros2_ws/build/scara_nodes': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_nodes -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/mpr/info_indus/ros2_ws/install/scara_nodes
+[0.335s] -- The C compiler identification is GNU 13.3.0
+[0.688s] -- The CXX compiler identification is GNU 13.3.0
+[0.756s] -- Detecting C compiler ABI info
+[1.027s] -- Detecting C compiler ABI info - done
+[1.044s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.048s] -- Detecting C compile features
+[1.050s] -- Detecting C compile features - done
+[1.069s] -- Detecting CXX compiler ABI info
+[1.367s] -- Detecting CXX compiler ABI info - done
+[1.418s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.418s] -- Detecting CXX compile features
+[1.423s] -- Detecting CXX compile features - done
+[1.442s] -- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.965s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[2.185s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[2.306s] -- Found rclpy: 7.1.6 (/opt/ros/jazzy/share/rclpy/cmake)
+[2.313s] -- Found trajectory_msgs: 5.3.6 (/opt/ros/jazzy/share/trajectory_msgs/cmake)
+[2.415s] -- Found rosidl_generator_c: 4.6.6 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[2.447s] -- Found rosidl_generator_cpp: 4.6.6 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[2.493s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.535s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.718s] -- Found ament_lint_auto: 0.17.3 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+[3.025s] -- Added test 'flake8' to check Python code syntax and style conventions
+[3.025s] -- Configured 'flake8' exclude dirs and/or files: 
+[3.026s] -- Added test 'lint_cmake' to check CMake code style
+[3.028s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[3.035s] -- Added test 'xmllint' to check XML markup files
+[3.036s] -- Configuring done (3.0s)
+[3.045s] -- Generating done (0.0s)
+[3.050s] -- Build files have been written to: /home/mpr/info_indus/ros2_ws/build/scara_nodes
+[3.076s] Invoked command in '/home/mpr/info_indus/ros2_ws/build/scara_nodes' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_nodes -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/mpr/info_indus/ros2_ws/install/scara_nodes
+[3.080s] Invoking command in '/home/mpr/info_indus/ros2_ws/build/scara_nodes': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/mpr/info_indus/ros2_ws/build/scara_nodes -- -j4 -l4
+[3.179s] Invoked command in '/home/mpr/info_indus/ros2_ws/build/scara_nodes' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/mpr/info_indus/ros2_ws/build/scara_nodes -- -j4 -l4
+[3.180s] Invoking command in '/home/mpr/info_indus/ros2_ws/build/scara_nodes': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/mpr/info_indus/ros2_ws/build/scara_nodes
+[3.198s] -- Install configuration: "Release"
+[3.199s] -- Execute custom install script
+[3.200s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_nodes/lib/scara_nodes/trajectory_publisher.py
+[3.227s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/ament_index/resource_index/package_run_dependencies/scara_nodes
+[3.248s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/ament_index/resource_index/parent_prefix_path/scara_nodes
+[3.271s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/environment/ament_prefix_path.sh
+[3.294s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/environment/ament_prefix_path.dsv
+[3.327s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/environment/path.sh
+[3.357s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/environment/path.dsv
+[3.391s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/local_setup.bash
+[3.426s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/local_setup.sh
+[3.476s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/local_setup.zsh
+[3.539s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/local_setup.dsv
+[3.572s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/package.dsv
+[3.616s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/ament_index/resource_index/packages/scara_nodes
+[3.651s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/cmake/scara_nodesConfig.cmake
+[3.686s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/cmake/scara_nodesConfig-version.cmake
+[3.727s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/package.xml
+[3.763s] Invoked command in '/home/mpr/info_indus/ros2_ws/build/scara_nodes' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/mpr/info_indus/ros2_ws/build/scara_nodes

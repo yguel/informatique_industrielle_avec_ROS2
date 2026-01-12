@@ -1,0 +1,16 @@
+/home/mpr/info_indus/ros2_ws/install/scara_nodes/lib/scara_nodes/trajectory_publisher.py
+/home/mpr/info_indus/ros2_ws/install/scara_nodes/share/ament_index/resource_index/package_run_dependencies/scara_nodes
+/home/mpr/info_indus/ros2_ws/install/scara_nodes/share/ament_index/resource_index/parent_prefix_path/scara_nodes
+/home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/environment/ament_prefix_path.sh
+/home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/environment/ament_prefix_path.dsv
+/home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/environment/path.sh
+/home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/environment/path.dsv
+/home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/local_setup.bash
+/home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/local_setup.sh
+/home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/local_setup.zsh
+/home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/local_setup.dsv
+/home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/package.dsv
+/home/mpr/info_indus/ros2_ws/install/scara_nodes/share/ament_index/resource_index/packages/scara_nodes
+/home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/cmake/scara_nodesConfig.cmake
+/home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/cmake/scara_nodesConfig-version.cmake
+/home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/package.xml

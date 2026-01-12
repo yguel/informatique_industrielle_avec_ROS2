@@ -1,0 +1,26 @@
+[0.031s] Invoking command in '/home/mpr/info_indus/ros2_ws/build/scara_bringup': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/mpr/info_indus/ros2_ws/build/scara_bringup -- -j4 -l4
+[0.154s] Invoked command in '/home/mpr/info_indus/ros2_ws/build/scara_bringup' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/mpr/info_indus/ros2_ws/build/scara_bringup -- -j4 -l4
+[0.157s] Invoking command in '/home/mpr/info_indus/ros2_ws/build/scara_bringup': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/mpr/info_indus/ros2_ws/build/scara_bringup
+[0.180s] -- Install configuration: "Release"
+[0.180s] -- Execute custom install script
+[0.180s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/launch/scara.launch.py
+[0.180s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/launch/scara_ecat.launch.py
+[0.180s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/launch/scara_fsoe_ecat.launch.py
+[0.180s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/launch/scara_gazebo.launch.py
+[0.180s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/config/scara_vel_sp_config.yaml
+[0.181s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/ament_index/resource_index/package_run_dependencies/scara_bringup
+[0.181s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/ament_index/resource_index/parent_prefix_path/scara_bringup
+[0.181s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/environment/ament_prefix_path.sh
+[0.181s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/environment/ament_prefix_path.dsv
+[0.181s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/environment/path.sh
+[0.181s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/environment/path.dsv
+[0.181s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/local_setup.bash
+[0.181s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/local_setup.sh
+[0.181s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/local_setup.zsh
+[0.182s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/local_setup.dsv
+[0.182s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/package.dsv
+[0.207s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/ament_index/resource_index/packages/scara_bringup
+[0.207s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/cmake/scara_bringupConfig.cmake
+[0.209s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/cmake/scara_bringupConfig-version.cmake
+[0.209s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/package.xml
+[0.211s] Invoked command in '/home/mpr/info_indus/ros2_ws/build/scara_bringup' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/mpr/info_indus/ros2_ws/build/scara_bringup

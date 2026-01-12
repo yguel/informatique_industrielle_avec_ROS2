@@ -1,0 +1,1 @@
+/home/mpr/info_indus/ros2_ws/build/scara_bringup/ament_cmake_environment_hooks/local_setup.bash

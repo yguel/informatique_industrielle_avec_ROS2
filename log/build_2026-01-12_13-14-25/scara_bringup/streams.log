@@ -1,0 +1,64 @@
+[0.032s] Invoking command in '/home/mpr/info_indus/ros2_ws/build/scara_bringup': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_bringup -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/mpr/info_indus/ros2_ws/install/scara_bringup
+[0.342s] -- The C compiler identification is GNU 13.3.0
+[0.724s] -- The CXX compiler identification is GNU 13.3.0
+[0.768s] -- Detecting C compiler ABI info
+[1.043s] -- Detecting C compiler ABI info - done
+[1.061s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.062s] -- Detecting C compile features
+[1.065s] -- Detecting C compile features - done
+[1.080s] -- Detecting CXX compiler ABI info
+[1.391s] -- Detecting CXX compiler ABI info - done
+[1.442s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.443s] -- Detecting CXX compile features
+[1.446s] -- Detecting CXX compile features - done
+[1.458s] -- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.985s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[2.211s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[2.315s] -- Found rclcpp: 28.1.13 (/opt/ros/jazzy/share/rclcpp/cmake)
+[2.425s] -- Found rosidl_generator_c: 4.6.6 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[2.459s] -- Found rosidl_generator_cpp: 4.6.6 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[2.505s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.546s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.759s] -- Found rmw_implementation_cmake: 7.3.2 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+[2.768s] -- Found rmw_fastrtps_cpp: 8.4.3 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+[3.104s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.13")  
+[3.161s] -- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+[3.217s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[3.482s] -- Found rclpy: 7.1.6 (/opt/ros/jazzy/share/rclpy/cmake)
+[3.488s] -- Found ament_lint_auto: 0.17.3 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+[3.918s] -- Added test 'copyright' to check source files copyright and LICENSE
+[3.923s] -- Added test 'flake8' to check Python code syntax and style conventions
+[3.924s] -- Configured 'flake8' exclude dirs and/or files: 
+[3.926s] -- Added test 'lint_cmake' to check CMake code style
+[3.928s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[3.930s] -- Added test 'xmllint' to check XML markup files
+[3.935s] -- Configuring done (3.9s)
+[3.943s] -- Generating done (0.0s)
+[3.947s] -- Build files have been written to: /home/mpr/info_indus/ros2_ws/build/scara_bringup
+[3.973s] Invoked command in '/home/mpr/info_indus/ros2_ws/build/scara_bringup' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_bringup -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/mpr/info_indus/ros2_ws/install/scara_bringup
+[3.977s] Invoking command in '/home/mpr/info_indus/ros2_ws/build/scara_bringup': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/mpr/info_indus/ros2_ws/build/scara_bringup -- -j4 -l4
+[4.073s] Invoked command in '/home/mpr/info_indus/ros2_ws/build/scara_bringup' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/mpr/info_indus/ros2_ws/build/scara_bringup -- -j4 -l4
+[4.076s] Invoking command in '/home/mpr/info_indus/ros2_ws/build/scara_bringup': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/mpr/info_indus/ros2_ws/build/scara_bringup
+[4.095s] -- Install configuration: "Release"
+[4.097s] -- Execute custom install script
+[4.097s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/launch/scara.launch.py
+[4.119s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/launch/scara_ecat.launch.py
+[4.140s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/launch/scara_fsoe_ecat.launch.py
+[4.161s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/launch/scara_gazebo.launch.py
+[4.183s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/config/scara_vel_sp_config.yaml
+[4.207s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/ament_index/resource_index/package_run_dependencies/scara_bringup
+[4.231s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/ament_index/resource_index/parent_prefix_path/scara_bringup
+[4.252s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/environment/ament_prefix_path.sh
+[4.271s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/environment/ament_prefix_path.dsv
+[4.291s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/environment/path.sh
+[4.311s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/environment/path.dsv
+[4.338s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/local_setup.bash
+[4.360s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/local_setup.sh
+[4.379s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/local_setup.zsh
+[4.397s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/local_setup.dsv
+[4.427s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/package.dsv
+[4.448s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/ament_index/resource_index/packages/scara_bringup
+[4.471s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/cmake/scara_bringupConfig.cmake
+[4.489s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/cmake/scara_bringupConfig-version.cmake
+[4.510s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/package.xml
+[4.543s] Invoked command in '/home/mpr/info_indus/ros2_ws/build/scara_bringup' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/mpr/info_indus/ros2_ws/build/scara_bringup

@@ -1,0 +1,4 @@
+source;share/scara_bringup/local_setup.bash
+source;share/scara_bringup/local_setup.dsv
+source;share/scara_bringup/local_setup.sh
+source;share/scara_bringup/local_setup.zsh

@@ -1,0 +1,28 @@
+In file included from [01m[K/home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_controllers/scara_joint_velocity_controller/include/scara_joint_velocity_controller/scara_joint_velocity_controller.hpp:27[m[K,
+                 from [01m[K/home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_controllers/scara_joint_velocity_controller/src/scara_joint_velocity_controller.cpp:15[m[K:
+[01m[K/opt/ros/jazzy/include/realtime_tools/realtime_tools/realtime_buffer.h:25:2:[m[K [01;35m[Kwarning: [m[K#warning "This header include is deprecated. Please update your code to use 'realtime_buffer.hpp' header." [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp]8;;[m[K]
+   25 | #[01;35m[Kwarning[m[K \
+      |  [01;35m[K^~~~~~~[m[K
+[01m[K/home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_controllers/scara_joint_velocity_controller/src/scara_joint_velocity_controller.cpp:[m[K In member function ‘[01m[Kvirtual controller_interface::return_type scara_joint_velocity_controller::ScaraJointVelocityController::[01;32m[Kupdate[m[K(const rclcpp::Time&, const rclcpp::Duration&)[m[K’:
+[01m[K/home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_controllers/scara_joint_velocity_controller/src/scara_joint_velocity_controller.cpp:188:46:[m[K [01;35m[Kwarning: [m[K‘[01m[Kdouble hardware_interface::LoanedStateInterface::[01;32m[Kget_value[m[K() const[m[K’ is deprecated: Use std::optional<T> get_optional() instead to retrieve the value. This method will be removed by the ROS 2 Kilted Kaiju release. [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+  188 |     double q = [01;35m[Kstate_interfaces_[j].get_value()[m[K;
+      |                [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~[m[K
+In file included from [01m[K/opt/ros/jazzy/include/controller_interface/controller_interface/controller_interface_base.hpp:30[m[K,
+                 from [01m[K/opt/ros/jazzy/include/controller_interface/controller_interface/controller_interface.hpp:21[m[K,
+                 from [01m[K/home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_controllers/scara_joint_velocity_controller/include/scara_joint_velocity_controller/scara_joint_velocity_controller.hpp:22[m[K:
+[01m[K/opt/ros/jazzy/include/hardware_interface/hardware_interface/loaned_state_interface.hpp:94:10:[m[K [01;36m[Knote: [m[Kdeclared here
+   94 |   double [01;36m[Kget_value[m[K() const
+      |          [01;36m[K^~~~~~~~~[m[K
+[01m[K/home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_controllers/scara_joint_velocity_controller/src/scara_joint_velocity_controller.cpp:196:39:[m[K [01;35m[Kwarning: [m[Kignoring return value of ‘[01m[Kbool hardware_interface::LoanedCommandInterface::[01;32m[Kset_value[m[K(const T&, unsigned int) [35m[K[with T = double][m[K[m[K’, declared with attribute ‘[01m[Knodiscard[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-result-Wunused-result]8;;[m[K]
+  196 |       [01;35m[Kcommand_interfaces_[j].set_value(command)[m[K;
+      |       [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~[m[K
+In file included from [01m[K/opt/ros/jazzy/include/controller_interface/controller_interface/controller_interface_base.hpp:29[m[K:
+[01m[K/opt/ros/jazzy/include/hardware_interface/hardware_interface/loaned_command_interface.hpp:113:22:[m[K [01;36m[Knote: [m[Kdeclared here
+  113 |   [[nodiscard]] bool [01;36m[Kset_value[m[K(const T & value, unsigned int max_tries = 10)
+      |                      [01;36m[K^~~~~~~~~[m[K
+[01m[K/home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_controllers/scara_joint_velocity_controller/src/scara_joint_velocity_controller.cpp:202:39:[m[K [01;35m[Kwarning: [m[Kignoring return value of ‘[01m[Kbool hardware_interface::LoanedCommandInterface::[01;32m[Kset_value[m[K(const T&, unsigned int) [35m[K[with T = double][m[K[m[K’, declared with attribute ‘[01m[Knodiscard[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-result-Wunused-result]8;;[m[K]
+  202 |       [01;35m[Kcommand_interfaces_[j].set_value(command)[m[K;
+      |       [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~[m[K
+[01m[K/opt/ros/jazzy/include/hardware_interface/hardware_interface/loaned_command_interface.hpp:113:22:[m[K [01;36m[Knote: [m[Kdeclared here
+  113 |   [[nodiscard]] bool [01;36m[Kset_value[m[K(const T & value, unsigned int max_tries = 10)
+      |                      [01;36m[K^~~~~~~~~[m[K

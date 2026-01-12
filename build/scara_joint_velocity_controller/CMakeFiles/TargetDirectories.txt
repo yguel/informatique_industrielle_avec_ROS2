@@ -1,0 +1,10 @@
+/home/mpr/info_indus/ros2_ws/build/scara_joint_velocity_controller/CMakeFiles/uninstall.dir
+/home/mpr/info_indus/ros2_ws/build/scara_joint_velocity_controller/CMakeFiles/scara_joint_velocity_controller_uninstall.dir
+/home/mpr/info_indus/ros2_ws/build/scara_joint_velocity_controller/CMakeFiles/scara_joint_velocity_controller.dir
+/home/mpr/info_indus/ros2_ws/build/scara_joint_velocity_controller/CMakeFiles/test.dir
+/home/mpr/info_indus/ros2_ws/build/scara_joint_velocity_controller/CMakeFiles/edit_cache.dir
+/home/mpr/info_indus/ros2_ws/build/scara_joint_velocity_controller/CMakeFiles/rebuild_cache.dir
+/home/mpr/info_indus/ros2_ws/build/scara_joint_velocity_controller/CMakeFiles/list_install_components.dir
+/home/mpr/info_indus/ros2_ws/build/scara_joint_velocity_controller/CMakeFiles/install.dir
+/home/mpr/info_indus/ros2_ws/build/scara_joint_velocity_controller/CMakeFiles/install/local.dir
+/home/mpr/info_indus/ros2_ws/build/scara_joint_velocity_controller/CMakeFiles/install/strip.dir

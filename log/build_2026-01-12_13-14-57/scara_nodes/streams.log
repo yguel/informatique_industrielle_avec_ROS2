@@ -1,0 +1,22 @@
+[0.042s] Invoking command in '/home/mpr/info_indus/ros2_ws/build/scara_nodes': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/mpr/info_indus/ros2_ws/build/scara_nodes -- -j4 -l4
+[0.146s] Invoked command in '/home/mpr/info_indus/ros2_ws/build/scara_nodes' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/mpr/info_indus/ros2_ws/build/scara_nodes -- -j4 -l4
+[0.149s] Invoking command in '/home/mpr/info_indus/ros2_ws/build/scara_nodes': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/mpr/info_indus/ros2_ws/build/scara_nodes
+[0.177s] -- Install configuration: "Release"
+[0.177s] -- Execute custom install script
+[0.178s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_nodes/lib/scara_nodes/trajectory_publisher.py
+[0.179s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/ament_index/resource_index/package_run_dependencies/scara_nodes
+[0.180s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/ament_index/resource_index/parent_prefix_path/scara_nodes
+[0.181s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/environment/ament_prefix_path.sh
+[0.183s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/environment/ament_prefix_path.dsv
+[0.183s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/environment/path.sh
+[0.185s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/environment/path.dsv
+[0.185s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/local_setup.bash
+[0.186s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/local_setup.sh
+[0.190s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/local_setup.zsh
+[0.190s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/local_setup.dsv
+[0.190s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/package.dsv
+[0.213s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/ament_index/resource_index/packages/scara_nodes
+[0.213s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/cmake/scara_nodesConfig.cmake
+[0.213s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/cmake/scara_nodesConfig-version.cmake
+[0.214s] -- Up-to-date symlink: /home/mpr/info_indus/ros2_ws/install/scara_nodes/share/scara_nodes/package.xml
+[0.254s] Invoked command in '/home/mpr/info_indus/ros2_ws/build/scara_nodes' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/mpr/info_indus/ros2_ws/build/scara_nodes

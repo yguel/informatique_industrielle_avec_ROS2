@@ -1,0 +1,1 @@
+controller_manager:gazebo_ros:gazebo_ros2_control:joint_state_publisher:rclpy:ros2_control:ros2_controllers:rviz2:sensor_msgs:slider_publisher:urdf:visualization_msgs:xacro

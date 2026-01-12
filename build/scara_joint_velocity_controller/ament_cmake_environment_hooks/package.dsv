@@ -1,0 +1,4 @@
+source;share/scara_joint_velocity_controller/local_setup.bash
+source;share/scara_joint_velocity_controller/local_setup.dsv
+source;share/scara_joint_velocity_controller/local_setup.sh
+source;share/scara_joint_velocity_controller/local_setup.zsh

@@ -1,0 +1,1 @@
+/home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_controllers/scara_joint_velocity_controller/include/scara_joint_velocity_controller/scara_joint_velocity_controller.hpp

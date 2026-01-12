@@ -1,0 +1,1 @@
+/home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_bringup/launch/scara_gazebo.launch.py

@@ -1,0 +1,8 @@
+source;share/scara_nodes/hook/cmake_prefix_path.ps1
+source;share/scara_nodes/hook/cmake_prefix_path.dsv
+source;share/scara_nodes/hook/cmake_prefix_path.sh
+source;share/scara_nodes/local_setup.bash
+source;share/scara_nodes/local_setup.dsv
+source;share/scara_nodes/local_setup.ps1
+source;share/scara_nodes/local_setup.sh
+source;share/scara_nodes/local_setup.zsh

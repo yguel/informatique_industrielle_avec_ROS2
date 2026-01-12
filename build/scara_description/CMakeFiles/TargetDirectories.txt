@@ -1,0 +1,9 @@
+/home/mpr/info_indus/ros2_ws/build/scara_description/CMakeFiles/uninstall.dir
+/home/mpr/info_indus/ros2_ws/build/scara_description/CMakeFiles/scara_description_uninstall.dir
+/home/mpr/info_indus/ros2_ws/build/scara_description/CMakeFiles/test.dir
+/home/mpr/info_indus/ros2_ws/build/scara_description/CMakeFiles/edit_cache.dir
+/home/mpr/info_indus/ros2_ws/build/scara_description/CMakeFiles/rebuild_cache.dir
+/home/mpr/info_indus/ros2_ws/build/scara_description/CMakeFiles/list_install_components.dir
+/home/mpr/info_indus/ros2_ws/build/scara_description/CMakeFiles/install.dir
+/home/mpr/info_indus/ros2_ws/build/scara_description/CMakeFiles/install/local.dir
+/home/mpr/info_indus/ros2_ws/build/scara_description/CMakeFiles/install/strip.dir

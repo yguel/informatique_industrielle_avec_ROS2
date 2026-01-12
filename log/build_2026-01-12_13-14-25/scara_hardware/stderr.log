@@ -1,0 +1,10 @@
+[01m[K/home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_hardware/src/scara_robot.cpp:[m[K In member function ‘[01m[Kvirtual CallbackReturn scara_hardware::ScaraRobot::[01;32m[Kon_init[m[K(const hardware_interface::HardwareInfo&)[m[K’:
+[01m[K/home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_hardware/src/scara_robot.cpp:24:51:[m[K [01;35m[Kwarning: [m[K‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn hardware_interface::HardwareComponentInterface::[01;32m[Kon_init[m[K(const hardware_interface::HardwareInfo&)[m[K’ is deprecated: Use on_init(const HardwareComponentInterfaceParams & params) instead. [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+   24 |   if ([01;35m[Khardware_interface::SystemInterface::on_init(info)[m[K != CallbackReturn::SUCCESS) {
+      |       [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~[m[K
+In file included from [01m[K/opt/ros/jazzy/include/hardware_interface/hardware_interface/system_interface.hpp:18[m[K,
+                 from [01m[K/home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_hardware/include/scara_hardware/scara_robot.hpp:24[m[K,
+                 from [01m[K/home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_hardware/src/scara_robot.cpp:15[m[K:
+[01m[K/opt/ros/jazzy/include/hardware_interface/hardware_interface/hardware_component_interface.hpp:235:26:[m[K [01;36m[Knote: [m[Kdeclared here
+  235 |   virtual CallbackReturn [01;36m[Kon_init[m[K(const HardwareInfo & hardware_info)
+      |                          [01;36m[K^~~~~~~[m[K

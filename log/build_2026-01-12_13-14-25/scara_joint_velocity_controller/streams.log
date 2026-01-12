@@ -1,0 +1,99 @@
+[0.032s] Invoking command in '/home/mpr/info_indus/ros2_ws/build/scara_joint_velocity_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_controllers/scara_joint_velocity_controller -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller
+[0.342s] -- The C compiler identification is GNU 13.3.0
+[0.722s] -- The CXX compiler identification is GNU 13.3.0
+[0.763s] -- Detecting C compiler ABI info
+[1.051s] -- Detecting C compiler ABI info - done
+[1.071s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.073s] -- Detecting C compile features
+[1.073s] -- Detecting C compile features - done
+[1.100s] -- Detecting CXX compiler ABI info
+[1.448s] -- Detecting CXX compiler ABI info - done
+[1.465s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.467s] -- Detecting CXX compile features
+[1.468s] -- Detecting CXX compile features - done
+[1.479s] -- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[2.025s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[2.230s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[2.317s] -- Found controller_interface: 4.39.2 (/opt/ros/jazzy/share/controller_interface/cmake)
+[2.431s] -- Found rosidl_generator_c: 4.6.6 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[2.466s] -- Found rosidl_generator_cpp: 4.6.6 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[2.500s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.542s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[3.083s] -- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+[3.200s] -- Found rmw_implementation_cmake: 7.3.2 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+[3.209s] -- Found rmw_fastrtps_cpp: 8.4.3 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+[3.271s] -- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+[3.489s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.13")  
+[3.493s] -- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+[3.557s] -- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+[3.575s] -- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+[3.620s] -- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+[3.650s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[4.363s] -- Found ament_cmake_gtest: 2.5.4 (/opt/ros/jazzy/share/ament_cmake_gtest/cmake)
+[4.371s] -- Found ament_lint_auto: 0.17.3 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+[4.592s] -- Configuring done (4.5s)
+[4.680s] -- Generating done (0.1s)
+[4.697s] -- Build files have been written to: /home/mpr/info_indus/ros2_ws/build/scara_joint_velocity_controller
+[4.745s] Invoked command in '/home/mpr/info_indus/ros2_ws/build/scara_joint_velocity_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_controllers/scara_joint_velocity_controller -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller
+[4.746s] Invoking command in '/home/mpr/info_indus/ros2_ws/build/scara_joint_velocity_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/mpr/info_indus/ros2_ws/build/scara_joint_velocity_controller -- -j4 -l4
+[4.896s] [ 50%] [32mBuilding CXX object CMakeFiles/scara_joint_velocity_controller.dir/src/scara_joint_velocity_controller.cpp.o[0m
+[5.922s] In file included from [01m[K/home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_controllers/scara_joint_velocity_controller/include/scara_joint_velocity_controller/scara_joint_velocity_controller.hpp:27[m[K,
+[5.922s]                  from [01m[K/home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_controllers/scara_joint_velocity_controller/src/scara_joint_velocity_controller.cpp:15[m[K:
+[5.922s] [01m[K/opt/ros/jazzy/include/realtime_tools/realtime_tools/realtime_buffer.h:25:2:[m[K [01;35m[Kwarning: [m[K#warning "This header include is deprecated. Please update your code to use 'realtime_buffer.hpp' header." [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp]8;;[m[K]
+[5.922s]    25 | #[01;35m[Kwarning[m[K \
+[5.922s]       |  [01;35m[K^~~~~~~[m[K
+[10.470s] [01m[K/home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_controllers/scara_joint_velocity_controller/src/scara_joint_velocity_controller.cpp:[m[K In member function ‘[01m[Kvirtual controller_interface::return_type scara_joint_velocity_controller::ScaraJointVelocityController::[01;32m[Kupdate[m[K(const rclcpp::Time&, const rclcpp::Duration&)[m[K’:
+[10.470s] [01m[K/home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_controllers/scara_joint_velocity_controller/src/scara_joint_velocity_controller.cpp:188:46:[m[K [01;35m[Kwarning: [m[K‘[01m[Kdouble hardware_interface::LoanedStateInterface::[01;32m[Kget_value[m[K() const[m[K’ is deprecated: Use std::optional<T> get_optional() instead to retrieve the value. This method will be removed by the ROS 2 Kilted Kaiju release. [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+[10.470s]   188 |     double q = [01;35m[Kstate_interfaces_[j].get_value()[m[K;
+[10.470s]       |                [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~[m[K
+[10.471s] In file included from [01m[K/opt/ros/jazzy/include/controller_interface/controller_interface/controller_interface_base.hpp:30[m[K,
+[10.471s]                  from [01m[K/opt/ros/jazzy/include/controller_interface/controller_interface/controller_interface.hpp:21[m[K,
+[10.471s]                  from [01m[K/home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_controllers/scara_joint_velocity_controller/include/scara_joint_velocity_controller/scara_joint_velocity_controller.hpp:22[m[K:
+[10.471s] [01m[K/opt/ros/jazzy/include/hardware_interface/hardware_interface/loaned_state_interface.hpp:94:10:[m[K [01;36m[Knote: [m[Kdeclared here
+[10.471s]    94 |   double [01;36m[Kget_value[m[K() const
+[10.471s]       |          [01;36m[K^~~~~~~~~[m[K
+[10.471s] [01m[K/home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_controllers/scara_joint_velocity_controller/src/scara_joint_velocity_controller.cpp:196:39:[m[K [01;35m[Kwarning: [m[Kignoring return value of ‘[01m[Kbool hardware_interface::LoanedCommandInterface::[01;32m[Kset_value[m[K(const T&, unsigned int) [35m[K[with T = double][m[K[m[K’, declared with attribute ‘[01m[Knodiscard[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-result-Wunused-result]8;;[m[K]
+[10.471s]   196 |       [01;35m[Kcommand_interfaces_[j].set_value(command)[m[K;
+[10.471s]       |       [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~[m[K
+[10.472s] In file included from [01m[K/opt/ros/jazzy/include/controller_interface/controller_interface/controller_interface_base.hpp:29[m[K:
+[10.472s] [01m[K/opt/ros/jazzy/include/hardware_interface/hardware_interface/loaned_command_interface.hpp:113:22:[m[K [01;36m[Knote: [m[Kdeclared here
+[10.472s]   113 |   [[nodiscard]] bool [01;36m[Kset_value[m[K(const T & value, unsigned int max_tries = 10)
+[10.472s]       |                      [01;36m[K^~~~~~~~~[m[K
+[10.472s] [01m[K/home/mpr/info_indus/ros2_ws/src/ecat_ros2_workshop/scara_controllers/scara_joint_velocity_controller/src/scara_joint_velocity_controller.cpp:202:39:[m[K [01;35m[Kwarning: [m[Kignoring return value of ‘[01m[Kbool hardware_interface::LoanedCommandInterface::[01;32m[Kset_value[m[K(const T&, unsigned int) [35m[K[with T = double][m[K[m[K’, declared with attribute ‘[01m[Knodiscard[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-result-Wunused-result]8;;[m[K]
+[10.472s]   202 |       [01;35m[Kcommand_interfaces_[j].set_value(command)[m[K;
+[10.472s]       |       [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~[m[K
+[10.472s] [01m[K/opt/ros/jazzy/include/hardware_interface/hardware_interface/loaned_command_interface.hpp:113:22:[m[K [01;36m[Knote: [m[Kdeclared here
+[10.472s]   113 |   [[nodiscard]] bool [01;36m[Kset_value[m[K(const T & value, unsigned int max_tries = 10)
+[10.472s]       |                      [01;36m[K^~~~~~~~~[m[K
+[25.102s] [100%] [32m[1mLinking CXX shared library libscara_joint_velocity_controller.so[0m
+[25.479s] [100%] Built target scara_joint_velocity_controller
+[25.504s] Invoked command in '/home/mpr/info_indus/ros2_ws/build/scara_joint_velocity_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/mpr/info_indus/ros2_ws/build/scara_joint_velocity_controller -- -j4 -l4
+[25.507s] Invoking command in '/home/mpr/info_indus/ros2_ws/build/scara_joint_velocity_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/mpr/info_indus/ros2_ws/build/scara_joint_velocity_controller
+[25.524s] -- Install configuration: "Release"
+[25.524s] -- Execute custom install script
+[25.525s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/share/scara_joint_velocity_controller//controller_plugin.xml
+[25.544s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/include/scara_joint_velocity_controller/scara_joint_velocity_controller.hpp
+[25.563s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/include/scara_joint_velocity_controller/visibility_control.h
+[25.582s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/lib/libscara_joint_velocity_controller.so
+[25.604s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/share/scara_joint_velocity_controller/environment/library_path.sh
+[25.624s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/share/scara_joint_velocity_controller/environment/library_path.dsv
+[25.643s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/share/ament_index/resource_index/package_run_dependencies/scara_joint_velocity_controller
+[25.661s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/share/ament_index/resource_index/parent_prefix_path/scara_joint_velocity_controller
+[25.679s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/share/scara_joint_velocity_controller/environment/ament_prefix_path.sh
+[25.697s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/share/scara_joint_velocity_controller/environment/ament_prefix_path.dsv
+[25.719s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/share/scara_joint_velocity_controller/environment/path.sh
+[25.738s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/share/scara_joint_velocity_controller/environment/path.dsv
+[25.757s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/share/scara_joint_velocity_controller/local_setup.bash
+[25.776s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/share/scara_joint_velocity_controller/local_setup.sh
+[25.794s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/share/scara_joint_velocity_controller/local_setup.zsh
+[25.815s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/share/scara_joint_velocity_controller/local_setup.dsv
+[25.834s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/share/scara_joint_velocity_controller/package.dsv
+[25.853s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/share/ament_index/resource_index/packages/scara_joint_velocity_controller
+[25.871s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/share/ament_index/resource_index/controller_interface__pluginlib__plugin/scara_joint_velocity_controller
+[25.891s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/share/scara_joint_velocity_controller/cmake/ament_cmake_export_dependencies-extras.cmake
+[25.913s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/share/scara_joint_velocity_controller/cmake/ament_cmake_export_include_directories-extras.cmake
+[25.932s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/share/scara_joint_velocity_controller/cmake/ament_cmake_export_libraries-extras.cmake
+[25.950s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/share/scara_joint_velocity_controller/cmake/scara_joint_velocity_controllerConfig.cmake
+[25.969s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/share/scara_joint_velocity_controller/cmake/scara_joint_velocity_controllerConfig-version.cmake
+[25.988s] -- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_joint_velocity_controller/share/scara_joint_velocity_controller/package.xml
+[26.013s] Invoked command in '/home/mpr/info_indus/ros2_ws/build/scara_joint_velocity_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/mpr/info_indus/ros2_ws/build/scara_joint_velocity_controller

@@ -1,0 +1,58 @@
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Found rclcpp: 28.1.13 (/opt/ros/jazzy/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 4.6.6 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+-- Found rosidl_generator_cpp: 4.6.6 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 7.3.2 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 8.4.3 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+-- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.13")  
+-- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found rclpy: 7.1.6 (/opt/ros/jazzy/share/rclpy/cmake)
+-- Found ament_lint_auto: 0.17.3 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+-- Added test 'copyright' to check source files copyright and LICENSE
+-- Added test 'flake8' to check Python code syntax and style conventions
+-- Configured 'flake8' exclude dirs and/or files: 
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done (3.9s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/mpr/info_indus/ros2_ws/build/scara_bringup
+-- Install configuration: "Release"
+-- Execute custom install script
+-- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/launch/scara.launch.py
+-- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/launch/scara_ecat.launch.py
+-- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/launch/scara_fsoe_ecat.launch.py
+-- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/launch/scara_gazebo.launch.py
+-- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/config/scara_vel_sp_config.yaml
+-- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/ament_index/resource_index/package_run_dependencies/scara_bringup
+-- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/ament_index/resource_index/parent_prefix_path/scara_bringup
+-- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/environment/ament_prefix_path.sh
+-- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/environment/ament_prefix_path.dsv
+-- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/environment/path.sh
+-- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/environment/path.dsv
+-- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/local_setup.bash
+-- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/local_setup.sh
+-- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/local_setup.zsh
+-- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/local_setup.dsv
+-- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/package.dsv
+-- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/ament_index/resource_index/packages/scara_bringup
+-- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/cmake/scara_bringupConfig.cmake
+-- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/cmake/scara_bringupConfig-version.cmake
+-- Symlinking: /home/mpr/info_indus/ros2_ws/install/scara_bringup/share/scara_bringup/package.xml
