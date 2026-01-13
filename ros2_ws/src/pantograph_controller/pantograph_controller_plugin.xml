@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<library path="pantograph_controller">
+    <class
+        name="pantograph_controller/PantographController"
+        type="pantograph_controller::PantographController"
+        base_class_type="controller_interface::ControllerInterface">
+        <description>
+            ros2_control controller for a pantograph mechanism
+        </description>
+    </class>
+</library>

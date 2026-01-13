@@ -1,0 +1,9 @@
+<library path="pantographe_hardware">
+    <class name="pantographe_hardware/PantographeHardwareInterface"
+            type="pantographe_hardware::PantographeHardwareInterface"
+            base_class_type="hardware_interface::SystemInterface">
+        <description>
+            Hardware interface pour un pantographe avec 2 moteurs dynamixel
+        </description>
+    </class>
+</library>

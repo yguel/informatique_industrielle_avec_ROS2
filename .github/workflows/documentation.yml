@@ -20,6 +20,8 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # ensure full history so pushes/merges to gh-pages are fast-forwardable
 
       - name: Install dependencies
         run: |
@@ -52,3 +54,4 @@ jobs:
           branch: gh-pages
           directory: gh-pages
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          force: true           # overwrite remote if it has diverged (fixes rejected push)

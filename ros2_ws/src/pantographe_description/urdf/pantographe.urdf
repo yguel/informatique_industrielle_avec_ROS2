@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<robot name="pantographe" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!--
+    Xacro file for the pantographe model.
+    Links: base, link1, link2, link3, link4
+    Meshes expected at: package://pantographe_description/meshes/base.dae and link1.dae..link4.dae
+
+    Notes:
+    - There are 5 joints forming a closed chain.
+    - Since URDF does not natively support closed kinematic loops, this file will ommit closing the 
+      chain by ignoring joint3 between link2 and link3.
+    - Joint 1 and 5 are the only driven joints. 
+    -->
+
+  <xacro:include filename="$(find pantographe_description)/urdf/pantographe_macros.urdf.xacro"/>
+
+  <!-- links:  -->
+  <xacro:link_with_mesh name="base"  mesh="base.dae"  mass="2.0"  ixx="0.02" iyy="0.02" izz="0.02"/>
+  <xacro:link_with_mesh name="link1" mesh="link1.dae" mass="0.5"  ixx="0.005" iyy="0.005" izz="0.005"/>
+  <xacro:link_with_mesh name="link2" mesh="link2.dae" mass="0.5"  ixx="0.005" iyy="0.005" izz="0.005"/>
+  <xacro:link_with_mesh name="link3" mesh="link3.dae" mass="0.5"  ixx="0.005" iyy="0.005" izz="0.005"/>
+  <xacro:link_with_mesh name="link4" mesh="link4.dae" mass="0.5"  ixx="0.005" iyy="0.005" izz="0.005"/>
+
+  <!-- joints: revolute about y. origins mesured in cad -->
+  <xacro:revolute_joint name="joint1" parent="base"  child="link1" xyz="-0.0800 0.0320 0.0700" rpy="-1.57079 1.57079 0" axis="0 0 1" lower="-3.1416" upper="3.1416" effort="10" velocity="5"/>
+  <xacro:revolute_joint name="joint5" parent="base" child="link4" xyz="0.0580 0.0320 0.0700" rpy="-1.57079 1.57079 0" axis="0 0 1" lower="-3.1416" upper="3.1416" effort="10" velocity="5"/>
+  <xacro:revolute_joint name="joint2" parent="link1" child="link2" xyz="0.0800 0.0000 0.0540" rpy="1.57079632679 0 3.14159" axis="0 1 0" lower="-3.1416" upper="3.1416" effort="10" velocity="5"/>
+  <xacro:revolute_joint name="joint4" parent="link4" child="link3" xyz="0.0790 0.0000 0.0530" rpy="-1.57079 0 3.14159" axis="0 1 0" lower="-3.1416" upper="3.1416" effort="10" velocity="5"/>
+
+</robot>

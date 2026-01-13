@@ -1,6 +1,6 @@
-###################################################
- Génération de la description URDF du pantographe
-###################################################
+###############################################
+Prérequis de la description URDF du pantographe
+###############################################
 
 Nous allons utiliser le modèle 3D au format step conçu et réalisé par M. Olivier PICCIN pour générer la description URDF du pantographe.
 
@@ -50,4 +50,8 @@ Pour convertir les modèles 3D en collada (dae), vous pouvez utiliser le logicie
 Création du fichier URDF
 =========================
 
-Dans un fichier URDF les modèles 3D sont référencés par des balises ``<mesh>``.
+.. warning::
+   **Erreur importante dans les fichiers fournis**
+   Les fichiers URDF référence les maillages 3D par rapport au repère des liens. Il est donc crucial de vérifier et d'ajuster les positions et orientations des repères dans les fichiers 3D pour qu'ils puissent être intégrés correctement (aussi capitale pour le calcul des masses et inerties). Des erreurs dans ces repères peuvent entraîner des incohérences dans la visualisation et la simulation du robot.
+
+   Pour ce faire nous recommandons de réexporter les fichiers 3D **individuellement**  en s'assurant qu'il sont bien reférencé par rapport au repère de la pièce (et non pas par rapport au repère global de l'assemblage).
