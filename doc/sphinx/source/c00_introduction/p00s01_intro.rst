@@ -1,5 +1,5 @@
 *************************************
-Développement informatique avec ROS2
+Développement informatique avec ROS2 test
 *************************************
 
 | Ce cours est une introduction pratique aux bonnes pratiques de développement informatique en prenant comme cas d'étude le développement de logiciels pour des applications robotiques avec ROS2. ROS2 crée un environnement de développement logiciel générique pour la robotique.
