@@ -19,6 +19,6 @@ Exemple de documentations de qualité
 
    * Le code `source de ethercat_driver_ros2 <https://github.com/ICube-Robotics/ethercat_driver_ros2>`_
 
-* La librairie `CGAL <https://doc.cgal.org/latest/Manual/index.html>`_
+* La bibliothèque `CGAL <https://doc.cgal.org/latest/Manual/index.html>`_
 
    * Le code `source de CGAL <https://github.com/CGAL/cgal>`_
