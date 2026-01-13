@@ -8,6 +8,7 @@ Pantographe de dessin robotisé avec Raspberry Pi et ROS2
    p50s01_material_description
    p50s02_mechanical_description
    p50s03_urdf
+   p50s04_dynamixel
 
 .. figure:: resources/img/real_system_photo.png
    :align: center

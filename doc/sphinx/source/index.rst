@@ -19,7 +19,7 @@ Table des matières
 
 .. toctree:: 
    :maxdepth: 3
-   :caption: Travaux Pratiques
+   :caption: Travaux Pratiques (Projet Binder, Hatton, Hoang)
 
    p00_pentograph_pencil_holder_with_rpi_and_dynamixel/p50s00_index
    p01_rpi_ubuntu_as_a_ros2_robotic_platform/p51s00_index
