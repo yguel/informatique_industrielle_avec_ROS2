@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<robot name = "scara" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <ros2_control name="scara" type="system">
+        <hardware>
+            <plugin>ethercat_driver/EthercatDriver</plugin>
+            <param name="master_id">0</param>
+            <param name="control_frequency">500</param>
+        </hardware>
+
+        <joint name="joint1">
+            <state_interface name="position" />
+            <command_interface name="position" />
+            <state_interface name="velocity" />
+            <command_interface name="velocity" />
+            <!--GPIO Declaration-->
+            <command_interface name="reset_fault"/>
+            <state_interface name="reset_fault"/>
+            <ec_module name="circulo_ecat_01">
+                <plugin>ethercat_generic_plugins/EcCiA402Drive</plugin>
+                <param name="alias">0</param>
+                <param name="position">0</param>
+                <!-- Available modes of operation = position 8, velocity 9, effort 10, homing 6 -->
+                <param name="mode_of_operation">8</param>
+                <!-- Synapticon CirculoSMM  -->
+                <param name="slave_config">$(find scara_description)/config/circulo_rot_20bits.yaml</param>
+            </ec_module>
+        </joint>
+
+
+
+        <joint name="joint2">
+            <state_interface name="position" />
+            <command_interface name="position" />
+            <state_interface name="velocity" />
+            <command_interface name="velocity" />
+        
+            <command_interface name="reset_fault"/>
+            <state_interface name="reset_fault"/>
+           <ec_module name="circulo_ecat_02">
+                <plugin>ethercat_generic_plugins/EcCiA402Drive</plugin>
+                <param name="alias">0</param>
+                <param name="position">1</param>
+               
+                <param name="mode_of_operation">8</param>
+              
+                <param name="slave_config">$(find scara_description)/config/circulo_rot_20bits.yaml</param>
+            </ec_module>
+        </joint>
+
+        <joint name="joint3">
+            <state_interface name="position" />
+            <command_interface name="position" />
+            <state_interface name="velocity" />
+            <command_interface name="velocity" />
+       
+            <command_interface name="reset_fault"/>
+            <state_interface name="reset_fault"/>
+            <ec_module name="circulo_ecat_03">
+                <plugin>ethercat_generic_plugins/EcCiA402Drive</plugin>
+                <param name="alias">0</param>
+                <param name="position">2</param>
+           
+                <param name="mode_of_operation">8</param>
+             
+                <param name="slave_config">$(find scara_description)/config/circulo_trans_20bits.yaml</param>
+            </ec_module>
+        </joint>
+
+        <joint name="joint4">
+            <state_interface name="position" />
+            <command_interface name="position" />
+            <state_interface name="velocity" />
+            <command_interface name="velocity" />
+        
+            <command_interface name="reset_fault"/>
+            <state_interface name="reset_fault"/>
+            <ec_module name="circulo_ecat_04">
+                <plugin>ethercat_generic_plugins/EcCiA402Drive</plugin>
+                <param name="alias">0</param>
+                <param name="position">3</param>
+             
+                <param name="mode_of_operation">8</param>
+           
+                <param name="slave_config">$(find scara_description)/config/circulo_rot_20bits.yaml</param>
+            </ec_module>
+        </joint>
+
+    </ros2_control>
+</robot>

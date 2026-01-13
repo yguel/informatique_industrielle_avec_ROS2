@@ -1,0 +1,87 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 500  # Hz
+
+    scara_trajectory_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    scara_position_controller:
+      type: position_controllers/JointGroupPositionController
+
+    scara_joint_velocity_controller:
+      type: scara_joint_velocity_controller/ScaraJointVelocityController
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+    
+    gpio_reset_controller:
+      type: gpio_controllers/GpioCommandController
+
+    gpio_safety_controller:
+      type: gpio_controllers/GpioCommandController
+
+
+scara_trajectory_controller:
+  ros__parameters:
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+    joints:
+      - joint1
+      - joint2
+      - joint3
+
+scara_position_controller:
+  ros__parameters:
+    joints:
+      - joint1
+      - joint2
+      - joint3
+
+scara_joint_velocity_controller:
+  ros__parameters:
+    joints:
+      - joint1
+      - joint2
+      - joint3
+
+gpio_reset_controller:
+  ros__parameters:
+    gpios:
+      - joint1
+      - joint2
+      - joint3
+    command_interfaces:
+      joint1:
+        - interfaces:
+          - reset_fault
+      joint2:
+        - interfaces:
+          - reset_fault
+      joint3:
+        - interfaces:
+          - reset_fault
+    state_interfaces:
+      joint1:
+        - interfaces:
+          - reset_fault
+      joint2:
+        - interfaces:
+          - reset_fault
+      joint3:
+        - interfaces:
+          - reset_fault
+
+gpio_safety_controller:
+  ros__parameters:
+    gpios:
+      - el6910_fsoe
+    command_interfaces:
+      el6910_fsoe:
+        - interfaces:
+          - safety_states_control
+    state_interfaces:
+      el6910_fsoe:
+        - interfaces:
+          - safety_states_control

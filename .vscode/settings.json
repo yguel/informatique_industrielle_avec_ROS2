@@ -13,4 +13,17 @@
     "[restructuredtext]": {
         "editor.tabSize": 3
     },
+    "ROS2.distro": "humble",
+    "python.autoComplete.extraPaths": [
+        "/home/anthony/ros2_ws/install/ramsai_nodes/lib/python3.10/site-packages",
+        "/home/anthony/ros2_ws/install/pck/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/anthony/ros2_ws/install/ramsai_nodes/lib/python3.10/site-packages",
+        "/home/anthony/ros2_ws/install/pck/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
 }

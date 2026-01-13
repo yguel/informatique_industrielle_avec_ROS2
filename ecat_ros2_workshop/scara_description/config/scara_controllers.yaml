@@ -1,0 +1,46 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    scara_trajectory_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    scara_position_controller:
+      type: position_controllers/JointGroupPositionController
+
+    scara_joint_velocity_controller:
+      type: scara_joint_velocity_controller/ScaraJointVelocityController
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+scara_trajectory_controller:
+  ros__parameters:
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+    joints:
+      - joint1
+      - joint2
+      - joint3
+      - joint4
+   
+
+scara_position_controller:
+  ros__parameters:
+    joints:
+      - joint1
+      - joint2
+      - joint3
+      - joint4
+   
+
+scara_joint_velocity_controller:
+  ros__parameters:
+    joints:
+      - joint1
+      - joint2
+      - joint3
+      - joint4
+  

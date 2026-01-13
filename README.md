@@ -8,3 +8,5 @@ Ce dépôt contient les sources d'un cours francophone présentant le développe
 
 Il se veut être lui-même un exemple de code documenté, testé, formaté, versionné, reproductible, open-source, et collaboratif.
 Si vous avez des suggestions, des corrections, des améliorations, n'hésitez pas à ouvrir une issue ou une pull request.
+
+Lien de notre documentation: https://anthonykilzi.github.io/informatique_industrielle_avec_ROS2_MaGdKa/

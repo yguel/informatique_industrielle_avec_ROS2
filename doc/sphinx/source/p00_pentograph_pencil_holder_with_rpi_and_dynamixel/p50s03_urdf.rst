@@ -50,4 +50,48 @@ Pour convertir les modèles 3D en collada (dae), vous pouvez utiliser le logicie
 Création du fichier URDF
 =========================
 
-Dans un fichier URDF les modèles 3D sont référencés par des balises ``<mesh>``.
+Le fichier URDF du pantographe est disponible en ressource :
+
+**ERREUR : Placement des repères au sein des fichiers**
+
+Les fichiers URDF référencent les maillages 3D par rapport au repère local de chaque lien. Pour garantir la validité de la simulation, il est impératif de vérifier la position des repères (frames) des fichiers 3D.
+
+Une erreur de référencement provoque des décalages visuels ce qui donne des repères compliqué à utilisé car il ne sont pas centré sur une des deux liaisons.
+
+**Action corrective requise :**
+* **Réexporter les fichiers 3D individuellement.**
+* **Référencement local :** Chaque pièce doit être exportée par rapport à son propre repère d'origine placé sur une de ses liaisons.
+
+Pour définir le fichier URDF, nous avons repris la structure du fichier URDF du SCARA disponible dans le dépôt github. Ensuite, il faut changer les parties correspondantes aux liens et aux joints.
+
+Voici un extrait du fichier URDF du pantographe avec les détails du Link 1 et Joint 1
+-------------------------------------------------------------------------------------
+
+Voici l'extrait du fichier URDF correspondant à l'articulation principale :
+
+.. code-block:: xml
+
+   <link name="link1">
+     <visual>
+       <geometry>
+         <mesh filename="file:///home/ada/ws1612/src/ecat_ros2_workshop/scara_description/urdf/meshes/link1.dae"/>
+       </geometry>      
+       <origin xyz="0 0 0" rpy="0 0 0"/>
+     </visual>
+   </link>
+
+   <joint name="joint1" type="revolute">
+      <parent link="base_link"/>
+      <child link="link1"/>
+      <origin xyz="-0.08 -0.07 0.035" rpy="0 0 0"/>
+      <axis xyz="0 0 1"/>
+      <limit lower="-3.14" upper="3.14" effort="10" velocity="1.0"/>
+   </joint>
+
+Explication technique
+---------------------
+
+* **Origin du Joint** : Définit la position du repère de l'enfant (`link1`) par rapport au parent (`base_link`). Il faut donc récupérer les coordonnées exactes de l'axe de rotation du joint dans l'assemblage global. Cela peut être fait en utilisant un logiciel de CAO pour mesurer la position de l'axe de rotation par rapport au repère global de l'assemblage.
+* **Origin du Visual** : Comme elle est à ``0 0 0``, le centre du fichier ``link1.dae`` doit correspondre exactement à l'axe de rotation défini dans le joint.
+* **Mesh filename** : Le chemin d'accès au fichier 3D exporté en collada. Ici il est possible de définir un chemin relatif mais cela peut engendrer des erreurs et que le fichier dae ne soit pas trouvé lors de l'utilisation du fichier URDF dans ROS2. Il est donc préférable d'utiliser un chemin absolu.
+

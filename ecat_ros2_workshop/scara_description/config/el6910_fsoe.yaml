@@ -1,0 +1,94 @@
+# Configuration file for Beckhoff EL6910
+# Description : EtherCAT safety Terminal, master version.
+vendor_id: 0x00000002
+product_id: 0x1afe3052
+rpdo: # RxPDO = receive PDO Mapping, MASTER OUT SLAVE IN
+  - index: 0x1600
+    channels:
+      - {index: 0x7000, sub_index: 0x01, type: int8} # FSoE Command 
+      - {skip: true, index: 0x7001, sub_index: 0x01, type: int8} # SubIndex 001 
+      - {skip: true, index: 0x7001, sub_index: 0x02, type: int8} # SubIndex 002 
+      - {skip: true, index: 0x7000, sub_index: 0x03, type: int16} # FSoE CRC 000 
+      - {skip: true, index: 0x7001, sub_index: 0x03, type: int8} # SubIndex 003 
+      - {skip: true, index: 0x7001, sub_index: 0x04, type: int8} # SubIndex 004 
+      - {skip: true, index: 0x7000, sub_index: 0x04, type: int16} # FSoE CRC 001 
+      - {skip: true, index: 0x7001, sub_index: 0x05, type: int8} # SubIndex 005 
+      - {skip: true, index: 0x7001, sub_index: 0x06, type: int8} # SubIndex 006 
+      - {skip: true, index: 0x7000, sub_index: 0x05, type: int16} # FSoE CRC 002 
+      - {skip: true, index: 0x7001, sub_index: 0x07, type: int8} # SubIndex 007 
+      - {skip: true, index: 0x7001, sub_index: 0x08, type: int8} # SubIndex 008 
+      - {skip: true, index: 0x7000, sub_index: 0x06, type: int16} # FSoE CRC 003 
+      - {skip: true, index: 0x7001, sub_index: 0x09, type: int8} # SubIndex 009 
+      - {skip: true, index: 0x7001, sub_index: 0x0a, type: int8} # SubIndex 010 
+      - {skip: true, index: 0x7000, sub_index: 0x07, type: int16} # FSoE CRC 004 
+      - {skip: true, index: 0x7001, sub_index: 0x0b, type: int8} # SubIndex 011 
+      - {skip: true, index: 0x7001, sub_index: 0x0c, type: int8} # SubIndex 012 
+      - {skip: true, index: 0x7000, sub_index: 0x08, type: int16} # FSoE CRC 005 
+      - {skip: true, index: 0x7001, sub_index: 0x0d, type: int8} # SubIndex 013 
+      - {skip: true, index: 0x7001, sub_index: 0x0e, type: int8} # SubIndex 014 
+      - {skip: true, index: 0x7000, sub_index: 0x09, type: int16} # FSoE CRC 006 
+      - {skip: true, index: 0x7000, sub_index: 0x02, type: int16} # FSoE Connection ID 
+
+  - index: 0x1601
+    channels:
+      - {index: 0x7010, sub_index: 0x01, type: int8} # FSoE Command 
+      - {skip: true, index: 0x7011, sub_index: 0x01, type: int8} # SubIndex 001 
+      - {skip: true, index: 0x7010, sub_index: 0x03, type: int16} # FSoE CRC 000 
+      - {skip: true, index: 0x7010, sub_index: 0x02, type: int16} # FSoE Connection ID 
+
+  - index: 0x1602
+    channels:
+      - {index: 0x7020, sub_index: 0x01, type: int8} # FSoE Command 
+      - {skip: true, index: 0x7021, sub_index: 0x01, type: int8} # SubIndex 001 
+      - {skip: true, index: 0x7020, sub_index: 0x03, type: int16} # FSoE CRC 000 
+      - {skip: true, index: 0x7020, sub_index: 0x02, type: int16} # FSoE Connection ID 
+
+  - index: 0x17f0
+    channels:
+#      - {index:  0xf788, sub_index: 0x00, type: int8, command_interface: safety_states_control, default: 0} # Standard Inputs
+      - {index:  0xf788, sub_index: 0x00, type: int8 } # Standard Inputs
+
+  - index: 0x17ff
+    channels:
+      - {skip: true, index: 0x0000, sub_index: 0x00, type: int16} # Gap
+
+
+tpdo: # TxPDO = transmit PDO Mapping, MASTER IN SLAVE OUT
+  - index: 0x1a00
+    channels:
+      - {index: 0x6000, sub_index: 0x01, type: int8} # FSoE Command 
+      - {index: 0x6001, sub_index: 0x01, type: int8} # SubIndex 001 
+      - {index: 0x6001, sub_index: 0x02, type: int8} # SubIndex 002 
+      - {index: 0x6000, sub_index: 0x03, type: int16} # FSoE CRC 000 
+      - {index: 0x6001, sub_index: 0x03, type: int8} # SubIndex 003 
+      - {index: 0x6001, sub_index: 0x04, type: int8} # SubIndex 004 
+      - {index: 0x6000, sub_index: 0x04, type: int16} # FSoE CRC 001 
+      - {index: 0x6000, sub_index: 0x02, type: int16} # FSoE Connection ID 
+
+  - index: 0x1a01
+    channels:
+      - {index: 0x6010, sub_index: 0x01, type: int8} # FSoE Command 
+      - {skip: true, index: 0x6011, sub_index: 0x01, type: int8} # SubIndex 001
+      - {skip: true, index: 0x6010, sub_index: 0x03, type: int16} # FSoE CRC 000 
+      - {skip: true, index: 0x6010, sub_index: 0x02, type: int16} # FSoE Connection ID 
+
+  - index: 0x1a02
+    channels:
+      - {index: 0x6020, sub_index: 0x01, type: int8} # FSoE Command 
+      - {skip: true, index: 0x6021, sub_index: 0x01, type: int8} # SubIndex 001 
+      - {skip: true, index: 0x6020, sub_index: 0x03, type: int16} # FSoE CRC 000 
+      - {skip: true, index: 0x6020, sub_index: 0x02, type: int16} # FSoE Connection ID 
+
+  - index: 0x1bff
+    channels:
+      - {skip: true, index: 0xf100, sub_index: 0x01, type: int8} # Safe Logic State
+      - {skip: true, index: 0xf100, sub_index: 0x02, type: int8} # Cycle Counter
+
+
+sm: # Sync Manager
+  - {index: 0, type: output, watchdog: disable }
+  - {index: 1, type: input, watchdog: disable }
+  - {index: 2, type: output, pdo: rpdo, watchdog: disable }
+  - {index: 3, type: input, pdo: tpdo, watchdog: disable }
+  - {index: 4, type: output, watchdog: disable }
+  - {index: 5, type: input, watchdog: disable }

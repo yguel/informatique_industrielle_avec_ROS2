@@ -1,0 +1,48 @@
+#Configuration file for the EtherCAT safety network of the el6910 test system
+nets:
+  - name: safety_net
+    safety_master: el6910_ecat_01
+    transfers:
+      #FSOE transfers
+      - size: 6
+        in: { ec_module: el1904_ecat_01, index: 0x6000, subindex: 0x01 }
+        out: { ec_module: el6910_ecat_01, index: 0x7000, subindex: 0x01 }
+      - size: 6
+        in: { ec_module: el6910_ecat_01, index: 0x6000, subindex: 0x01 }
+        out: { ec_module: el1904_ecat_01, index: 0x7000, subindex: 0x01 }
+      - size: 6
+        in: { ec_module: el2904_ecat_01, index: 0x6000, subindex: 0x01 }
+        out: { ec_module: el6910_ecat_01, index: 0x7010, subindex: 0x01 }
+      - size: 6
+        in: { ec_module: el6910_ecat_01, index: 0x6010, subindex: 0x01 }
+        out: { ec_module: el2904_ecat_01, index: 0x7000, subindex: 0x01 }
+
+      - size: 31
+        in: { ec_module: circulo_smm_ecat_01, index: 0x6760, subindex: 0x01 }
+        out: { ec_module: el6910_ecat_01, index: 0x7020, subindex: 0x01 }
+      - size: 11
+        in: { ec_module: el6910_ecat_01, index: 0x6020, subindex: 0x01 }
+        out: { ec_module: circulo_smm_ecat_01, index: 0x6770, subindex: 0x01 }
+
+      - size: 31
+        in: { ec_module: circulo_smm_ecat_02, index: 0x6760, subindex: 0x01 }
+        out: { ec_module: el6910_ecat_01, index: 0x7030, subindex: 0x01 }
+      - size: 11
+        in: { ec_module: el6910_ecat_01, index: 0x6030, subindex: 0x01 }
+        out: { ec_module: circulo_smm_ecat_02, index: 0x6770, subindex: 0x01 }
+
+      - size: 31
+        in: { ec_module: circulo_smm_ecat_03, index: 0x6760, subindex: 0x01 }
+        out: { ec_module: el6910_ecat_01, index: 0x7040, subindex: 0x01 }
+      - size: 11
+        in: { ec_module: el6910_ecat_01, index: 0x6040, subindex: 0x01 }
+        out: { ec_module: circulo_smm_ecat_03, index: 0x6770, subindex: 0x01 }
+
+      #Digital IO transfers
+      # - size: 1
+      #   in: { ec_module: el1018_ecat_01, index: 0x6000, subindex: 0x01 }
+      #   out: { ec_module: el2008_ecat_01, index: 0x7000, subindex: 0x01 }
+      # - size: 1
+      #   in: { ec_module: el1018_ecat_01, index: 0x6000, subindex: 0x01 }
+      #   out: { ec_module: el6910_ecat_01, index: 0xf788, subindex: 0x0 }
+

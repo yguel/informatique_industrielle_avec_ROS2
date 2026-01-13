@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<robot name = "scara" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <ros2_control name="scara" type="system">
+        <hardware>
+            <plugin>ethercat_driver/EthercatDriver</plugin>
+            <param name="master_id">0</param>
+            <param name="control_frequency">500</param>
+            <param name="fsoe_config">$(find scara_description)/config/scara_fsoe_config.yaml</param>
+        </hardware>
+
+        <joint name="joint1">
+            <state_interface name="position" />
+            <command_interface name="position" />
+            <state_interface name="velocity" />
+            <command_interface name="velocity" />
+            <!--GPIO Declaration-->
+            <command_interface name="reset_fault"/>
+            <state_interface name="reset_fault"/>
+            <state_interface name="smm_sto_state"/>
+            <state_interface name="smm_sos_state"/>
+            <state_interface name="smm_error_active_state"/>
+            <ec_module name="circulo_smm_ecat_01">
+                <plugin>ethercat_generic_plugins/EcCiA402Drive</plugin>
+                <param name="alias">0</param>
+                <param name="position">3</param>
+                <!-- Available modes of operation = position 8, velocity 9, effort 10, homing 6 -->
+                <param name="mode_of_operation">8</param>
+                <!-- Synapticon CirculoSMM  -->
+                <param name="slave_config">$(find scara_description)/config/circulo_fsoe_rot_20bits.yaml</param>
+            </ec_module>
+        </joint>
+
+        <joint name="joint2">
+            <state_interface name="position" />
+           <!-- <command_interface name="position" />-->
+            <state_interface name="velocity" />
+           <!-- <command_interface name="velocity" />-->
+            <!--GPIO Declaration-->
+           <!-- <command_interface name="reset_fault"/>-->
+            <state_interface name="reset_fault"/>
+            <state_interface name="smm_sto_state"/>
+            <state_interface name="smm_sos_state"/>
+            <state_interface name="smm_error_active_state"/>
+            <ec_module name="circulo_smm_ecat_02">
+                <plugin>ethercat_generic_plugins/EcCiA402Drive</plugin>
+                <param name="alias">0</param>
+                <param name="position">4</param>
+                <!-- Available modes of operation = position 8, velocity 9, effort 10, homing 6 -->
+                <param name="mode_of_operation">8</param>
+                <!-- Synapticon CirculoSMM  -->
+                <param name="slave_config">$(find scara_description)/config/circulo_fsoe_rot_20bits.yaml</param>
+            </ec_module>
+        </joint>
+
+        <joint name="joint3">
+            <state_interface name="position" />
+            <command_interface name="position" />
+            <state_interface name="velocity" />
+            <command_interface name="velocity" />
+            <!--GPIO Declaration-->
+            <command_interface name="reset_fault"/>
+            <state_interface name="reset_fault"/>
+            <state_interface name="smm_sto_state"/>
+            <state_interface name="smm_sos_state"/>
+            <state_interface name="smm_error_active_state"/>
+            <ec_module name="circulo_smm_ecat_03">
+                <plugin>ethercat_generic_plugins/EcCiA402Drive</plugin>
+                <param name="alias">0</param>
+                <param name="position">5</param>
+                <!-- Available modes of operation = position 8, velocity 9, effort 10, homing 6 -->
+                <param name="mode_of_operation">8</param>
+                <!-- Synapticon CirculoSMM  -->
+                <param name="slave_config">$(find scara_description)/config/circulo_fsoe_trans_20bits.yaml</param>
+            </ec_module>
+        </joint>
+        <gpio name="el6910_fsoe">
+            <state_interface name="safety_states_control" />
+            <command_interface name="safety_states_control" />
+            <ec_module name="el6910_ecat_01">
+                <plugin>ethercat_generic_plugins/GenericEcSlave</plugin>
+                <param name="alias">0</param>
+                <param name="position">8</param>
+                <!-- Beckhoff EL6910  -->
+                <param name="slave_config">$(find scara_description)/config/el6910_fsoe_scara.yaml</param>
+            </ec_module>
+        </gpio>
+        <gpio name="el1904_fsoe">
+            <ec_module name="el1904_ecat_01">
+                <plugin>ethercat_generic_plugins/GenericEcSlave</plugin>
+                <param name="alias">0</param>
+                <param name="position">9</param>
+                <!-- Beckhoff EL1904  -->
+                <param name="slave_config">$(find scara_description)/config/el1904_fsoe.yaml</param>
+            </ec_module>
+        </gpio>
+        <gpio name="el2904_fsoe">
+            <ec_module name="el2904_ecat_01">
+                <plugin>ethercat_generic_plugins/GenericEcSlave</plugin>
+                <param name="alias">0</param>
+                <param name="position">10</param>
+                <!-- Beckhoff EL2904  -->
+                <param name="slave_config">$(find scara_description)/config/el2904_fsoe.yaml</param>
+            </ec_module>
+        </gpio>
+
+
+
+    </ros2_control>
+</robot>
