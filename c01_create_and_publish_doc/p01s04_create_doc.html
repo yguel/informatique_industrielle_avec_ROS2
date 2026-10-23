@@ -12,7 +12,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=ed6d1f65" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2f145f6b" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -373,22 +373,28 @@ Il est courant, par exemple, de préfixer une librairie python avec le préfix <
 <span class="linenos">72</span><span class="w">    </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="kc">red</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
 <span class="linenos">73</span><span class="p">}</span>
 <span class="linenos">74</span>
-<span class="linenos">75</span><span class="c">/* Comparison table whose header row is a single ok/nok symbol shown 400% bigger */</span>
-<span class="linenos">76</span><span class="nt">table</span><span class="p">.</span><span class="nc">list-comparison-ok_nok</span><span class="w"> </span><span class="p">{</span>
-<span class="linenos">77</span><span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="n">fit-content</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
-<span class="linenos">78</span><span class="w">    </span><span class="k">margin-left</span><span class="p">:</span><span class="w"> </span><span class="kc">auto</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
-<span class="linenos">79</span><span class="w">    </span><span class="k">margin-right</span><span class="p">:</span><span class="w"> </span><span class="kc">auto</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
-<span class="linenos">80</span><span class="w">    </span><span class="k">border-collapse</span><span class="p">:</span><span class="w"> </span><span class="kc">collapse</span><span class="p">;</span>
-<span class="linenos">81</span><span class="p">}</span>
-<span class="linenos">82</span>
-<span class="linenos">83</span><span class="nt">table</span><span class="p">.</span><span class="nc">list-comparison-ok_nok</span><span class="w"> </span><span class="nt">tbody</span><span class="w"> </span><span class="nt">tr</span><span class="p">:</span><span class="nd">first-child</span><span class="o">&gt;</span><span class="nt">th</span><span class="o">,</span>
-<span class="linenos">84</span><span class="nt">table</span><span class="p">.</span><span class="nc">list-comparison-ok_nok</span><span class="w"> </span><span class="nt">tbody</span><span class="w"> </span><span class="nt">tr</span><span class="p">:</span><span class="nd">first-child</span><span class="o">&gt;</span><span class="nt">td</span><span class="o">,</span>
-<span class="linenos">85</span><span class="nt">table</span><span class="p">.</span><span class="nc">list-comparison-ok_nok</span><span class="w"> </span><span class="nt">tbody</span><span class="w"> </span><span class="nt">tr</span><span class="p">:</span><span class="nd">first-child</span><span class="o">&gt;</span><span class="nt">th</span><span class="w"> </span><span class="o">*,</span>
-<span class="linenos">86</span><span class="nt">table</span><span class="p">.</span><span class="nc">list-comparison-ok_nok</span><span class="w"> </span><span class="nt">tbody</span><span class="w"> </span><span class="nt">tr</span><span class="p">:</span><span class="nd">first-child</span><span class="o">&gt;</span><span class="nt">td</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">{</span>
-<span class="linenos">87</span><span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="kt">%</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
-<span class="linenos">88</span><span class="w">    </span><span class="k">text-align</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
-<span class="linenos">89</span><span class="w">    </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="kc">bold</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
-<span class="linenos">90</span><span class="p">}</span>
+<span class="linenos">75</span><span class="c">/* Comparison table whose first row (ok/nok symbols) is shown 400% bigger */</span>
+<span class="linenos">76</span><span class="c">/* docutils turns the RST class "list-comparison-ok_nok" into "list-comparison-ok-nok" in the HTML */</span>
+<span class="linenos">77</span><span class="nt">table</span><span class="p">.</span><span class="nc">list-comparison-ok-nok</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">78</span><span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="n">fit-content</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="linenos">79</span><span class="w">    </span><span class="k">margin-left</span><span class="p">:</span><span class="w"> </span><span class="kc">auto</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="linenos">80</span><span class="w">    </span><span class="k">margin-right</span><span class="p">:</span><span class="w"> </span><span class="kc">auto</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="linenos">81</span><span class="w">    </span><span class="k">border-collapse</span><span class="p">:</span><span class="w"> </span><span class="kc">collapse</span><span class="p">;</span>
+<span class="linenos">82</span><span class="p">}</span>
+<span class="linenos">83</span>
+<span class="linenos">84</span><span class="nt">table</span><span class="p">.</span><span class="nc">list-comparison-ok-nok</span><span class="w"> </span><span class="nt">tbody</span><span class="w"> </span><span class="nt">tr</span><span class="p">:</span><span class="nd">first-child</span><span class="o">&gt;</span><span class="nt">td</span><span class="o">,</span>
+<span class="linenos">85</span><span class="nt">table</span><span class="p">.</span><span class="nc">list-comparison-ok-nok</span><span class="w"> </span><span class="nt">tbody</span><span class="w"> </span><span class="nt">tr</span><span class="p">:</span><span class="nd">first-child</span><span class="o">&gt;</span><span class="nt">th</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">86</span><span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="kt">%</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="linenos">87</span><span class="w">    </span><span class="k">text-align</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="linenos">88</span><span class="w">    </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="kc">bold</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="linenos">89</span><span class="p">}</span>
+<span class="linenos">90</span>
+<span class="linenos">91</span><span class="c">/* The theme sets an absolute font-size on td&gt;p, so it must inherit the 400% from the cell */</span>
+<span class="linenos">92</span><span class="nt">table</span><span class="p">.</span><span class="nc">list-comparison-ok-nok</span><span class="w"> </span><span class="nt">tbody</span><span class="w"> </span><span class="nt">tr</span><span class="p">:</span><span class="nd">first-child</span><span class="o">&gt;</span><span class="nt">td</span><span class="o">&gt;</span><span class="nt">p</span><span class="o">,</span>
+<span class="linenos">93</span><span class="nt">table</span><span class="p">.</span><span class="nc">list-comparison-ok-nok</span><span class="w"> </span><span class="nt">tbody</span><span class="w"> </span><span class="nt">tr</span><span class="p">:</span><span class="nd">first-child</span><span class="o">&gt;</span><span class="nt">th</span><span class="o">&gt;</span><span class="nt">p</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">94</span><span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="kc">inherit</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="linenos">95</span><span class="w">    </span><span class="k">line-height</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+<span class="linenos">96</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>

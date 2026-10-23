@@ -72,19 +72,25 @@ table.forbidden-methods-table tbody tr td:last-child {
     background-color: red !important;
 }
 
-/* Comparison table whose header row is a single ok/nok symbol shown 400% bigger */
-table.list-comparison-ok_nok {
+/* Comparison table whose first row (ok/nok symbols) is shown 400% bigger */
+/* docutils turns the RST class "list-comparison-ok_nok" into "list-comparison-ok-nok" in the HTML */
+table.list-comparison-ok-nok {
     width: fit-content !important;
     margin-left: auto !important;
     margin-right: auto !important;
     border-collapse: collapse;
 }
 
-table.list-comparison-ok_nok tbody tr:first-child>th,
-table.list-comparison-ok_nok tbody tr:first-child>td,
-table.list-comparison-ok_nok tbody tr:first-child>th *,
-table.list-comparison-ok_nok tbody tr:first-child>td * {
+table.list-comparison-ok-nok tbody tr:first-child>td,
+table.list-comparison-ok-nok tbody tr:first-child>th {
     font-size: 400% !important;
     text-align: center !important;
     font-weight: bold !important;
+}
+
+/* The theme sets an absolute font-size on td>p, so it must inherit the 400% from the cell */
+table.list-comparison-ok-nok tbody tr:first-child>td>p,
+table.list-comparison-ok-nok tbody tr:first-child>th>p {
+    font-size: inherit !important;
+    line-height: 1.2 !important;
 }
