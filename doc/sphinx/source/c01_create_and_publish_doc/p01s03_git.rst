@@ -152,7 +152,7 @@ C'est-à-dire les fichiers que l'on souhaite faire suivre par Git.
 
 .. list-table::
    :align: center
-   :class: list-comparison-ok_nok
+   :class: list-comparison-ok-nok
 
    * - ✅
      - ❌
