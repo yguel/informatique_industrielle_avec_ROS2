@@ -27,3 +27,64 @@ pre {
     display: block;
     /* Ensure the element takes up full width */
 }
+
+/* Style for the forbidden methods table */
+table.forbidden-methods-table {
+    width: -moz-fit-content !important;
+    width: fit-content !important;
+    table-layout: auto !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    background-color: white !important;
+    border: 12px solid black !important;
+    border-collapse: collapse;
+}
+
+table.forbidden-methods-table col {
+    width: auto !important;
+}
+
+table.forbidden-methods-table tbody tr td {
+    border: 12px solid black !important;
+    padding: 30px 40px !important;
+    vertical-align: middle !important;
+    background-color: white !important;
+}
+
+/* Cells can contain a paragraph that would otherwise break vertical centering */
+table.forbidden-methods-table tbody tr td>p {
+    margin: 0 !important;
+}
+
+table.forbidden-methods-table tbody tr td:first-child p {
+    font-size: 400% !important;
+    text-align: center !important;
+    font-weight: bold !important;
+}
+
+table.forbidden-methods-table tbody tr td:last-child {
+    text-align: center !important;
+}
+
+.text-bold-black-on-red {
+    font-weight: bold !important;
+    color: black !important;
+    background-color: red !important;
+}
+
+/* Comparison table whose header row is a single ok/nok symbol shown 400% bigger */
+table.list-comparison-ok_nok {
+    width: fit-content !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    border-collapse: collapse;
+}
+
+table.list-comparison-ok_nok tbody tr:first-child>th,
+table.list-comparison-ok_nok tbody tr:first-child>td,
+table.list-comparison-ok_nok tbody tr:first-child>th *,
+table.list-comparison-ok_nok tbody tr:first-child>td * {
+    font-size: 400% !important;
+    text-align: center !important;
+    font-weight: bold !important;
+}
