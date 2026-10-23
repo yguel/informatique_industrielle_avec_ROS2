@@ -12,7 +12,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=fdcf8bf8" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=ed6d1f65" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -56,7 +56,33 @@
 <li class="toctree-l1 current"><a class="reference internal" href="p01s00_index.html">Premier projet &amp; doc</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="p01s01_quality_docs.html">Exemple de documentations de qualité</a></li>
 <li class="toctree-l2"><a class="reference internal" href="p01s02_create_and_publish_doc.html">Création du projet</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Introduction au versionning avec git</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Introduction au versionning avec git</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pourquoi-un-systeme-de-gestion-de-versions">Pourquoi un système de gestion de versions ?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#git-permet-de-travailler-a-plusieurs">Git permet de travailler à plusieurs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#comment-fonctionne-git">Comment fonctionne Git ?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#les-commits">Les commits</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#quels-sont-les-fichiers-a-committer">Quels sont les fichiers à committer ?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#les-branches">Les branches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conventions-de-nommage-numerotation-de-versions">Conventions de nommage, numérotation, de versions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nommage-de-fichiers">Nommage de fichiers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nommage-des-variables-fonctions-classes-methodes-et-champs">Nommage des variables, fonctions, classes, méthodes et champs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nommage-des-versions">Nommage des versions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nommage-des-commits">Nommage des commits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nommage-des-branches">Nommage des branches</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#identifier-un-probleme-bug-avec-un-systeme-de-controle-de-version">Identifier un problème/bug avec un système de contrôle de version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references-utiles-et-exercices-en-ligne">Références utiles et exercices en ligne</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#references">Références</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exercices-en-ligne">Exercices en ligne</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#regles-d-or-du-travail-avec-git">Règles d’or du travail avec Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initialisation-du-depot-git">Initialisation du dépôt git</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="p01s04_create_doc.html">Création d’une première documentation sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="p01s05_www_doc.html">Publier la documentation</a></li>
 </ul>
@@ -99,6 +125,408 @@
   <section id="introduction-au-versionning-avec-git">
 <h1>Introduction au versionning avec git<a class="headerlink" href="#introduction-au-versionning-avec-git" title="Lien vers cette rubrique"></a></h1>
 <p>Git est un logiciel de gestion de versions décentralisé. C’est un logiciel libre créé par Linus Torvalds, le créateur de Linux. Il permet de suivre l’évolution d’un projet informatique en enregistrant les différentes versions des fichiers qui le composent. Git est très utilisé dans le monde du développement logiciel, mais il peut également être utilisé pour suivre l’évolution de tout type de fichier.</p>
+<section id="pourquoi-un-systeme-de-gestion-de-versions">
+<h2>Pourquoi un système de gestion de versions ?<a class="headerlink" href="#pourquoi-un-systeme-de-gestion-de-versions" title="Lien vers cette rubrique"></a></h2>
+<p>Les projets informatiques évoluent constamment. Il est donc important de pouvoir suivre les modifications apportées aux fichiers du projet, de revenir à des versions précédentes si nécessaire, et de collaborer efficacement avec d’autres développeurs. Un système de gestion de versions comme git permet de répondre à ces besoins.</p>
+<p>Souvent les personnes utilisent des copies avec des noms différents pour gérer les versions de leurs fichiers, mais cette méthode est peu pratique et sujette aux erreurs. Git permet de gérer les versions de manière beaucoup plus efficace et sécurisée.</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../_images/old_storage_versioning_system.png"><img alt="../_images/old_storage_versioning_system.png" src="../_images/old_storage_versioning_system.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Une méthode de versionnage obsolète</span><a class="headerlink" href="#id1" title="Lien vers cette image"></a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="../_images/computer_burns.png"><img alt="../_images/computer_burns.png" src="../_images/computer_burns.png" style="width: 60%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Les ordinateurs peuvent tomber en panne, être perdus et faire perdre des données si elles ne sont pas correctement sauvegardées.</span><a class="headerlink" href="#id2" title="Lien vers cette image"></a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Les méthodes à proscrire à l’ère du versionnage avec git :</p>
+<ul class="simple">
+<li><p>Utiliser des copies multiples avec des noms différents pour gérer les versions des fichiers (zippé ou non)</p></li>
+<li><p>Le mail</p></li>
+<li><p>Les drives (google drive, dropbox, etc.)</p></li>
+</ul>
+<table class="forbidden-methods-table docutils align-center">
+<tbody>
+<tr class="row-odd"><td><p>❌</p></td>
+<td><p><a class="reference internal" href="../_images/google_drive.png"><img alt="google_drive" src="../_images/google_drive.png" style="height: 120px;" /></a> <a class="reference internal" href="../_images/mail.jpeg"><img alt="mail" src="../_images/mail.jpeg" style="height: 120px;" /></a> <a class="reference internal" href="../_images/zip.png"><img alt="zip" src="../_images/zip.png" style="height: 120px;" /></a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="git-permet-de-travailler-a-plusieurs">
+<h2>Git permet de travailler à plusieurs<a class="headerlink" href="#git-permet-de-travailler-a-plusieurs" title="Lien vers cette rubrique"></a></h2>
+<p>Travailler à plusieurs implique:</p>
+<dl class="simple">
+<dt>👉 Travailler en parallèle sur</dt><dd><ul class="simple">
+<li><p>Des éléments distincts (synchronisation)</p></li>
+<li><p>Les mêmes éléments (divergences, conflits)</p></li>
+</ul>
+</dd>
+</dl>
+<p>Git + CI/CD fournit des outils puissants pour régler ces problèmes.</p>
+<p>Git est un système de gestion de versions (VCS, Version Control System en anglais).
+Il permet de <strong>conserver un historique</strong> des <strong>modifications</strong> effectuées sur un projet et de maintenir des <strong>versions concurrentes</strong> de manière <strong>distribuée</strong> et <strong>synchronisée</strong>.</p>
+<ol class="arabic simple">
+<li><p>Identifier les modifications (quelles lignes, quand, quel auteur, commentaires, lien avec un bug, une feature)</p></li>
+<li><p>Revenir à une version donnée</p></li>
+<li><p>Versions de référence disponibles sur une
+plateforme partagée (en-ligne)</p></li>
+<li><p>Travailler à plusieurs et en même temps</p></li>
+<li><p>Mécanismes pour <strong>identifier et résoudre
+les conflits</strong></p></li>
+</ol>
+<p>Les plateformes de gestion de versions en ligne, comme GitHub, GitLab ou Bitbucket, permettent de centraliser les dépôts git et la collaboration entre plusieurs développeurs.</p>
+<table class="forbidden-methods-table docutils align-center">
+<tbody>
+<tr class="row-odd"><td><p>✅</p></td>
+<td><p><a class="reference internal" href="../_images/github.png"><img alt="github" src="../_images/github.png" style="height: 120px;" /></a> <a class="reference internal" href="../_images/gitlab.png"><img alt="gitlab" src="../_images/gitlab.png" style="height: 120px;" /></a></p></td>
+</tr>
+</tbody>
+</table>
+<p>Ces plateforme contiennent ce que l’on appelle le dépôt distant et la référence de code.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/classic_git_usage.png"><img alt="../_images/classic_git_usage.png" src="../_images/classic_git_usage.png" style="width: 50%;" />
+</a>
+</figure>
+<p>Elles permettent de:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Exécuter les tests d’intégration automatique</p></li>
+<li><p>Créer la documentation</p></li>
+<li><p>Publier la documentation officielle</p></li>
+</ul>
+</div></blockquote>
+<p>Les développeurs eux:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Travaillent sur le code localement</p></li>
+<li><p>Poussent leurs modifications vers le dépôt distant en proposant des changements (pull request)</p></li>
+<li><p>Récupèrent les modifications des autres développeurs depuis le dépôt distant</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Différence entre Git &amp; GitHub</p>
+<ul class="simple">
+<li><p>Git : <strong>logiciel</strong> de gestion de version distribué</p></li>
+<li><p>GitHub, GitLab, … : <strong>plateformes/serveurs</strong> d’hébergement de code source, collaboratives, web, serveurs d’exécutions pour les tests, production de la documentation, gestion de sécurité.</p></li>
+</ul>
+<p><strong>GitHub et GitLab contiennent le même logiciel git que celui utilisé en local.</strong></p>
+<p><strong>NB:</strong> on peut avoir 2 repos git en local et pusher de l’un sur l’autre</p>
+</div>
+</section>
+<section id="comment-fonctionne-git">
+<h2>Comment fonctionne Git ?<a class="headerlink" href="#comment-fonctionne-git" title="Lien vers cette rubrique"></a></h2>
+<p>Git stocke les différences entre les versions de votre projet sous forme de <strong>diffs</strong>: les différences à l’échelle des lignes des fichiers.
+C’est pourquoi il est important dans le code/documentation produite que les éléments différents soient sur des lignes distinctes.
+C’est pourquoi dans ce cours, nous veillerons par exemple à aller dans le restructuredText, le type de markdown utilisé pour cette documentation, à aller à la ligne à chaque nouvelle phrase.</p>
+</section>
+<section id="les-commits">
+<h2>Les commits<a class="headerlink" href="#les-commits" title="Lien vers cette rubrique"></a></h2>
+<p>Un commit est un enregistrement des modifications apportées à votre dépôt git. Il permet de conserver un historique des changements et de revenir à une version précédente si nécessaire.</p>
+<p><strong>RÈGLE D’OR :</strong> chaque commit doit représenter un changement cohérent et significatif dans le projet. La modification doit être <strong>atomique</strong> pour que l’historique des commits reste clair et compréhensible et ne doit donc porter que sur un aspect précis du projet.</p>
+<p>Par exemple:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>on ne mélange pas les modifications de code avec les traductions de la documentation. On va faire 2 commits distincts pour cela.</p></li>
+<li><p>on peut changer documentation et code en même temps, mais que si le changement de documentation correspond directement au changement de code.</p></li>
+</ul>
+</div></blockquote>
+<section id="quels-sont-les-fichiers-a-committer">
+<h3>Quels sont les fichiers à committer ?<a class="headerlink" href="#quels-sont-les-fichiers-a-committer" title="Lien vers cette rubrique"></a></h3>
+<p>C’est-à-dire les fichiers que l’on souhaite faire suivre par Git.</p>
+<table class="list-comparison-ok-nok docutils align-center">
+<tbody>
+<tr class="row-odd"><td><p>✅</p></td>
+<td><p>❌</p></td>
+</tr>
+<tr class="row-even"><td><p>Fichiers <strong>texte :</strong></p>
+<ul class="simple">
+<li><p>Code (.py, .tex, .c, etc.)</p></li>
+<li><p>Configuration (.xml, .yaml, .json, etc.)</p></li>
+<li><p>Fichier de projet (.toml, CMakeLists.txt, etc.)</p></li>
+</ul>
+<p>Fichiers <strong>binaires de petite taille :</strong></p>
+<ul class="simple">
+<li><p>images</p></li>
+<li><p>exécutables</p></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li><p>Artefacts de compilation (.o, .pyc, etc.)</p></li>
+<li><p>Tout fichier qui peut être généré rapidement, automatiquement et de manière déterministe par un processus versionné</p></li>
+<li><p>CAO</p></li>
+<li><p>Powerpoints</p></li>
+<li><p>Vidéos</p></li>
+<li><p>Datasets</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="les-branches">
+<h2>Les branches<a class="headerlink" href="#les-branches" title="Lien vers cette rubrique"></a></h2>
+<p>Les branches stockent des versions différentes et parallèle de votre projet au sein du même dépôt git.
+Elles permettent de travailler sur des fonctionnalités ou des corrections de bugs de manière isolée, sans affecter la branche principale (souvent appelée <code class="docutils literal notranslate"><span class="pre">main</span></code> ou <code class="docutils literal notranslate"><span class="pre">master</span></code>).</p>
+<p>Ainsi on a:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>La branche principale (souvent appelée <code class="docutils literal notranslate"><span class="pre">main</span></code> ou <code class="docutils literal notranslate"><span class="pre">master</span></code>) qui contient une version de <strong>référence</strong>: la branche «main» <strong>utilisable</strong> (stable)</p></li>
+<li><p>Différentes versions pour différents contextes: les <strong>releases</strong> (types d’Os, de matériel -arm, intel, carte graphiques différentes etc. -, ainsi que différentes versions du projet)</p></li>
+<li><p>Une branche de développement principale (souvent appelée <code class="docutils literal notranslate"><span class="pre">rolling</span></code> ou``dev``) où les nouvelles fonctionnalités et corrections de bugs sont intégrées avant d’être fusionnées dans la branche principale.</p></li>
+</ul>
+</div></blockquote>
+<figure class="align-center" id="id3">
+<img alt="Exemple de branches git" src="../_images/branches.png" />
+<figcaption>
+<p><span class="caption-text">Les différentes branches coexistent dans le dépôt git et sont utilisées pour organiser le développement du projet.</span><a class="headerlink" href="#id3" title="Lien vers cette image"></a></p>
+</figcaption>
+</figure>
+<p>Pour que l’historique soit utilisable:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>On ne commit jamais dans la branche principale directement. Les modifications doivent passer par une branche de développement ou une branche spécifique à une fonctionnalité.</p></li>
+<li><p>Les branches de développement ou spécifiques à une fonctionnalité doivent être fusionnées dans la branche principale uniquement après avoir été testées et validées. Cette fusion se fait via une <strong>pull request</strong> qui si elle est acceptée est effectuée avec une commande de type <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code>.</p></li>
+</ul>
+</div></blockquote>
+<p>Avoir un historique clair est fondamental, en pratique, on va souvent nettoyer l’historique lors du <code class="docutils literal notranslate"><span class="pre">merge</span></code> des branches en faisant un merge spécifique appelé <strong>squash merge</strong>. Cela permet de regrouper tous les commits d’une branche en un seul commit avant de l’intégrer dans la branche principale.</p>
+<p>Exemple:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feature-branch
+<span class="c1"># Effectuez des modifications dans votre projet</span>
+git<span class="w"> </span>add<span class="w"> </span>optimize.cpp
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"[feat] new optimization feature 1"</span>
+<span class="c1"># Oups vous avez fait une erreur, vous la corrigez</span>
+git<span class="w"> </span>add<span class="w"> </span>optimize.cpp
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"[fix] fixe termination condition in optimize.cpp"</span>
+git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>merge<span class="w"> </span>--squash<span class="w"> </span>feature-branch
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"[feat] new optimization feature 1"</span>
+</pre></div>
+</div>
+<p>Ainsi vous conservez un historique clair et lisible dans la branche principale, en regroupant tous les commits liés à une fonctionnalité en un seul commit et sans les péripéties intermédiaires.</p>
+<p>La description ci-dessus est pour une utilisation locale, mais comme vous ne devriez jamais pousser des commits sur la branche principale, vous le ferez la plupart du temps sur les plateformes GitHub ou GitLab via des pull requests, dans ce cas:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>GitHub : au moment de valider la PR, cliquez sur la flèche du bouton vert <code class="docutils literal notranslate"><span class="pre">Merge</span></code> et sélectionnez <code class="docutils literal notranslate"><span class="pre">Squash</span> <span class="pre">and</span> <span class="pre">merge</span></code>.</p></li>
+<li><p>GitLab : cochez la case <code class="docutils literal notranslate"><span class="pre">Squash</span> <span class="pre">commits</span></code> dans les options de la Merge Request avant de cliquer sur <code class="docutils literal notranslate"><span class="pre">Merge</span></code>.</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Git est souvent aussi utilisé comme un sauvegarde temporaire de votre travail, c’est normal, pour cela préfixez vos commit de sauvegarde avec <code class="docutils literal notranslate"><span class="pre">[WIP]</span></code> pour indiquer qu’il s’agit d’un travail en cours (Work In Progress).
+Souvent les plateformes n’effectuent pas de vérification stricte sur les commits marqués comme <code class="docutils literal notranslate"><span class="pre">[WIP]</span></code> et vous permettent de les pousser sur le dépôt distant sans problème.
+Vous pouvez supprimez ces commits de l’historique de votre branche en utilisant la commande``git squash``.</p>
+</div>
+</section>
+<section id="conventions-de-nommage-numerotation-de-versions">
+<h2>Conventions de nommage, numérotation, de versions<a class="headerlink" href="#conventions-de-nommage-numerotation-de-versions" title="Lien vers cette rubrique"></a></h2>
+<p>Choisir une convention de nommage cohérente est essentiel pour la lisibilité et la maintenabilité d’un projet, en particulier lorsque plusieurs langages de programmation coexistent, comme c’est le cas ici avec Python et C++ dans l’écosystème ROS2.</p>
+<p>Il existe plusieurs conventions de casse (« case » en anglais), c’est-à-dire des manières de séparer les mots qui composent un nom :</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">snake_case</span></code> : tous les mots sont en minuscules, séparés par des underscores (<code class="docutils literal notranslate"><span class="pre">_</span></code>). Exemple : <code class="docutils literal notranslate"><span class="pre">maximum_velocity</span></code>, <code class="docutils literal notranslate"><span class="pre">compute_jacobian</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">camelCase</span></code> (ou <em>lower camel case</em>) : le premier mot commence par une minuscule, chaque mot suivant commence par une majuscule, sans séparateur. Exemple : <code class="docutils literal notranslate"><span class="pre">maximumVelocity</span></code>, <code class="docutils literal notranslate"><span class="pre">computeJacobian</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PascalCase</span></code> (ou <em>upper camel case</em>, souvent appelé simplement <code class="docutils literal notranslate"><span class="pre">CamelCase</span></code>) : identique au camelCase, mais le premier mot commence également par une majuscule. Exemple : <code class="docutils literal notranslate"><span class="pre">RobotController</span></code>, <code class="docutils literal notranslate"><span class="pre">JointState</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SCREAMING_SNAKE_CASE</span></code> : identique au snake_case, mais tout en majuscules. Utilisé pour les constantes. Exemple : <code class="docutils literal notranslate"><span class="pre">MAX_VELOCITY</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kebab-case</span></code> : identique au snake_case, mais les mots sont séparés par des tirets (<code class="docutils literal notranslate"><span class="pre">-</span></code>). Peu utilisé dans le code lui-même (le tiret est souvent un opérateur), mais fréquent pour les noms de fichiers, de dépôts ou d’URL. Exemple : <code class="docutils literal notranslate"><span class="pre">mon-super-projet</span></code>.</p></li>
+</ul>
+<p>Ce cours retient la convention recommandée par défaut en Python (<a class="reference external" href="https://peps.python.org/pep-0008/#naming-conventions">PEP 8</a>) qui est aussi celle adoptée par la plupart des guides de style C++ utilisés en robotique (dont le <a class="reference external" href="https://docs.ros.org/en/rolling/Contributing/Code-Style-Language-Versions.html">guide de style de ROS2</a>). Elle a l’avantage d’être identique dans les deux langages, ce qui facilite le passage de l’un à l’autre :</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PascalCase</span></code> pour tout ce qui désigne un <strong>type</strong> : classes, structures, enums, alias de types.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">snake_case</span></code> pour tout ce qui désigne un <strong>comportement</strong> ou une <strong>donnée</strong> : fonctions, méthodes, variables, paramètres, champs/attributs, modules Python, espaces de noms (namespaces) C++, paquets.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SCREAMING_SNAKE_CASE</span></code> pour les <strong>constantes</strong> et les macros.</p></li>
+</ul>
+<section id="nommage-de-fichiers">
+<h3>Nommage de fichiers<a class="headerlink" href="#nommage-de-fichiers" title="Lien vers cette rubrique"></a></h3>
+<ul class="simple">
+<li><p>Les noms de fichiers sont en <code class="docutils literal notranslate"><span class="pre">snake_case</span></code> et en minuscules : <code class="docutils literal notranslate"><span class="pre">robot_controller.cpp</span></code>, <code class="docutils literal notranslate"><span class="pre">joint_state_publisher.py</span></code>. Cela évite les problèmes de sensibilité à la casse, qui diffère suivant les systèmes de fichiers (Linux est sensible à la casse, Windows et MacOS ne le sont pas par défaut).</p></li>
+<li><p>On évite les espaces, les accents et les caractères spéciaux dans les noms de fichiers, qui peuvent poser des soucis suivant les terminaux, scripts ou outils de compilation utilisés.</p></li>
+<li><p>En C++, un fichier d’en-tête et son fichier source définissent généralement une seule classe principale, dont le nom en <code class="docutils literal notranslate"><span class="pre">PascalCase</span></code> est converti en <code class="docutils literal notranslate"><span class="pre">snake_case</span></code> pour nommer les fichiers. Par exemple la classe <code class="docutils literal notranslate"><span class="pre">RobotController</span></code> est déclarée dans <code class="docutils literal notranslate"><span class="pre">robot_controller.hpp</span></code> et définie dans <code class="docutils literal notranslate"><span class="pre">robot_controller.cpp</span></code>.</p></li>
+<li><p>En Python, un module qui définit une seule classe principale suit la même règle : le module <code class="docutils literal notranslate"><span class="pre">robot_controller.py</span></code> contient la classe <code class="docutils literal notranslate"><span class="pre">RobotController</span></code>.</p></li>
+</ul>
+</section>
+<section id="nommage-des-variables-fonctions-classes-methodes-et-champs">
+<h3>Nommage des variables, fonctions, classes, méthodes et champs<a class="headerlink" href="#nommage-des-variables-fonctions-classes-methodes-et-champs" title="Lien vers cette rubrique"></a></h3>
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-text">Conventions de nommage retenues pour ce cours</span><a class="headerlink" href="#id4" title="Lien vers ce tableau"></a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 20.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Élément</p></th>
+<th class="head"><p>Convention</p></th>
+<th class="head"><p>Exemple</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Classe, structure, enum, type</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PascalCase</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RobotController</span></code>, <code class="docutils literal notranslate"><span class="pre">JointState</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Fonction, méthode</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">snake_case</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">compute_jacobian()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_position()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Variable, paramètre, champ/attribut</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">snake_case</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">joint_velocity</span></code>, <code class="docutils literal notranslate"><span class="pre">robot_name</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Constante, macro</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SCREAMING_SNAKE_CASE</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MAX_VELOCITY</span></code>, <code class="docutils literal notranslate"><span class="pre">PI</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Module (Python), espace de noms (C++), paquet</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">snake_case</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">robot_description</span></code>, <code class="docutils literal notranslate"><span class="pre">scara_hardware</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Quelques précisions complémentaires :</p>
+<ul class="simple">
+<li><p>En C++, il est courant de suffixer les attributs privés d’une classe par un underscore final (ex : <code class="docutils literal notranslate"><span class="pre">velocity_</span></code>) afin de les distinguer visuellement des variables locales et des paramètres de fonction.</p></li>
+</ul>
+<p>On peut aussi utiliser un préfixe <code class="docutils literal notranslate"><span class="pre">m_</span></code> pour les attributs membres privés (ex : <code class="docutils literal notranslate"><span class="pre">m_velocity</span></code>) afin de les distinguer des variables locales et des paramètres de fonction.
+* Python n’a pas de véritables membres privés : par convention, on préfixe par un underscore (<code class="docutils literal notranslate"><span class="pre">_velocity</span></code>) pour indiquer un usage interne à la classe ou au module, l’usage du double underscore (<code class="docutils literal notranslate"><span class="pre">__velocity</span></code>) étant réservé aux cas où l’on souhaite explicitement activer le <em>name mangling</em>.
+* Un nom doit rester court mais explicite : il vaut mieux <code class="docutils literal notranslate"><span class="pre">joint_velocity</span></code> que <code class="docutils literal notranslate"><span class="pre">jv</span></code> ou que <code class="docutils literal notranslate"><span class="pre">the_velocity_of_the_joint_in_radian_per_second</span></code>.</p>
+</section>
+<section id="nommage-des-versions">
+<h3>Nommage des versions<a class="headerlink" href="#nommage-des-versions" title="Lien vers cette rubrique"></a></h3>
+<p>Utiliser la convention <strong>SemVer</strong>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> MAJEUR.MINEUR.CORRECTIF
+
+
+* MAJEUR → rupture de compatibilité (API)
+* MINEUR → ajout compatible (Features)
+* CORRECTIF → correction de bug
+</pre></div>
+</div>
+<p>Liens pour la doc: <a class="reference external" href="https://semver.org/lang/fr/">https://semver.org/lang/fr/</a></p>
+</section>
+<section id="nommage-des-commits">
+<h3>Nommage des commits<a class="headerlink" href="#nommage-des-commits" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>&lt;<span class="nb">type</span><span class="w"> </span>de<span class="w"> </span>commit&gt;:<span class="o">[</span>&lt;scope&gt;<span class="o">]</span><span class="w"> </span>description<span class="w"> </span>du<span class="w"> </span>commit
+
+<span class="w"> </span><span class="o">[</span>optional<span class="w"> </span>body<span class="o">]</span>
+
+<span class="w"> </span><span class="o">[</span>optional<span class="w"> </span>footer<span class="o">(</span>s<span class="o">)]</span>
+
+
+*<span class="w"> </span>feat:<span class="w"> </span>nouvelle<span class="w"> </span>fonctionnalité
+*<span class="w"> </span>fix:<span class="w"> </span>correction<span class="w"> </span>de<span class="w"> </span>bug
+*<span class="w"> </span>BREAKING<span class="w"> </span>CHANGE:<span class="w"> </span>changement<span class="w"> </span>API
+*<span class="w"> </span>docs:<span class="w"> </span>documentation
+*<span class="w"> </span>refactor:<span class="w"> </span>refactorisation
+*<span class="w"> </span>test:<span class="w"> </span>tests
+*<span class="w"> </span>build:<span class="w"> </span>build<span class="w"> </span>/<span class="w"> </span>dépendances
+*<span class="w"> </span>ci:<span class="w"> </span>intégration<span class="w"> </span><span class="k">continue</span>
+*<span class="w"> </span>chore:<span class="w"> </span>maintenance<span class="w"> </span>diverse
+</pre></div>
+</div>
+</section>
+<section id="nommage-des-branches">
+<h3>Nommage des branches<a class="headerlink" href="#nommage-des-branches" title="Lien vers cette rubrique"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>feature/&lt;description-courte&gt; : ajout d’une fonctionnalité</p></li>
+<li><p>fix/&lt;description-courte&gt; : ajout d’un correctif</p></li>
+<li><p>release/&lt;version&gt; : version du logiciel correspondant à un env. donné (API,matériel, OS, etc.)</p></li>
+<li><p>chore/&lt;description-courte&gt; : maintenance sans impact sur l’api, les features, ou un bug</p></li>
+<li><p>docs/&lt;description-courte&gt; : ajout d’éléments de documentation</p></li>
+<li><p>hotfix/&lt;description-courte&gt; : ajout d’un correctif urgent</p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+<section id="identifier-un-probleme-bug-avec-un-systeme-de-controle-de-version">
+<h2>Identifier un problème/bug avec un système de contrôle de version<a class="headerlink" href="#identifier-un-probleme-bug-avec-un-systeme-de-controle-de-version" title="Lien vers cette rubrique"></a></h2>
+<ol class="arabic simple">
+<li><p>Associer le problème à un <strong>test</strong></p></li>
+<li><p>Trouver la première version pour laquelle le test échoue alors que le test est OK pour les versions d’avant.</p></li>
+<li><p>Analyser les modifications et les appliquer itérativements pour identifier celle responsable du problème</p></li>
+</ol>
+<p><strong>Procéder par dichotomie pour accélérer la recherche.</strong></p>
+<p>Un outil utile pour cette recherche est la commande <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">bisect</span></code>, qui permet de procéder par dichotomie pour identifier le commit responsable d’un bug.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<dl class="simple">
+<dt>Cela ne sera efficace que si vous avez des commits atomiques <br></dt><dd><p>✅ une fonction/bug/feature à la fois</p>
+</dd>
+<dt>Cela ne marchera pas par exemple si <br></dt><dd><p>❌ 50 fonctions modifiées dans le commit</p>
+</dd>
+</dl>
+</div>
+</section>
+<section id="references-utiles-et-exercices-en-ligne">
+<h2>Références utiles et exercices en ligne<a class="headerlink" href="#references-utiles-et-exercices-en-ligne" title="Lien vers cette rubrique"></a></h2>
+<section id="references">
+<h3>Références<a class="headerlink" href="#references" title="Lien vers cette rubrique"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>👉 <a class="reference external" href="https://www.conventionalcommits.org/en/v1.0.0/">www.conventionalcommits.org v1.0.0</a></p></li>
+<li><p>👉 <a class="reference external" href="https://git-scm.com/book/ms/v2/Distributed-Git-Contributing-to-a-Project">Contributing to a distributed git Project by git-scm</a></p></li>
+<li><p>👉 <a class="reference external" href="https://docs.github.com/en/get-started/using-github/github-flow">github-flow</a></p></li>
+<li><p>👉 <a class="reference external" href="https://docs.gitlab.com/user/project/repository/branches/strategies/">gitlab strategies for branches</a></p></li>
+<li><p>👉 <a class="reference external" href="https://www.atlassian.com/continuous-delivery/continuous-integration/trunk-based-development">trunk-based-development by Atlassian</a></p></li>
+<li><p>👉 <a class="reference external" href="https://semver.org/lang/fr/">Spécification SemVer</a></p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="exercices-en-ligne">
+<h3>Exercices en ligne<a class="headerlink" href="#exercices-en-ligne" title="Lien vers cette rubrique"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://learngitbranching.js.org/?locale=fr_FR">https://learngitbranching.js.org/?locale=fr_FR</a></p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+<section id="regles-d-or-du-travail-avec-git">
+<h2>Règles d’or du travail avec Git<a class="headerlink" href="#regles-d-or-du-travail-avec-git" title="Lien vers cette rubrique"></a></h2>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><span class="text-bold-black-on-red">Ne jamais toucher la branche «main»</span></p></li>
+<li><p><span class="text-bold-black-on-red">Ne jamais toucher la branche de quelqu’un d’autre</span></p></li>
+<li><p><span class="text-bold-black-on-red">Ne jamais ajouter tout le répertoire racine du projet</span> <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">.</span></code></p></li>
+</ol>
+</div></blockquote>
+<p>▸ Créer une nouvelle branche (dans le repo ou sur un fork) pour chaque nouvelle fonctionnalité ou correctif <br>
+▸ Faire uniquement sur cette nouvelle branche</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>COMMIT</p></li>
+<li><p>PUSH</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="initialisation-du-depot-git">
+<h2>Initialisation du dépôt git<a class="headerlink" href="#initialisation-du-depot-git" title="Lien vers cette rubrique"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Git est un logiciel en ligne de commande. Il existe des interfaces graphiques pour Git, mais il est recommandé de commencer par apprendre à utiliser Git en ligne de commande.</p>
@@ -152,6 +580,7 @@ Nous pouvons voir l’état de notre dépôt git en tapant la commande suivante:
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>log
 </pre></div>
 </div>
+</section>
 </section>
 
 
