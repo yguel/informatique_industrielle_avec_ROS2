@@ -303,9 +303,9 @@ Utiliser la convention **SemVer**:
    MAJEUR.MINEUR.CORRECTIF 
 
 
-  * MAJEUR → rupture de compatibilité (API)
-  * MINEUR → ajout compatible (Features)
-  * CORRECTIF → correction de bug
+   * MAJEUR → rupture de compatibilité (API)
+   * MINEUR → ajout compatible (Features)
+   * CORRECTIF → correction de bug
 
 Liens pour la doc: https://semver.org/lang/fr/
 
@@ -322,15 +322,15 @@ Nommage des commits
    [optional footer(s)]
 
 
-  * feat: nouvelle fonctionnalité
-  * fix: correction de bug
-  * BREAKING CHANGE: changement API
-  * docs: documentation
-  * refactor: refactorisation
-  * test: tests
-  * build: build / dépendances
-  * ci: intégration continue
-  * chore: maintenance diverse
+   * feat: nouvelle fonctionnalité
+   * fix: correction de bug
+   * BREAKING CHANGE: changement API
+   * docs: documentation
+   * refactor: refactorisation
+   * test: tests
+   * build: build / dépendances
+   * ci: intégration continue
+   * chore: maintenance diverse
 
 ---------------------
 Nommage des branches
@@ -384,7 +384,23 @@ Références
 Exercices en ligne
 -------------------
 
+Les exercices en ligne suivants sont à faire (principal et remote)
+
    * https://learngitbranching.js.org/?locale=fr_FR
+
+Réaliser en cours les exercices suivants:
+
+Principal:
+
+   * Séquence d'introduction (1 à 4)
+   * Montée en puissance (1 à 4)
+   * Déplacer et indexer le travail (1 à 4)
+
+Remote:
+
+   * Push & Pull -- Dépôts Git distants ! (1 à 8)
+
+Les autres exercices sont à réaliser à la maison.
 
 ================================
 Règles d'or du travail avec Git
