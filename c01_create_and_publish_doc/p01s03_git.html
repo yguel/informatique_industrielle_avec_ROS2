@@ -420,13 +420,13 @@ Vous pouvez supprimez ces commits de l’historique de votre branche en utilisan
 <h3>Nommage des versions<a class="headerlink" href="#nommage-des-versions" title="Lien vers cette rubrique"></a></h3>
 <p>Utiliser la convention <strong>SemVer</strong>:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MAJEUR.MINEUR.CORRECTIF
-
-
-* MAJEUR → rupture de compatibilité (API)
-* MINEUR → ajout compatible (Features)
-* CORRECTIF → correction de bug
 </pre></div>
 </div>
+<ul class="simple">
+<li><p>MAJEUR → rupture de compatibilité (API)</p></li>
+<li><p>MINEUR → ajout compatible (Features)</p></li>
+<li><p>CORRECTIF → correction de bug</p></li>
+</ul>
 <p>Liens pour la doc: <a class="reference external" href="https://semver.org/lang/fr/">https://semver.org/lang/fr/</a></p>
 </section>
 <section id="nommage-des-commits">
@@ -436,24 +436,23 @@ Vous pouvez supprimez ces commits de l’historique de votre branche en utilisan
 <span class="o">[</span>optional<span class="w"> </span>body<span class="o">]</span>
 
 <span class="o">[</span>optional<span class="w"> </span>footer<span class="o">(</span>s<span class="o">)]</span>
-
-
-*<span class="w"> </span>feat:<span class="w"> </span>nouvelle<span class="w"> </span>fonctionnalité
-*<span class="w"> </span>fix:<span class="w"> </span>correction<span class="w"> </span>de<span class="w"> </span>bug
-*<span class="w"> </span>BREAKING<span class="w"> </span>CHANGE:<span class="w"> </span>changement<span class="w"> </span>API
-*<span class="w"> </span>docs:<span class="w"> </span>documentation
-*<span class="w"> </span>refactor:<span class="w"> </span>refactorisation
-*<span class="w"> </span>test:<span class="w"> </span>tests
-*<span class="w"> </span>build:<span class="w"> </span>build<span class="w"> </span>/<span class="w"> </span>dépendances
-*<span class="w"> </span>ci:<span class="w"> </span>intégration<span class="w"> </span><span class="k">continue</span>
-*<span class="w"> </span>chore:<span class="w"> </span>maintenance<span class="w"> </span>diverse
 </pre></div>
 </div>
+<ul class="simple">
+<li><p>feat: nouvelle fonctionnalité</p></li>
+<li><p>fix: correction de bug</p></li>
+<li><p>BREAKING CHANGE: changement API</p></li>
+<li><p>docs: documentation</p></li>
+<li><p>refactor: refactorisation</p></li>
+<li><p>test: tests</p></li>
+<li><p>build: build / dépendances</p></li>
+<li><p>ci: intégration continue</p></li>
+<li><p>chore: maintenance diverse</p></li>
+</ul>
 </section>
 <section id="nommage-des-branches">
 <h3>Nommage des branches<a class="headerlink" href="#nommage-des-branches" title="Lien vers cette rubrique"></a></h3>
-<blockquote>
-<div><ul class="simple">
+<ul class="simple">
 <li><p>feature/&lt;description-courte&gt; : ajout d’une fonctionnalité</p></li>
 <li><p>fix/&lt;description-courte&gt; : ajout d’un correctif</p></li>
 <li><p>release/&lt;version&gt; : version du logiciel correspondant à un env. donné (API,matériel, OS, etc.)</p></li>
@@ -461,7 +460,6 @@ Vous pouvez supprimez ces commits de l’historique de votre branche en utilisan
 <li><p>docs/&lt;description-courte&gt; : ajout d’éléments de documentation</p></li>
 <li><p>hotfix/&lt;description-courte&gt; : ajout d’un correctif urgent</p></li>
 </ul>
-</div></blockquote>
 </section>
 </section>
 <section id="identifier-un-probleme-bug-avec-un-systeme-de-controle-de-version">
