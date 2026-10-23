@@ -303,9 +303,9 @@ Utiliser la convention **SemVer**:
    MAJEUR.MINEUR.CORRECTIF 
 
 
-   * MAJEUR → rupture de compatibilité (API)
-   * MINEUR → ajout compatible (Features)
-   * CORRECTIF → correction de bug
+* MAJEUR → rupture de compatibilité (API)
+* MINEUR → ajout compatible (Features)
+* CORRECTIF → correction de bug
 
 Liens pour la doc: https://semver.org/lang/fr/
 
@@ -322,26 +322,26 @@ Nommage des commits
    [optional footer(s)]
 
 
-   * feat: nouvelle fonctionnalité
-   * fix: correction de bug
-   * BREAKING CHANGE: changement API
-   * docs: documentation
-   * refactor: refactorisation
-   * test: tests
-   * build: build / dépendances
-   * ci: intégration continue
-   * chore: maintenance diverse
+* feat: nouvelle fonctionnalité
+* fix: correction de bug
+* BREAKING CHANGE: changement API
+* docs: documentation
+* refactor: refactorisation
+* test: tests
+* build: build / dépendances
+* ci: intégration continue
+* chore: maintenance diverse
 
 ---------------------
 Nommage des branches
 ---------------------
 
-  * feature/<description-courte> : ajout d’une fonctionnalité
-  * fix/<description-courte> : ajout d’un correctif
-  * release/<version> : version du logiciel correspondant à un env. donné (API,matériel, OS, etc.)
-  * chore/<description-courte> : maintenance sans impact sur l’api, les features, ou un bug
-  * docs/<description-courte> : ajout d’éléments de documentation
-  * hotfix/<description-courte> : ajout d’un correctif urgent
+* feature/<description-courte> : ajout d’une fonctionnalité
+* fix/<description-courte> : ajout d’un correctif
+* release/<version> : version du logiciel correspondant à un env. donné (API,matériel, OS, etc.)
+* chore/<description-courte> : maintenance sans impact sur l’api, les features, ou un bug
+* docs/<description-courte> : ajout d’éléments de documentation
+* hotfix/<description-courte> : ajout d’un correctif urgent
 
 ==================================================================
 Identifier un problème/bug avec un système de contrôle de version
