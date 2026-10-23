@@ -115,7 +115,13 @@ Effectuez les commandes suivantes:
 .. code-block:: bash
    
    git branch -a
+
+.. code-block:: bash
+   
    git branch -M rolling
+
+.. code-block:: bash
+   
    git branch -a
 
 The branch commands permet de renommer la branche principale (appelée main ou master) en ``rolling`` en accord avec la politique de nommage de ROS2.
@@ -160,9 +166,21 @@ Créer un fichier sur cette branche nommée ``.gitkeep`` cela permet de garder l
 .. code-block:: bash
 
    touch .gitkeep
+
+.. code-block:: bash
+   
    git add .gitkeep
+
+.. code-block:: bash
+   
    git commit -m "First commit of the gh-pages branch"
+
+.. code-block:: bash
+   
    git push -u origin gh-pages
+
+.. code-block:: bash
+   
    git checkout rolling
 
 Nous allons créer un fichier spécial qui va dire à github de créer et de publier la documentation à chaque fois qu'un changement est fait sur la branche rolling
@@ -171,8 +189,7 @@ Créer le fichier ``.github/workflows/documentation.yml`` à la racine du projet
 
 .. code-block:: bash
 
-   mkdir -p .github/workflows
-   touch .github/workflows/documentation.yml
+   mkdir -p .github/workflows && touch .github/workflows/documentation.yml
 
 Ajouter le contenu suivant dans le fichier ``.github/workflows/documentation.yml``:
 
@@ -226,7 +243,13 @@ Maintenant vous pouvez ajouter le fichier de workflow à git et pusher:
 .. code-block:: bash
 
    git add .github/workflows/documentation.yml
+
+.. code-block:: bash
+   
    git commit -m "Add github action to build and publish the documentation"
+
+.. code-block:: bash
+   
    git push
 
 Maintenant, vous pouvez voir la documentation apparaître sur le web en temps réel en allant sur la page de votre dépôt github et en cliquant sur le lien ``Actions``.
