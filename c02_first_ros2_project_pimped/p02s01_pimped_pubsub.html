@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rappels : setup ROS2 &mdash; Documentation Cours d&#39;Informatique Industrielle avec ROS2 1.0.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -127,23 +127,23 @@ git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ICube
 <span class="linenos"> 6</span><span class="nb">export</span><span class="w"> </span><span class="nv">COLCON_EXTENSION_BLOCKLIST</span><span class="o">=</span>colcon_core.event_handler.desktop_notification
 <span class="linenos"> 7</span>
 <span class="linenos"> 8</span><span class="c1"># Avoid pitfalls of another than en locale</span>
-<span class="linenos"> 9</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2</span><span class="o">=</span><span class="s1">&#39;LC_NUMERIC=en_US.UTF-8 ros2&#39;</span>
+<span class="linenos"> 9</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2</span><span class="o">=</span><span class="s1">'LC_NUMERIC=en_US.UTF-8 ros2'</span>
 <span class="linenos">10</span>
 <span class="linenos">11</span><span class="c1"># humble</span>
-<span class="linenos">12</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_humble</span><span class="o">=</span><span class="s1">&#39;source /opt/ros/humble/setup.bash&#39;</span>
-<span class="linenos">13</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_humble_src</span><span class="o">=</span><span class="s1">&#39;ros2_humble &amp;&amp; source install/setup.bash&#39;</span>
+<span class="linenos">12</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_humble</span><span class="o">=</span><span class="s1">'source /opt/ros/humble/setup.bash'</span>
+<span class="linenos">13</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_humble_src</span><span class="o">=</span><span class="s1">'ros2_humble &amp;&amp; source install/setup.bash'</span>
 <span class="linenos">14</span>
 <span class="linenos">15</span><span class="c1"># jazzy</span>
-<span class="linenos">16</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_jazzy</span><span class="o">=</span><span class="s1">&#39;source /opt/ros/jazzy/setup.bash&#39;</span>
-<span class="linenos">17</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_jazzy_src</span><span class="o">=</span><span class="s1">&#39;ros2_jazzy &amp;&amp; source install/setup.bash&#39;</span>
+<span class="linenos">16</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_jazzy</span><span class="o">=</span><span class="s1">'source /opt/ros/jazzy/setup.bash'</span>
+<span class="linenos">17</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_jazzy_src</span><span class="o">=</span><span class="s1">'ros2_jazzy &amp;&amp; source install/setup.bash'</span>
 <span class="linenos">18</span>
 <span class="linenos">19</span><span class="c1"># agnostic distro commands</span>
 <span class="linenos">20</span>
 <span class="linenos">21</span><span class="c1">## build</span>
-<span class="linenos">22</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_dep</span><span class="o">=</span><span class="s1">&#39;rosdep install --ignore-src --from-paths . -y -r&#39;</span>
-<span class="linenos">23</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_build</span><span class="o">=</span><span class="s1">&#39;ros2_dep &amp;&amp; colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release --symlink-install &amp;&amp; source install/setup.bash&#39;</span>
-<span class="linenos">24</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_build_debug</span><span class="o">=</span><span class="s1">&#39;ros2_dep &amp;&amp; colcon build --cmake-args -DCMAKE_BUILD_TYPE=Debug --symlink-install &amp;&amp; source install/setup.bash&#39;</span>
-<span class="linenos">25</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_build_reldebug</span><span class="o">=</span><span class="s1">&#39;ros2_dep &amp;&amp; colcon build --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo --symlink-install &amp;&amp; source install/setup.bash&#39;</span>
+<span class="linenos">22</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_dep</span><span class="o">=</span><span class="s1">'rosdep install --ignore-src --from-paths . -y -r'</span>
+<span class="linenos">23</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_build</span><span class="o">=</span><span class="s1">'ros2_dep &amp;&amp; colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release --symlink-install &amp;&amp; source install/setup.bash'</span>
+<span class="linenos">24</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_build_debug</span><span class="o">=</span><span class="s1">'ros2_dep &amp;&amp; colcon build --cmake-args -DCMAKE_BUILD_TYPE=Debug --symlink-install &amp;&amp; source install/setup.bash'</span>
+<span class="linenos">25</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_build_reldebug</span><span class="o">=</span><span class="s1">'ros2_dep &amp;&amp; colcon build --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo --symlink-install &amp;&amp; source install/setup.bash'</span>
 <span class="linenos">26</span>
 <span class="linenos">27</span><span class="k">function</span><span class="w"> </span>ros2_build_only<span class="w"> </span><span class="o">{</span>
 <span class="linenos">28</span>ros2_dep
@@ -158,12 +158,12 @@ git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ICube
 <span class="linenos">37</span><span class="o">}</span>
 <span class="linenos">38</span>
 <span class="linenos">39</span><span class="k">function</span><span class="w"> </span>ros2_build_except<span class="w"> </span><span class="o">{</span>
-<span class="linenos">40</span><span class="nv">old</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$IFS</span><span class="s2">&quot;</span>
-<span class="linenos">41</span><span class="nv">IFS</span><span class="o">=</span><span class="s1">&#39;|&#39;</span>
-<span class="linenos">42</span><span class="nv">all_except_those</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$*</span><span class="s2">&quot;</span>
+<span class="linenos">40</span><span class="nv">old</span><span class="o">=</span><span class="s2">"</span><span class="nv">$IFS</span><span class="s2">"</span>
+<span class="linenos">41</span><span class="nv">IFS</span><span class="o">=</span><span class="s1">'|'</span>
+<span class="linenos">42</span><span class="nv">all_except_those</span><span class="o">=</span><span class="s2">"</span><span class="nv">$*</span><span class="s2">"</span>
 <span class="linenos">43</span><span class="nv">IFS</span><span class="o">=</span><span class="nv">$old</span>
 <span class="linenos">44</span><span class="c1">#echo $all_except_those</span>
-<span class="linenos">45</span><span class="nv">reg</span><span class="o">=</span><span class="s2">&quot; ^((?!((^|, )(&quot;</span><span class="nv">$all_except_those</span><span class="s2">&quot;))+</span>$<span class="s2">).)*&quot;</span>
+<span class="linenos">45</span><span class="nv">reg</span><span class="o">=</span><span class="s2">" ^((?!((^|, )("</span><span class="nv">$all_except_those</span><span class="s2">"))+</span>$<span class="s2">).)*"</span>
 <span class="linenos">46</span><span class="c1">#echo $reg</span>
 <span class="linenos">47</span>ros2_dep
 <span class="linenos">48</span>colcon<span class="w"> </span>build<span class="w"> </span>--cmake-args<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release<span class="w"> </span>--symlink-install<span class="w"> </span>--packages-select-regex<span class="w"> </span><span class="nv">$reg</span>
@@ -171,36 +171,36 @@ git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ICube
 <span class="linenos">50</span><span class="o">}</span>
 <span class="linenos">51</span>
 <span class="linenos">52</span><span class="c1">### build moveit</span>
-<span class="linenos">53</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_build_moveit</span><span class="o">=</span><span class="s1">&#39;ros2_dep install -r --from-paths . --ignore-src --rosdistro $ROS_DISTRO -y &amp;&amp; colcon build --mixin release --executor sequential &amp;&amp; source install/setup.bash&#39;</span>
+<span class="linenos">53</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_build_moveit</span><span class="o">=</span><span class="s1">'ros2_dep install -r --from-paths . --ignore-src --rosdistro $ROS_DISTRO -y &amp;&amp; colcon build --mixin release --executor sequential &amp;&amp; source install/setup.bash'</span>
 <span class="linenos">54</span>
 <span class="linenos">55</span><span class="c1">## test</span>
-<span class="linenos">56</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_test</span><span class="o">=</span><span class="s1">&#39;source install/setup.bash &amp; colcon test --ctest-args tests&#39;</span>
-<span class="linenos">57</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_test_verbose</span><span class="o">=</span><span class="s1">&#39;source install/setup.bash &amp; colcon test --ctest-args &quot;--debug --verbose tests&quot;&#39;</span>
-<span class="linenos">58</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_test_stop_on_failure</span><span class="o">=</span><span class="s1">&#39;source install/setup.bash &amp; colcon test --ctest-args &quot;--debug --stop-on-failure --verbose tests&quot;&#39;</span>
-<span class="linenos">59</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_view_tests</span><span class="o">=</span><span class="s1">&#39;colcon test-result&#39;</span>
-<span class="linenos">60</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_view_tests_all</span><span class="o">=</span><span class="s1">&#39;colcon test-result --all&#39;</span>
+<span class="linenos">56</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_test</span><span class="o">=</span><span class="s1">'source install/setup.bash &amp; colcon test --ctest-args tests'</span>
+<span class="linenos">57</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_test_verbose</span><span class="o">=</span><span class="s1">'source install/setup.bash &amp; colcon test --ctest-args "--debug --verbose tests"'</span>
+<span class="linenos">58</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_test_stop_on_failure</span><span class="o">=</span><span class="s1">'source install/setup.bash &amp; colcon test --ctest-args "--debug --stop-on-failure --verbose tests"'</span>
+<span class="linenos">59</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_view_tests</span><span class="o">=</span><span class="s1">'colcon test-result'</span>
+<span class="linenos">60</span><span class="nb">alias</span><span class="w"> </span><span class="nv">ros2_view_tests_all</span><span class="o">=</span><span class="s1">'colcon test-result --all'</span>
 <span class="linenos">61</span>
 <span class="linenos">62</span>
 <span class="linenos">63</span><span class="k">function</span><span class="w"> </span>ros2_test_only<span class="w"> </span><span class="o">{</span>
-<span class="linenos">64</span>colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--ctest-args<span class="w"> </span><span class="s2">&quot;--debug --verbose tests&quot;</span><span class="w"> </span>--packages-select<span class="w">  </span><span class="nv">$@</span>
+<span class="linenos">64</span>colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--ctest-args<span class="w"> </span><span class="s2">"--debug --verbose tests"</span><span class="w"> </span>--packages-select<span class="w">  </span><span class="nv">$@</span>
 <span class="linenos">65</span><span class="o">}</span>
 <span class="linenos">66</span>
 <span class="linenos">67</span><span class="k">function</span><span class="w"> </span>ros2_test_only_stop_when_fails<span class="w"> </span><span class="o">{</span>
-<span class="linenos">68</span>colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--ctest-args<span class="w"> </span><span class="s2">&quot;--debug --stop-on-failure --verbose tests&quot;</span><span class="w"> </span>--packages-select<span class="w">  </span><span class="nv">$@</span>
+<span class="linenos">68</span>colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--ctest-args<span class="w"> </span><span class="s2">"--debug --stop-on-failure --verbose tests"</span><span class="w"> </span>--packages-select<span class="w">  </span><span class="nv">$@</span>
 <span class="linenos">69</span><span class="o">}</span>
 <span class="linenos">70</span>
 <span class="linenos">71</span><span class="k">function</span><span class="w"> </span>ros2_test_only_pkg_test<span class="o">()</span><span class="w"> </span>
 <span class="linenos">72</span><span class="o">{</span>
 <span class="linenos">73</span><span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">pkg</span><span class="o">=</span><span class="nv">$1</span>
 <span class="linenos">74</span><span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">test</span><span class="o">=</span><span class="nv">$2</span>
-<span class="linenos">75</span><span class="w">    </span>colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--ctest-args<span class="w"> </span><span class="s2">&quot;--debug --verbose --tests-regex </span><span class="nv">$2</span><span class="s2"> tests&quot;</span><span class="w"> </span>--packages-select<span class="w">  </span><span class="nv">$1</span>
+<span class="linenos">75</span><span class="w">    </span>colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--ctest-args<span class="w"> </span><span class="s2">"--debug --verbose --tests-regex </span><span class="nv">$2</span><span class="s2"> tests"</span><span class="w"> </span>--packages-select<span class="w">  </span><span class="nv">$1</span>
 <span class="linenos">76</span><span class="o">}</span>
 <span class="linenos">77</span>
 <span class="linenos">78</span><span class="k">function</span><span class="w"> </span>ros2_test_only_stop_when_fails_pkg_test<span class="w"> </span>
 <span class="linenos">79</span><span class="o">{</span>
 <span class="linenos">80</span><span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">pkg</span><span class="o">=</span><span class="nv">$1</span>
 <span class="linenos">81</span><span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">test</span><span class="o">=</span><span class="nv">$2</span>
-<span class="linenos">82</span><span class="w">    </span>colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--ctest-args<span class="w"> </span><span class="s2">&quot;--debug --stop-on-failure --verbose --tests-regex </span><span class="nv">$2</span><span class="s2"> tests&quot;</span><span class="w"> </span>--packages-select<span class="w">  </span><span class="nv">$1</span>
+<span class="linenos">82</span><span class="w">    </span>colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--ctest-args<span class="w"> </span><span class="s2">"--debug --stop-on-failure --verbose --tests-regex </span><span class="nv">$2</span><span class="s2"> tests"</span><span class="w"> </span>--packages-select<span class="w">  </span><span class="nv">$1</span>
 <span class="linenos">83</span><span class="o">}</span>
 <span class="linenos">84</span>
 <span class="linenos">85</span><span class="k">function</span><span class="w"> </span>ros2_view_result_of_test<span class="o">()</span><span class="w"> </span>

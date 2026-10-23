@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>L’outil pre-commit &mdash; Documentation Cours d&#39;Informatique Industrielle avec ROS2 1.0.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -134,7 +134,7 @@ Il est également fortement recommandé d’ajouter dans le message de commit :
 #. un texte explicit indiquant que c’est un commit temporaire (par exemple <code class="docutils literal notranslate"><span class="pre">[WIP]</span></code> pour Work In Progress),
 #. un texte explicatif sur l’état du code,
 #. le mot clé <code class="docutils literal notranslate"><span class="pre">[skip</span> <span class="pre">ci]</span></code> pour éviter de déclencher des actions automatiques (comme des tests) sur ce commit.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;[WIP][skip ci] 70% du refactoring effectué suite au bug 356&quot;</span><span class="w"> </span>--no-verify
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"[WIP][skip ci] 70% du refactoring effectué suite au bug 356"</span><span class="w"> </span>--no-verify
 </pre></div>
 </div>
 <p>Ainsi il sera possible de faire un test automatique sur la branche principale pour vérifier que jamais de commit avec les mots clés <code class="docutils literal notranslate"><span class="pre">[WIP]</span></code> ou <code class="docutils literal notranslate"><span class="pre">[skip</span> <span class="pre">ci]</span></code> n’ont été mergés.</p>

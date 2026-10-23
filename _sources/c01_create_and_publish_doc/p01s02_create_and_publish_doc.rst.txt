@@ -30,7 +30,11 @@ Créer un répertoire ''.vscode'' dans le répertoire du projet et créer 1 fich
 
 .. code-block:: bash
    
-   mkdir .vscode
+   mkdir -p .vscode
+
+
+.. code-block:: bash
+
    touch .vscode/settings.json
 
 Aller dans le répertoire de configuration des paramètres globaux de vscode pour l'utilisateur courant et créer un fichier ``keybindings.json`` vide:
@@ -38,6 +42,9 @@ Aller dans le répertoire de configuration des paramètres globaux de vscode pou
 .. code-block:: bash
 
    cd ~/.config/Code/User
+
+.. code-block:: bash
+
    touch keybindings.json
 
 ================================================

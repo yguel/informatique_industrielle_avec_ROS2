@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Publier la documentation &mdash; Documentation Cours d&#39;Informatique Industrielle avec ROS2 1.0.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -132,7 +132,7 @@ et appelez votre dépôt <code class="docutils literal notranslate"><span class=
 <section id="creer-une-cle-ssh-et-l-ajouter-a-github">
 <h3>Créer une clé ssh et l’ajouter à github<a class="headerlink" href="#creer-une-cle-ssh-et-l-ajouter-a-github" title="Lien vers cette rubrique"></a></h3>
 <p>Pour pouvoir pousser votre projet sur github, il est recommandé d’utiliser une clé ssh. Pour créer une clé ssh, ouvrez un terminal et tapez la commande suivante:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;your_email@example.com&quot;</span><span class="w"> </span>-f<span class="w"> </span>~/.ssh/id_ed25519_info_indus_tutorial
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-C<span class="w"> </span><span class="s2">"your_email@example.com"</span><span class="w"> </span>-f<span class="w"> </span>~/.ssh/id_ed25519_info_indus_tutorial
 </pre></div>
 </div>
 <p>Remplacez <code class="docutils literal notranslate"><span class="pre">your_email&#64;example.com</span></code> par votre email.</p>
@@ -187,8 +187,12 @@ et appelez votre dépôt <code class="docutils literal notranslate"><span class=
 <h3>Changement de nom de la branche principale<a class="headerlink" href="#changement-de-nom-de-la-branche-principale" title="Lien vers cette rubrique"></a></h3>
 <p>Effectuez les commandes suivantes:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>branch<span class="w"> </span>-a
-git<span class="w"> </span>branch<span class="w"> </span>-M<span class="w"> </span>rolling
-git<span class="w"> </span>branch<span class="w"> </span>-a
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>branch<span class="w"> </span>-M<span class="w"> </span>rolling
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>branch<span class="w"> </span>-a
 </pre></div>
 </div>
 <p>The branch commands permet de renommer la branche principale (appelée main ou master) en <code class="docutils literal notranslate"><span class="pre">rolling</span></code> en accord avec la politique de nommage de ROS2.</p>
@@ -219,16 +223,23 @@ Vous devriez voir les fichiers de votre projet s’afficher sur github.</p>
 </div>
 <p>Créer un fichier sur cette branche nommée <code class="docutils literal notranslate"><span class="pre">.gitkeep</span></code> cela permet de garder le répertoire vide et de pouvoir pousser la branche sur github:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>touch<span class="w"> </span>.gitkeep
-git<span class="w"> </span>add<span class="w"> </span>.gitkeep
-git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;First commit of the gh-pages branch&quot;</span>
-git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>gh-pages
-git<span class="w"> </span>checkout<span class="w"> </span>rolling
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>.gitkeep
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"First commit of the gh-pages branch"</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>gh-pages
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>rolling
 </pre></div>
 </div>
 <p>Nous allons créer un fichier spécial qui va dire à github de créer et de publier la documentation à chaque fois qu’un changement est fait sur la branche rolling</p>
 <p>Créer le fichier <code class="docutils literal notranslate"><span class="pre">.github/workflows/documentation.yml</span></code> à la racine du projet git:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>.github/workflows
-touch<span class="w"> </span>.github/workflows/documentation.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>.github/workflows<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>touch<span class="w"> </span>.github/workflows/documentation.yml
 </pre></div>
 </div>
 <p>Ajouter le contenu suivant dans le fichier <code class="docutils literal notranslate"><span class="pre">.github/workflows/documentation.yml</span></code>:</p>
@@ -247,7 +258,7 @@ touch<span class="w"> </span>.github/workflows/documentation.yml
 <span class="linenos">11</span>
 <span class="linenos">12</span><span class="c1"># A workflow run is made up of one or more jobs that can run sequentially or in parallel</span>
 <span class="linenos">13</span><span class="nt">jobs</span><span class="p">:</span>
-<span class="linenos">14</span><span class="w">  </span><span class="c1"># This workflow contains a single job called &quot;build&quot;</span>
+<span class="linenos">14</span><span class="w">  </span><span class="c1"># This workflow contains a single job called "build"</span>
 <span class="linenos">15</span><span class="w">  </span><span class="nt">build_documentation</span><span class="p">:</span>
 <span class="linenos">16</span><span class="w">    </span><span class="c1"># The type of runner that the job will run on</span>
 <span class="linenos">17</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-22.04</span>
@@ -277,11 +288,11 @@ touch<span class="w"> </span>.github/workflows/documentation.yml
 </span><span class="linenos">41</span><span class="w">            </span><span class="no">mkdir -p gh-pages/docs/</span>
 <span class="linenos">42</span><span class="w">            </span><span class="no">cp -r ./doc/sphinx/build/html/* gh-pages/</span>
 <span class="linenos">43</span><span class="w">            </span><span class="no">cd gh-pages</span>
-<span class="linenos">44</span><span class="w">            </span><span class="no">git config --local user.email &quot;action@github.com&quot;</span>
-<span class="linenos">45</span><span class="w">            </span><span class="no">git config --local user.name &quot;GitHub Action&quot;</span>
+<span class="linenos">44</span><span class="w">            </span><span class="no">git config --local user.email "action@github.com"</span>
+<span class="linenos">45</span><span class="w">            </span><span class="no">git config --local user.name "GitHub Action"</span>
 <span class="linenos">46</span><span class="w">            </span><span class="no">touch .nojekyll</span>
 <span class="linenos">47</span><span class="w">            </span><span class="no">git add .</span>
-<span class="linenos">48</span><span class="w">            </span><span class="no">git commit -m &quot;Update documentation&quot; -a || true</span>
+<span class="linenos">48</span><span class="w">            </span><span class="no">git commit -m "Update documentation" -a || true</span>
 <span class="linenos">49</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Push changes</span>
 <span class="linenos">50</span><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ad-m/github-push-action@master</span>
 <span class="linenos">51</span><span class="w">        </span><span class="nt">with</span><span class="p">:</span>
@@ -330,8 +341,12 @@ Il faut:</p>
 </figure>
 <p>Maintenant vous pouvez ajouter le fichier de workflow à git et pusher:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>.github/workflows/documentation.yml
-git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add github action to build and publish the documentation&quot;</span>
-git<span class="w"> </span>push
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Add github action to build and publish the documentation"</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push
 </pre></div>
 </div>
 <p>Maintenant, vous pouvez voir la documentation apparaître sur le web en temps réel en allant sur la page de votre dépôt github et en cliquant sur le lien <code class="docutils literal notranslate"><span class="pre">Actions</span></code>.</p>

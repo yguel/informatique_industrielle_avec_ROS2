@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lancer les tests de ROS2 et les analyser &mdash; Documentation Cours d&#39;Informatique Industrielle avec ROS2 1.0.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -147,13 +147,13 @@ Summary: 5 packages finished [1.38s]
 <span class="hll"><span class="linenos">10</span>--- stderr: scara_bringup                                                    
 </span><span class="hll"><span class="linenos">11</span>Errors while running CTest
 </span><span class="hll"><span class="linenos">12</span>Output from these tests are in: /home/pi/info_indus/ros2_ws/build/scara_bringup/Testing/Temporary/LastTest.log
-</span><span class="hll"><span class="linenos">13</span>Use &quot;--rerun-failed --output-on-failure&quot; to re-run the failed cases verbosely.
+</span><span class="hll"><span class="linenos">13</span>Use "--rerun-failed --output-on-failure" to re-run the failed cases verbosely.
 </span><span class="hll"><span class="linenos">14</span>---
 </span><span class="hll"><span class="linenos">15</span>Finished &lt;&lt;&lt; scara_bringup [1.04s]      [ with test failures ]
 </span><span class="hll"><span class="linenos">16</span>--- stderr: scara_nodes
 </span><span class="hll"><span class="linenos">17</span>Errors while running CTest
 </span><span class="hll"><span class="linenos">18</span>Output from these tests are in: /home/pi/info_indus/ros2_ws/build/scara_nodes/Testing/Temporary/LastTest.log
-</span><span class="hll"><span class="linenos">19</span>Use &quot;--rerun-failed --output-on-failure&quot; to re-run the failed cases verbosely.
+</span><span class="hll"><span class="linenos">19</span>Use "--rerun-failed --output-on-failure" to re-run the failed cases verbosely.
 </span><span class="hll"><span class="linenos">20</span>---
 </span><span class="hll"><span class="linenos">21</span>Finished &lt;&lt;&lt; scara_nodes [1.06s]        [ with test failures ]
 </span><span class="linenos">22</span>
@@ -201,10 +201,10 @@ Il suffit de faire un <code class="docutils literal notranslate"><span class="pr
 Les cas d’usage sont très rares: principalement pour débuguer les CMakeLists.txt impliquant des tests et vérifier quels tests sont executés.</p>
 </div>
 <p>En ajoutant les lignes suivantes dans le fichier de configuration de vscode, vous pouvez ouvrir les fichiers de log des tests avec la coloration syntaxique adaptée:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;files.associations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="nt">&quot;Test.xml&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;log&quot;</span><span class="p">,</span>
-<span class="w">     </span><span class="nt">&quot;*.xunit.xml&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;log&quot;</span><span class="p">,</span>
-<span class="w">     </span><span class="nt">&quot;*.gtest.xml&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;log&quot;</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">"files.associations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="nt">"Test.xml"</span><span class="p">:</span><span class="w"> </span><span class="s2">"log"</span><span class="p">,</span>
+<span class="w">     </span><span class="nt">"*.xunit.xml"</span><span class="p">:</span><span class="w"> </span><span class="s2">"log"</span><span class="p">,</span>
+<span class="w">     </span><span class="nt">"*.gtest.xml"</span><span class="p">:</span><span class="w"> </span><span class="s2">"log"</span>
 <span class="w">     </span><span class="p">},</span>
 </pre></div>
 </div>
@@ -224,90 +224,90 @@ Humble</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">settings.json</span><a class="headerlink" href="#id2" title="Lien vers ce code"></a></div>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;editor.formatOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editor.detectIndentation&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editor.formatOnPaste&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editor.wordWrap&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;on&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;C_Cpp.clang_format_sortIncludes&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;terminal.integrated.scrollback&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;workbench.editor.enablePreview&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;[restructuredtext]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;editor.tabSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">    </span><span class="nt">"editor.formatOnSave"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"editor.detectIndentation"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"editor.formatOnPaste"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"editor.wordWrap"</span><span class="p">:</span><span class="w"> </span><span class="s2">"on"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"C_Cpp.clang_format_sortIncludes"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"terminal.integrated.scrollback"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"workbench.editor.enablePreview"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"[restructuredtext]"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"editor.tabSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
 <span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;files.associations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;Test.xml&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;log&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;*.xunit.xml&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;log&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;*.gtest.xml&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;log&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;*.repos&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;yaml&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;*.world&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xml&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;*.xacro&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xml&quot;</span>
+<span class="w">    </span><span class="nt">"files.associations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"Test.xml"</span><span class="p">:</span><span class="w"> </span><span class="s2">"log"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"*.xunit.xml"</span><span class="p">:</span><span class="w"> </span><span class="s2">"log"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"*.gtest.xml"</span><span class="p">:</span><span class="w"> </span><span class="s2">"log"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"*.repos"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yaml"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"*.world"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xml"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"*.xacro"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xml"</span>
 <span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;editor.tabSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editor.rulers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="nt">"editor.tabSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"editor.rulers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">        </span><span class="mi">100</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;python.analysis.extraPaths&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="s2">&quot;/opt/ros/humble/lib/python3.10/site-packages/&quot;</span>
+<span class="w">    </span><span class="nt">"python.analysis.extraPaths"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"/opt/ros/humble/lib/python3.10/site-packages/"</span>
 <span class="w">    </span><span class="p">],</span>
 <span class="w">    </span><span class="c1">// Autocomplete from ros python packages</span>
-<span class="w">    </span><span class="nt">&quot;python.autoComplete.extraPaths&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="s2">&quot;/opt/ros/humble/lib/python3.10/site-packages/&quot;</span>
+<span class="w">    </span><span class="nt">"python.autoComplete.extraPaths"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"/opt/ros/humble/lib/python3.10/site-packages/"</span>
 <span class="w">    </span><span class="p">],</span>
 <span class="w">    </span><span class="c1">// Environment file lets vscode find python files within workspace</span>
-<span class="w">    </span><span class="nt">&quot;python.envFile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}/.env&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"python.envFile"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${workspaceFolder}/.env"</span><span class="p">,</span>
 <span class="w">    </span><span class="c1">// Use the system installed version of autopep8</span>
-<span class="w">    </span><span class="nt">&quot;python.formatting.autopep8Path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/usr/bin/autopep8&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;python.formatting.autopep8Args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="s2">&quot;--max-line-length=100&quot;</span>
+<span class="w">    </span><span class="nt">"python.formatting.autopep8Path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/bin/autopep8"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"python.formatting.autopep8Args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"--max-line-length=100"</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;C_Cpp.default.intelliSenseMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;linux-gcc-x86&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;C_Cpp.formatting&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;disabled&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;uncrustify.configPath.linux&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/opt/ros/humble/lib/python3.10/site-packages/ament_uncrustify/configuration/ament_code_style.cfg&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;[cpp]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;editor.defaultFormatter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;zachflower.uncrustify&quot;</span>
+<span class="w">    </span><span class="nt">"C_Cpp.default.intelliSenseMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"linux-gcc-x86"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"C_Cpp.formatting"</span><span class="p">:</span><span class="w"> </span><span class="s2">"disabled"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"uncrustify.configPath.linux"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/opt/ros/humble/lib/python3.10/site-packages/ament_uncrustify/configuration/ament_code_style.cfg"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"[cpp]"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"editor.defaultFormatter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zachflower.uncrustify"</span>
 <span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;search.exclude&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;**/node_modules&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;**/bower_components&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;**/*.code-search&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;**/build&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;**/install&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;**/log&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="nt">"search.exclude"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"**/node_modules"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"**/bower_components"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"**/*.code-search"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"**/build"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"**/install"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"**/log"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;cSpell.words&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="s2">&quot;RTPS&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;athackst&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;autopep&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;cmake&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;cppcheck&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;cpplint&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;DCMAKE&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;deque&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;devcontainer&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;ints&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;noqa&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;pytest&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;rclcpp&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;rclpy&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;repos&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;rosdep&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;rosdistro&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;rosidl&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;RTPS&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;uncrustify&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;Wextra&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;Wpedantic&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;xmllint&quot;</span>
+<span class="w">    </span><span class="nt">"cSpell.words"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"RTPS"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"athackst"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"autopep"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"cmake"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"cppcheck"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"cpplint"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"DCMAKE"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"deque"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"devcontainer"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"ints"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"noqa"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"pytest"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"rclcpp"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"rclpy"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"repos"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"rosdep"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"rosdistro"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"rosidl"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"RTPS"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"uncrustify"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"Wextra"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"Wpedantic"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"xmllint"</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;cSpell.allowCompoundWords&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;cSpell.ignorePaths&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="s2">&quot;**/package-lock.json&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;**/node_modules/**&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;**/vscode-extension/**&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;**/.git/objects/**&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;.vscode&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;.vscode-insiders&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;.devcontainer/devcontainer.json&quot;</span>
+<span class="w">    </span><span class="nt">"cSpell.allowCompoundWords"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"cSpell.ignorePaths"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"**/package-lock.json"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"**/node_modules/**"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"**/vscode-extension/**"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"**/.git/objects/**"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">".vscode"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">".vscode-insiders"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">".devcontainer/devcontainer.json"</span>
 <span class="w">    </span><span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
@@ -320,90 +320,90 @@ Jazzy</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">settings.json</span><a class="headerlink" href="#id3" title="Lien vers ce code"></a></div>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;editor.formatOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editor.detectIndentation&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editor.formatOnPaste&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editor.wordWrap&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;on&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;C_Cpp.clang_format_sortIncludes&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;terminal.integrated.scrollback&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;workbench.editor.enablePreview&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;[restructuredtext]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;editor.tabSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">    </span><span class="nt">"editor.formatOnSave"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"editor.detectIndentation"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"editor.formatOnPaste"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"editor.wordWrap"</span><span class="p">:</span><span class="w"> </span><span class="s2">"on"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"C_Cpp.clang_format_sortIncludes"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"terminal.integrated.scrollback"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"workbench.editor.enablePreview"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"[restructuredtext]"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"editor.tabSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
 <span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;files.associations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;Test.xml&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;log&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;*.xunit.xml&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;log&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;*.gtest.xml&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;log&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;*.repos&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;yaml&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;*.world&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xml&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;*.xacro&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xml&quot;</span>
+<span class="w">    </span><span class="nt">"files.associations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"Test.xml"</span><span class="p">:</span><span class="w"> </span><span class="s2">"log"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"*.xunit.xml"</span><span class="p">:</span><span class="w"> </span><span class="s2">"log"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"*.gtest.xml"</span><span class="p">:</span><span class="w"> </span><span class="s2">"log"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"*.repos"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yaml"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"*.world"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xml"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"*.xacro"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xml"</span>
 <span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;editor.tabSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editor.rulers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="nt">"editor.tabSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"editor.rulers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">        </span><span class="mi">100</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;python.analysis.extraPaths&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="s2">&quot;/opt/ros/jazzy/lib/python3.10/site-packages/&quot;</span>
+<span class="w">    </span><span class="nt">"python.analysis.extraPaths"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"/opt/ros/jazzy/lib/python3.10/site-packages/"</span>
 <span class="w">    </span><span class="p">],</span>
 <span class="w">    </span><span class="c1">// Autocomplete from ros python packages</span>
-<span class="w">    </span><span class="nt">&quot;python.autoComplete.extraPaths&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="s2">&quot;/opt/ros/jazzy/lib/python3.10/site-packages/&quot;</span>
+<span class="w">    </span><span class="nt">"python.autoComplete.extraPaths"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"/opt/ros/jazzy/lib/python3.10/site-packages/"</span>
 <span class="w">    </span><span class="p">],</span>
 <span class="w">    </span><span class="c1">// Environment file lets vscode find python files within workspace</span>
-<span class="w">    </span><span class="nt">&quot;python.envFile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}/.env&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"python.envFile"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${workspaceFolder}/.env"</span><span class="p">,</span>
 <span class="w">    </span><span class="c1">// Use the system installed version of autopep8</span>
-<span class="w">    </span><span class="nt">&quot;python.formatting.autopep8Path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/usr/bin/autopep8&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;python.formatting.autopep8Args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="s2">&quot;--max-line-length=100&quot;</span>
+<span class="w">    </span><span class="nt">"python.formatting.autopep8Path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/bin/autopep8"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"python.formatting.autopep8Args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"--max-line-length=100"</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;C_Cpp.default.intelliSenseMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;linux-gcc-x86&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;C_Cpp.formatting&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;disabled&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;uncrustify.configPath.linux&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/opt/ros/jazzy/lib/python3.10/site-packages/ament_uncrustify/configuration/ament_code_style.cfg&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;[cpp]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;editor.defaultFormatter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;zachflower.uncrustify&quot;</span>
+<span class="w">    </span><span class="nt">"C_Cpp.default.intelliSenseMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"linux-gcc-x86"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"C_Cpp.formatting"</span><span class="p">:</span><span class="w"> </span><span class="s2">"disabled"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"uncrustify.configPath.linux"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/opt/ros/jazzy/lib/python3.10/site-packages/ament_uncrustify/configuration/ament_code_style.cfg"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"[cpp]"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"editor.defaultFormatter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zachflower.uncrustify"</span>
 <span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;search.exclude&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;**/node_modules&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;**/bower_components&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;**/*.code-search&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;**/build&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;**/install&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;**/log&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="nt">"search.exclude"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"**/node_modules"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"**/bower_components"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"**/*.code-search"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"**/build"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"**/install"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"**/log"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;cSpell.words&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="s2">&quot;RTPS&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;athackst&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;autopep&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;cmake&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;cppcheck&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;cpplint&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;DCMAKE&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;deque&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;devcontainer&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;ints&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;noqa&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;pytest&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;rclcpp&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;rclpy&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;repos&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;rosdep&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;rosdistro&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;rosidl&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;RTPS&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;uncrustify&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;Wextra&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;Wpedantic&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;xmllint&quot;</span>
+<span class="w">    </span><span class="nt">"cSpell.words"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"RTPS"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"athackst"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"autopep"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"cmake"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"cppcheck"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"cpplint"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"DCMAKE"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"deque"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"devcontainer"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"ints"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"noqa"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"pytest"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"rclcpp"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"rclpy"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"repos"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"rosdep"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"rosdistro"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"rosidl"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"RTPS"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"uncrustify"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"Wextra"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"Wpedantic"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"xmllint"</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;cSpell.allowCompoundWords&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;cSpell.ignorePaths&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="s2">&quot;**/package-lock.json&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;**/node_modules/**&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;**/vscode-extension/**&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;**/.git/objects/**&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;.vscode&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;.vscode-insiders&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;.devcontainer/devcontainer.json&quot;</span>
+<span class="w">    </span><span class="nt">"cSpell.allowCompoundWords"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"cSpell.ignorePaths"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"**/package-lock.json"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"**/node_modules/**"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"**/vscode-extension/**"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"**/.git/objects/**"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">".vscode"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">".vscode-insiders"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">".devcontainer/devcontainer.json"</span>
 <span class="w">    </span><span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
@@ -435,247 +435,247 @@ Ils devront néanmoins être corrigés pour que le code soit conforme aux standa
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// See https://go.microsoft.com/fwlink/?LinkId=733558</span>
 <span class="w">    </span><span class="c1">// for the documentation about the tasks.json format</span>
-<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;tasks&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">        </span><span class="c1">// Build tasks</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;build&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Build workspace (default)&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./build.sh&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;group&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;build&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;isDefault&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"build"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Build workspace (default)"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./build.sh"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"group"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"build"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"isDefault"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$gcc&quot;</span>
+<span class="w">            </span><span class="nt">"problemMatcher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$gcc"</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;debug&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Build workspace (debug)&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./build.sh&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;env&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                    </span><span class="nt">&quot;BUILD_TYPE&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Debug&quot;</span>
+<span class="w">            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debug"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Build workspace (debug)"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./build.sh"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">"BUILD_TYPE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Debug"</span>
 <span class="w">                </span><span class="p">}</span>
 <span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;group&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;build&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$gcc&quot;</span>
+<span class="w">            </span><span class="nt">"group"</span><span class="p">:</span><span class="w"> </span><span class="s2">"build"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"problemMatcher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$gcc"</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="c1">// Test tasks</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Run all unit tests and show results.&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./test.sh&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;group&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;isDefault&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Run all unit tests and show results."</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./test.sh"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"group"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"isDefault"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="c1">// Clean</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Run the clean target&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;colcon build --cmake-target clean&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$gcc&quot;</span>
+<span class="w">            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"clean"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Run the clean target"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"colcon build --cmake-target clean"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"problemMatcher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$gcc"</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;purge&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Purge workspace by deleting all generated files.&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sudo rm -fr build install log; sudo py3clean .&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"purge"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Purge workspace by deleting all generated files."</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sudo rm -fr build install log; sudo py3clean ."</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"problemMatcher"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="c1">// Linting and static code analysis tasks</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fix&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Reformat files with uncrustify.&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ament_uncrustify --reformat src/&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fix"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Reformat files with uncrustify."</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ament_uncrustify --reformat src/"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"problemMatcher"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uncrustify&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Lint files with uncrustify.&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ament_uncrustify src/&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;presentation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;panel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dedicated&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;reveal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;silent&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;clear&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uncrustify"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lint files with uncrustify."</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ament_uncrustify src/"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"presentation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"panel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dedicated"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"reveal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"silent"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"clear"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="nt">"problemMatcher"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">                </span><span class="p">{</span>
-<span class="w">                    </span><span class="nt">&quot;owner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uncrustify&quot;</span><span class="p">,</span>
-<span class="w">                    </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uncrustify&quot;</span><span class="p">,</span>
-<span class="w">                    </span><span class="nt">&quot;fileLocation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;relative&quot;</span><span class="p">,</span>
-<span class="w">                    </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="nt">"owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uncrustify"</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uncrustify"</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">"fileLocation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"relative"</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">                        </span><span class="c1">// just the file name message</span>
 <span class="w">                        </span><span class="p">{</span>
-<span class="w">                            </span><span class="nt">&quot;regexp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^(.*)&#39;(.*)&#39;:&quot;</span><span class="p">,</span>
-<span class="w">                            </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file&quot;</span><span class="p">,</span>
-<span class="w">                            </span><span class="nt">&quot;file&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">                            </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">                            </span><span class="nt">"regexp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^(.*)'(.*)':"</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file"</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">"file"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
 <span class="w">                        </span><span class="p">}</span>
 <span class="w">                    </span><span class="p">]</span>
 <span class="w">                </span><span class="p">}</span>
 <span class="w">            </span><span class="p">]</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cpplint&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Lint files with cpplint.&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ament&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;task&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cpplint&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;src/&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$ament_cpplint&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;presentation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;panel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dedicated&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;reveal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;silent&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;clear&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpplint"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lint files with cpplint."</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ament"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"task"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpplint"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"src/"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"problemMatcher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$ament_cpplint"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"presentation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"panel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dedicated"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"reveal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"silent"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"clear"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cppcheck&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Run static code checker cppcheck.&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ament&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;task&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cppcheck&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;src/&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$ament_cppcheck&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;presentation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;panel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dedicated&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;reveal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;silent&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;clear&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cppcheck"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Run static code checker cppcheck."</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ament"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"task"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cppcheck"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"src/"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"problemMatcher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$ament_cppcheck"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"presentation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"panel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dedicated"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"reveal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"silent"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"clear"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;env&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                    </span><span class="nt">&quot;AMENT_CPPCHECK_ALLOW_SLOW_VERSIONS&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span>
+<span class="w">            </span><span class="nt">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">"AMENT_CPPCHECK_ALLOW_SLOW_VERSIONS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span>
 <span class="w">                </span><span class="p">}</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lint_cmake&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Run lint on cmake files.&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ament&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;task&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lint_cmake&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;src/&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$ament_lint_cmake&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;presentation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;panel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dedicated&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;reveal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;silent&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;clear&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lint_cmake"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Run lint on cmake files."</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ament"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"task"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lint_cmake"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"src/"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"problemMatcher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$ament_lint_cmake"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"presentation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"panel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dedicated"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"reveal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"silent"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"clear"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;flake8&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Run flake8 on python files.&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ament&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;task&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;flake8&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;src/&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$ament_flake8&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;presentation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;panel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dedicated&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;reveal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;silent&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;clear&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flake8"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Run flake8 on python files."</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ament"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"task"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flake8"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"src/"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"problemMatcher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$ament_flake8"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"presentation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"panel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dedicated"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"reveal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"silent"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"clear"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pep257&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Run pep257 on python files.&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ament&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;task&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pep257&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;src/&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$ament_pep257&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;presentation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;panel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dedicated&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;reveal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;silent&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;clear&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pep257"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Run pep257 on python files."</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ament"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"task"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pep257"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"src/"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"problemMatcher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$ament_pep257"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"presentation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"panel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dedicated"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"reveal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"silent"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"clear"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xmllint&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Run xmllint on xml files.&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ament&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;task&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xmllint&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;src/&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$ament_xmllint&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;presentation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;panel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dedicated&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;reveal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;silent&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;clear&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xmllint"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Run xmllint on xml files."</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ament"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"task"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xmllint"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"src/"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"problemMatcher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$ament_xmllint"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"presentation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"panel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dedicated"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"reveal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"silent"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"clear"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lint all&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Run all linters.&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;dependsOn&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                </span><span class="s2">&quot;cppcheck&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="s2">&quot;cpplint&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="s2">&quot;flake8&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="s2">&quot;lint_cmake&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="s2">&quot;pep257&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="s2">&quot;xmllint&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="s2">&quot;uncrustify&quot;</span>
+<span class="w">            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lint all"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Run all linters."</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"dependsOn"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">"cppcheck"</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">"cpplint"</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">"flake8"</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">"lint_cmake"</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">"pep257"</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">"xmllint"</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">"uncrustify"</span>
 <span class="w">            </span><span class="p">],</span>
-<span class="w">            </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">            </span><span class="nt">"problemMatcher"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="c1">// Workspace editing tasks</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;new ament_cmake package&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Create a new ROS cpp package from a template.&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ros2 pkg create --destination-directory src --build-type ament_cmake ${input:package}&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new ament_cmake package"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Create a new ROS cpp package from a template."</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ros2 pkg create --destination-directory src --build-type ament_cmake ${input:package}"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"problemMatcher"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;new ament_python package&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Create a new ROS python package from a template.&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ros2 pkg create --destination-directory src --build-type ament_python ${input:package}&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new ament_python package"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Create a new ROS python package from a template."</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ros2 pkg create --destination-directory src --build-type ament_python ${input:package}"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"problemMatcher"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;import from workspace file&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Use vcs to import modules specified by a workspace/rosinstall file.&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vcs import &lt; src/ros2.repos src&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"import from workspace file"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Use vcs to import modules specified by a workspace/rosinstall file."</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vcs import &lt; src/ros2.repos src"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"problemMatcher"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;update workspace file&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Use vcs to update repositories in src to workspace file.&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vcs export src &gt; src/ros2.repos&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"update workspace file"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Use vcs to update repositories in src to workspace file."</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vcs export src &gt; src/ros2.repos"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"problemMatcher"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;install dependencies&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Install all dependencies specified in the workspaces package.xml files.&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sudo apt-get update &amp;&amp; rosdep update &amp;&amp; rosdep install --from-paths src --ignore-src -y&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"install dependencies"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Install all dependencies specified in the workspaces package.xml files."</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sudo apt-get update &amp;&amp; rosdep update &amp;&amp; rosdep install --from-paths src --ignore-src -y"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"problemMatcher"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;setup&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Set up the workspace&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./setup.sh&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"setup"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Set up the workspace"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./setup.sh"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"problemMatcher"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;add submodules from .repos&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Create a git submodule for all repositories in your .repos file&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python3 .devcontainer/repos_to_submodules.py&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">            </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"add submodules from .repos"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Create a git submodule for all repositories in your .repos file"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"python3 .devcontainer/repos_to_submodules.py"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"problemMatcher"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="nt">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;package&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;promptString&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Package name&quot;</span>
+<span class="w">            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"promptString"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Package name"</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">]</span>
 <span class="p">}</span>

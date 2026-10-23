@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Introduction au versionning avec git &mdash; Documentation Cours d&#39;Informatique Industrielle avec ROS2 1.0.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -129,12 +129,14 @@ Nous pouvons voir l’état de notre dépôt git en tapant la commande suivante:
 </div>
 <p>Nous voyons que le répertoire <code class="docutils literal notranslate"><span class="pre">.vscode</span></code> est ajouté par git, mais il n’est pas encore enregistré dans l’historique de git.</p>
 <p>Pour enregistrer ces modifications dans l’historique de git, tapez la commande suivante:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;First commit&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"First commit"</span>
 </pre></div>
 </div>
 <p>Git ne doit pas être configuré et il vous demande de mettre des variables à jour. Faites le en suivant les instructions.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&quot;mon.email@insa-strasbourg.fr&quot;</span>
-git<span class="w"> </span>config<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;Prénom NOM&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>user.email<span class="w"> </span><span class="s2">"mon.email@insa-strasbourg.fr"</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>user.name<span class="w"> </span><span class="s2">"Prénom NOM"</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -142,7 +144,7 @@ git<span class="w"> </span>config<span class="w"> </span>user.name<span class="w
 <p>L’option <code class="docutils literal notranslate"><span class="pre">--global</span></code> est pour que ces informations soient utilisées pour tous les projets git de votre machine, comme les machines sont partagées, il est préférable de ne pas mettre ces informations globalement, mais par projet.</p>
 </div>
 <p>Maintenant votre premier commit devrait fonctionner:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;First commit&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"First commit"</span>
 </pre></div>
 </div>
 <p>Cela enregistre les modifications dans l’historique de git avec le message <code class="docutils literal notranslate"><span class="pre">First</span> <span class="pre">commit</span></code>.</p>

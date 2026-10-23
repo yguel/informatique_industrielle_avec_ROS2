@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Création du projet &mdash; Documentation Cours d&#39;Informatique Industrielle avec ROS2 1.0.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -123,13 +123,17 @@ Vous pouvez changer ce nom si vous le souhaitez, mais il faudra alors adapter to
 </pre></div>
 </div>
 <p>Créer un répertoire “”.vscode”” dans le répertoire du projet et créer 1 fichier vide dedans: <code class="docutils literal notranslate"><span class="pre">settings.json</span></code></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>.vscode
-touch<span class="w"> </span>.vscode/settings.json
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>.vscode
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>touch<span class="w"> </span>.vscode/settings.json
 </pre></div>
 </div>
 <p>Aller dans le répertoire de configuration des paramètres globaux de vscode pour l’utilisateur courant et créer un fichier <code class="docutils literal notranslate"><span class="pre">keybindings.json</span></code> vide:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/.config/Code/User
-touch<span class="w"> </span>keybindings.json
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>touch<span class="w"> </span>keybindings.json
 </pre></div>
 </div>
 <section id="premiers-pas-avec-l-editeur-ide-de-code-vscode">
@@ -143,19 +147,19 @@ touch<span class="w"> </span>keybindings.json
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">Fichier settings.json</span><a class="headerlink" href="#id2" title="Lien vers ce code"></a></div>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="p">{</span>
-<span class="linenos"> 2</span><span class="w">    </span><span class="nt">&quot;editor.formatOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="linenos"> 3</span><span class="w">    </span><span class="nt">&quot;editor.detectIndentation&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="linenos"> 4</span><span class="w">    </span><span class="nt">&quot;editor.formatOnPaste&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="linenos"> 5</span><span class="w">    </span><span class="nt">&quot;editor.wordWrap&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;on&quot;</span><span class="p">,</span>
-<span class="linenos"> 6</span><span class="w">    </span><span class="nt">&quot;C_Cpp.clang_format_sortIncludes&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="linenos"> 7</span><span class="w">    </span><span class="nt">&quot;python.formatting.autopep8Args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="linenos"> 8</span><span class="w">        </span><span class="s2">&quot;--ignore&quot;</span><span class="p">,</span>
-<span class="linenos"> 9</span><span class="w">        </span><span class="s2">&quot;E402&quot;</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="nt">"editor.formatOnSave"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="linenos"> 3</span><span class="w">    </span><span class="nt">"editor.detectIndentation"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="linenos"> 4</span><span class="w">    </span><span class="nt">"editor.formatOnPaste"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="linenos"> 5</span><span class="w">    </span><span class="nt">"editor.wordWrap"</span><span class="p">:</span><span class="w"> </span><span class="s2">"on"</span><span class="p">,</span>
+<span class="linenos"> 6</span><span class="w">    </span><span class="nt">"C_Cpp.clang_format_sortIncludes"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="nt">"python.formatting.autopep8Args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos"> 8</span><span class="w">        </span><span class="s2">"--ignore"</span><span class="p">,</span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="s2">"E402"</span>
 <span class="linenos">10</span><span class="w">    </span><span class="p">],</span>
-<span class="linenos">11</span><span class="w">    </span><span class="nt">&quot;terminal.integrated.scrollback&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span>
-<span class="linenos">12</span><span class="w">    </span><span class="nt">&quot;workbench.editor.enablePreview&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="linenos">13</span><span class="w">    </span><span class="nt">&quot;[restructuredtext]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="linenos">14</span><span class="w">        </span><span class="nt">&quot;editor.tabSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="linenos">11</span><span class="w">    </span><span class="nt">"terminal.integrated.scrollback"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span>
+<span class="linenos">12</span><span class="w">    </span><span class="nt">"workbench.editor.enablePreview"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="linenos">13</span><span class="w">    </span><span class="nt">"[restructuredtext]"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">14</span><span class="w">        </span><span class="nt">"editor.tabSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
 <span class="linenos">15</span><span class="w">    </span><span class="p">},</span>
 <span class="linenos">16</span><span class="p">}</span>
 </pre></div>
@@ -176,12 +180,12 @@ touch<span class="w"> </span>keybindings.json
 <div class="code-block-caption"><span class="caption-text">Fichier keybindings.json</span><a class="headerlink" href="#id3" title="Lien vers ce code"></a></div>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="p">[</span>
 <span class="linenos"> 2</span><span class="w">    </span><span class="p">{</span>
-<span class="linenos"> 3</span><span class="w">        </span><span class="nt">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ctrl+q&quot;</span><span class="p">,</span>
-<span class="linenos"> 4</span><span class="w">        </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-workbench.action.quit&quot;</span>
+<span class="linenos"> 3</span><span class="w">        </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctrl+q"</span><span class="p">,</span>
+<span class="linenos"> 4</span><span class="w">        </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-workbench.action.quit"</span>
 <span class="linenos"> 5</span><span class="w">    </span><span class="p">},</span>
 <span class="linenos"> 6</span><span class="w">    </span><span class="p">{</span>
-<span class="linenos"> 7</span><span class="w">        </span><span class="nt">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;enter&quot;</span><span class="p">,</span>
-<span class="linenos"> 8</span><span class="w">        </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-restructuredtext.editor.listEditing&quot;</span>
+<span class="linenos"> 7</span><span class="w">        </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enter"</span><span class="p">,</span>
+<span class="linenos"> 8</span><span class="w">        </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-restructuredtext.editor.listEditing"</span>
 <span class="linenos"> 9</span><span class="w">    </span><span class="p">}</span>
 <span class="linenos">10</span><span class="p">]</span>
 </pre></div>

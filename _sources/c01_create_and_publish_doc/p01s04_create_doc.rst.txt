@@ -8,7 +8,10 @@ Installer sphinx
 
 .. code-block:: bash
    
-   sudo apt-get update
+   sudo apt-get update 
+   
+.. code-block:: bash
+   
    sudo apt-get install -f python3-sphinx
 
 Créer un répertoire pour la documentation:
@@ -32,8 +35,17 @@ Installer les dépendances:
 .. code-block:: bash
 
    cd ~/info_indus/info_indus_tutorial/doc/sphinx
+
+.. code-block:: bash
+
    python3 -m venv .venv
+
+.. code-block:: bash
+   
    source .venv/bin/activate
+
+.. code-block:: bash
+
    pip install -r requirements.txt
 
 
@@ -45,8 +57,7 @@ Initialiser la documentation avec les outils sphinx:
 
 .. code-block:: bash
 
-   cd ~/info_indus/info_indus_tutorial/doc
-   sphinx-quickstart sphinx
+   cd ~/info_indus/info_indus_tutorial/doc && sphinx-quickstart sphinx
 
 Répondre aux questions posées par sphinx-quickstart.
 
@@ -101,6 +112,9 @@ Ajouter le fichier ``custom.css`` dans le répertoire ``_static/css``:
 .. code-block:: bash
 
    mkdir -p ~/info_indus/info_indus_tutorial/doc/sphinx/source/_static/css
+
+.. code-block:: bash
+   
    touch ~/info_indus/info_indus_tutorial/doc/sphinx/source/_static/css/custom.css
 
 .. literalinclude:: ../_static/css/custom.css
@@ -117,8 +131,7 @@ Depuis le répertoire ``sphinx`` faire:
 
 .. code-block:: bash
 
-   cd ~/info_indus/info_indus_tutorial/doc/sphinx
-   make html
+   cd ~/info_indus/info_indus_tutorial/doc/sphinx && make html
 
 La documentation est un site statique html qui se trouve dans le répertoire ``build/html``.
 Le fichier ``index.html`` est la page d'accueil de la documentation.
@@ -136,17 +149,21 @@ Voir l'état de votre dépôt git:
 
 .. code-block:: bash
 
-   git status
+   cd ~/info_indus/info_indus_tutorial && git status
 
-Ajouter les fichiers de la documentation:
+Ajouter les fichiers de la documentation du répertoire source:
 
 .. code-block:: bash
 
-   cd ~/info_indus/info_indus_tutorial/doc/sphinx
-   git add source
-   git add Makefile make.bat requirements.txt
+   cd ~/info_indus/info_indus_tutorial/doc/sphinx && git add source
 
-Fair le commit des modifications:
+Puis ajouter les fichiers de production de la documentation: Makefile, make.bat et requirements.txt:
+
+.. code-block:: bash
+
+   cd ~/info_indus/info_indus_tutorial/doc/sphinx && git add Makefile make.bat requirements.txt
+
+Faire le commit des modifications:
 
 .. code-block:: bash
 
