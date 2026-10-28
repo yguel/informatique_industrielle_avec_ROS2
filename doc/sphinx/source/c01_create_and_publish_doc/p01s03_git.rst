@@ -406,9 +406,9 @@ Les autres exercices sont à réaliser à la maison.
 Règles d'or du travail avec Git
 ================================
 
-   #. :text-bold-black-on-red:`Ne jamais toucher la branche «main»`
-   #. :text-bold-black-on-red:`Ne jamais toucher la branche de quelqu’un d’autre`
-   #. :text-bold-black-on-red:`Ne jamais ajouter tout le répertoire racine du projet` :code:`git add .`
+   #. :text-bold-black-on-red:`Ne jamais toucher (commiter dans) la branche «main» directement` 
+   #. :text-bold-black-on-red:`Ne jamais toucher (commiter dans) la branche de quelqu’un d’autre`
+   #. :text-bold-black-on-red:`Ne jamais ajouter tout le répertoire racine du projet avec la commande` :code:`git add .` (surtout après avoir compilé).
 
 ▸ Créer une nouvelle branche (dans le repo ou sur un fork) pour chaque nouvelle fonctionnalité ou correctif |br|
 ▸ Faire uniquement sur cette nouvelle branche
