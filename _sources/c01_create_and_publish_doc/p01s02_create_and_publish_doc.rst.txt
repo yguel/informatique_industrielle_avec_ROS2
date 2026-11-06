@@ -2,14 +2,52 @@
 Création du projet
 *******************
 
-Ouvrir un terminal sous ubuntu en tapant ``Ctrl+Alt+t`` ou en recherchant ``terminal`` dans le menu de recherche ou en cliquant sur l'icone du terminal dans la barre de tâche.
+.. tab-set::
+    :sync-group: os
 
-.. _gnome_terminal_icon:
-.. figure:: resources/img/gnome_terminal_icon.png
-   :align: center
-   :width: 30%
+    .. tab-item:: Linux-Ubuntu
 
-   Clickez sur l'icone du terminal
+      Ouvrir un terminal sous ubuntu en tapant ``Ctrl+Alt+t`` ou en recherchant ``terminal`` dans le menu de recherche ou en cliquant sur l'icone du terminal dans la barre de tâche.
+
+      .. _gnome_terminal_icon:
+      .. figure:: resources/img/gnome_terminal_icon.png
+         :align: center
+         :width: 30%
+
+         Clickez sur l'icone du terminal
+
+    .. tab-item:: Windows
+
+      Prérequis
+      ---------
+      
+         #. Version supérieure ou égale à Windows 11
+
+            Pour vérifier votre version, tapez winver dans Démarrer.
+         
+         #. La virtualisation doit être activée dans le BIOS/UEFI. Vous pouvez le vérifier dans le Gestionnaire des tâches, onglet Performance, puis Processeur : la ligne « Virtualisation » doit indiquer « Activé ».
+
+      Installez wsl
+      -------------
+      
+      Ouvrez un powershell en mode administrateur et lancez la commande suivante:
+
+      .. code-block:: bash
+
+         wsl --install
+
+      Redémarrez votre ordinateur si nécessaire pour que les modifications prennent effet.
+
+      Vérifiez que WSL est correctement installé en lançant la commande suivante dans un powershell:
+
+      .. code-block:: bash
+
+         wsl --version
+
+      Si la version de WSL s'affiche correctement, cela signifie que l'installation a réussi.
+
+      Utilisez la console WSL pour exécuter les commandes Linux nécessaires à l'installation et à la configuration de votre environnement de documentation.
+
 
 Dans votre home créez un répertoire pour le projet:
 

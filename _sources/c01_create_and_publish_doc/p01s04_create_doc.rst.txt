@@ -6,13 +6,25 @@ Création d'une première documentation sphinx
 Installer sphinx
 =======================
 
+
+Installez sphinx sur votre système Linux-Ubuntu/WSL-Ubuntu avec les commandes suivantes:
+
 .. code-block:: bash
-   
+         
    sudo apt-get update 
-   
+
+
 .. code-block:: bash
-   
+      
    sudo apt-get install -f python3-sphinx
+
+
+Installez git
+
+.. code-block:: bash
+
+   sudo apt-get install -f git
+
 
 Créer un répertoire pour la documentation:
 

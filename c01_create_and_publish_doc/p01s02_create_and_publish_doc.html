@@ -104,6 +104,10 @@
              
   <section id="creation-du-projet">
 <h1>Création du projet<a class="headerlink" href="#creation-du-projet" title="Lien vers cette rubrique"></a></h1>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+Linux-Ubuntu</label><div class="sd-tab-content docutils">
 <p>Ouvrir un terminal sous ubuntu en tapant <code class="docutils literal notranslate"><span class="pre">Ctrl+Alt+t</span></code> ou en recherchant <code class="docutils literal notranslate"><span class="pre">terminal</span></code> dans le menu de recherche ou en cliquant sur l’icone du terminal dans la barre de tâche.</p>
 <figure class="align-center" id="id1">
 <span id="gnome-terminal-icon"></span><a class="reference internal image-reference" href="../_images/gnome_terminal_icon.png"><img alt="../_images/gnome_terminal_icon.png" src="../_images/gnome_terminal_icon.png" style="width: 30%;" />
@@ -112,6 +116,31 @@
 <p><span class="caption-text">Clickez sur l’icone du terminal</span><a class="headerlink" href="#id1" title="Lien vers cette image"></a></p>
 </figcaption>
 </figure>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+Windows</label><div class="sd-tab-content docutils">
+<blockquote>
+<div><ol class="arabic">
+<li><p>Version supérieure ou égale à Windows 11</p>
+<p>Pour vérifier votre version, tapez winver dans Démarrer.</p>
+</li>
+<li><p>La virtualisation doit être activée dans le BIOS/UEFI. Vous pouvez le vérifier dans le Gestionnaire des tâches, onglet Performance, puis Processeur : la ligne « Virtualisation » doit indiquer « Activé ».</p></li>
+</ol>
+</div></blockquote>
+<p>Ouvrez un powershell en mode administrateur et lancez la commande suivante:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wsl<span class="w"> </span>--install
+</pre></div>
+</div>
+<p>Redémarrez votre ordinateur si nécessaire pour que les modifications prennent effet.</p>
+<p>Vérifiez que WSL est correctement installé en lançant la commande suivante dans un powershell:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wsl<span class="w"> </span>--version
+</pre></div>
+</div>
+<p>Si la version de WSL s’affiche correctement, cela signifie que l’installation a réussi.</p>
+<p>Utilisez la console WSL pour exécuter les commandes Linux nécessaires à l’installation et à la configuration de votre environnement de documentation.</p>
+</div>
+</div>
 <p>Dans votre home créez un répertoire pour le projet:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/info_indus/info_indus_tutorial
 </pre></div>
