@@ -106,6 +106,15 @@ Trouver l'adresse du dépôt distant pour les opérations de clone, pull, push, 
 
 Remplacez ``MY_GIT_REMOTE_ADDRESS`` par l'adresse du dépôt distant que vous venez de copier.
 
+Si vous vous êtes trompé et que vous avez mis une adresse en ``https://...`` alors que vous vouliez utiliser ``ssh``, vous pouvez corriger cela avec la commande suivante:
+
+.. code-block:: bash
+
+   git remote set-url origin GIT_SSH_REMOTE_ADDRESS
+
+
+Remplacez ``GIT_SSH_REMOTE_ADDRESS`` par l'adresse SSH correcte de votre dépôt distant.
+
 .. note:: Il y a une autre manière de récupérer l'adresse du dépôt gihub utilisable pour les opérations de clone, pull, push, etc. C'est en utilisant la commande suivante: ``git remote get-url origin`` . D'un point de vue mémo-techique, j'utilise une commande plus simple: ``git remote -v`` qui me donne l'adresse des dépôts distants et leur nom (``origin`` est celui qui nous intéresse ici). Cette commande est plus simple à retenir pour 2 raisons en plus d'être plus courte: 1) ``remote`` design le dépôt distant, 2) ``-v`` pour verbose, c'est-à-dire afficher les informations de manière détaillée, c'est l'option courante dans le monde des commandes linux pour obtenir plus d'informations.
 
 Changement de nom de la branche principale
