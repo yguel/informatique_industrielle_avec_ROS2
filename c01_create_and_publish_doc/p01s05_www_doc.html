@@ -179,6 +179,11 @@ et appelez votre dépôt <code class="docutils literal notranslate"><span class=
 </pre></div>
 </div>
 <p>Remplacez <code class="docutils literal notranslate"><span class="pre">MY_GIT_REMOTE_ADDRESS</span></code> par l’adresse du dépôt distant que vous venez de copier.</p>
+<p>Si vous vous êtes trompé et que vous avez mis une adresse en <code class="docutils literal notranslate"><span class="pre">https://...</span></code> alors que vous vouliez utiliser <code class="docutils literal notranslate"><span class="pre">ssh</span></code>, vous pouvez corriger cela avec la commande suivante:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>set-url<span class="w"> </span>origin<span class="w"> </span>GIT_SSH_REMOTE_ADDRESS
+</pre></div>
+</div>
+<p>Remplacez <code class="docutils literal notranslate"><span class="pre">GIT_SSH_REMOTE_ADDRESS</span></code> par l’adresse SSH correcte de votre dépôt distant.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Il y a une autre manière de récupérer l’adresse du dépôt gihub utilisable pour les opérations de clone, pull, push, etc. C’est en utilisant la commande suivante: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">get-url</span> <span class="pre">origin</span></code> . D’un point de vue mémo-techique, j’utilise une commande plus simple: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">-v</span></code> qui me donne l’adresse des dépôts distants et leur nom (<code class="docutils literal notranslate"><span class="pre">origin</span></code> est celui qui nous intéresse ici). Cette commande est plus simple à retenir pour 2 raisons en plus d’être plus courte: 1) <code class="docutils literal notranslate"><span class="pre">remote</span></code> design le dépôt distant, 2) <code class="docutils literal notranslate"><span class="pre">-v</span></code> pour verbose, c’est-à-dire afficher les informations de manière détaillée, c’est l’option courante dans le monde des commandes linux pour obtenir plus d’informations.</p>
