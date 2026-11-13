@@ -411,4 +411,8 @@ Une fois toutes les pull requests fermées, retournez sur l'onglet ``Pull reques
 Commencez à collaborer !
 =========================
 
-Chacun d'entre vous peut maintenant docummenter les équations de la dynamique du système 5 barres (voir :ref:`mechanical_description`)
+Chacun d'entre vous peut maintenant docummenter les équations de la dynamique du système 5 barres (voir :ref:`mechanical_description`) dans votre fork du projet, en créant ou en modifiant les fichiers appropriés et en soumettant vos changements via des pull requests.
+
+Écrire la dynamique c'est écrire les équations donnant la position de la pointe du stylo en fonction des angles des articulations du système 5 barres: :math:`q_1, q_4`.
+
+Attention, pour avoir une unique solution il faut faire attention à la configuration initiale du système et ajouter des contraintes géométriques pour contraindre certains mouvements.
