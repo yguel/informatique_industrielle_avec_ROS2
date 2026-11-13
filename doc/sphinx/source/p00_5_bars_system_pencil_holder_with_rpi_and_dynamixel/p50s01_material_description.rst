@@ -1,4 +1,4 @@
 #####################################################
-Description du matériel de la plateforme pantographe
+Description du matériel de la plateforme système 5 barres
 #####################################################
 

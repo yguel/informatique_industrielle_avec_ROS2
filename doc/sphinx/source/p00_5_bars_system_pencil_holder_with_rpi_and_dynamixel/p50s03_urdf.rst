@@ -1,19 +1,19 @@
 ###################################################
- Génération de la description URDF du pantographe
+ Génération de la description URDF du système 5 barres
 ###################################################
 
-Nous allons utiliser le modèle 3D au format step conçu et réalisé par M. Olivier PICCIN pour générer la description URDF du pantographe.
+Nous allons utiliser le modèle 3D au format step conçu et réalisé par M. Olivier PICCIN pour générer la description URDF du système 5 barres.
 
 .. figure:: resources/img/pantograph_step_model.png
    :align: center
 
 Il s'agit d'un assemblage comportant 5 pièces principales :
 
-  #. BATI_ASM: le bâti de la strucuture du pantographe avec les 2 moteurs pas à pas. Dans l'URDF nous allons le nommer ``base``.
-  #. LINK1_ASM: le bras gauche du pantographe. Dans l'URDF nous allons le nommer ``link1``.
-  #. LINK2_ASM: l'avant bras gauche du pantographe. Dans l'URDF nous allons le nommer ``link2``.
-  #. LINK3_ASM: l'avant bras droit du pantographe. Dans l'URDF nous allons le nommer ``link3``.
-  #. LINK4_ASM: le bras droit du pantographe. Dans l'URDF nous allons le nommer ``link4``.
+  #. BATI_ASM: le bâti de la strucuture du système 5 barres avec les 2 moteurs pas à pas. Dans l'URDF nous allons le nommer ``base``.
+  #. LINK1_ASM: le bras gauche du système 5 barres. Dans l'URDF nous allons le nommer ``link1``.
+  #. LINK2_ASM: l'avant bras gauche du système 5 barres. Dans l'URDF nous allons le nommer ``link2``.
+  #. LINK3_ASM: l'avant bras droit du système 5 barres. Dans l'URDF nous allons le nommer ``link3``.
+  #. LINK4_ASM: le bras droit du système 5 barres. Dans l'URDF nous allons le nommer ``link4``.
 
 :download:`maquette-5-barres_asm.stp <resources/cad/maquette-5-barres_asm.stp>`
 

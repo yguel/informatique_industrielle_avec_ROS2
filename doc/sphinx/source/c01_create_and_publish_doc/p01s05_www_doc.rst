@@ -102,7 +102,7 @@ Trouver l'adresse du dépôt distant pour les opérations de clone, pull, push, 
 
 .. code-block:: bash
 
-   git remote add origin MY_GIT_REMOTE_ADDRESS
+   cd ~/info_indus/info_indus_tutorial && git remote add origin MY_GIT_REMOTE_ADDRESS
 
 Remplacez ``MY_GIT_REMOTE_ADDRESS`` par l'adresse du dépôt distant que vous venez de copier.
 
@@ -110,7 +110,7 @@ Si vous vous êtes trompé et que vous avez mis une adresse en ``https://...`` a
 
 .. code-block:: bash
 
-   git remote set-url origin GIT_SSH_REMOTE_ADDRESS
+   cd ~/info_indus/info_indus_tutorial && git remote set-url origin GIT_SSH_REMOTE_ADDRESS
 
 
 Remplacez ``GIT_SSH_REMOTE_ADDRESS`` par l'adresse SSH correcte de votre dépôt distant.

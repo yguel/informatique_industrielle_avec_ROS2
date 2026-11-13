@@ -1,0 +1,28 @@
+# Crédits des images de ce répertoire
+
+Toutes les images de ce répertoire proviennent de la documentation officielle de
+GitHub, dont le contenu est publié dans le dépôt public [github/docs](https://github.com/github/docs)
+sous licence **Creative Commons Attribution 4.0 International (CC BY 4.0)**
+(voir <https://github.com/github/docs/blob/main/LICENSE>).
+
+Elles sont donc redistribuables, y compris dans ce cours, à condition de citer
+leur origine — c'est l'objet de ce fichier, et des légendes de chaque figure
+dans `p01s06_cooperate_by_pull_request.rst`.
+
+Les fichiers ont été renommés pour être lisibles, mais leur contenu n'a pas été
+modifié. Correspondance avec les chemins d'origine dans `github/docs`, sous
+`assets/images/help/` :
+
+| Fichier ici                           | Chemin d'origine dans github/docs                              |
+| ------------------------------------- | -------------------------------------------------------------- |
+| `your_organizations_menu.png`         | `profile/your-organizations-global-nav-update.png`               |
+| `fork_button.png`                     | `repository/fork-button.png`                                     |
+| `compare_and_pull_request_button.png` | `pull_requests/pull-request-compare-pull-request.png`            |
+| `open_a_pull_request_base_head.png`   | `pull_requests/choose-base-fork-and-branch.png`                  |
+| `pull_requests_tab.png`               | `repository/repo-tabs-pull-requests-global-nav-update.png`       |
+| `pull_request_files_changed.png`      | `pull_requests/pr-files-changed-example.png`                     |
+
+Téléchargées le 13 novembre 2026 depuis la branche `main` de `github/docs`.
+
+Note : l'interface de GitHub évolue, ces captures peuvent se démoder. Elles sont
+là pour situer un bouton ou un onglet, pas pour être prises au pixel près.
