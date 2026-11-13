@@ -71,6 +71,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="p01s05_www_doc.html">Publier la documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p01s06_cooperate_by_pull_request.html">Coopérer grâce aux pull requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p01s07_understand_git.html">Pour aller plus loin : Comprendre git</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../c02_first_ros2_project_pimped/p02s00_index.html">Tutoriel ROS2 épicé</a></li>
@@ -79,7 +81,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Travaux Pratiques</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../p00_pentograph_pencil_holder_with_rpi_and_dynamixel/p50s00_index.html">Pantographe de dessin robotisé avec Raspberry Pi et ROS2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p00_5_bars_system_pencil_holder_with_rpi_and_dynamixel/p50s00_index.html">système 5 barres de dessin robotisé avec Raspberry Pi et ROS2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../p01_rpi_ubuntu_as_a_ros2_robotic_platform/p51s00_index.html">Ubuntu &amp; RPi &amp; ROS2</a></li>
 </ul>
 
@@ -414,8 +416,30 @@ Il est courant, par exemple, de préfixer une librairie python avec le préfix <
 <p>La documentation est un site statique html qui se trouve dans le répertoire <code class="docutils literal notranslate"><span class="pre">build/html</span></code>.
 Le fichier <code class="docutils literal notranslate"><span class="pre">index.html</span></code> est la page d’accueil de la documentation.
 Ouvrir la documentation avec un navigateur web, par exemple firefox:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+Linux-Ubuntu</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>firefox<span class="w"> </span>~/info_indus/info_indus_tutorial/doc/sphinx/build/html/index.html
 </pre></div>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+Windows</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>explorer.exe<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>wslpath<span class="w"> </span>-w<span class="w"> </span>~/info_indus/info_indus_tutorial/doc/sphinx/build/html/index.html<span class="k">)</span><span class="s2">"</span>
+</pre></div>
+</div>
+<p>ou bien vous pouvez utiliser wslview:</p>
+<p>installer wslu pour utiliser wslview:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>wslu
+</pre></div>
+</div>
+<p>utiliser wslview pour ouvrir la documentation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wslview<span class="w"> </span>~/info_indus/info_indus_tutorial/doc/sphinx/build/html/index.html
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="sauvegarder-la-documentation-avec-git">

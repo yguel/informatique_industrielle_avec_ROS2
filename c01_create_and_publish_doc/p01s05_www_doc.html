@@ -29,7 +29,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Recherche" href="../search.html" />
-    <link rel="next" title="Tutoriel ROS2 épicé" href="../c02_first_ros2_project_pimped/p02s00_index.html" />
+    <link rel="next" title="Coopérer grâce aux pull requests" href="p01s06_cooperate_by_pull_request.html" />
     <link rel="prev" title="Création d’une première documentation sphinx" href="p01s04_create_doc.html" /> 
 </head>
 
@@ -74,6 +74,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#creer-le-workflow-git-et-voir-la-documentation-apparaitre-sur-le-web-en-temps-reel">Créer le workflow git et voir la documentation apparaître sur le web en temps réel</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="p01s06_cooperate_by_pull_request.html">Coopérer grâce aux pull requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p01s07_understand_git.html">Pour aller plus loin : Comprendre git</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../c02_first_ros2_project_pimped/p02s00_index.html">Tutoriel ROS2 épicé</a></li>
@@ -82,7 +84,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Travaux Pratiques</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../p00_pentograph_pencil_holder_with_rpi_and_dynamixel/p50s00_index.html">Pantographe de dessin robotisé avec Raspberry Pi et ROS2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p00_5_bars_system_pencil_holder_with_rpi_and_dynamixel/p50s00_index.html">système 5 barres de dessin robotisé avec Raspberry Pi et ROS2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../p01_rpi_ubuntu_as_a_ros2_robotic_platform/p51s00_index.html">Ubuntu &amp; RPi &amp; ROS2</a></li>
 </ul>
 
@@ -175,12 +177,12 @@ et appelez votre dépôt <code class="docutils literal notranslate"><span class=
 </a>
 </figure>
 </div></div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>MY_GIT_REMOTE_ADDRESS
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/info_indus/info_indus_tutorial<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>MY_GIT_REMOTE_ADDRESS
 </pre></div>
 </div>
 <p>Remplacez <code class="docutils literal notranslate"><span class="pre">MY_GIT_REMOTE_ADDRESS</span></code> par l’adresse du dépôt distant que vous venez de copier.</p>
 <p>Si vous vous êtes trompé et que vous avez mis une adresse en <code class="docutils literal notranslate"><span class="pre">https://...</span></code> alors que vous vouliez utiliser <code class="docutils literal notranslate"><span class="pre">ssh</span></code>, vous pouvez corriger cela avec la commande suivante:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>set-url<span class="w"> </span>origin<span class="w"> </span>GIT_SSH_REMOTE_ADDRESS
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/info_indus/info_indus_tutorial<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>remote<span class="w"> </span>set-url<span class="w"> </span>origin<span class="w"> </span>GIT_SSH_REMOTE_ADDRESS
 </pre></div>
 </div>
 <p>Remplacez <code class="docutils literal notranslate"><span class="pre">GIT_SSH_REMOTE_ADDRESS</span></code> par l’adresse SSH correcte de votre dépôt distant.</p>
@@ -370,7 +372,7 @@ Il faut:</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
         <a href="p01s04_create_doc.html" class="btn btn-neutral float-left" title="Création d’une première documentation sphinx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
-        <a href="../c02_first_ros2_project_pimped/p02s00_index.html" class="btn btn-neutral float-right" title="Tutoriel ROS2 épicé" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="p01s06_cooperate_by_pull_request.html" class="btn btn-neutral float-right" title="Coopérer grâce aux pull requests" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

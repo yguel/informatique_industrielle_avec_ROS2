@@ -1,0 +1,548 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coopérer grâce aux pull requests &mdash; Documentation Cours d&#39;Informatique Industrielle avec ROS2 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2f145f6b" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=05dadb3a"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=30646c52"></script>
+      <script src="../_static/translations.js?v=e6b791cb"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="../_static/tabs.js?v=3030b3cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Pour aller plus loin : Comprendre git" href="p01s07_understand_git.html" />
+    <link rel="prev" title="Publier la documentation" href="p01s05_www_doc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Cours d'Informatique Industrielle avec ROS2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Informatique Industrielle &amp; ROS2</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../c00_introduction/p00s00_index.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="p01s00_index.html">Premier projet &amp; doc</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="p01s01_quality_docs.html">Exemple de documentations de qualité</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p01s02_create_and_publish_doc.html">Création du projet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p01s03_git.html">Introduction au versionning avec git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p01s04_create_doc.html">Création d’une première documentation sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p01s05_www_doc.html">Publier la documentation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Coopérer grâce aux pull requests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#le-principe-du-travail-par-pull-request">Le principe du travail par pull request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#preparer-le-terrain">Préparer le terrain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cloner-son-fork">Cloner son fork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creer-sa-branche-personnelle">Créer sa branche personnelle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pousser-sa-branche-sur-son-fork">Pousser sa branche sur son fork</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#faire-une-modification-personnelle">Faire une modification personnelle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ouvrir-une-pull-request">Ouvrir une pull request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#voir-les-pull-requests-de-tout-le-monde">Voir les pull requests de tout le monde</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#refuser-toutes-les-pull-requests">Refuser toutes les pull requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#commencez-a-collaborer">Commencez à collaborer !</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="p01s07_understand_git.html">Pour aller plus loin : Comprendre git</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../c02_first_ros2_project_pimped/p02s00_index.html">Tutoriel ROS2 épicé</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c03_test_your_code/p03s00_index.html">Tester le code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c04_collaborate_with_coders/p04s00_index.html">Les outils nécessaires pour collaborer entre codeurs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Travaux Pratiques</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../p00_5_bars_system_pencil_holder_with_rpi_and_dynamixel/p50s00_index.html">système 5 barres de dessin robotisé avec Raspberry Pi et ROS2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p01_rpi_ubuntu_as_a_ros2_robotic_platform/p51s00_index.html">Ubuntu &amp; RPi &amp; ROS2</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cours d'Informatique Industrielle avec ROS2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="p01s00_index.html">Premier projet &amp; doc</a></li>
+      <li class="breadcrumb-item active">Coopérer grâce aux pull requests</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/c01_create_and_publish_doc/p01s06_cooperate_by_pull_request.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cooperer-grace-aux-pull-requests">
+<h1>Coopérer grâce aux pull requests<a class="headerlink" href="#cooperer-grace-aux-pull-requests" title="Lien vers cette rubrique"></a></h1>
+<p id="index-0">Jusqu’ici chacun a travaillé seul, sur <strong>son</strong> projet et sur <strong>son</strong> dépôt github.
+Nous allons maintenant passer au travail en équipe : tout le groupe va contribuer à <strong>un seul et même dépôt</strong>, que nous appellerons le <strong>dépôt principal</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>Créer votre groupe</p></li>
+<li><p>Dans chaque groupe, le premier qui est arrivé à ce point du cours sera le responsable du projet : c’est son projet git qui servira de base au dépôt commun du groupe, et c’est lui qui administrera le compte organisation.</p></li>
+</ol>
+</div>
+<section id="le-principe-du-travail-par-pull-request">
+<h2>Le principe du travail par pull request<a class="headerlink" href="#le-principe-du-travail-par-pull-request" title="Lien vers cette rubrique"></a></h2>
+<p>Sur un projet partagé, personne ne pousse directement sur le dépôt principal. Le cycle de travail est toujours le même :</p>
+<ol class="arabic simple">
+<li><p>chaque personne travaille dans <strong>sa propre copie</strong> du dépôt principal : c’est le <strong>fork</strong> ;</p></li>
+<li><p>chaque personne travaille dans <strong>sa propre branche</strong> : <code class="docutils literal notranslate"><span class="pre">mon_nom/xxxxx</span></code> avec <code class="docutils literal notranslate"><span class="pre">xxxxx</span></code> décrivant le contenu ou l’objectif de la branche par exemple <code class="docutils literal notranslate"><span class="pre">mon_nom/feature_add_option_to_save_changes_into_config_file</span></code> ou <code class="docutils literal notranslate"><span class="pre">mon_nom/fix_bug42</span></code> ;</p></li>
+<li><p>quand son travail est prêt, elle fait une <strong>requête</strong> au dépôt principal d’intégrer sa branche : c’est la <strong>pull request</strong> (demande de tirage) ;</p></li>
+<li><p>le responsable, ainsi que toutes les personnes concernées, <strong>lisent</strong> la pull request, la discute, puis l”<strong>accepte</strong> (merge) ou la <strong>refuse</strong> (close).</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Les deux mots à retenir :</p>
+<ul class="simple">
+<li><p><strong>fork</strong> : une copie d’un dépôt github dans <strong>votre</strong> compte github. Vous avez tous les droits sur votre fork, et aucun droit sur le dépôt d’origine. Github garde le lien entre les deux, c’est ce lien qui rend la pull request possible.</p></li>
+<li><p><strong>pull request</strong> : une demande faite au propriétaire du dépôt d’origine de <strong>tirer</strong> (<code class="docutils literal notranslate"><span class="pre">pull</span></code>) les commits d’une de vos branches dans une de ses branches.</p></li>
+</ul>
+</div>
+<p>Le dépôt principal n’appartiendra à personne en particulier : il appartiendra au <strong>groupe</strong>. Sur github cela se traduit par un compte d’un type particulier, le compte <strong>organisation</strong>, que le responsable va créer au nom du groupe. Le <strong>responsable</strong> est simplement la personne qui administre ce compte ; tous les autres sont des <strong>membres</strong>. Les étapes de préparation ne sont donc pas les mêmes pour tout le monde : choisissez votre onglet ci-dessous.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>C’est ainsi que sont organisés les projets en entreprise et les grands projets libres : le dépôt de référence est rattaché à un compte organisation et non au compte personnel d’un développeur. <br>
+Cela permet de centraliser la gestion des droits et des branches sur le dépôt principal, pendant que <strong>tout le monde</strong> — y compris la personne qui administre l’organisation — contribue de la même manière, par fork et pull request. <br>
+Personne n’est un cas particulier, et le projet survit au départ de n’importe lequel de ses contributeurs.</p>
+</div>
+</section>
+<section id="preparer-le-terrain">
+<h2>Préparer le terrain<a class="headerlink" href="#preparer-le-terrain" title="Lien vers cette rubrique"></a></h2>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Je suis membre (non responsable)</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Je suis le responsable (une seule personne)</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>Votre feuille de route :</p>
+<ol class="arabic simple">
+<li><p>attendre que le responsable ait créé l’organisation du groupe et vous ait communiqué l’adresse du dépôt principal ;</p></li>
+<li><p>supprimer votre propre dépôt <code class="docutils literal notranslate"><span class="pre">info_indus_tutorial</span></code> ;</p></li>
+<li><p>forker le dépôt principal du groupe.</p></li>
+</ol>
+<p>Les deux dernières étapes sont détaillées ci-dessous.</p>
+<p class="rubric">Supprimer votre propre dépôt info_indus_tutorial sur github</p>
+<p>Votre dépôt personnel n’est plus la référence : la référence est désormais le dépôt de l’organisation du groupe, et vous allez travailler dans un fork de ce dépôt, qui portera <strong>le même nom</strong> que votre dépôt actuel. Pour qu’aucune confusion ne soit possible entre les deux, nous supprimons votre dépôt personnel.</p>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>La suppression d’un dépôt sur github est <strong>définitive et irréversible</strong>. Elle supprime aussi les branches (dont <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>), les actions et la documentation publiée sur le web. Avant de valider, vérifiez deux choses : que le dépôt principal du groupe existe bien dans l’organisation, et que vous êtes bien sur <strong>votre</strong> dépôt personnel <code class="docutils literal notranslate"><span class="pre">info_indus_tutorial</span></code>.</p>
+</div>
+<p>Procédure :</p>
+<ol class="arabic">
+<li><p>allez sur la page de votre dépôt <code class="docutils literal notranslate"><span class="pre">info_indus_tutorial</span></code> sur github ;</p></li>
+<li><p>cliquez sur l’onglet <code class="docutils literal notranslate"><span class="pre">Settings</span></code> (en haut, à droite de la liste des onglets) ;</p></li>
+<li><p>restez dans la sous-section <code class="docutils literal notranslate"><span class="pre">General</span></code> et descendez tout en bas de la page, jusqu’à l’encadré rouge <code class="docutils literal notranslate"><span class="pre">Danger</span> <span class="pre">Zone</span></code> ;</p></li>
+<li><p>cliquez sur le bouton <code class="docutils literal notranslate"><span class="pre">Delete</span> <span class="pre">this</span> <span class="pre">repository</span></code> ;</p></li>
+<li><p>github vous demande de confirmer : cochez les cases proposées puis recopiez <strong>exactement</strong> le nom complet du dépôt demandé, de la forme <code class="docutils literal notranslate"><span class="pre">mon_login/info_indus_tutorial</span></code> ;</p></li>
+<li><p>cliquez sur le bouton rouge de confirmation <code class="docutils literal notranslate"><span class="pre">I</span> <span class="pre">understand</span> <span class="pre">the</span> <span class="pre">consequences,</span> <span class="pre">delete</span> <span class="pre">this</span> <span class="pre">repository</span></code>.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/delete_github_project.gif"><img alt="../_images/delete_github_project.gif" src="../_images/delete_github_project.gif" style="width: 80%;" />
+</a>
+</figure>
+</li>
+</ol>
+<p>Mettez aussi de côté votre copie locale, nous allons en récupérer une neuve juste après :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mv<span class="w"> </span>~/info_indus/info_indus_tutorial<span class="w"> </span>~/info_indus/info_indus_tutorial_old
+</pre></div>
+</div>
+<p class="rubric">Forker le dépôt principal du groupe</p>
+<p>Le dépôt principal est celui de l’organisation ; son adresse est de la forme <code class="docutils literal notranslate"><span class="pre">https://github.com/mon_groupe/info_indus_tutorial</span></code>.</p>
+<ol class="arabic simple">
+<li><p>ouvrez cette adresse dans votre navigateur, en étant connecté à votre <strong>compte github personnel</strong> ;</p></li>
+<li><p>cliquez sur le bouton <code class="docutils literal notranslate"><span class="pre">Fork</span></code>, en haut à droite de la page ;</p></li>
+<li><p>dans la page <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">a</span> <span class="pre">new</span> <span class="pre">fork</span></code>, laissez le champ <code class="docutils literal notranslate"><span class="pre">Owner</span></code> sur <strong>votre login personnel</strong> et le champ <code class="docutils literal notranslate"><span class="pre">Repository</span> <span class="pre">name</span></code> sur <code class="docutils literal notranslate"><span class="pre">info_indus_tutorial</span></code> ;</p></li>
+<li><p><strong>décochez</strong> la case <code class="docutils literal notranslate"><span class="pre">Copy</span> <span class="pre">the</span> <span class="pre">rolling</span> <span class="pre">branch</span> <span class="pre">only</span></code> : nous voulons aussi récupérer la branche <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> ;</p></li>
+<li><p>cliquez sur le bouton <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">fork</span></code>.</p></li>
+</ol>
+<p>Vous arrivez sur la page de votre fork. Sous son titre, github affiche <code class="docutils literal notranslate"><span class="pre">forked</span> <span class="pre">from</span> <span class="pre">mon_groupe/info_indus_tutorial</span></code> : c’est la marque du lien entre les deux dépôts, et c’est ce lien qui rendra la pull request possible.</p>
+<blockquote>
+<div><figure class="align-center">
+<a class="reference internal image-reference" href="../_images/create_fork_on_github.gif"><img alt="../_images/create_fork_on_github.gif" src="../_images/create_fork_on_github.gif" style="width: 80%;" />
+</a>
+</figure>
+</div></blockquote>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>Vous avez quelques étapes de plus que les autres, car c’est vous qui mettez le dépôt principal en place. Votre feuille de route :</p>
+<ol class="arabic simple">
+<li><p>créer un compte <strong>organisation</strong> github au nom du groupe ;</p></li>
+<li><p>forker votre dépôt <code class="docutils literal notranslate"><span class="pre">info_indus_tutorial</span></code> <strong>dans cette organisation</strong> : ce fork devient le dépôt principal du groupe ;</p></li>
+<li><p>régler le dépôt principal pour qu’il accepte les pull requests ;</p></li>
+<li><p>communiquer l’adresse du dépôt principal à tous les membres ;</p></li>
+<li><p>puis, <strong>exactement comme les autres membres</strong>, supprimer votre dépôt personnel et forker le dépôt principal.</p></li>
+</ol>
+<p class="rubric">Créer un compte organisation au nom du groupe</p>
+<ol class="arabic">
+<li><p>cliquez sur votre photo de profil en haut à droite, puis sur <code class="docutils literal notranslate"><span class="pre">Your</span> <span class="pre">organizations</span></code> ;</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../_images/your_organizations_menu.png"><img alt="Menu du compte github ouvert, l'entrée « Your organizations » est entourée." src="../_images/your_organizations_menu.png" style="width: 45%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">L’entrée <code class="docutils literal notranslate"><span class="pre">Your</span> <span class="pre">organizations</span></code> dans le menu de votre photo de profil. <br>
+<em>Source : documentation officielle de GitHub (dépôt ``github/docs``, licence CC BY 4.0).</em></span><a class="headerlink" href="#id1" title="Lien vers cette image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>cliquez sur le bouton vert <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">organization</span></code> ;</p></li>
+<li><p>choisissez le plan gratuit <code class="docutils literal notranslate"><span class="pre">Free</span></code> ;</p></li>
+<li><p>remplissez le champ <code class="docutils literal notranslate"><span class="pre">Organization</span> <span class="pre">name</span></code> avec un nom au nom de votre groupe. Ce nom doit être <strong>unique sur tout github</strong> et ne peut contenir ni espace ni accent : prenez par exemple <code class="docutils literal notranslate"><span class="pre">info-indus-groupe-01</span></code> ;</p></li>
+<li><p>renseignez le <code class="docutils literal notranslate"><span class="pre">Contact</span> <span class="pre">email</span></code> et indiquez, à la question <code class="docutils literal notranslate"><span class="pre">This</span> <span class="pre">organization</span> <span class="pre">belongs</span> <span class="pre">to</span></code>, qu’il s’agit d’un compte personnel (<code class="docutils literal notranslate"><span class="pre">My</span> <span class="pre">personal</span> <span class="pre">account</span></code>) ;</p></li>
+<li><p>validez. Github vous propose alors d’inviter des membres : saisissez les logins github des autres membres du groupe, ou passez l’étape avec <code class="docutils literal notranslate"><span class="pre">Skip</span> <span class="pre">this</span> <span class="pre">step</span></code>.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Inviter les membres dans l’organisation n’est <strong>pas</strong> nécessaire pour qu’ils puissent forker le dépôt et ouvrir des pull requests : un dépôt public est forkable par n’importe qui. L’invitation sert à autre chose : elle permettra plus tard de donner à certains membres le droit de relire et d’intégrer les pull requests des autres, au lieu que tout repose sur vous.</p>
+</div>
+<p class="rubric">Forker votre dépôt dans l’organisation</p>
+<p>C’est le moment de transférer votre travail au groupe. Vous n’allez pas déplacer votre dépôt, vous allez en faire un fork dans l’organisation : votre dépôt personnel reste intact pour l’instant.</p>
+<ol class="arabic">
+<li><p>allez sur la page de votre dépôt <code class="docutils literal notranslate"><span class="pre">info_indus_tutorial</span></code> sur github ;</p></li>
+<li><p>cliquez sur le bouton <code class="docutils literal notranslate"><span class="pre">Fork</span></code>, en haut à droite de la page ;</p>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="../_images/fork_button.png"><img alt="Page d'accueil d'un dépôt github, le bouton « Fork » est entouré." src="../_images/fork_button.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Le bouton <code class="docutils literal notranslate"><span class="pre">Fork</span></code>, dans la barre de boutons en haut à droite de la page du dépôt. <br>
+<em>Source : documentation officielle de GitHub (dépôt ``github/docs``, licence CC BY 4.0).</em></span><a class="headerlink" href="#id2" title="Lien vers cette image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>dans la page <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">a</span> <span class="pre">new</span> <span class="pre">fork</span></code>, ouvrez la liste déroulante <code class="docutils literal notranslate"><span class="pre">Owner</span></code> et sélectionnez <strong>l’organisation du groupe</strong> que vous venez de créer, et non votre login personnel ;</p></li>
+<li><p>laissez le champ <code class="docutils literal notranslate"><span class="pre">Repository</span> <span class="pre">name</span></code> sur <code class="docutils literal notranslate"><span class="pre">info_indus_tutorial</span></code> ;</p></li>
+<li><p><strong>décochez</strong> la case <code class="docutils literal notranslate"><span class="pre">Copy</span> <span class="pre">the</span> <span class="pre">rolling</span> <span class="pre">branch</span> <span class="pre">only</span></code> : nous voulons aussi récupérer la branche <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> ;</p></li>
+<li><p>cliquez sur le bouton <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">fork</span></code>.</p></li>
+</ol>
+<p>Le dépôt <code class="docutils literal notranslate"><span class="pre">mon_groupe/info_indus_tutorial</span></code> ainsi créé est désormais le <strong>dépôt principal du groupe</strong>.</p>
+<p class="rubric">Autoriser les pull requests sur le dépôt principal</p>
+<p>Tous les réglages qui suivent se font sur le dépôt <strong>de l’organisation</strong>, pas sur votre dépôt personnel. Les réglages d’un dépôt ne sont pas recopiés par le fork : il faut les refaire.</p>
+<ol class="arabic simple">
+<li><p>allez sur la page du dépôt <code class="docutils literal notranslate"><span class="pre">mon_groupe/info_indus_tutorial</span></code> ;</p></li>
+<li><p>cliquez sur l’onglet <code class="docutils literal notranslate"><span class="pre">Settings</span></code>, sous-section <code class="docutils literal notranslate"><span class="pre">General</span></code> ;</p></li>
+<li><p>dans la section <code class="docutils literal notranslate"><span class="pre">Features</span></code>, vérifiez que la case <code class="docutils literal notranslate"><span class="pre">Issues</span></code> est cochée : c’est là que se feront les discussions ;</p></li>
+<li><p>descendez jusqu’à la section <code class="docutils literal notranslate"><span class="pre">Pull</span> <span class="pre">Requests</span></code> et cochez au moins <code class="docutils literal notranslate"><span class="pre">Allow</span> <span class="pre">merge</span> <span class="pre">commits</span></code> ainsi que <code class="docutils literal notranslate"><span class="pre">Allow</span> <span class="pre">squash</span> <span class="pre">merging</span></code> ;</p></li>
+<li><p>cochez également <code class="docutils literal notranslate"><span class="pre">Automatically</span> <span class="pre">delete</span> <span class="pre">head</span> <span class="pre">branches</span></code> : github supprimera les branches une fois les pull requests intégrées, cela évite d’accumuler des branches mortes.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Un dépôt <strong>public</strong> accepte les pull requests venant de n’importe quel fork sans réglage particulier : il n’y a pas de case <code class="docutils literal notranslate"><span class="pre">Allow</span> <span class="pre">pull</span> <span class="pre">requests</span></code> à cocher. Ce qui se règle ici, c’est <strong>comment</strong> les pull requests pourront être intégrées. Vérifiez simplement, dans la <code class="docutils literal notranslate"><span class="pre">Danger</span> <span class="pre">Zone</span></code> tout en bas de la page <code class="docutils literal notranslate"><span class="pre">General</span></code>, que le dépôt est bien <code class="docutils literal notranslate"><span class="pre">public</span></code> : s’il était privé, personne ne pourrait le forker.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/allow_pull_requests.gif"><img alt="../_images/allow_pull_requests.gif" src="../_images/allow_pull_requests.gif" style="width: 80%;" />
+</a>
+</figure>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Pour que la documentation du groupe soit publiée comme l’était la vôtre, il reste deux choses à refaire sur le dépôt de l’organisation : <br>
+1. rejouer <a class="reference internal" href="p01s05_www_doc.html#setup-git-actions"><span class="std std-ref">le réglage des actions github</span></a> (<code class="docutils literal notranslate"><span class="pre">Settings</span></code> → <code class="docutils literal notranslate"><span class="pre">Actions</span></code> → <code class="docutils literal notranslate"><span class="pre">General</span></code>), car un fork ne recopie pas ces autorisations ; <br>
+2. corriger dans le fichier <code class="docutils literal notranslate"><span class="pre">.github/workflows/documentation.yml</span></code> la ligne <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">...</span></code>, qui pointe encore vers votre dépôt personnel, pour qu’elle pointe vers l’adresse <code class="docutils literal notranslate"><span class="pre">HTTPS</span></code> du dépôt de l’organisation. <br>
+Faites ce second point plus tard, par une pull request : ce sera votre première contribution au dépôt du groupe.</p>
+</div>
+<p class="rubric">Communiquer l’adresse du dépôt principal à tous les membres</p>
+<p>Sur la page d’accueil du dépôt de l’organisation, cliquez sur le bouton vert <code class="docutils literal notranslate"><span class="pre">Code</span></code> et copiez l’adresse <code class="docutils literal notranslate"><span class="pre">HTTPS</span></code> (voir la <a class="reference internal" href="p01s05_www_doc.html#get-git-remote-project-address"><span class="std std-ref">procédure du chapitre précédent</span></a>), puis diffusez-la au groupe. Elle est de la forme :</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>https://github.com/mon_groupe/info_indus_tutorial
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Diffusez l’adresse <code class="docutils literal notranslate"><span class="pre">HTTPS</span></code> et non l’adresse <code class="docutils literal notranslate"><span class="pre">ssh</span></code> : l’adresse <code class="docutils literal notranslate"><span class="pre">HTTPS</span></code> est celle que l’on ouvre dans un navigateur pour forker le dépôt. Chaque membre utilisera ensuite l’adresse <code class="docutils literal notranslate"><span class="pre">ssh</span></code> de <strong>son propre fork</strong> pour le cloner.</p>
+</div>
+<p class="rubric">Et maintenant, comme tout le monde</p>
+<p>Le dépôt principal existe et il est en place. Vous redevenez à cet instant un contributeur comme les autres : votre dépôt personnel <code class="docutils literal notranslate"><span class="pre">info_indus_tutorial</span></code> fait double emploi avec celui de l’organisation, vous allez donc le supprimer, puis forker le dépôt principal — autrement dit reforker chez vous ce que vous venez de forker dans l’organisation.</p>
+<p class="rubric">Supprimer votre propre dépôt info_indus_tutorial sur github</p>
+<p>Votre dépôt personnel n’est plus la référence : la référence est désormais le dépôt de l’organisation du groupe, et vous allez travailler dans un fork de ce dépôt, qui portera <strong>le même nom</strong> que votre dépôt actuel. Pour qu’aucune confusion ne soit possible entre les deux, nous supprimons votre dépôt personnel.</p>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>La suppression d’un dépôt sur github est <strong>définitive et irréversible</strong>. Elle supprime aussi les branches (dont <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>), les actions et la documentation publiée sur le web. Avant de valider, vérifiez deux choses : que le dépôt principal du groupe existe bien dans l’organisation, et que vous êtes bien sur <strong>votre</strong> dépôt personnel <code class="docutils literal notranslate"><span class="pre">info_indus_tutorial</span></code>.</p>
+</div>
+<p>Procédure :</p>
+<ol class="arabic">
+<li><p>allez sur la page de votre dépôt <code class="docutils literal notranslate"><span class="pre">info_indus_tutorial</span></code> sur github ;</p></li>
+<li><p>cliquez sur l’onglet <code class="docutils literal notranslate"><span class="pre">Settings</span></code> (en haut, à droite de la liste des onglets) ;</p></li>
+<li><p>restez dans la sous-section <code class="docutils literal notranslate"><span class="pre">General</span></code> et descendez tout en bas de la page, jusqu’à l’encadré rouge <code class="docutils literal notranslate"><span class="pre">Danger</span> <span class="pre">Zone</span></code> ;</p></li>
+<li><p>cliquez sur le bouton <code class="docutils literal notranslate"><span class="pre">Delete</span> <span class="pre">this</span> <span class="pre">repository</span></code> ;</p></li>
+<li><p>github vous demande de confirmer : cochez les cases proposées puis recopiez <strong>exactement</strong> le nom complet du dépôt demandé, de la forme <code class="docutils literal notranslate"><span class="pre">mon_login/info_indus_tutorial</span></code> ;</p></li>
+<li><p>cliquez sur le bouton rouge de confirmation <code class="docutils literal notranslate"><span class="pre">I</span> <span class="pre">understand</span> <span class="pre">the</span> <span class="pre">consequences,</span> <span class="pre">delete</span> <span class="pre">this</span> <span class="pre">repository</span></code>.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/delete_github_project.gif"><img alt="../_images/delete_github_project.gif" src="../_images/delete_github_project.gif" style="width: 80%;" />
+</a>
+</figure>
+</li>
+</ol>
+<p>Mettez aussi de côté votre copie locale, nous allons en récupérer une neuve juste après :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mv<span class="w"> </span>~/info_indus/info_indus_tutorial<span class="w"> </span>~/info_indus/info_indus_tutorial_old
+</pre></div>
+</div>
+<p class="rubric">Forker le dépôt principal du groupe</p>
+<p>Le dépôt principal est celui de l’organisation ; son adresse est de la forme <code class="docutils literal notranslate"><span class="pre">https://github.com/mon_groupe/info_indus_tutorial</span></code>.</p>
+<ol class="arabic simple">
+<li><p>ouvrez cette adresse dans votre navigateur, en étant connecté à votre <strong>compte github personnel</strong> ;</p></li>
+<li><p>cliquez sur le bouton <code class="docutils literal notranslate"><span class="pre">Fork</span></code>, en haut à droite de la page ;</p></li>
+<li><p>dans la page <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">a</span> <span class="pre">new</span> <span class="pre">fork</span></code>, laissez le champ <code class="docutils literal notranslate"><span class="pre">Owner</span></code> sur <strong>votre login personnel</strong> et le champ <code class="docutils literal notranslate"><span class="pre">Repository</span> <span class="pre">name</span></code> sur <code class="docutils literal notranslate"><span class="pre">info_indus_tutorial</span></code> ;</p></li>
+<li><p><strong>décochez</strong> la case <code class="docutils literal notranslate"><span class="pre">Copy</span> <span class="pre">the</span> <span class="pre">rolling</span> <span class="pre">branch</span> <span class="pre">only</span></code> : nous voulons aussi récupérer la branche <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> ;</p></li>
+<li><p>cliquez sur le bouton <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">fork</span></code>.</p></li>
+</ol>
+<p>Vous arrivez sur la page de votre fork. Sous son titre, github affiche <code class="docutils literal notranslate"><span class="pre">forked</span> <span class="pre">from</span> <span class="pre">mon_groupe/info_indus_tutorial</span></code> : c’est la marque du lien entre les deux dépôts, et c’est ce lien qui rendra la pull request possible.</p>
+<blockquote>
+<div><figure class="align-center">
+<a class="reference internal image-reference" href="../_images/create_fork_on_github.gif"><img alt="../_images/create_fork_on_github.gif" src="../_images/create_fork_on_github.gif" style="width: 80%;" />
+</a>
+</figure>
+</div></blockquote>
+</div></div>
+<p>À partir d’ici, <strong>tout le monde fait exactement la même chose</strong> : responsable comme membres, chacun possède son fork personnel du dépôt principal et travaille dedans.</p>
+</section>
+<section id="cloner-son-fork">
+<h2>Cloner son fork<a class="headerlink" href="#cloner-son-fork" title="Lien vers cette rubrique"></a></h2>
+<p>Récupérez l’adresse <code class="docutils literal notranslate"><span class="pre">ssh</span></code> de <strong>votre fork</strong> (bouton vert <code class="docutils literal notranslate"><span class="pre">Code</span></code> sur la page de votre fork, onglet <code class="docutils literal notranslate"><span class="pre">SSH</span></code>), exactement comme au chapitre précédent, puis clonez-le :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/info_indus
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>MY_FORK_SSH_ADDRESS<span class="w"> </span>info_indus_tutorial
+</pre></div>
+</div>
+<p>Remplacez <code class="docutils literal notranslate"><span class="pre">MY_FORK_SSH_ADDRESS</span></code> par l’adresse <code class="docutils literal notranslate"><span class="pre">ssh</span></code> de votre fork. Elle est de la forme <code class="docutils literal notranslate"><span class="pre">git&#64;github.com:mon_login/info_indus_tutorial.git</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>Clonez bien <strong>votre fork</strong>, et non le dépôt principal. Si vous clonez le dépôt principal, vous ne pourrez rien y pousser : vous n’avez pas les droits en écriture dessus.</p>
+</div>
+<p>Placez-vous dans le dépôt et vérifiez où pointe <code class="docutils literal notranslate"><span class="pre">origin</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/info_indus/info_indus_tutorial
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>-v
+</pre></div>
+</div>
+<p>Vous devez voir votre fork, et lui seul.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Par convention, on ajoute un second dépôt distant nommé <code class="docutils literal notranslate"><span class="pre">upstream</span></code> qui pointe vers le dépôt principal. Il sert plus tard à récupérer le travail des autres une fois qu’il a été intégré :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>upstream<span class="w"> </span>https://github.com/mon_groupe/info_indus_tutorial.git
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">origin</span></code> est à vous et vous pouvez y pousser ; <code class="docutils literal notranslate"><span class="pre">upstream</span></code> ne vous appartient pas et vous n’en ferez que des <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code> / <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>.</p>
+</div>
+</section>
+<section id="creer-sa-branche-personnelle">
+<h2>Créer sa branche personnelle<a class="headerlink" href="#creer-sa-branche-personnelle" title="Lien vers cette rubrique"></a></h2>
+<p>On ne travaille jamais directement sur <code class="docutils literal notranslate"><span class="pre">rolling</span></code> : c’est la branche de référence, celle qui doit toujours fonctionner. Chacun crée donc sa branche de travail, nommée par exemple <code class="docutils literal notranslate"><span class="pre">mon_nom/dev</span></code>.</p>
+<p>Vérifiez d’abord sur quelle branche vous êtes :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>branch<span class="w"> </span>-a
+</pre></div>
+</div>
+<p>Créez ensuite votre branche à partir de <code class="docutils literal notranslate"><span class="pre">rolling</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>switch<span class="w"> </span>-c<span class="w"> </span>mon_nom/dev
+</pre></div>
+</div>
+<p>Remplacez <code class="docutils literal notranslate"><span class="pre">mon_nom</span></code> par <strong>votre</strong> nom ou votre login github, sans espace ni accent : par exemple <code class="docutils literal notranslate"><span class="pre">yguel/dev</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Le caractère <code class="docutils literal notranslate"><span class="pre">/</span></code> dans <code class="docutils literal notranslate"><span class="pre">yguel/dev</span></code> n’est pas un répertoire : git autorise les <code class="docutils literal notranslate"><span class="pre">/</span></code> dans les noms de branche et les outils s’en servent pour <strong>regrouper</strong> les branches par préfixe. C’est la convention la plus répandue : <code class="docutils literal notranslate"><span class="pre">nom/dev</span></code>, <code class="docutils literal notranslate"><span class="pre">nom/fix-truc</span></code>, <code class="docutils literal notranslate"><span class="pre">feature/machin</span></code>. Elle rend la liste des branches lisible dès que le projet grossit.</p>
+</div>
+<p>Vérifiez que vous êtes bien sur votre nouvelle branche :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>branch<span class="w"> </span>-a
+</pre></div>
+</div>
+<p>L’étoile <code class="docutils literal notranslate"><span class="pre">*</span></code> doit se trouver devant <code class="docutils literal notranslate"><span class="pre">mon_nom/dev</span></code>.</p>
+</section>
+<section id="pousser-sa-branche-sur-son-fork">
+<h2>Pousser sa branche sur son fork<a class="headerlink" href="#pousser-sa-branche-sur-son-fork" title="Lien vers cette rubrique"></a></h2>
+<p>Votre branche n’existe pour l’instant que sur votre machine. Poussez-la sur votre fork :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>mon_nom/dev
+</pre></div>
+</div>
+<p>Comme au chapitre précédent, l’option <code class="docutils literal notranslate"><span class="pre">-u</span></code> n’est nécessaire que la <strong>première</strong> fois que vous poussez cette branche : elle associe votre branche locale à la branche distante du même nom. Ensuite, un simple <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> suffira.</p>
+<p>Rafraîchissez la page de votre fork sur github : le sélecteur de branches, en haut à gauche de la liste des fichiers, affiche maintenant deux branches, <code class="docutils literal notranslate"><span class="pre">rolling</span></code> et <code class="docutils literal notranslate"><span class="pre">mon_nom/dev</span></code>.</p>
+</section>
+<section id="faire-une-modification-personnelle">
+<h2>Faire une modification personnelle<a class="headerlink" href="#faire-une-modification-personnelle" title="Lien vers cette rubrique"></a></h2>
+<p>Chacun va maintenant faire une modification <strong>différente de celle des autres</strong>, pour que les pull requests soient bien distinctes.</p>
+<p>Éditez le fichier <code class="docutils literal notranslate"><span class="pre">doc/sphinx/source/index.rst</span></code> et ajoutez-y une ligne contenant votre prénom et votre nom, par exemple :</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Cette ligne a été ajoutée par Manuel YGUEL.
+</pre></div>
+</div>
+<p>Puis enregistrez le travail et poussez-le :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>doc/sphinx/source/index.rst
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Add a line signed by MY_NAME in the main index"</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push
+</pre></div>
+</div>
+<p>Remplacez <code class="docutils literal notranslate"><span class="pre">MY_NAME</span></code> par votre nom. Notez qu’il n’y a plus besoin de l’option <code class="docutils literal notranslate"><span class="pre">-u</span></code> : la branche est déjà associée.</p>
+</section>
+<section id="ouvrir-une-pull-request">
+<h2>Ouvrir une pull request<a class="headerlink" href="#ouvrir-une-pull-request" title="Lien vers cette rubrique"></a></h2>
+<p>Allez sur la page de <strong>votre fork</strong> sur github et rafraîchissez-la. Github détecte que vous venez de pousser une branche et affiche, juste au-dessus de la liste des fichiers, un bandeau jaune avec un bouton vert <code class="docutils literal notranslate"><span class="pre">Compare</span> <span class="pre">&amp;</span> <span class="pre">pull</span> <span class="pre">request</span></code>.</p>
+<ol class="arabic simple">
+<li><p>cliquez sur le bouton <code class="docutils literal notranslate"><span class="pre">Compare</span> <span class="pre">&amp;</span> <span class="pre">pull</span> <span class="pre">request</span></code> ;</p></li>
+<li><p>github ouvre la page <code class="docutils literal notranslate"><span class="pre">Open</span> <span class="pre">a</span> <span class="pre">pull</span> <span class="pre">request</span></code>. Vérifiez les quatre champs de la ligne de comparaison, en haut :</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">base</span> <span class="pre">repository</span></code> : le dépôt <strong>principal</strong>, <code class="docutils literal notranslate"><span class="pre">mon_groupe/info_indus_tutorial</span></code> ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">base</span></code> : la branche <code class="docutils literal notranslate"><span class="pre">rolling</span></code> du dépôt principal, c’est là que vous demandez à être intégré ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">head</span> <span class="pre">repository</span></code> : <strong>votre</strong> fork ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compare</span></code> : <strong>votre</strong> branche <code class="docutils literal notranslate"><span class="pre">mon_nom/dev</span></code> ;</p></li>
+</ol>
+</li>
+<li><p>donnez un titre clair à la pull request, par exemple <code class="docutils literal notranslate"><span class="pre">Ajout</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">signature</span> <span class="pre">de</span> <span class="pre">Manuel</span> <span class="pre">YGUEL</span></code> ;</p></li>
+<li><p>écrivez dans le champ de description ce que vous avez modifié et pourquoi ;</p></li>
+<li><p>cliquez sur le bouton vert <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">pull</span> <span class="pre">request</span></code>.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Si le bandeau jaune a disparu (il ne s’affiche que quelques minutes après le <code class="docutils literal notranslate"><span class="pre">push</span></code>), le chemin complet fonctionne toujours : sur la page de votre fork, cliquez sur l’onglet <code class="docutils literal notranslate"><span class="pre">Pull</span> <span class="pre">requests</span></code>, puis sur le bouton vert <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">pull</span> <span class="pre">request</span></code>, et renseignez les quatre champs ci-dessus.</p>
+</div>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="../_images/compare_and_pull_request_button.png"><img alt="Bandeau jaune « octo-repo had recent pushes less than a minute ago » avec un bouton vert « Compare &amp; pull request »." src="../_images/compare_and_pull_request_button.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Le bandeau qui apparaît sur votre fork juste après le <code class="docutils literal notranslate"><span class="pre">push</span></code>, avec le bouton <code class="docutils literal notranslate"><span class="pre">Compare</span> <span class="pre">&amp;</span> <span class="pre">pull</span> <span class="pre">request</span></code>. <br>
+<em>Source : documentation officielle de GitHub (dépôt ``github/docs``, licence CC BY 4.0).</em></span><a class="headerlink" href="#id3" title="Lien vers cette image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="../_images/open_a_pull_request_base_head.png"><img alt="Page « Open a pull request » montrant la ligne base repository, base, head repository, compare." src="../_images/open_a_pull_request_base_head.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">La ligne de comparaison de la page <code class="docutils literal notranslate"><span class="pre">Open</span> <span class="pre">a</span> <span class="pre">pull</span> <span class="pre">request</span></code>. Ici <code class="docutils literal notranslate"><span class="pre">base</span> <span class="pre">repository</span></code> est le dépôt d’une organisation (<code class="docutils literal notranslate"><span class="pre">octo-org</span></code>) et <code class="docutils literal notranslate"><span class="pre">head</span> <span class="pre">repository</span></code> le fork personnel (<code class="docutils literal notranslate"><span class="pre">octocat</span></code>) : c’est exactement votre situation. <br>
+<em>Source : documentation officielle de GitHub (dépôt ``github/docs``, licence CC BY 4.0).</em></span><a class="headerlink" href="#id4" title="Lien vers cette image"></a></p>
+</figcaption>
+</figure>
+<p>Votre pull request est maintenant ouverte <strong>sur le dépôt principal</strong>. Vous n’avez pourtant aucun droit d’écriture dessus : c’est tout l’intérêt du mécanisme. Vous avez <strong>proposé</strong> une modification, vous ne l’avez pas imposée.</p>
+</section>
+<section id="voir-les-pull-requests-de-tout-le-monde">
+<h2>Voir les pull requests de tout le monde<a class="headerlink" href="#voir-les-pull-requests-de-tout-le-monde" title="Lien vers cette rubrique"></a></h2>
+<p>Attendez que chaque membre du groupe ait ouvert la sienne, puis :</p>
+<ol class="arabic simple">
+<li><p>ouvrez l’adresse du <strong>dépôt principal</strong> communiquée par le responsable ;</p></li>
+<li><p>cliquez sur l’onglet <code class="docutils literal notranslate"><span class="pre">Pull</span> <span class="pre">requests</span></code>, en haut de la page. Le compteur à côté du nom de l’onglet indique le nombre de pull requests ouvertes ;</p></li>
+<li><p>vous voyez la liste de <strong>toutes</strong> les pull requests du groupe, avec pour chacune son numéro (<code class="docutils literal notranslate"><span class="pre">#1</span></code>, <code class="docutils literal notranslate"><span class="pre">#2</span></code>, …), son titre, son auteur et sa date ;</p></li>
+<li><p>cliquez sur l’une d’elles, puis sur l’onglet <code class="docutils literal notranslate"><span class="pre">Files</span> <span class="pre">changed</span></code> : vous voyez le <code class="docutils literal notranslate"><span class="pre">diff</span></code>, ligne par ligne, exactement comme avec <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> ;</p></li>
+<li><p>revenez sur l’onglet <code class="docutils literal notranslate"><span class="pre">Conversation</span></code> : c’est là que se discute la modification. Tout le monde peut commenter, y compris dans la marge d’une ligne précise du <code class="docutils literal notranslate"><span class="pre">diff</span></code>.</p></li>
+</ol>
+<figure class="align-center" id="id5">
+<a class="reference internal image-reference" href="../_images/pull_requests_tab.png"><img alt="Barre d'onglets d'un dépôt github, l'onglet « Pull requests » et son compteur sont entourés." src="../_images/pull_requests_tab.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">L’onglet <code class="docutils literal notranslate"><span class="pre">Pull</span> <span class="pre">requests</span></code> du dépôt principal, et son compteur de pull requests ouvertes. <br>
+<em>Source : documentation officielle de GitHub (dépôt ``github/docs``, licence CC BY 4.0).</em></span><a class="headerlink" href="#id5" title="Lien vers cette image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="../_images/pull_request_files_changed.png"><img alt="Pull request ouverte sur l'onglet « Files changed », montrant un diff ligne à ligne." src="../_images/pull_request_files_changed.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Une pull request, ouverte sur son onglet <code class="docutils literal notranslate"><span class="pre">Files</span> <span class="pre">changed</span></code> : le <code class="docutils literal notranslate"><span class="pre">diff</span></code> est affiché ligne à ligne, en rouge ce qui est retiré, en vert ce qui est ajouté. Les onglets <code class="docutils literal notranslate"><span class="pre">Conversation</span></code>, <code class="docutils literal notranslate"><span class="pre">Commits</span></code>, <code class="docutils literal notranslate"><span class="pre">Checks</span></code> et <code class="docutils literal notranslate"><span class="pre">Files</span> <span class="pre">changed</span></code> sont visibles en haut. <br>
+<em>Source : documentation officielle de GitHub (dépôt ``github/docs``, licence CC BY 4.0).</em></span><a class="headerlink" href="#id6" title="Lien vers cette image"></a></p>
+</figcaption>
+</figure>
+<p>Retenez bien ce point : <strong>tout le travail proposé est visible par tous, avant d’être intégré</strong>. C’est ce qui rend la relecture par les pairs possible, et c’est la raison d’être des pull requests.</p>
+</section>
+<section id="refuser-toutes-les-pull-requests">
+<h2>Refuser toutes les pull requests<a class="headerlink" href="#refuser-toutes-les-pull-requests" title="Lien vers cette rubrique"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Cette partie se fait en groupe. <br>
+Quand on travaille à distance, on peut faire en sorte que plusieurs personnes autorisées soient nécessaire pour valider une pull request avant qu’elle ne soit intégrée. <br>
+Cela permet de garantir que le code est relu et approuvé par plusieurs membres du groupe avant d’être fusionné. <br> <br></p>
+<p>L’option sous github se trouve dans les <strong>Settings</strong> du dépôt principal, sous <strong>Branches</strong>, puis en configurant les <strong>branch protection rules</strong> pour la branche <code class="docutils literal notranslate"><span class="pre">rolling</span></code>.
+Il faut choisir le nombre de relecteurs obligatoires et éventuellement d’autres critères de protection de la branche.</p>
+<p>Dans notre cas particulier, réunissez vous autour du responsable.</p>
+</div>
+<p>Ces pull requests n’étaient qu’un exercice : nous allons maintenant toutes les refuser, pour voir ce que cela donne et pour laisser le dépôt principal propre.</p>
+<p>Sur github, refuser une pull request se dit <strong>fermer</strong> (<code class="docutils literal notranslate"><span class="pre">close</span></code>) : on ne la supprime pas, on la clôt sans l’intégrer. Elle reste consultable, avec toute sa discussion, dans le filtre <code class="docutils literal notranslate"><span class="pre">Closed</span></code>.</p>
+<p>Le responsable, pour chaque pull request ouverte :</p>
+<ol class="arabic simple">
+<li><p>ouvrez le dépôt principal, onglet <code class="docutils literal notranslate"><span class="pre">Pull</span> <span class="pre">requests</span></code> ;</p></li>
+<li><p>cliquez sur la première pull request de la liste ;</p></li>
+<li><p>descendez tout en bas de l’onglet <code class="docutils literal notranslate"><span class="pre">Conversation</span></code>, jusqu’au champ de commentaire ;</p></li>
+<li><p>écrivez un commentaire expliquant le refus, par exemple <code class="docutils literal notranslate"><span class="pre">Merci,</span> <span class="pre">c'était</span> <span class="pre">un</span> <span class="pre">exercice</span> <span class="pre">:</span> <span class="pre">je</span> <span class="pre">ferme</span> <span class="pre">cette</span> <span class="pre">pull</span> <span class="pre">request</span> <span class="pre">sans</span> <span class="pre">l'intégrer.</span></code> ;</p></li>
+<li><p>cliquez sur le bouton <code class="docutils literal notranslate"><span class="pre">Close</span> <span class="pre">with</span> <span class="pre">comment</span></code> (si vous n’écrivez rien, le bouton s’appelle simplement <code class="docutils literal notranslate"><span class="pre">Close</span> <span class="pre">pull</span> <span class="pre">request</span></code>) ;</p></li>
+<li><p>recommencez pour chacune des autres pull requests.</p></li>
+</ol>
+<p>Une fois toutes les pull requests fermées, retournez sur l’onglet <code class="docutils literal notranslate"><span class="pre">Pull</span> <span class="pre">requests</span></code> du dépôt principal : le compteur <code class="docutils literal notranslate"><span class="pre">Open</span></code> est à zéro, et le filtre <code class="docutils literal notranslate"><span class="pre">Closed</span></code> les contient toutes.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Fermer une pull request ne touche <strong>ni</strong> à votre fork <strong>ni</strong> à votre branche <code class="docutils literal notranslate"><span class="pre">mon_nom/dev</span></code> : votre travail est toujours là, chez vous. Une pull request fermée peut d’ailleurs être rouverte avec le bouton <code class="docutils literal notranslate"><span class="pre">Reopen</span> <span class="pre">pull</span> <span class="pre">request</span></code>, et pousser un nouveau commit sur la branche <code class="docutils literal notranslate"><span class="pre">mon_nom/dev</span></code> d’une pull request <strong>ouverte</strong> la met automatiquement à jour. C’est ainsi qu’on corrige un travail après une relecture : on ne referme pas une pull request pour en ouvrir une autre, on pousse les corrections sur la même branche.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Les captures d’écran fixes de cette section proviennent de la documentation officielle de GitHub, publiée dans le dépôt <a class="reference external" href="https://github.com/github/docs">github/docs</a> sous licence <a class="reference external" href="https://github.com/github/docs/blob/main/LICENSE">CC BY 4.0</a>. <br>
+Le détail fichier par fichier se trouve dans <code class="docutils literal notranslate"><span class="pre">resources/img/pull_request/github_docs/CREDITS.txt</span></code>. <br>
+Les noms de dépôts et de comptes qu’on y voit (<code class="docutils literal notranslate"><span class="pre">octocat</span></code>, <code class="docutils literal notranslate"><span class="pre">octo-org</span></code>, <code class="docutils literal notranslate"><span class="pre">hello-world</span></code>, <code class="docutils literal notranslate"><span class="pre">github/docs</span></code>) sont ceux des exemples de GitHub : transposez-les à votre fork, à votre organisation et à <code class="docutils literal notranslate"><span class="pre">info_indus_tutorial</span></code>.</p>
+</div>
+</section>
+<section id="commencez-a-collaborer">
+<h2>Commencez à collaborer !<a class="headerlink" href="#commencez-a-collaborer" title="Lien vers cette rubrique"></a></h2>
+<p>Chacun d’entre vous peut maintenant docummenter les équations de la dynamique du système 5 barres (voir <a class="reference internal" href="../p00_5_bars_system_pencil_holder_with_rpi_and_dynamixel/p50s02_mechanical_description.html#mechanical-description"><span class="std std-ref">Description mécanique de la plateforme système 5 barres</span></a>)</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="p01s05_www_doc.html" class="btn btn-neutral float-left" title="Publier la documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="p01s07_understand_git.html" class="btn btn-neutral float-right" title="Pour aller plus loin : Comprendre git" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Manuel YGUEL.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

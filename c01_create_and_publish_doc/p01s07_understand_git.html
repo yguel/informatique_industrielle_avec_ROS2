@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pour aller plus loin : Comprendre git &mdash; Documentation Cours d&#39;Informatique Industrielle avec ROS2 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2f145f6b" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=05dadb3a"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=30646c52"></script>
+      <script src="../_static/translations.js?v=e6b791cb"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Tutoriel ROS2 épicé" href="../c02_first_ros2_project_pimped/p02s00_index.html" />
+    <link rel="prev" title="Coopérer grâce aux pull requests" href="p01s06_cooperate_by_pull_request.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Cours d'Informatique Industrielle avec ROS2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Informatique Industrielle &amp; ROS2</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../c00_introduction/p00s00_index.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="p01s00_index.html">Premier projet &amp; doc</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="p01s01_quality_docs.html">Exemple de documentations de qualité</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p01s02_create_and_publish_doc.html">Création du projet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p01s03_git.html">Introduction au versionning avec git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p01s04_create_doc.html">Création d’une première documentation sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p01s05_www_doc.html">Publier la documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p01s06_cooperate_by_pull_request.html">Coopérer grâce aux pull requests</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Pour aller plus loin : Comprendre git</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#comment-git-calcule-les-differences-entre-2-versions-d-un-meme-fichier">Comment git calcule les différences entre 2 versions d’un même fichier ?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#les-outils-pour-visualiser-les-differences-entre-2-fichiers">Les outils pour visualiser les différences entre 2 fichiers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#implications-de-l-utilisation-de-git-dans-la-redaction-de-code">Implications de l’utilisation de git dans la rédaction de code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pour-aller-plus-loin-sur-l-algorithme-de-difference">Pour aller plus loin sur l’algorithme de différence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#comment-versionner-les-fichiers-binaires">Comment versionner les fichiers binaires ?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pourquoi-git-est-il-en-difficulte-avec-les-fichiers-binaires">Pourquoi git est-il en difficulté avec les fichiers binaires ?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#git-lfs-garder-les-gros-fichiers-en-dehors-de-l-historique">Git LFS : garder les gros fichiers en dehors de l’historique</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#les-bonnes-pratiques-pour-versionner-des-fichiers-binaires">Les bonnes pratiques pour versionner des fichiers binaires</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../c02_first_ros2_project_pimped/p02s00_index.html">Tutoriel ROS2 épicé</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c03_test_your_code/p03s00_index.html">Tester le code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c04_collaborate_with_coders/p04s00_index.html">Les outils nécessaires pour collaborer entre codeurs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Travaux Pratiques</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../p00_5_bars_system_pencil_holder_with_rpi_and_dynamixel/p50s00_index.html">système 5 barres de dessin robotisé avec Raspberry Pi et ROS2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p01_rpi_ubuntu_as_a_ros2_robotic_platform/p51s00_index.html">Ubuntu &amp; RPi &amp; ROS2</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cours d'Informatique Industrielle avec ROS2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="p01s00_index.html">Premier projet &amp; doc</a></li>
+      <li class="breadcrumb-item active">Pour aller plus loin : Comprendre git</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/c01_create_and_publish_doc/p01s07_understand_git.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pour-aller-plus-loin-comprendre-git">
+<h1>Pour aller plus loin : Comprendre git<a class="headerlink" href="#pour-aller-plus-loin-comprendre-git" title="Lien vers cette rubrique"></a></h1>
+<p id="index-0">Git fonctionne en enregistrant les différences entre les versions d’un fichier.
+Pour cela il utilise un système de points de contrôle appelés commits.
+Un commit est un point de contrôle qui enregistre l’état des fichiers à un instant donné. Il est possible de revenir à un commit précédent à tout moment.
+Ce qui est fondamental à comprendre c’est que git ne stocke pas les fichiers mais les différences entre les fichiers.</p>
+<section id="comment-git-calcule-les-differences-entre-2-versions-d-un-meme-fichier">
+<h2>Comment git calcule les différences entre 2 versions d’un même fichier ?<a class="headerlink" href="#comment-git-calcule-les-differences-entre-2-versions-d-un-meme-fichier" title="Lien vers cette rubrique"></a></h2>
+<p>Git utilise un algorithme de différences pour calculer les différences entre 2 versions d’un fichier.</p>
+<p>L’utilitaire de ligne de commande <code class="docutils literal notranslate"><span class="pre">diff</span></code> permet de calculer et de visualiser les différences entre 2 fichiers.
+Sous linux, vous pouvez l’utiliser en ligne de commande de la manière suivante :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>diff<span class="w"> </span>fichier1<span class="w"> </span>fichier2
+</pre></div>
+</div>
+<p>Il produit un affichage de la différence entre les 2 fichiers.</p>
+<section id="les-outils-pour-visualiser-les-differences-entre-2-fichiers">
+<h3>Les outils pour visualiser les différences entre 2 fichiers<a class="headerlink" href="#les-outils-pour-visualiser-les-differences-entre-2-fichiers" title="Lien vers cette rubrique"></a></h3>
+<section id="vscode">
+<h4>vscode<a class="headerlink" href="#vscode" title="Lien vers cette rubrique"></a></h4>
+<p>Dans vscode vous pouvez visualiser les différences entre 2 fichiers en utilisant pour les 2 versions d’un même fichier <code class="docutils literal notranslate"><span class="pre">Select</span> <span class="pre">for</span> <span class="pre">Compare</span></code> qui s’obtient en faisant un clic droit sur chaque version du fichier dans l’explorateur de fichiers.</p>
+</section>
+<section id="kompare">
+<h4>Kompare<a class="headerlink" href="#kompare" title="Lien vers cette rubrique"></a></h4>
+<p>Kompare est un outil graphique pour visualiser les différences entre 2 fichiers, très bien fait qui fait partie de la suite kde.
+Il s’installe avec la commande suivante :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>kompare
+</pre></div>
+</div>
+<p>Il s’utilise en ligne de commande de la manière suivante :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kompare<span class="w"> </span>fichier1<span class="w"> </span>fichier2
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="implications-de-l-utilisation-de-git-dans-la-redaction-de-code">
+<h2>Implications de l’utilisation de git dans la rédaction de code<a class="headerlink" href="#implications-de-l-utilisation-de-git-dans-la-redaction-de-code" title="Lien vers cette rubrique"></a></h2>
+<p>L’unité de base étant la ligne, il est important de placer sur des lignes différentes des éléments dont la sémantique est différente.
+Ainsi pour un fichier comme ce cours (c’est aussi valable pour un rapport ou une thèse), il est très intéressant de placer des phrases différentes sur des lignes différentes.
+On laisse le soin au système de mise en forme de texte de gérer les retours à la ligne.
+C’est naturellement ce qui se passe avec LaTex (.tex) ou restructuredtext (.rst), ce dernier étant le format utilisé par ce cours pour générer cette documentation avec sphinx.</p>
+</section>
+<section id="pour-aller-plus-loin-sur-l-algorithme-de-difference">
+<h2>Pour aller plus loin sur l’algorithme de différence<a class="headerlink" href="#pour-aller-plus-loin-sur-l-algorithme-de-difference" title="Lien vers cette rubrique"></a></h2>
+<p>L’algorithme est appelé algorithme de différences en ligne de Myers.
+Il cherche les plus longues sous-séquence de lignes communes entre les 2 fichiers.
+Des bonnes explications sont disponibles:</p>
+<ul>
+<li><p>James Coglan présente un article sur son blog en 2 parties:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="http://blog.jcoglan.com/2017/09/19/the-myers-diff-algorithm-part-1/">The Myers diff algorithm: part 1</a>.</p></li>
+<li><p><a class="reference external" href="http://blog.jcoglan.com/2017/09/19/the-myers-diff-algorithm-part-2/">The Myers diff algorithm: part 2</a>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Nicholas Butler présente un bon article sur son blog:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="http://simplygenius.net/Article/DiffTutorial1">Myers” Diff Algorithm: The basic greedy algorithm</a>.</p></li>
+<li><p><a class="reference external" href="http://simplygenius.net/Article/DiffTutorial2">Myers” Diff Algorithm : The linear space refinement</a>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Diff">Wikipedia Diff article</a>.</p></li>
+</ul>
+</section>
+<section id="comment-versionner-les-fichiers-binaires">
+<h2>Comment versionner les fichiers binaires ?<a class="headerlink" href="#comment-versionner-les-fichiers-binaires" title="Lien vers cette rubrique"></a></h2>
+<p id="index-1">Tout ce qui précède repose sur une hypothèse : le fichier est un <strong>fichier texte</strong>, découpable en lignes.
+Or un projet de robotique contient beaucoup de fichiers qui ne sont pas du texte : des maillages 3D (<code class="docutils literal notranslate"><span class="pre">.stl</span></code>, <code class="docutils literal notranslate"><span class="pre">.dae</span></code>), des images et des vidéos, des enregistrements de bags ROS 2 (<code class="docutils literal notranslate"><span class="pre">.mcap</span></code>, <code class="docutils literal notranslate"><span class="pre">.db3</span></code>) et, de plus en plus souvent, des <strong>modèles d’intelligence artificielle</strong> (les poids d’un réseau de neurones).</p>
+<section id="pourquoi-git-est-il-en-difficulte-avec-les-fichiers-binaires">
+<h3>Pourquoi git est-il en difficulté avec les fichiers binaires ?<a class="headerlink" href="#pourquoi-git-est-il-en-difficulte-avec-les-fichiers-binaires" title="Lien vers cette rubrique"></a></h3>
+<p>Un fichier binaire n’a pas de lignes : l’algorithme de Myers n’a donc rien à comparer.
+Git est alors obligé de conserver <strong>chaque version du fichier dans son intégralité</strong>.
+Pire, la plupart des formats binaires sont compressés (un <code class="docutils literal notranslate"><span class="pre">.pt</span></code> PyTorch est une archive zip, un <code class="docutils literal notranslate"><span class="pre">.jpg</span></code> est compressé) : changer un seul paramètre du modèle modifie la quasi-totalité des octets du fichier.
+Trois conséquences très concrètes :</p>
+<ol class="arabic simple">
+<li><p><strong>Le dépôt grossit sans limite</strong> : 10 versions d’un modèle de 200 Mo, c’est 2 Go dans l’historique, et cet historique est recopié intégralement à chaque <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code>, pour toujours (même si vous supprimez le fichier ensuite).</p></li>
+<li><p><strong>Les différences sont illisibles</strong> : <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> affiche seulement <code class="docutils literal notranslate"><span class="pre">Binary</span> <span class="pre">files</span> <span class="pre">a/model.onnx</span> <span class="pre">and</span> <span class="pre">b/model.onnx</span> <span class="pre">differ</span></code>.</p></li>
+<li><p><strong>Les conflits sont infusionnables</strong> : si deux personnes modifient le même binaire, git ne peut pas fusionner, il faut choisir une version et perdre l’autre.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Les plateformes en ligne imposent de plus des limites par fichier : GitHub refuse les fichiers de plus de 100 Mo lors d’un <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> et avertit au-delà de 50 Mo. Un modèle d’IA dépasse très vite ce seuil.</p>
+</div>
+</section>
+<section id="git-lfs-garder-les-gros-fichiers-en-dehors-de-l-historique">
+<h3>Git LFS : garder les gros fichiers en dehors de l’historique<a class="headerlink" href="#git-lfs-garder-les-gros-fichiers-en-dehors-de-l-historique" title="Lien vers cette rubrique"></a></h3>
+<p><strong>Git LFS</strong> (<em>Large File Storage</em>, stockage des gros fichiers) est une extension de git qui résout ce problème par une indirection.
+Au moment du commit, le fichier binaire est remplacé dans le dépôt par un petit <strong>fichier texte de quelques centaines d’octets</strong>, appelé <em>pointeur</em>, qui contient l’empreinte (<code class="docutils literal notranslate"><span class="pre">sha256</span></code>) et la taille du vrai fichier :</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>version https://git-lfs.github.com/spec/v1
+oid sha256:4d7a214614ab2935c943f9e0ff69d22eadbb8f32b1258daaa5e2ca24d17e2393
+size 131613504
+</pre></div>
+</div>
+<p>Ce pointeur, lui, est du texte : git le versionne, le compare et le fusionne parfaitement.
+Le fichier réel est envoyé en parallèle sur un <strong>serveur LFS</strong> (celui de GitHub, GitLab, Hugging Face ou le vôtre) et n’est redescendu sur votre machine que pour la version que vous avez extraite.
+L’historique du dépôt reste donc léger, et <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> reste rapide.</p>
+<section id="exemple-typique-les-modeles-d-intelligence-artificielle">
+<h4>Exemple typique : les modèles d’intelligence artificielle<a class="headerlink" href="#exemple-typique-les-modeles-d-intelligence-artificielle" title="Lien vers cette rubrique"></a></h4>
+<p>Les poids d’un réseau de neurones sont le cas d’école du fichier binaire volumineux, régulièrement remplacé (ré-entraînement, nouveau jeu de données, quantification) et impossible à fusionner.</p>
+<table class="docutils align-center" id="id1">
+<caption><span class="caption-text">Formats de modèles d’IA couramment rencontrés en robotique</span><a class="headerlink" href="#id1" title="Lien vers ce tableau"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Extension</p></th>
+<th class="head"><p>Contenu</p></th>
+<th class="head"><p>Exemples et ordres de grandeur</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.pt</span></code> / <code class="docutils literal notranslate"><span class="pre">.pth</span></code></p></td>
+<td><p>Poids PyTorch</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">yolov8n.pt</span></code> (≈ 6 Mo), <code class="docutils literal notranslate"><span class="pre">yolov8x.pt</span></code> (≈ 130 Mo)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.safetensors</span></code></p></td>
+<td><p>Poids Hugging Face (format sûr)</p></td>
+<td><p>modèles de vision ou de langage, de 100 Mo à plusieurs Go</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.onnx</span></code></p></td>
+<td><p>Modèle échangeable entre frameworks</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">resnet50.onnx</span></code> (≈ 100 Mo)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.engine</span></code> / <code class="docutils literal notranslate"><span class="pre">.plan</span></code></p></td>
+<td><p>Moteur TensorRT compilé pour un GPU</p></td>
+<td><p>généré sur la cible (Jetson), <strong>à ne pas versionner</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.tflite</span></code></p></td>
+<td><p>Modèle embarqué quantifié</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mobilenet_v2.tflite</span></code> (≈ 14 Mo)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.gguf</span></code></p></td>
+<td><p>Modèle de langage quantifié (llama.cpp)</p></td>
+<td><p>de 1 à 40 Go selon la quantification</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Le site <strong>Hugging Face</strong> est lui-même un ensemble de dépôts git utilisant Git LFS : lorsque vous faites <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://huggingface.co/...</span></code>, ce sont les pointeurs LFS qui sont clonés, puis les poids qui sont téléchargés. C’est exactement le mécanisme décrit ici.</p>
+</div>
+</section>
+<section id="installer-git-lfs">
+<h4>Installer git lfs<a class="headerlink" href="#installer-git-lfs" title="Lien vers cette rubrique"></a></h4>
+<p>Sous Ubuntu (ou sous WSL) :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>git-lfs
+</pre></div>
+</div>
+<p>Puis, <strong>une seule fois par compte utilisateur</strong>, pour installer les filtres dans votre configuration git globale :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>lfs<span class="w"> </span>install
+</pre></div>
+</div>
+<p>Vérifiez l’installation :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>lfs<span class="w"> </span>version
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Sous macOS : <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">git-lfs</span></code>. Sous Windows, Git LFS est fourni avec <em>Git for Windows</em> ; si vous suivez ce cours sous WSL, utilisez la commande <code class="docutils literal notranslate"><span class="pre">apt-get</span></code> ci-dessus à l’intérieur de WSL.</p>
+</div>
+</section>
+<section id="placer-des-fichiers-sous-git-lfs">
+<h4>Placer des fichiers sous Git LFS<a class="headerlink" href="#placer-des-fichiers-sous-git-lfs" title="Lien vers cette rubrique"></a></h4>
+<p>On déclare les <strong>motifs de fichiers</strong> à suivre, et non les fichiers un par un :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/info_indus/info_indus_tutorial
+git<span class="w"> </span>lfs<span class="w"> </span>track<span class="w"> </span><span class="s2">"*.pt"</span>
+git<span class="w"> </span>lfs<span class="w"> </span>track<span class="w"> </span><span class="s2">"*.onnx"</span>
+git<span class="w"> </span>lfs<span class="w"> </span>track<span class="w"> </span><span class="s2">"*.safetensors"</span>
+git<span class="w"> </span>lfs<span class="w"> </span>track<span class="w"> </span><span class="s2">"models/**"</span>
+</pre></div>
+</div>
+<p>Ces commandes ne font qu’écrire dans un fichier <code class="docutils literal notranslate"><span class="pre">.gitattributes</span></code> à la racine du dépôt :</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>*.pt filter=lfs diff=lfs merge=lfs -text
+*.onnx filter=lfs diff=lfs merge=lfs -text
+</pre></div>
+</div>
+<p>Ce fichier <strong>doit impérativement être versionné et poussé en premier</strong>, sinon vos collègues (et la CI) committeront les binaires en clair :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>.gitattributes
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"[lfs] Suivi des modeles d'IA avec git lfs"</span>
+</pre></div>
+</div>
+<p>Ensuite, le fichier binaire s’ajoute comme n’importe quel autre fichier :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>models/yolov8x.pt
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"[model] Ajout du modele de detection yolov8x"</span>
+git<span class="w"> </span>push
+</pre></div>
+</div>
+<p>Pour contrôler ce qui est réellement géré par LFS :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>lfs<span class="w"> </span>ls-files
+git<span class="w"> </span>lfs<span class="w"> </span>status
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">lfs</span> <span class="pre">track</span></code> n’agit que sur les fichiers ajoutés <strong>après</strong> la déclaration. Un fichier déjà présent dans l’historique y reste : il faut réécrire l’historique (voir la migration ci-dessous). Déclarez donc vos motifs LFS <strong>dès la création du dépôt</strong>.</p>
+</div>
+</section>
+<section id="recuperer-un-depot-qui-contient-des-fichiers-lfs">
+<h4>Récupérer un dépôt qui contient des fichiers LFS<a class="headerlink" href="#recuperer-un-depot-qui-contient-des-fichiers-lfs" title="Lien vers cette rubrique"></a></h4>
+<p>Si <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">lfs</span></code> est installé, le fonctionnement est transparent : <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> et <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> téléchargent les vrais fichiers.
+Si vous récupérez un dépôt et que vous ne trouvez que des pointeurs (un fichier <code class="docutils literal notranslate"><span class="pre">.onnx</span></code> de 130 octets), c’est que LFS n’était pas installé : corrigez-le avec</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>lfs<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>lfs<span class="w"> </span>pull
+</pre></div>
+</div>
+<p>Pour cloner <strong>sans</strong> télécharger les gigaoctets de poids (très utile pour inspecter un dépôt de modèles) :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">GIT_LFS_SKIP_SMUDGE</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://huggingface.co/openai/whisper-small
+</pre></div>
+</div>
+<p>puis télécharger seulement ce dont vous avez besoin :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>lfs<span class="w"> </span>pull<span class="w"> </span>--include<span class="o">=</span><span class="s2">"*.safetensors"</span>
+</pre></div>
+</div>
+<p>Enfin, pour faire du ménage dans le cache local des anciennes versions :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>lfs<span class="w"> </span>prune
+</pre></div>
+</div>
+</section>
+<section id="migrer-un-depot-existant-vers-lfs">
+<h4>Migrer un dépôt existant vers LFS<a class="headerlink" href="#migrer-un-depot-existant-vers-lfs" title="Lien vers cette rubrique"></a></h4>
+<p>Pour savoir quels types de fichiers pèsent lourd dans votre historique :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>lfs<span class="w"> </span>migrate<span class="w"> </span>info<span class="w"> </span>--everything<span class="w"> </span>--above<span class="o">=</span>10Mb
+</pre></div>
+</div>
+<p>Puis pour déplacer rétroactivement ces fichiers dans LFS :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>lfs<span class="w"> </span>migrate<span class="w"> </span>import<span class="w"> </span>--everything<span class="w"> </span>--include<span class="o">=</span><span class="s2">"*.pt,*.onnx"</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">lfs</span> <span class="pre">migrate</span> <span class="pre">import</span></code> <strong>réécrit l’historique</strong> : tous les identifiants de commits changent. Il faut donc pousser en force (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">--force-with-lease</span></code>) et prévenir <strong>tous</strong> les collaborateurs, qui devront recloner le dépôt. À ne faire que sur un dépôt dont on maîtrise les utilisateurs, et jamais pendant qu’une pull request est en cours.</p>
+</div>
+</section>
+<section id="verrouiller-un-fichier-que-l-on-ne-peut-pas-fusionner">
+<h4>Verrouiller un fichier que l’on ne peut pas fusionner<a class="headerlink" href="#verrouiller-un-fichier-que-l-on-ne-peut-pas-fusionner" title="Lien vers cette rubrique"></a></h4>
+<p>Comme deux modifications concurrentes d’un binaire sont infusionnables, LFS propose un verrou explicite, qui prévient les autres que le fichier est en cours de modification :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>lfs<span class="w"> </span>lock<span class="w"> </span>models/yolov8x.pt
+git<span class="w"> </span>lfs<span class="w"> </span>locks
+git<span class="w"> </span>lfs<span class="w"> </span>unlock<span class="w"> </span>models/yolov8x.pt
+</pre></div>
+</div>
+<p>On peut rendre ce verrou obligatoire en déclarant le motif <code class="docutils literal notranslate"><span class="pre">lockable</span></code> dans <code class="docutils literal notranslate"><span class="pre">.gitattributes</span></code> (les fichiers sont alors en lecture seule tant qu’ils ne sont pas verrouillés) :</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>*.pt filter=lfs diff=lfs merge=lfs -text lockable
+</pre></div>
+</div>
+</section>
+<section id="attention-aux-quotas">
+<h4>Attention aux quotas<a class="headerlink" href="#attention-aux-quotas" title="Lien vers cette rubrique"></a></h4>
+<p>Le stockage LFS n’est pas gratuit et illimité : sur GitHub, l’offre gratuite se compte en <strong>quelques gigaoctets de stockage et de bande passante par mois</strong> (vérifiez les conditions en vigueur, elles évoluent), et la bande passante est consommée à <strong>chaque</strong> clonage, y compris par la CI.
+Un dépôt de cours cloné par 50 étudiants avec un modèle de 500 Mo épuise le quota en une séance.
+Alternatives courantes :</p>
+<ul class="simple">
+<li><p>héberger les modèles sur <strong>Hugging Face Hub</strong>, conçu pour cela, et ne versionner dans le dépôt de code que l’identifiant du modèle ;</p></li>
+<li><p>attacher les gros fichiers à une <strong>release</strong> GitHub (hors LFS) ;</p></li>
+<li><p>utiliser un outil dédié aux données et modèles comme <strong>DVC</strong>, qui applique le même principe de pointeur mais avec un stockage de votre choix (S3, serveur de laboratoire, disque réseau) ;</p></li>
+<li><p>ne rien stocker du tout et <strong>télécharger le modèle à la demande</strong> depuis un script, en vérifiant son empreinte <code class="docutils literal notranslate"><span class="pre">sha256</span></code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="les-bonnes-pratiques-pour-versionner-des-fichiers-binaires">
+<h3>Les bonnes pratiques pour versionner des fichiers binaires<a class="headerlink" href="#les-bonnes-pratiques-pour-versionner-des-fichiers-binaires" title="Lien vers cette rubrique"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>Préférer un format texte chaque fois qu’il existe.</strong> Un <code class="docutils literal notranslate"><span class="pre">.urdf</span></code>/<code class="docutils literal notranslate"><span class="pre">.xacro</span></code>, un <code class="docutils literal notranslate"><span class="pre">.csv</span></code>, un <code class="docutils literal notranslate"><span class="pre">.json</span></code>, un <code class="docutils literal notranslate"><span class="pre">.svg</span></code> ou un fichier de configuration <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> se comparent et se fusionnent ; leur équivalent binaire, non. C’est un critère de choix de format à part entière.</p></li>
+<li><p><strong>Ne jamais versionner ce qui est généré.</strong> Un moteur TensorRT <code class="docutils literal notranslate"><span class="pre">.engine</span></code>, un <code class="docutils literal notranslate"><span class="pre">build/</span></code>, un <code class="docutils literal notranslate"><span class="pre">install/</span></code>, un <code class="docutils literal notranslate"><span class="pre">__pycache__</span></code> ou une vidéo de démonstration ré-encodée se régénèrent : ils vont dans le <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>, pas dans LFS.</p></li>
+<li><p><strong>Ne versionner que les binaires qui sont des sources</strong>, c’est-à-dire ceux que l’on ne sait pas reconstruire : poids d’un modèle entraîné, maillage de CAO, image de référence pour un test.</p></li>
+<li><p><strong>Accompagner chaque binaire d’un fichier texte de métadonnées</strong> versionné à côté de lui (par exemple <code class="docutils literal notranslate"><span class="pre">yolov8x.md</span></code> ou <code class="docutils literal notranslate"><span class="pre">models.yaml</span></code>) : provenance, licence, date, empreinte <code class="docutils literal notranslate"><span class="pre">sha256</span></code>, jeu de données et script d’entraînement, performances mesurées. C’est ce fichier texte, lui, qui portera l’historique lisible des évolutions.</p></li>
+<li><p><strong>Committer un binaire seul, dans un commit dédié</strong>, avec un message explicite : cela permet de repérer et, si besoin, d’annuler facilement les commits lourds.</p></li>
+<li><p><strong>Étiqueter les versions</strong> (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">tag</span></code>) qui correspondent à un modèle livré, pour pouvoir retrouver exactement le couple code + modèle utilisé lors d’une démonstration ou d’une publication.</p></li>
+<li><p><strong>Mettre en place LFS dès le premier commit</strong> du dépôt : c’est le seul moyen d’éviter une réécriture d’historique douloureuse.</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="p01s06_cooperate_by_pull_request.html" class="btn btn-neutral float-left" title="Coopérer grâce aux pull requests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="../c02_first_ros2_project_pimped/p02s00_index.html" class="btn btn-neutral float-right" title="Tutoriel ROS2 épicé" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Manuel YGUEL.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

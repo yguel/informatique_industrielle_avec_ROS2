@@ -149,9 +149,36 @@ La documentation est un site statique html qui se trouve dans le répertoire ``b
 Le fichier ``index.html`` est la page d'accueil de la documentation.
 Ouvrir la documentation avec un navigateur web, par exemple firefox:
 
-.. code-block:: bash
 
-   firefox ~/info_indus/info_indus_tutorial/doc/sphinx/build/html/index.html
+.. tab-set::
+    :sync-group: os
+
+    .. tab-item:: Linux-Ubuntu
+
+      .. code-block:: bash
+
+         firefox ~/info_indus/info_indus_tutorial/doc/sphinx/build/html/index.html
+
+    .. tab-item:: Windows
+
+      .. code-block:: bash
+
+         explorer.exe "$(wslpath -w ~/info_indus/info_indus_tutorial/doc/sphinx/build/html/index.html)"
+
+      ou bien vous pouvez utiliser wslview:
+
+      installer wslu pour utiliser wslview:
+
+      .. code-block:: bash
+
+         sudo apt update && sudo apt install -y wslu
+
+      utiliser wslview pour ouvrir la documentation:
+            
+      .. code-block:: bash
+
+         wslview ~/info_indus/info_indus_tutorial/doc/sphinx/build/html/index.html
+
 
 =======================================
 Sauvegarder la documentation avec git
