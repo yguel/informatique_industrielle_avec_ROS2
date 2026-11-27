@@ -56,7 +56,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../c01_create_and_publish_doc/p01s00_index.html">Premier projet &amp; doc</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="p02s00_index.html">Tutoriel ROS2 épicé</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Rappels : setup ROS2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#premiers-pas-avec-le-package-scara-tutorial-ros2">Premiers pas avec le package scara_tutorial_ros2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#premiers-pas-avec-le-tutoriel-scara">Premiers pas avec le tutoriel SCARA</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#extension-vscode-pour-ros2">Extension vscode pour ROS2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#creer-la-description-urdf-physique-d-un-robot">Créer la description URDF physique d’un robot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#creer-un-projet-ros2-c-publisher-subscriber">Créer un projet ROS2 c++ publisher-subscriber</a></li>
@@ -101,15 +101,37 @@
              
   <section id="rappels-setup-ros2">
 <h1>Rappels : setup ROS2<a class="headerlink" href="#rappels-setup-ros2" title="Lien vers cette rubrique"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ce chapitre, et les suivants, s’appuient sur <strong>Docker</strong>. Si vous ne l’avez pas encore
+sur votre machine, installez-le en suivant <span class="xref std std-doc">p02s00_install_docker</span>.</p>
+<p><strong>Si Docker est déjà installé, ne le réinstallez pas.</strong> Une commande suffit à le
+vérifier :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>hello-world
+</pre></div>
+</div>
+<p>Si vous voyez <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">from</span> <span class="pre">Docker!</span></code>, tout est en place et vous pouvez continuer.
+Sinon, la page <span class="xref std std-ref">install_docker</span> explique quoi faire selon le message obtenu.</p>
+</div>
 <p>Un projet ROS2 se compile et s’exécute dans ce que l’on appelle un <code class="docutils literal notranslate"><span class="pre">workspace</span></code> souvent abrévié en <code class="docutils literal notranslate"><span class="pre">ws</span></code> dans lequel se trouve un répertoire <code class="docutils literal notranslate"><span class="pre">src</span></code> qui contient les packages ROS2 que vous allez créer ou que vous allez utiliser.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/info_indus/
 mkdir<span class="w"> </span>-p<span class="w"> </span>ros2_ws/src
 </pre></div>
 </div>
 <p>Nous allons maintenant utiliser un package ROS2 que nous allons installer dans le répertoire <code class="docutils literal notranslate"><span class="pre">src</span></code> de votre workspace ROS2.</p>
+<p>Il s’agit du <strong>tutoriel SCARA</strong>, dans sa version <code class="docutils literal notranslate"><span class="pre">ecat_ros2_workshop</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/info_indus/ros2_ws/src
 git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ICube-Robotics/ecat_ros2_workshop
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Tout le cours utilise <strong>ROS 2 Jazzy</strong>. Pour vérifier la distribution installée sur
+votre machine :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>printenv<span class="w"> </span>ROS_DISTRO<span class="w">      </span><span class="c1"># si l'environnement ROS 2 est déjà chargé</span>
+ls<span class="w"> </span>/opt/ros<span class="w">              </span><span class="c1"># sinon : la liste des distributions installées</span>
+</pre></div>
+</div>
 </div>
 <p>Afin d’accélerer les processus de compilation et d’exécution, nous allons utiliser des macros bash qui facilitent la tâche quand on utilise la suite d’outils ROS2 centrée sur <code class="docutils literal notranslate"><span class="pre">colcon</span></code>.</p>
 <p>Ouvrez votre fichier <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> avec vscode:</p>
@@ -219,14 +241,19 @@ git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ICube
 </div>
 <p>Vous pouvez maintenant utiliser les macros bash que vous venez de définir.</p>
 </section>
-<section id="premiers-pas-avec-le-package-scara-tutorial-ros2">
-<h1>Premiers pas avec le package scara_tutorial_ros2<a class="headerlink" href="#premiers-pas-avec-le-package-scara-tutorial-ros2" title="Lien vers cette rubrique"></a></h1>
-<p>Nous allons maintenant compiler le package <code class="docutils literal notranslate"><span class="pre">scara_tutorial_ros2</span></code> que nous venons de cloner à l’aide des macros bash que nous venons de définir.</p>
+<section id="premiers-pas-avec-le-tutoriel-scara">
+<h1>Premiers pas avec le tutoriel SCARA<a class="headerlink" href="#premiers-pas-avec-le-tutoriel-scara" title="Lien vers cette rubrique"></a></h1>
+<p>Nous allons maintenant compiler le tutoriel SCARA que nous venons de cloner, à l’aide des macros bash que nous venons de définir.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/info_indus/ros2_ws
 sudo<span class="w"> </span>apt-get<span class="w"> </span>update
 ros2_jazzy
 ros2_build
 </pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>Vérifiez au passage la <strong>branche</strong> du dépôt cloné : un projet ROS 2 a souvent une
+branche par distribution. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-a</span></code> les liste, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">&lt;branche&gt;</span></code> bascule.</p>
 </div>
 <p>Si tout s’est bien passé, vous devriez voir un message de succès à la fin de la compilation.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#All required rosdeps installed successfully</span>
@@ -260,7 +287,7 @@ Summary:<span class="w"> </span><span class="m">5</span><span class="w"> </span>
 </section>
 <section id="creer-la-description-urdf-physique-d-un-robot">
 <h2>Créer la description URDF physique d’un robot<a class="headerlink" href="#creer-la-description-urdf-physique-d-un-robot" title="Lien vers cette rubrique"></a></h2>
-<p>Pour créer la description URDF physique d’un robot, suivez dans l’ordre:</p>
+<p>Pour créer la description URDF physique d’un robot, suivez dans l’ordre :</p>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://icube-robotics.github.io/ecat_ros2_workshop/tutorials/urdf_tutorial/">tutoriel URDF</a></p></li>
 <li><p><a class="reference external" href="https://icube-robotics.github.io/ecat_ros2_workshop/">Comment lancer et intéragir avec le système courant</a></p></li>

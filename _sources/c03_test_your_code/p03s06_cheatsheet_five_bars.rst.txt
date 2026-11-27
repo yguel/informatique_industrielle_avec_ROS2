@@ -12,6 +12,17 @@ Toutes les commandes de ce chapitre, rassemblées. Elles sont données **en clai
 sans raccourci : ce sont celles que vous taperez sur n'importe quelle machine, dans
 le conteneur comme en installation native.
 
+Pour entrer dans le conteneur, le point de départ est toujours le même :
+
+.. code-block:: bash
+
+   git clone https://github.com/yguel/informatique_industrielle_avec_ROS2.git   # une seule fois
+   cd informatique_industrielle_avec_ROS2/mujoco/five_bars_ws/docker
+   ./start.sh
+
+Installation de Docker et détail de cet amorçage :
+:doc:`../c02_first_ros2_project_pimped/p02s00_install_docker`.
+
 Deux conventions pour lire ce qui suit :
 
 * les commandes s'exécutent **depuis la racine de l'espace de travail**,

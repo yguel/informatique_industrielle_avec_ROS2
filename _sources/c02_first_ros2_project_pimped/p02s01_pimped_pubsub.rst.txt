@@ -2,6 +2,21 @@
 Rappels : setup ROS2
 *************************************
 
+.. note::
+
+   Ce chapitre, et les suivants, s'appuient sur **Docker**. Si vous ne l'avez pas encore
+   sur votre machine, installez-le en suivant :doc:`p02s00_install_docker`.
+
+   **Si Docker est déjà installé, ne le réinstallez pas.** Une commande suffit à le
+   vérifier :
+
+   .. code-block:: bash
+
+      docker run --rm hello-world
+
+   Si vous voyez ``Hello from Docker!``, tout est en place et vous pouvez continuer.
+   Sinon, la page :ref:`install_docker` explique quoi faire selon le message obtenu.
+
 Un projet ROS2 se compile et s'exécute dans ce que l'on appelle un ``workspace`` souvent abrévié en ``ws`` dans lequel se trouve un répertoire ``src`` qui contient les packages ROS2 que vous allez créer ou que vous allez utiliser.
 
 .. code-block:: bash
@@ -11,10 +26,22 @@ Un projet ROS2 se compile et s'exécute dans ce que l'on appelle un ``workspace`
 
 Nous allons maintenant utiliser un package ROS2 que nous allons installer dans le répertoire ``src`` de votre workspace ROS2.
 
+Il s'agit du **tutoriel SCARA**, dans sa version ``ecat_ros2_workshop`` :
+
 .. code-block:: bash
 
    cd ~/info_indus/ros2_ws/src
    git clone https://github.com/ICube-Robotics/ecat_ros2_workshop
+
+.. note::
+
+   Tout le cours utilise **ROS 2 Jazzy**. Pour vérifier la distribution installée sur
+   votre machine :
+
+   .. code-block:: bash
+
+      printenv ROS_DISTRO      # si l'environnement ROS 2 est déjà chargé
+      ls /opt/ros              # sinon : la liste des distributions installées
 
 Afin d'accélerer les processus de compilation et d'exécution, nous allons utiliser des macros bash qui facilitent la tâche quand on utilise la suite d'outils ROS2 centrée sur ``colcon``.
 
@@ -42,10 +69,10 @@ Rechargez votre fichier ``~/.bashrc`` pour prendre en compte les modifications:
 Vous pouvez maintenant utiliser les macros bash que vous venez de définir.
 
 *************************************************
-Premiers pas avec le package scara_tutorial_ros2
+Premiers pas avec le tutoriel SCARA
 *************************************************
 
-Nous allons maintenant compiler le package ``scara_tutorial_ros2`` que nous venons de cloner à l'aide des macros bash que nous venons de définir.
+Nous allons maintenant compiler le tutoriel SCARA que nous venons de cloner, à l'aide des macros bash que nous venons de définir.
 
 .. code-block:: bash
 
@@ -53,6 +80,11 @@ Nous allons maintenant compiler le package ``scara_tutorial_ros2`` que nous veno
    sudo apt-get update
    ros2_jazzy
    ros2_build
+
+.. warning::
+
+   Vérifiez au passage la **branche** du dépôt cloné : un projet ROS 2 a souvent une
+   branche par distribution. ``git branch -a`` les liste, ``git switch <branche>`` bascule.
 
 Si tout s'est bien passé, vous devriez voir un message de succès à la fin de la compilation.
 
@@ -93,7 +125,7 @@ Pour faciliter la rédaction de code ROS2, il est très utile d'installer les ex
 Créer la description URDF physique d'un robot 
 ===============================================
 
-Pour créer la description URDF physique d'un robot, suivez dans l'ordre:
+Pour créer la description URDF physique d'un robot, suivez dans l'ordre :
 
 #. `tutoriel URDF <https://icube-robotics.github.io/ecat_ros2_workshop/tutorials/urdf_tutorial/>`_
 #. `Comment lancer et intéragir avec le système courant <https://icube-robotics.github.io/ecat_ros2_workshop/>`_

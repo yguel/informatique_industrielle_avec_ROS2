@@ -262,55 +262,31 @@ Il simule le système 5 barres étudié en travaux pratiques (voir <a class="ref
 <li><p><strong>avec Docker</strong> : rien à installer sur votre machine à part Docker, l’image contient ROS 2, MuJoCo et Google Test. C’est la méthode <strong>recommandée</strong>, et c’est exactement ce que fait l’intégration continue du projet.</p></li>
 <li><p><strong>sans Docker</strong> : installation native. Elle n’a de sens que sur <strong>Ubuntu 24.04</strong> (<em>Noble</em>), la seule distribution pour laquelle ROS 2 Jazzy est distribué en paquets binaires.</p></li>
 </ul>
-<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
-<summary class="sd-summary-title sd-card-header">
-<span class="sd-summary-text">Comment installer Docker sur votre machine si besoin ?</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Docker est-il déjà installé chez vous ?</strong> Si oui, ne le réinstallez pas. Une commande
+suffit à trancher :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>hello-world
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">from</span> <span class="pre">Docker!</span></code> : tout est en place, continuez. Autre réponse, ou Docker absent :
+la page <span class="xref std std-doc">../c02_first_ros2_project_pimped/p02s00_install_docker</span> donne la marche à
+suivre pour Linux, Windows et macOS, et explique quoi faire selon le message obtenu.
+C’est le seul endroit du cours où l’installation de Docker est décrite.</p>
+</div>
+<p>Choisissez maintenant l’onglet qui correspond à votre machine.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
-<label class="sd-tab-label" for="sd-tab-item-0">
-Installer Docker sur Linux</label><div class="sd-tab-content docutils">
-<p class="sd-card-text">Suivez les instructions officielles : <a class="reference external" href="https://docs.docker.com/engine/install/">installer Docker Engine</a> (pour Ubuntu : <a class="reference external" href="https://docs.docker.com/engine/install/ubuntu/">installer Docker Engine sur Ubuntu</a>).</p>
-<p class="sd-card-text">Ajoutez ensuite votre compte au groupe <code class="docutils literal notranslate"><span class="pre">docker</span></code>, sans quoi il faudra préfixer chaque commande par <code class="docutils literal notranslate"><span class="pre">sudo</span></code> :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span><span class="nv">$USER</span>
-</pre></div>
-</div>
-<p class="sd-card-text">Fermez puis rouvrez votre session (le changement de groupe n’est pris en compte qu’à la connexion), et vérifiez :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>hello-world
-</pre></div>
-</div>
-<p class="sd-card-text">Voir aussi les <a class="reference external" href="https://docs.docker.com/engine/install/linux-postinstall/">étapes post-installation</a> de la documentation Docker.</p>
-</div>
-<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
-<label class="sd-tab-label" for="sd-tab-item-1">
-Installer Docker sur Windows</label><div class="sd-tab-content docutils">
-<p class="sd-card-text">Installez <a class="reference external" href="https://docs.docker.com/desktop/setup/install/windows-install/">Docker Desktop pour Windows</a>, en choisissant le moteur <strong>WSL 2</strong> (c’est le choix par défaut).</p>
-<p class="sd-card-text">Puis, dans <code class="docutils literal notranslate"><span class="pre">Settings</span></code> → <code class="docutils literal notranslate"><span class="pre">Resources</span></code> → <code class="docutils literal notranslate"><span class="pre">WSL</span> <span class="pre">integration</span></code>, activez l’intégration pour votre distribution <code class="docutils literal notranslate"><span class="pre">Ubuntu-24.04</span></code>. La commande <code class="docutils literal notranslate"><span class="pre">docker</span></code> devient alors utilisable <strong>depuis le terminal Ubuntu de WSL</strong>, ce qui est ce dont nous avons besoin.</p>
-<p class="sd-card-text">Vérifiez depuis le terminal Ubuntu :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>hello-world
-</pre></div>
-</div>
-</div>
-<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
-<label class="sd-tab-label" for="sd-tab-item-2">
-Installer Docker sur Mac</label><div class="sd-tab-content docutils">
-<p class="sd-card-text">Installez <a class="reference external" href="https://docs.docker.com/desktop/setup/install/mac-install/">Docker Desktop pour Mac</a>, en prenant la version correspondant à votre processeur (Apple Silicon ou Intel).</p>
-<p class="sd-card-text">Vérifiez dans un terminal :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>hello-world
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</details><p>Choisissez maintenant l’onglet qui correspond à votre machine.</p>
-<div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
-<label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="linux-docker" for="sd-tab-item-3">
+<label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="linux-docker" for="sd-tab-item-0">
 Linux avec Docker</label><div class="sd-tab-content docutils">
 <p>C’est la configuration de référence : celle des machines de la salle de cours, et celle de l’intégration continue.</p>
-<p>Tout passe par un seul script, <code class="docutils literal notranslate"><span class="pre">docker/start.sh</span></code>, qui construit l’image au premier appel (comptez une dizaine de minutes) :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker/start.sh<span class="w"> </span><span class="nb">test</span><span class="w">     </span><span class="c1"># compile et lance tous les tests, headless</span>
+<p>Tout passe par un seul script, <code class="docutils literal notranslate"><span class="pre">docker/start.sh</span></code>, qui construit l’image au premier appel (comptez une dizaine de minutes). Depuis le dépôt cloné plus haut :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>mujoco/five_bars_ws/docker
+./start.sh<span class="w">               </span><span class="c1"># une ligne de commande dans le conteneur</span>
+./start.sh<span class="w"> </span><span class="nb">test</span><span class="w">          </span><span class="c1"># ou directement : compile et lance tous les tests, headless</span>
 </pre></div>
 </div>
+<p>Le script retrouve ses chemins tout seul : on peut aussi l’appeler depuis la racine du projet, <code class="docutils literal notranslate"><span class="pre">docker/start.sh</span></code>, et c’est la forme utilisée dans la suite du chapitre.</p>
 <p>Les autres usages du script :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker/start.sh<span class="w">                                        </span><span class="c1"># un shell dans le conteneur, workspace compilé</span>
 docker/start.sh<span class="w"> </span>--rebuild<span class="w">                              </span><span class="c1"># forcer la reconstruction de l'image</span>
@@ -328,8 +304,8 @@ docker/start.sh<span class="w"> </span>ros2<span class="w"> </span>run<span clas
 </ul>
 </div>
 </div>
-<input id="sd-tab-item-4" name="sd-tab-set-1" type="radio">
-<label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="linux-native" for="sd-tab-item-4">
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="linux-native" for="sd-tab-item-1">
 Linux sans Docker</label><div class="sd-tab-content docutils">
 <div class="admonition warning">
 <p class="admonition-title">Avertissement</p>
@@ -385,8 +361,8 @@ Ils sont déjà chargés dans le conteneur Docker. En installation native,
 installez ce <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> une fois pour toutes.</p>
 </div>
 </div>
-<input id="sd-tab-item-5" name="sd-tab-set-1" type="radio">
-<label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="rpi5" for="sd-tab-item-5">
+<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="rpi5" for="sd-tab-item-2">
 Raspberry Pi 5 sans Docker</label><div class="sd-tab-content docutils">
 <p>Sur un Raspberry Pi 5 sous <strong>Ubuntu 24.04 pour arm64</strong>, l’installation native fonctionne : ROS 2 Jazzy est publié pour <code class="docutils literal notranslate"><span class="pre">arm64</span></code>, et MuJoCo fournit des roues <code class="docutils literal notranslate"><span class="pre">aarch64</span></code>.</p>
 <p>Reprenez <strong>à l’identique</strong> les quatre étapes de l’onglet « Linux sans Docker », compilation comprise :</p>
@@ -426,8 +402,8 @@ ros2_build_reldebug
 Néanmoins pour ce cours, le Pi 5 est normalement suffisant pour exécuter les nœuds ROS 2 et la simulation, même avec le rendu 3D.</p>
 </div>
 </div>
-<input id="sd-tab-item-6" name="sd-tab-set-1" type="radio">
-<label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="windows-wsl" for="sd-tab-item-6">
+<input id="sd-tab-item-3" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="windows-wsl" for="sd-tab-item-3">
 Windows avec WSL 2</label><div class="sd-tab-content docutils">
 <p>Sous Windows, on ne travaille pas directement dans Windows : on installe <strong>WSL 2</strong> (une vraie Ubuntu dans Windows), et tout le reste se fait depuis le terminal Ubuntu.</p>
 <p class="rubric">1. Installer WSL 2 avec Ubuntu 24.04</p>
@@ -451,8 +427,8 @@ Windows avec WSL 2</label><div class="sd-tab-content docutils">
 <p>Sous Windows 11, WSL affiche les fenêtres graphiques Linux sans configuration (WSLg) : le viewer MuJoCo et RViz s’ouvrent comme des applications Windows. Le rendu est logiciel par défaut, donc lent mais utilisable.</p>
 </div>
 </div>
-<input id="sd-tab-item-7" name="sd-tab-set-1" type="radio">
-<label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="macos" for="sd-tab-item-7">
+<input id="sd-tab-item-4" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="macos" for="sd-tab-item-4">
 macOS</label><div class="sd-tab-content docutils">
 <p>Sur Mac, <strong>Docker est la seule voie raisonnable</strong> : ROS 2 Jazzy n’est pas distribué en binaire pour macOS, il faudrait le compiler depuis les sources, ce qui dépasse largement le cadre de ce cours.</p>
 <p>Installez Docker Desktop (voir le dépliant ci-dessus), puis :</p>
@@ -485,26 +461,36 @@ macOS</label><div class="sd-tab-content docutils">
 simulateur MuJoCo avec deux curseurs, un par moteur : vous imposez <code class="docutils literal notranslate"><span class="pre">q1</span></code> et <code class="docutils literal notranslate"><span class="pre">q4</span></code>,
 et le pantographe se referme sous vos yeux.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-8" name="sd-tab-set-2" type="radio">
-<label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="linux-docker" for="sd-tab-item-8">
+<input checked="checked" id="sd-tab-item-5" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="linux-docker" for="sd-tab-item-5">
 Avec Docker</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker/start.sh<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>five_bars_mujoco<span class="w"> </span>direct_gui
+<p>Ouvrez d’abord une ligne de commande dans le conteneur :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/info_indus/informatique_industrielle_avec_ROS2/mujoco/five_bars_ws/docker
+./start.sh
 </pre></div>
 </div>
 <p>Au premier appel, le script construit l’image puis compile l’espace de travail :
-comptez une dizaine de minutes. Ensuite, la fenêtre s’ouvre en quelques secondes.</p>
-<p>vous plus tard lancer le docker et avoir la ligne de commande:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker/start.sh
-</pre></div>
-</div>
-<p>et dans la console du conteneur, vous pouvez lancer les commandes ROS 2 comme d’habitude.</p>
+comptez une dizaine de minutes. Les fois suivantes, l’invite apparaît en quelques
+secondes.</p>
+<p>Vous êtes maintenant <strong>dans le conteneur</strong>, avec ROS 2 chargé et le projet compilé.
+Les commandes <code class="docutils literal notranslate"><span class="pre">ros2</span></code> s’y tapent comme sur une machine ordinaire :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>five_bars_mujoco<span class="w"> </span>direct_gui
 </pre></div>
 </div>
-<p>Par exemple pour voir l’interface avec la simulation graphique MuJoCo.</p>
+<p><code class="docutils literal notranslate"><span class="pre">exit</span></code> referme le conteneur quand vous avez fini.</p>
+<div class="admonition tip">
+<p class="admonition-title">Astuce</p>
+<p>Pour une commande unique, sans ouvrir de session interactive, on peut la passer
+directement au script — pratique pour un lancement ponctuel ou dans un alias :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker/start.sh<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>five_bars_mujoco<span class="w"> </span>direct_gui
+</pre></div>
 </div>
-<input id="sd-tab-item-9" name="sd-tab-set-2" type="radio">
-<label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="linux-native" for="sd-tab-item-9">
+<p>Si vous n’avez pas encore le dépôt du cours, ou pas encore Docker, tout est
+décrit dans <span class="xref std std-doc">../c02_first_ros2_project_pimped/p02s00_install_docker</span>.</p>
+</div>
+</div>
+<input id="sd-tab-item-6" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="linux-native" for="sd-tab-item-6">
 Sans Docker</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2_jazzy
 ros2_build_reldebug
