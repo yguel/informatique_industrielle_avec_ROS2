@@ -235,17 +235,14 @@ Choisissez maintenant l'onglet qui correspond à votre machine.
       .. rubric:: Rendu logiciel
 
       Le Pi n'a pas de pilote OpenGL utilisable par MuJoCo pour le rendu hors écran. Forcez le rendu logiciel, fourni par ``libosmesa6`` :
+      
+      Ajoutez cette ligne à votre ``~/.bashrc``. 
 
       .. code-block:: bash
 
          export MUJOCO_GL=osmesa
 
-      Ajoutez cette ligne à votre ``~/.bashrc``. **Les tests n'en souffrent pas** : ils utilisent la simulation en mode *headless*, sans fenêtre.
-
       .. rubric:: Le viewer 3D
-
-      Un Pi 5 encaisse l'IHM avec sa fenêtre 3D. Utilisez donc la même commande que tout
-      le monde :
 
       .. code-block:: bash
 
@@ -255,14 +252,13 @@ Choisissez maintenant l'onglet qui correspond à votre machine.
 
          Si l'affichage devient poussif chez vous, deux portes de sortie, dans cet ordre :
 
-         #. la version **sans fenêtre de rendu** — les curseurs restent, la simulation
-            tourne derrière, et c'est amplement suffisant pour manipuler ``q1`` et ``q4`` :
+         1. la version **sans fenêtre de rendu** — les curseurs restent, la simulation tourne derrière, et c'est amplement suffisant pour manipuler ``q1`` et ``q4`` :
 
             .. code-block:: bash
 
                ros2 run five_bars_mujoco direct_gui --no-viewer
-
-         #. **une machine plus puissante**, dans une approche industrielle, les single board computers comme le Raspberry Pi sont utilisés pour exécuter les nœuds ROS 2, mais le développement et la compilation et le rendu 3D se font sur des machines plus performantes.
+         
+         2. **une machine plus puissante**, dans une approche industrielle, les single board computers comme le Raspberry Pi sont utilisés pour exécuter les nœuds ROS 2, mais le développement et la compilation et le rendu 3D se font sur des machines plus performantes. |br|
          Néanmoins pour ce cours, le Pi 5 est normalement suffisant pour exécuter les nœuds ROS 2 et la simulation, même avec le rendu 3D.
 
    .. tab-item:: Windows avec WSL 2
@@ -344,6 +340,20 @@ et le pantographe se referme sous vos yeux.
 
       Au premier appel, le script construit l'image puis compile l'espace de travail :
       comptez une dizaine de minutes. Ensuite, la fenêtre s'ouvre en quelques secondes.
+
+      vous plus tard lancer le docker et avoir la ligne de commande:
+
+      .. code-block:: bash
+
+         docker/start.sh
+
+      et dans la console du conteneur, vous pouvez lancer les commandes ROS 2 comme d'habitude.
+
+      .. code-block:: bash
+
+         ros2 run five_bars_mujoco direct_gui
+
+      Par exemple pour voir l'interface avec la simulation graphique MuJoCo.
 
    .. tab-item:: Sans Docker
       :sync: linux-native
