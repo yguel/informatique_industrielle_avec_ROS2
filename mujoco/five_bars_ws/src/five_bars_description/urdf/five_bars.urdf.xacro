@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<!--
+  Description URDF du système 5 barres (pantographe porte-stylo).
+
+  L'URDF ne sait représenter qu'un ARBRE : la boucle fermée en A3 est donc ouverte
+  ici (link3 n'est pas rattaché à link2). C'est le nœud five_bars_state_updater qui,
+  à partir de q1 et q4, calcule les angles des pivots passifs (joint_A2, joint_A4)
+  avec MuJoCo pour que link2 et link3 se rejoignent bien en A3 dans RViz.
+
+  Arguments :
+    ros2_control (true|false)  : ajoute la balise <ros2_control>
+    command_topic, state_topic : topics utilisés par le hardware interface
+-->
+<robot name="five_bars" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:arg name="ros2_control" default="true"/>
+  <xacro:arg name="command_topic" default="/five_bars/joint_commands"/>
+  <xacro:arg name="state_topic" default="/five_bars/sim/actuated_joint_states"/>
+
+  <xacro:property name="cfg" value="${xacro.load_yaml('$(find five_bars_description)/config/geometry.yaml')}"/>
+  <xacro:property name="g" value="${cfg['geometry']}"/>
+  <xacro:property name="lim" value="${cfg['limits']}"/>
+  <xacro:property name="ref" value="${cfg['reference_configuration']}"/>
+  <xacro:property name="mesh_dir" value="package://five_bars_description/meshes"/>
+
+  <material name="frame"><color rgba="0.75 0.75 0.78 1"/></material>
+  <material name="left"><color rgba="0.2 0.6 0.25 1"/></material>
+  <material name="right"><color rgba="0.2 0.35 0.75 1"/></material>
+  <material name="pen"><color rgba="0.8 0.1 0.1 1"/></material>
+
+  <xacro:macro name="arm_link" params="name length mass material">
+    <link name="${name}">
+      <visual>
+        <geometry><mesh filename="${mesh_dir}/${name}.stl"/></geometry>
+        <material name="${material}"/>
+      </visual>
+      <inertial>
+        <origin xyz="${length/2} 0 0.08"/>
+        <mass value="${mass}"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="${mass*length*length/12}" iyz="0" izz="${mass*length*length/12}"/>
+      </inertial>
+    </link>
+  </xacro:macro>
+
+  <!-- Bâti : repère R0 du schéma (origine A1, x0 vers A5, z0 vers le haut) -->
+  <link name="base">
+    <visual>
+      <geometry><mesh filename="${mesh_dir}/base.stl"/></geometry>
+      <material name="frame"/>
+    </visual>
+  </link>
+
+  <xacro:arm_link name="link1" length="${g['l1']}" mass="0.030" material="left"/>
+  <xacro:arm_link name="link2" length="${g['l2']}" mass="0.040" material="left"/>
+  <xacro:arm_link name="link4" length="${g['l4']}" mass="0.030" material="right"/>
+  <xacro:arm_link name="link3" length="${g['l3']}" mass="0.035" material="right"/>
+
+  <!-- Pivot A1 (actif) : valeur = q1, angle absolu de link1 par rapport à x0 -->
+  <joint name="joint_q1" type="revolute">
+    <parent link="base"/><child link="link1"/>
+    <origin xyz="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="${lim['q1'][0]}" upper="${lim['q1'][1]}" effort="1.5" velocity="6.0"/>
+  </joint>
+  <!-- Pivot A2 (passif) : angle relatif link1 -> link2 -->
+  <joint name="joint_A2" type="continuous">
+    <parent link="link1"/><child link="link2"/>
+    <origin xyz="${g['l1']} 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+  <!-- Pivot A5 (actif) : valeur = q4, angle absolu de link4 par rapport à x0 -->
+  <joint name="joint_q4" type="revolute">
+    <parent link="base"/><child link="link4"/>
+    <origin xyz="${g['l0']} 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="${lim['q4'][0]}" upper="${lim['q4'][1]}" effort="1.5" velocity="6.0"/>
+  </joint>
+  <!-- Pivot A4 (passif) : angle relatif link4 -> link3 -->
+  <joint name="joint_A4" type="continuous">
+    <parent link="link4"/><child link="link3"/>
+    <origin xyz="${g['l4']} 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <!-- Pivot A3 vu de chaque côté (repères utiles pour vérifier la fermeture dans RViz) -->
+  <link name="A3_link2"/>
+  <joint name="A3_link2_fixed" type="fixed">
+    <parent link="link2"/><child link="A3_link2"/>
+    <origin xyz="${g['l2']} 0 0.085"/>
+  </joint>
+  <link name="A3_link3"/>
+  <joint name="A3_link3_fixed" type="fixed">
+    <parent link="link3"/><child link="A3_link3"/>
+    <origin xyz="${g['l3']} 0 0.085"/>
+  </joint>
+
+  <!-- Outil : pointe du stylo, référencée par rapport à son support sur link2 -->
+  <link name="pen_tip">
+    <visual>
+      <origin xyz="0 0 0.035"/>
+      <geometry><cylinder radius="0.005" length="0.07"/></geometry>
+      <material name="pen"/>
+    </visual>
+  </link>
+  <joint name="pen_fixed" type="fixed">
+    <parent link="link2"/><child link="pen_tip"/>
+    <origin xyz="${g['l2'] + g['pen_dx']} ${g['pen_dy']} ${g['pen_z']}"/>
+  </joint>
+
+  <xacro:if value="$(arg ros2_control)">
+    <xacro:include filename="$(find five_bars_description)/urdf/five_bars.ros2_control.xacro"/>
+    <xacro:five_bars_ros2_control
+        command_topic="$(arg command_topic)" state_topic="$(arg state_topic)"
+        q1_min="${lim['q1'][0]}" q1_max="${lim['q1'][1]}"
+        q4_min="${lim['q4'][0]}" q4_max="${lim['q4'][1]}"
+        q1_init="${ref['q1']}" q4_init="${ref['q4']}"/>
+  </xacro:if>
+</robot>

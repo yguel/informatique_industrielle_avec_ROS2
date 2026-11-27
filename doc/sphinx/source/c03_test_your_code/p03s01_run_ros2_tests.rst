@@ -133,6 +133,11 @@ Il faut configurer des tâches dans le fichier ``.vscode/tasks.json`` du répert
 
 Ce fichier est intégralement repris du projet git: `vscode_ros2_workspace d'athackst (Allison Thackston) <https://github.com/athackst/vscode_ros2_workspace>`_
 
+Un ``linter`` est un outil qui analyse le code source pour détecter des erreurs de style, de formatage ou de bonnes pratiques. |br|
+C'est très utile pour maintenir un code propre et cohérent, surtout dans des projets collaboratifs. |br|
+Ainsi pour un même texte de code, tous les développeurs produiront le même code finale, la même ligne de code sera formatée de la même manière et donc il n'y aura pas de différences inutiles dans les commits. |br|
+Plus d'information sur ces outils sont fournies dans le chapitre :ref:`Les outils nécessaires pour collaborer entre codeurs <collaborate_with_coders>`.
+
 Pour exécuter une tache de linter, il suffit de taper ``Ctrl+Shift+P`` puis de taper ``Run Task`` et de sélectionner la tâche voulue.
 
 Dans notre cas, il faut sélectionner la tâche ``flake8`` pour exécuter les tests de formatage de code python.

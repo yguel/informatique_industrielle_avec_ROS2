@@ -1,0 +1,31 @@
+Note: Google Test filter = ForwardKinematics.HomeConfiguration:ForwardKinematics.PenOffsetIsTakenIntoAccount
+[==========] Running 2 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 2 tests from ForwardKinematics
+[ RUN      ] ForwardKinematics.HomeConfiguration
+src/five_bars_kinematics/test/test_kinematics.cpp:115: Failure
+The difference between p->x and pen.x is 0.026381683914824094, which exceeds kPosTol, where
+p->x evaluates to 0.099826288561126283,
+pen.x evaluates to 0.073444604646302189, and
+kPosTol evaluates to 0.0001.
+src/five_bars_kinematics/test/test_kinematics.cpp:116: Failure
+The difference between p->y and pen.y is 0.0010033712176293341, which exceeds kPosTol, where
+p->y evaluates to 0.20117638933642057,
+pen.y evaluates to 0.2021797605540499, and
+kPosTol evaluates to 0.0001.
+[  FAILED  ] ForwardKinematics.HomeConfiguration (0 ms)
+[ RUN      ] ForwardKinematics.PenOffsetIsTakenIntoAccount
+src/five_bars_kinematics/test/test_kinematics.cpp:137: Failure
+The difference between std::hypot(p->x - a3[0], p->y - a3[1]) and std::hypot(geometry_.pen_dx, geometry_.pen_dy) is 0.026400757563753912, which exceeds kPosTol, where
+std::hypot(p->x - a3[0], p->y - a3[1]) evaluates to 1.1342688738841454e-12,
+std::hypot(geometry_.pen_dx, geometry_.pen_dy) evaluates to 0.026400757564888182, and
+kPosTol evaluates to 0.0001.
+[  FAILED  ] ForwardKinematics.PenOffsetIsTakenIntoAccount (0 ms)
+[----------] 2 tests from ForwardKinematics (1 ms total)
+[----------] Global test environment tear-down
+[==========] 2 tests from 1 test suite ran. (134 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 2 tests, listed below:
+[  FAILED  ] ForwardKinematics.HomeConfiguration
+[  FAILED  ] ForwardKinematics.PenOffsetIsTakenIntoAccount
+ 2 FAILED TESTS

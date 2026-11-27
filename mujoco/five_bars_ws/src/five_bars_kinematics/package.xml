@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>five_bars_kinematics</name>
+  <version>0.1.0</version>
+  <description>Modèles géométriques direct/inverse du système 5 barres (C++ et Python, à implémenter) et leurs tests (gtest, unittest) validés par la simulation MuJoCo headless.</description>
+  <maintainer email="todo@example.com">TODO</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_cmake_python</buildtool_depend>
+
+  <test_depend>ament_cmake_gtest</test_depend>
+  <test_depend>ament_cmake_pytest</test_depend>
+  <test_depend>five_bars_description</test_depend>
+  <test_depend>five_bars_mujoco</test_depend>
+  <test_depend>python3-numpy</test_depend>
+  <!-- MuJoCo (C et Python) : pip install mujoco, voir docker/Dockerfile -->
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

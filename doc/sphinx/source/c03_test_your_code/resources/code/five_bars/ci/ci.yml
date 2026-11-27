@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  checks: write          # publication du rapport de tests
+  pull-requests: write
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Image Docker (ROS 2 Jazzy + MuJoCo + gtest) et compilation du workspace
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/Dockerfile
+          target: ci
+          tags: five_bars:ci
+          load: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Tests unitaires headless (gtest + unittest + simulation MuJoCo)
+        run: |
+          mkdir -p test_results
+          docker run --rm -v "$PWD/test_results:/ws/test_results" five_bars:ci bash -c '
+            colcon test --event-handlers console_direct+ --return-code-on-test-failure; ret=$?
+            colcon test-result --verbose
+            cp build/*/test_results/*/*.xml /ws/test_results/ 2>/dev/null || true
+            exit $ret'
+
+      - name: Rapport de tests
+        if: always()
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+          files: test_results/*.xml
+
+      - name: Archive des résultats
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: test_results/

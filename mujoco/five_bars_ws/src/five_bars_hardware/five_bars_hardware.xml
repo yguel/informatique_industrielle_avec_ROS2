@@ -1,0 +1,10 @@
+<library path="five_bars_hardware">
+  <class name="five_bars_hardware/MujocoTopicSystem"
+         type="five_bars_hardware::MujocoTopicSystem"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      Système 5 barres simulé dans MuJoCo : consignes [q1, q4] publiées sur un topic
+      (lu par five_bars_mujoco/sim_node), états lus sur un topic JointState.
+    </description>
+  </class>
+</library>

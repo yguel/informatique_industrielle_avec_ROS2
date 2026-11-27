@@ -1,0 +1,39 @@
+# Géométrie du système 5 barres — source unique pour la génération du MJCF et de l'URDF.
+#
+# Repère R0 (celui du schéma cinématique) : origine en A1 (axe moteur gauche),
+# x0 de A1 vers A5, y0 vers le stylo, z0 vers le haut (axes des liaisons pivots).
+# Toutes les longueurs sont en mètres, les angles en radians.
+#
+# Valeurs MESURÉES SUR LA CAO (maquette-5-barres_asm.stp / *.dae) par ajustement
+# de cercles sur les alésages des liaisons (tools/measure_cad.py).
+# Le schéma cinématique du cours donne : l0 = 137.98 mm, l1 = l4 = 80 mm, l2 = l3 = 146.3 mm.
+# La CAO fournie donne l0 = 137.99 mm, l1 = 80.0 mm, l2 = 157.0 mm, l3 = 147.0 mm, l4 = 79.0 mm : les maillages
+# n'étant cohérents (chaîne fermée) qu'avec les cotes CAO, ce sont elles qui sont utilisées.
+# Pour utiliser les cotes du schéma (ou celles mesurées sur VOTRE robot), modifiez ce
+# fichier puis relancez : python3 tools/generate_models.py
+geometry:
+  l0: 0.13798          # |A1A5| bâti
+  l1: 0.080000          # |A1A2| bras gauche  (link1)
+  l2: 0.157000          # |A2A3| avant-bras gauche (link2, porte le stylo)
+  l3: 0.147000          # |A4A3| avant-bras droit (link3)
+  l4: 0.079000          # |A5A4| bras droit (link4)
+  # Décalage du stylo dans le repère de link2 (origine A3, x2 suivant A2->A3,
+  # y2 = z0 ^ x2, i.e. à gauche de A2->A3). Mesuré sur l'alésage Ø12 du porte-stylo.
+  pen_dx: -0.016000     # le stylo est 16 mm "avant" A3 le long de A2A3
+  pen_dy: 0.021000      # et 21 mm sur le côté gauche (vers l'extérieur)
+  pen_z: 0.048          # hauteur de la pointe (cosmétique, le modèle est plan)
+
+# Configuration de l'assemblage CAO (état initial "home" de la simulation).
+# q1, q4 : angles ABSOLUS des bras par rapport à x0 (convention du schéma).
+# joint_A2, joint_A4 : angles RELATIFS des pivots passifs (avant-bras / bras),
+# approximatifs : la simulation referme exactement la chaîne au démarrage.
+reference_configuration:
+  q1: 1.5707963         # 90.00°
+  q4: 1.1504938         # 65.92°
+  joint_A2: -0.68923    # -39.49° (link2 à 50.51° absolu)
+  joint_A4: 0.91962     #  52.69° (link3 à 118.61° absolu)
+
+# Débattements des actionneurs (Dynamixel AX-12A) en angle absolu q1, q4
+limits:
+  q1: [0.5236, 2.9671]  # [30°, 170°]
+  q4: [0.1745, 2.6180]  # [10°, 150°]

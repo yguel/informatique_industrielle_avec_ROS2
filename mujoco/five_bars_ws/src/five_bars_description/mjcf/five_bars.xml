@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!-- FICHIER GÉNÉRÉ par tools/generate_models.py à partir de config/geometry.yaml : ne pas éditer à la main. -->
+<mujoco model="five_bars">
+  <compiler angle="radian" meshdir="../meshes" autolimits="true"/>
+  <option timestep="0.001" integrator="implicitfast"/>
+
+  <visual>
+    <global offwidth="1280" offheight="960" azimuth="90" elevation="-89"/>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3"/>
+  </visual>
+
+  <default>
+    <joint type="hinge" axis="0 0 1" damping="0.002" armature="0.0005"/>
+    <geom contype="0" conaffinity="0"/>
+    <site size="0.003" rgba="1 0.2 0.2 1"/>
+    <default class="visual">
+      <geom type="mesh" group="2" mass="0"/>
+    </default>
+    <default class="servo">
+      <!-- Dynamixel AX-12A : couple de blocage ~1.5 N.m -->
+      <position kp="8" kv="0.16" forcerange="-1.5 1.5"/>
+    </default>
+  </default>
+
+  <asset>
+    <material name="frame" rgba="0.75 0.75 0.78 1"/>
+    <material name="arm" rgba="0.15 0.15 0.15 1"/>
+    <material name="arm_left" rgba="0.2 0.6 0.25 1"/>
+    <material name="arm_right" rgba="0.2 0.35 0.75 1"/>
+    <material name="pen" rgba="0.8 0.1 0.1 1"/>
+    <mesh name="base" file="base.stl"/>
+    <mesh name="link1" file="link1.stl"/>
+    <mesh name="link2" file="link2.stl"/>
+    <mesh name="link3" file="link3.stl"/>
+    <mesh name="link4" file="link4.stl"/>
+  </asset>
+
+  <worldbody>
+    <light pos="0.07 0.1 0.8" dir="0 0 -1" directional="true"/>
+    <camera name="top" pos="0.068990 0.110000 0.65" xyaxes="1 0 0 0 1 0"/>
+    <geom name="base" class="visual" mesh="base" material="frame"/>
+    <site name="A1" pos="0 0 0.085000"/>
+    <site name="A5" pos="0.137980 0 0.085000"/>
+
+    <body name="link1">
+      <inertial pos="0.040000 0 0.085000" mass="0.030" diaginertia="2e-6 2e-5 2e-5"/>
+      <joint name="joint_q1" range="0.523600 2.967100"/>
+      <geom class="visual" mesh="link1" material="arm_left"/>
+      <site name="A2" pos="0.080000 0 0.085000"/>
+      <body name="link2" pos="0.080000 0 0">
+        <inertial pos="0.078500 0 0.085000" mass="0.040" diaginertia="3e-6 8e-5 8e-5"/>
+        <joint name="joint_A2"/>
+        <geom class="visual" mesh="link2" material="arm_left"/>
+        <site name="A3_link2" pos="0.157000 0 0.085000"/>
+        <site name="pen_tip" pos="0.141000 0.021000 0.048000" size="0.004" rgba="1 0 0 1"/>
+        <geom name="pen" type="cylinder" size="0.005 0.035" pos="0.141000 0.021000 0.083000" material="pen" group="1" mass="0"/>
+      </body>
+    </body>
+
+    <body name="link4" pos="0.137980 0 0">
+      <inertial pos="0.039500 0 0.085000" mass="0.030" diaginertia="2e-6 2e-5 2e-5"/>
+      <joint name="joint_q4" range="0.174500 2.618000"/>
+      <geom class="visual" mesh="link4" material="arm_right"/>
+      <site name="A4" pos="0.079000 0 0.085000"/>
+      <body name="link3" pos="0.079000 0 0">
+        <inertial pos="0.073500 0 0.085000" mass="0.035" diaginertia="3e-6 7e-5 7e-5"/>
+        <joint name="joint_A4"/>
+        <geom class="visual" mesh="link3" material="arm_right"/>
+        <site name="A3_link3" pos="0.147000 0 0.085000"/>
+      </body>
+    </body>
+  </worldbody>
+
+  <equality>
+    <!-- Fermeture de la chaîne cinématique : les deux avant-bras partagent le pivot A3 -->
+    <connect name="closure_A3" site1="A3_link2" site2="A3_link3" solref="0.004 1"/>
+  </equality>
+
+  <actuator>
+    <position name="act_q1" class="servo" joint="joint_q1" ctrlrange="0.523600 2.967100"/>
+    <position name="act_q4" class="servo" joint="joint_q4" ctrlrange="0.174500 2.618000"/>
+  </actuator>
+
+  <sensor>
+    <jointpos name="q1" joint="joint_q1"/>
+    <jointpos name="q4" joint="joint_q4"/>
+    <jointvel name="dq1" joint="joint_q1"/>
+    <jointvel name="dq4" joint="joint_q4"/>
+    <framepos name="pen_pos" objtype="site" objname="pen_tip"/>
+  </sensor>
+
+  <keyframe>
+    <!-- Configuration de l'assemblage CAO (qpos = joint_q1, joint_A2, joint_q4, joint_A4) -->
+    <key name="home" qpos="1.570796 -0.689230 1.150494 0.919620" ctrl="1.570796 1.150494"/>
+  </keyframe>
+</mujoco>

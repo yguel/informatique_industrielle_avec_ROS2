@@ -1,0 +1,45 @@
+# docker-compose.yml lives in docker/ ; every relative path is relative to this folder:
+#   build context ".." = repository root, sources mounted from ../src.
+#
+# Usage (from the repository root):
+#   xhost +local:docker                                   # allow X11 windows (Linux)
+#   docker compose -f docker/docker-compose.yml build
+#   docker compose -f docker/docker-compose.yml run --rm dev    # shell, ../src mounted in /ws/src
+#   docker compose -f docker/docker-compose.yml run --rm test   # build + headless tests (like the CI)
+# or from docker/:  cd docker && docker compose run --rm dev
+services:
+  dev:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: desktop
+    image: five_bars:dev
+    network_mode: host
+    ipc: host
+    environment:
+      - DISPLAY=${DISPLAY:-:0}
+      - QT_X11_NO_MITSHM=1
+      - ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-0}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ../src:/ws/src
+    devices:
+      - /dev/dri:/dev/dri   # GPU acceleration (remove if /dev/dri does not exist)
+    command: >
+      bash -c "colcon build --event-handlers console_cohesion- && source /ws/install/setup.bash && exec bash"
+
+  test:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: ci
+    image: five_bars:ci
+    volumes:
+      - ../src:/ws/src
+      - ../test_results:/ws/test_results
+    command: >
+      bash -c "colcon build --event-handlers console_cohesion+ &&
+               colcon test --event-handlers console_direct+ --return-code-on-test-failure;
+               ret=$$?; colcon test-result --verbose;
+               mkdir -p /ws/test_results && cp build/*/test_results/*/*.xml /ws/test_results/ 2>/dev/null;
+               exit $$ret"

@@ -1,0 +1,35 @@
+test_home_configuration (test_kinematics.TestForwardKinematics) ... ERROR
+test_matches_mujoco_simulation (test_kinematics.TestForwardKinematics) ... test_pen_offset_is_taken_into_account (test_kinematics.TestForwardKinematics)
+Le stylo n'est PAS en A3 : un modèle qui l'oublie doit échouer ici. ... ERROR
+test_unassemblable_configuration_returns_none (test_kinematics.TestForwardKinematics) ... ERROR
+test_inverse_of_forward_is_identity (test_kinematics.TestInverseKinematics) ... test_matches_mujoco_simulation (test_kinematics.TestInverseKinematics) ... test_reaches_targets_in_simulation (test_kinematics.TestInverseKinematics)
+IK -> consignes des servos simulés -> le stylo doit arriver sur la cible. ... test_unreachable_point_returns_none (test_kinematics.TestInverseKinematics) ... ERROR
+test_home_pen_position_matches_cad (test_kinematics.TestSimulationHarness) ... ok
+test_simulation_tracks_commands (test_kinematics.TestSimulationHarness) ... ok
+
+======================================================================
+ERROR: test_home_configuration (test_kinematics.TestForwardKinematics)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "src/five_bars_kinematics/test/test_kinematics.py", line 79, in test_home_configuration
+    result = forward_kinematics(float(q[0]), float(q[1]), self.geometry)
+  File "src/five_bars_kinematics/five_bars_kinematics/kinematics.py", line 51, in forward_kinematics
+    raise NotImplementedError("forward_kinematics n'est pas encore implémenté")
+NotImplementedError: forward_kinematics n'est pas encore implémenté
+
+======================================================================
+ERROR: test_matches_mujoco_simulation (test_kinematics.TestForwardKinematics) (q1_deg=90.0, q4_deg=20.0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "src/five_bars_kinematics/test/test_kinematics.py", line 87, in test_matches_mujoco_simulation
+    result = forward_kinematics(q1, q4, self.geometry)
+  File "src/five_bars_kinematics/five_bars_kinematics/kinematics.py", line 51, in forward_kinematics
+    raise NotImplementedError("forward_kinematics n'est pas encore implémenté")
+NotImplementedError: forward_kinematics n'est pas encore implémenté
+
+[... les 62 autres erreurs sont identiques ...]
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.631s
+
+FAILED (errors=64)

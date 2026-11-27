@@ -1,0 +1,6 @@
+build/
+install/
+log/
+test_results/
+.git/
+**/__pycache__/

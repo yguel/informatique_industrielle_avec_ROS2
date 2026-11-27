@@ -1,0 +1,49 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Cell Size: 0.05
+      Plane Cell Count: 10
+      Enabled: true
+    - Class: rviz_default_plugins/RobotModel
+      Name: RobotModel
+      Enabled: true
+      Description Source: Topic
+      Description Topic:
+        Value: /robot_description
+    - Class: rviz_default_plugins/TF
+      Name: TF
+      Enabled: true
+      Marker Scale: 0.05
+      Show Names: true
+    - Class: rviz_default_plugins/PointStamped
+      Name: Pen
+      Enabled: true
+      Topic:
+        Value: /five_bars/pen_position
+      Color: 255; 0; 0
+      Radius: 0.006
+      History Length: 500
+  Global Options:
+    Fixed Frame: base
+    Frame Rate: 30
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 0.6
+      Focal Point:
+        X: 0.07
+        Y: 0.1
+        Z: 0.05
+      Pitch: 1.2
+      Yaw: -1.5708
+Window Geometry:
+  Width: 1200
+  Height: 800

@@ -1,0 +1,10 @@
+test_command_is_saturated (test_sim.TestFiveBarsSim) ... ok
+test_home_is_closed (test_sim.TestFiveBarsSim) ... ok
+test_kinematic_closure_matches_dynamic_simulation (test_sim.TestFiveBarsSim) ... ok
+test_settle_reaches_command_and_keeps_chain_closed (test_sim.TestFiveBarsSim) ... ok
+test_unreachable_configuration_is_reported (test_sim.TestFiveBarsSim) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.266s
+
+OK

@@ -1,0 +1,38 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    forward_position_controller:
+      type: forward_command_controller/ForwardCommandController
+
+    joint_trajectory_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+# Publie q1, q4 sur /joint_state_broadcaster/joint_states (et non /joint_states) :
+# c'est five_bars_state_updater qui publie l'état COMPLET (avec les pivots passifs)
+# sur /joint_states pour robot_state_publisher.
+joint_state_broadcaster:
+  ros__parameters:
+    use_local_topics: true
+    joints: [joint_q1, joint_q4]
+    interfaces: [position, velocity, effort]
+
+# Commande directe : ros2 topic pub /forward_position_controller/commands std_msgs/msg/Float64MultiArray "{data: [2.0, 1.0]}"
+forward_position_controller:
+  ros__parameters:
+    joints: [joint_q1, joint_q4]
+    interface_name: position
+
+# Pour suivre des trajectoires (dessin) : à activer à la place du forward controller
+joint_trajectory_controller:
+  ros__parameters:
+    joints: [joint_q1, joint_q4]
+    command_interfaces: [position]
+    state_interfaces: [position, velocity]
+    allow_partial_joints_goal: false
+    constraints:
+      stopped_velocity_tolerance: 0.05
+      goal_time: 0.5

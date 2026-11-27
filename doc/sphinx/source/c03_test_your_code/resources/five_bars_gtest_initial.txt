@@ -1,0 +1,84 @@
+[==========] Running 10 tests from 3 test suites.
+[----------] Global test environment set-up.
+[----------] 2 tests from SimulationHarness
+[ RUN      ] SimulationHarness.HomePenPositionMatchesCad
+[       OK ] SimulationHarness.HomePenPositionMatchesCad (0 ms)
+[ RUN      ] SimulationHarness.SimulationTracksCommands
+[       OK ] SimulationHarness.SimulationTracksCommands (4 ms)
+[----------] 2 tests from SimulationHarness (4 ms total)
+[----------] 4 tests from ForwardKinematics
+[ RUN      ] ForwardKinematics.HomeConfiguration
+src/five_bars_kinematics/test/test_kinematics.cpp:114: Failure
+Value of: p.has_value()
+  Actual: false
+Expected: true
+forwardKinematics n'a pas renvoyé de solution
+[  FAILED  ] ForwardKinematics.HomeConfiguration (0 ms)
+[ RUN      ] ForwardKinematics.MatchesMujocoSimulation
+src/five_bars_kinematics/test/test_kinematics.cpp:125: Failure
+Value of: p.has_value()
+  Actual: false
+Expected: true
+configuration atteignable déclarée impossible
+Google Test trace:
+src/five_bars_kinematics/test/test_kinematics.cpp:122: q1=90° q4=20°
+[  FAILED  ] ForwardKinematics.MatchesMujocoSimulation (5 ms)
+[ RUN      ] ForwardKinematics.PenOffsetIsTakenIntoAccount
+src/five_bars_kinematics/test/test_kinematics.cpp:135: Failure
+Value of: p.has_value()
+  Actual: false
+Expected: true
+[  FAILED  ] ForwardKinematics.PenOffsetIsTakenIntoAccount (0 ms)
+[ RUN      ] ForwardKinematics.UnassemblableConfigurationReturnsNullopt
+src/five_bars_kinematics/test/test_kinematics.cpp:143: Failure
+Value of: forwardKinematics({deg(110), deg(60)}, geometry_).has_value()
+  Actual: false
+Expected: true
+[  FAILED  ] ForwardKinematics.UnassemblableConfigurationReturnsNullopt (0 ms)
+[----------] 4 tests from ForwardKinematics (7 ms total)
+[----------] 4 tests from InverseKinematics
+[ RUN      ] InverseKinematics.MatchesMujocoSimulation
+src/five_bars_kinematics/test/test_kinematics.cpp:157: Failure
+Value of: r.has_value()
+  Actual: false
+Expected: true
+point atteignable déclaré inatteignable
+Google Test trace:
+src/five_bars_kinematics/test/test_kinematics.cpp:154: q1=90° q4=20°
+[  FAILED  ] InverseKinematics.MatchesMujocoSimulation (4 ms)
+[ RUN      ] InverseKinematics.ReachesTargetsInSimulation
+src/five_bars_kinematics/test/test_kinematics.cpp:169: Failure
+Value of: r.has_value()
+  Actual: false
+Expected: true
+Google Test trace:
+src/five_bars_kinematics/test/test_kinematics.cpp:167: cible x=0.02 y=0.13
+[  FAILED  ] InverseKinematics.ReachesTargetsInSimulation (0 ms)
+[ RUN      ] InverseKinematics.InverseOfForwardIsIdentity
+src/five_bars_kinematics/test/test_kinematics.cpp:181: Failure
+Value of: p.has_value()
+  Actual: false
+Expected: true
+Google Test trace:
+src/five_bars_kinematics/test/test_kinematics.cpp:179: q1=90° q4=20°
+[  FAILED  ] InverseKinematics.InverseOfForwardIsIdentity (0 ms)
+[ RUN      ] InverseKinematics.UnreachablePointReturnsNullopt
+src/five_bars_kinematics/test/test_kinematics.cpp:191: Failure
+Value of: inverseKinematics({0.07, 0.17}, geometry_).has_value()
+  Actual: false
+Expected: true
+[  FAILED  ] InverseKinematics.UnreachablePointReturnsNullopt (0 ms)
+[----------] 4 tests from InverseKinematics (7 ms total)
+[----------] Global test environment tear-down
+[==========] 10 tests from 3 test suites ran. (215 ms total)
+[  PASSED  ] 2 tests.
+[  FAILED  ] 8 tests, listed below:
+[  FAILED  ] ForwardKinematics.HomeConfiguration
+[  FAILED  ] ForwardKinematics.MatchesMujocoSimulation
+[  FAILED  ] ForwardKinematics.PenOffsetIsTakenIntoAccount
+[  FAILED  ] ForwardKinematics.UnassemblableConfigurationReturnsNullopt
+[  FAILED  ] InverseKinematics.MatchesMujocoSimulation
+[  FAILED  ] InverseKinematics.ReachesTargetsInSimulation
+[  FAILED  ] InverseKinematics.InverseOfForwardIsIdentity
+[  FAILED  ] InverseKinematics.UnreachablePointReturnsNullopt
+ 8 FAILED TESTS

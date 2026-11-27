@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!--
+    Seuls les deux pivots motorisés (A1 : q1, A5 : q4) sont déclarés : les pivots
+    passifs A2, A4 ne sont ni commandés ni mesurés sur le vrai robot.
+
+    Le hardware interface five_bars_hardware/MujocoTopicSystem dialogue avec le
+    simulateur MuJoCo uniquement par topics :
+      write() -> publie [q1, q4] (std_msgs/Float64MultiArray) sur command_topic,
+                 le MÊME topic que celui écouté par five_bars_sim_node et alimenté
+                 par l'IHM à curseurs ;
+      read()  <- lit q1, q4 (position, vitesse, effort) sur state_topic
+                 (sensor_msgs/JointState publié par five_bars_sim_node).
+  -->
+  <xacro:macro name="five_bars_ros2_control"
+               params="command_topic state_topic q1_min q1_max q4_min q4_max q1_init q4_init">
+    <ros2_control name="FiveBarsMujocoSystem" type="system">
+      <hardware>
+        <plugin>five_bars_hardware/MujocoTopicSystem</plugin>
+        <param name="command_topic">${command_topic}</param>
+        <param name="state_topic">${state_topic}</param>
+        <!-- délai max d'attente du premier état du simulateur à l'activation (s) -->
+        <param name="state_timeout">10.0</param>
+        <!-- ne publie une commande que si elle a changé (cohabitation avec l'IHM) -->
+        <param name="publish_only_on_change">true</param>
+      </hardware>
+      <joint name="joint_q1">
+        <command_interface name="position">
+          <param name="min">${q1_min}</param>
+          <param name="max">${q1_max}</param>
+        </command_interface>
+        <state_interface name="position"><param name="initial_value">${q1_init}</param></state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+      <joint name="joint_q4">
+        <command_interface name="position">
+          <param name="min">${q4_min}</param>
+          <param name="max">${q4_max}</param>
+        </command_interface>
+        <state_interface name="position"><param name="initial_value">${q4_init}</param></state_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+    </ros2_control>
+  </xacro:macro>
+</robot>
