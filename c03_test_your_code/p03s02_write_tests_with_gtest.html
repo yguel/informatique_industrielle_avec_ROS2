@@ -388,13 +388,11 @@ Raspberry Pi 5 sans Docker</label><div class="sd-tab-content docutils">
 <p>Sur un modèle 4 Go, ajoutez en plus un fichier d’échange (<code class="docutils literal notranslate"><span class="pre">swap</span></code>) d’au moins 2 Go avant de compiler.</p>
 <p class="rubric">Rendu logiciel</p>
 <p>Le Pi n’a pas de pilote OpenGL utilisable par MuJoCo pour le rendu hors écran. Forcez le rendu logiciel, fourni par <code class="docutils literal notranslate"><span class="pre">libosmesa6</span></code> :</p>
+<p>Ajoutez cette ligne à votre <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code>.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MUJOCO_GL</span><span class="o">=</span>osmesa
 </pre></div>
 </div>
-<p>Ajoutez cette ligne à votre <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code>. <strong>Les tests n’en souffrent pas</strong> : ils utilisent la simulation en mode <em>headless</em>, sans fenêtre.</p>
 <p class="rubric">Le viewer 3D</p>
-<p>Un Pi 5 encaisse l’IHM avec sa fenêtre 3D. Utilisez donc la même commande que tout
-le monde :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>five_bars_mujoco<span class="w"> </span>direct_gui
 </pre></div>
 </div>
@@ -402,14 +400,13 @@ le monde :</p>
 <p class="admonition-title">Astuce</p>
 <p>Si l’affichage devient poussif chez vous, deux portes de sortie, dans cet ordre :</p>
 <ol class="arabic">
-<li><p>la version <strong>sans fenêtre de rendu</strong> — les curseurs restent, la simulation
-tourne derrière, et c’est amplement suffisant pour manipuler <code class="docutils literal notranslate"><span class="pre">q1</span></code> et <code class="docutils literal notranslate"><span class="pre">q4</span></code> :</p>
+<li><p>la version <strong>sans fenêtre de rendu</strong> — les curseurs restent, la simulation tourne derrière, et c’est amplement suffisant pour manipuler <code class="docutils literal notranslate"><span class="pre">q1</span></code> et <code class="docutils literal notranslate"><span class="pre">q4</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>five_bars_mujoco<span class="w"> </span>direct_gui<span class="w"> </span>--no-viewer
 </pre></div>
 </div>
 </li>
 </ol>
-<p>#. <strong>une machine plus puissante</strong>, dans une approche industrielle, les single board computers comme le Raspberry Pi sont utilisés pour exécuter les nœuds ROS 2, mais le développement et la compilation et le rendu 3D se font sur des machines plus performantes.
+<p>2. <strong>une machine plus puissante</strong>, dans une approche industrielle, les single board computers comme le Raspberry Pi sont utilisés pour exécuter les nœuds ROS 2, mais le développement et la compilation et le rendu 3D se font sur des machines plus performantes. <br>
 Néanmoins pour ce cours, le Pi 5 est normalement suffisant pour exécuter les nœuds ROS 2 et la simulation, même avec le rendu 3D.</p>
 </div>
 </div>
@@ -480,6 +477,15 @@ Avec Docker</label><div class="sd-tab-content docutils">
 </div>
 <p>Au premier appel, le script construit l’image puis compile l’espace de travail :
 comptez une dizaine de minutes. Ensuite, la fenêtre s’ouvre en quelques secondes.</p>
+<p>vous plus tard lancer le docker et avoir la ligne de commande:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker/start.sh
+</pre></div>
+</div>
+<p>et dans la console du conteneur, vous pouvez lancer les commandes ROS 2 comme d’habitude.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>five_bars_mujoco<span class="w"> </span>direct_gui
+</pre></div>
+</div>
+<p>Par exemple pour voir l’interface avec la simulation graphique MuJoCo.</p>
 </div>
 <input id="sd-tab-item-9" name="sd-tab-set-2" type="radio">
 <label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="linux-native" for="sd-tab-item-9">
