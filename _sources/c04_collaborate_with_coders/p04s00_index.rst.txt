@@ -1,3 +1,5 @@
+.. _collaborate_with_coders:
+
 #####################################################
 Les outils nécessaires pour collaborer entre codeurs
 #####################################################

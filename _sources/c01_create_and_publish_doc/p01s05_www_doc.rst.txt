@@ -214,10 +214,25 @@ Modifiez la ligne surlignée du fichier de workflow commençant par ``git clone 
 Par contre pour modifier le dépôt: action ``push``, il faut forcément des autorisations car le dépôt n'est pas en écriture pour tout le monde. C'est pour cela que dans le ::ref:` workflow<github_workflow_doc>`, l'action ``Push changes`` lignes 49-54, a un champ particulier ``github_token`` qui permet d'authentifier le workflow pour qu'il puisse pousser les modifications sur le dépôt. Le mot de passe est généré automatiquement par GitHub, et les actions github auront le droit de pousser sur le dépôt une fois que vous aurez fait :ref:`les modifications dans les settings du projet ci-après<setup_git_actions>`.
 
 
+Modifier les settings github
+-----------------------------
 
+Il faut maintenant faire quelques modifications dans les settings du projet sur github.
 
-Il faut maintenant faire quelques modifications dans les settings du projet sur github
-Il faut:
+**Modifications des github pages**
+
+#. aller dans les settings du projet
+#. aller dans la section ``Pages``
+#. Assurez-vous que votre site GitHub Pages est actuellement construit à partir de la branche gh-pages (Your GitHub Pages site is currently being built from the gh-pages branch) comme sur la figure ci-dessous :numref:`setup_git_pages` .
+
+.. figure:: resources/img/github_pages_config.png
+   :align: center
+   :width: 80%
+   :name: setup_git_pages
+
+   Configuration des GitHub Pages
+
+**Modifications des actions GitHub**
 
 #. aller dans les settings du projet
 #. aller dans la section ``Actions``
@@ -247,6 +262,9 @@ Il faut:
    :align: center
    :width: 80%
 
+Push the workflow file
+-----------------------
+
 Maintenant vous pouvez ajouter le fichier de workflow à git et pusher:
 
 .. code-block:: bash
@@ -260,6 +278,10 @@ Maintenant vous pouvez ajouter le fichier de workflow à git et pusher:
 .. code-block:: bash
    
    git push
+
+
+Workflow in action
+-------------------
 
 Maintenant, vous pouvez voir la documentation apparaître sur le web en temps réel en allant sur la page de votre dépôt github et en cliquant sur le lien ``Actions``.
 

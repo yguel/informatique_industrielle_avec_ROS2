@@ -1,0 +1,1269 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Écrire des tests C++ avec Google Test &mdash; Documentation Cours d&#39;Informatique Industrielle avec ROS2 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2f145f6b" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=05dadb3a"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=30646c52"></script>
+      <script src="../_static/translations.js?v=e6b791cb"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Écrire des tests pour du code Python" href="p03s03_write_tests_for_python.html" />
+    <link rel="prev" title="Lancer les tests de ROS2 et les analyser" href="p03s01_run_ros2_tests.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Cours d'Informatique Industrielle avec ROS2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Informatique Industrielle &amp; ROS2</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../c00_introduction/p00s00_index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c01_create_and_publish_doc/p01s00_index.html">Premier projet &amp; doc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c02_first_ros2_project_pimped/p02s00_index.html">Tutoriel ROS2 épicé</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="p03s00_index.html">Tester le code</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="p03s01_run_ros2_tests.html">Lancer les tests de ROS2 et les analyser</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Écrire des tests C++ avec Google Test</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#le-projet-support-5-barres">Le projet support : 5 barres</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#installer-l-environnement">Installer l’environnement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#voir-le-robot-avant-d-ecrire-une-ligne">Voir le robot avant d’écrire une ligne</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#commencer-par-les-tests-la-demarche-tdd">Commencer par les tests : la démarche TDD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#les-briques-de-base-de-gtest">Les briques de base de gtest</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#declarer-un-cas-de-test">Déclarer un cas de test</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#assert-ou-expect-savoir-lequel-choisir"><code class="docutils literal notranslate"><span class="pre">ASSERT_*</span></code> ou <code class="docutils literal notranslate"><span class="pre">EXPECT_*</span></code> : savoir lequel choisir</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#comparer-des-flottants-expect-near">Comparer des flottants : <code class="docutils literal notranslate"><span class="pre">EXPECT_NEAR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#documenter-un-echec-messages-et-scoped-trace">Documenter un échec : messages et <code class="docutils literal notranslate"><span class="pre">SCOPED_TRACE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#les-fixtures-partager-un-contexte-entre-tests">Les fixtures : partager un contexte entre tests</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#reutiliser-une-fixture-sous-plusieurs-noms">Réutiliser une fixture sous plusieurs noms</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#que-verifient-les-tests-du-5-barres">Que vérifient les tests du 5 barres ?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#un-cas-nominal-simple-verifiable-a-la-main">Un cas nominal simple, vérifiable à la main</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#un-balayage-de-l-espace-de-travail">Un balayage de l’espace de travail</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#une-propriete-qui-attrape-une-erreur-precise">Une propriété qui attrape une erreur précise</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#des-invariants">Des invariants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#les-cas-d-erreur">Les cas d’erreur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#un-test-du-banc-de-test-lui-meme">Un test du banc de test lui-même</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#integrer-les-tests-au-paquet-ros-2">Intégrer les tests au paquet ROS 2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#declarer-le-test-dans-cmakelists-txt">Déclarer le test dans <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#declarer-les-dependances-dans-package-xml">Déclarer les dépendances dans <code class="docutils literal notranslate"><span class="pre">package.xml</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trouver-une-bibliotheque-sans-support-cmake">Trouver une bibliothèque sans support CMake</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#lancer-les-tests">Lancer les tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lire-et-interpreter-un-echec">Lire et interpréter un échec</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#l-etat-initial-du-projet">L’état initial du projet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#un-echec-qui-revele-une-vraie-erreur">Un échec qui révèle une vraie erreur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#les-trois-questions-a-se-poser-devant-un-echec">Les trois questions à se poser devant un échec</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ce-qui-fait-un-bon-test">Ce qui fait un bon test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exercices">Exercices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="p03s03_write_tests_for_python.html">Écrire des tests pour du code Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s04_use_simulation_to_write_tests.html">Utiliser la simulation pour écrire des tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s05_create_CI_for_automatically_runing_your_tests.html">Exécuter les tests automatiquement : l’intégration continue</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../c04_collaborate_with_coders/p04s00_index.html">Les outils nécessaires pour collaborer entre codeurs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Travaux Pratiques</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../p00_5_bars_system_pencil_holder_with_rpi_and_dynamixel/p50s00_index.html">système 5 barres de dessin robotisé avec Raspberry Pi et ROS2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p01_rpi_ubuntu_as_a_ros2_robotic_platform/p51s00_index.html">Ubuntu &amp; RPi &amp; ROS2</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cours d'Informatique Industrielle avec ROS2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="p03s00_index.html">Tester le code</a></li>
+      <li class="breadcrumb-item active">Écrire des tests C++ avec Google Test</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/c03_test_your_code/p03s02_write_tests_with_gtest.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ecrire-des-tests-c-avec-google-test">
+<span id="write-tests-with-gtest"></span><h1>Écrire des tests C++ avec Google Test<a class="headerlink" href="#ecrire-des-tests-c-avec-google-test" title="Lien vers cette rubrique"></a></h1>
+<p id="index-0">Un test unitaire est un morceau de code dont le seul rôle est de <strong>vérifier automatiquement</strong> qu’un autre morceau de code fait ce qu’il doit faire.
+Tant qu’une vérification n’est pas écrite sous forme de test exécutable, elle n’existe pas : elle est au mieux dans la tête de celui qui a écrit le code, et elle disparaît à la première modification.</p>
+<p>Dans ce chapitre, nous utilisons un projet support complet : la simulation du <strong>système 5 barres</strong> du cours, dans lequel les <strong>modèles géométriques direct et inverse</strong> sont à écrire, et où les tests sont déjà fournis.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Les sections <a class="reference internal" href="p03s03_write_tests_for_python.html"><span class="doc">Écrire des tests pour du code Python</span></a> et <a class="reference internal" href="p03s04_use_simulation_to_write_tests.html"><span class="doc">Utiliser la simulation pour écrire des tests</span></a> reprennent le même projet, respectivement en Python et du point de vue de la simulation.
+La section <a class="reference internal" href="p03s05_create_CI_for_automatically_runing_your_tests.html"><span class="doc">Exécuter les tests automatiquement : l’intégration continue</span></a> montre comment faire exécuter ces tests automatiquement à chaque <code class="docutils literal notranslate"><span class="pre">push</span></code>.</p>
+</div>
+<section id="le-projet-support-5-barres">
+<h2>Le projet support : 5 barres<a class="headerlink" href="#le-projet-support-5-barres" title="Lien vers cette rubrique"></a></h2>
+<p>Le projet est un espace de travail ROS 2 fourni avec le cours, dans le dossier <code class="docutils literal notranslate"><span class="pre">mujoco/five_bars_ws</span></code> du dépôt.
+Il simule le système 5 barres étudié en travaux pratiques (voir <a class="reference internal" href="../p00_5_bars_system_pencil_holder_with_rpi_and_dynamixel/p50s02_mechanical_description.html#mechanical-description"><span class="std std-ref">Description mécanique de la plateforme système 5 barres</span></a>).</p>
+<p>Première étape, commune à tout le monde : récupérer le dépôt du cours et se placer dans l’espace de travail.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/yguel/informatique_industrielle_avec_ROS2.git
+<span class="nb">cd</span><span class="w"> </span>informatique_industrielle_avec_ROS2/mujoco/five_bars_ws
+</pre></div>
+</div>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../_images/schema_cinematique.svg"><img alt="../_images/schema_cinematique.svg" src="../_images/schema_cinematique.svg" style="width: 70%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 13 </span><span class="caption-text">Schéma cinématique du système 5 barres. Les deux moteurs imposent les angles absolus <code class="docutils literal notranslate"><span class="pre">q1</span></code> (bras gauche <code class="docutils literal notranslate"><span class="pre">A1A2</span></code>) et <code class="docutils literal notranslate"><span class="pre">q4</span></code> (bras droit <code class="docutils literal notranslate"><span class="pre">A5A4</span></code>) ; la chaîne se referme en <code class="docutils literal notranslate"><span class="pre">A3</span></code> ; le stylo est porté par l’avant-bras gauche, <strong>décalé</strong> par rapport à <code class="docutils literal notranslate"><span class="pre">A3</span></code>.</span><a class="headerlink" href="#id1" title="Lien vers cette image"></a></p>
+</figcaption>
+</figure>
+<p>Les paquets utiles pour ce chapitre sont :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Paquet</p></th>
+<th class="head"><p>Rôle</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">five_bars_description</span></code></p></td>
+<td><p>Géométrie du robot : <code class="docutils literal notranslate"><span class="pre">config/geometry.yaml</span></code>, modèle MuJoCo (MJCF) et URDF générés à partir de ce fichier.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">five_bars_mujoco</span></code></p></td>
+<td><p>Simulation MuJoCo (<code class="docutils literal notranslate"><span class="pre">sim.py</span></code>) et nœuds ROS 2 (simulateur, IHM, mise à jour d’état).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">five_bars_kinematics</span></code></p></td>
+<td><p><strong>Le code à écrire</strong> (modèles direct et inverse, en C++ et en Python) <strong>et ses tests</strong> (<code class="docutils literal notranslate"><span class="pre">gtest</span></code> et <code class="docutils literal notranslate"><span class="pre">unittest</span></code>).</p></td>
+</tr>
+</tbody>
+</table>
+<p>Le code à écrire est volontairement livré vide : seules les signatures et les conventions sont données.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-number">Code source 9 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">five_bars_kinematics/include/five_bars_kinematics/kinematics.hpp</span></code> — les structures et les deux fonctions à implémenter</span><a class="headerlink" href="#id2" title="Lien vers ce code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">/// Paramètres géométriques (m). Voir five_bars_description/config/geometry.yaml.</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">Geometry</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">l0</span><span class="p">;</span><span class="w">      </span><span class="c1">///&lt; |A1A5|</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">l1</span><span class="p">;</span><span class="w">      </span><span class="c1">///&lt; |A1A2|</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">l2</span><span class="p">;</span><span class="w">      </span><span class="c1">///&lt; |A2A3|</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">l3</span><span class="p">;</span><span class="w">      </span><span class="c1">///&lt; |A4A3|</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">l4</span><span class="p">;</span><span class="w">      </span><span class="c1">///&lt; |A5A4|</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">pen_dx</span><span class="p">;</span><span class="w">  </span><span class="c1">///&lt; décalage du stylo par rapport à A3, le long de A2-&gt;A3</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">pen_dy</span><span class="p">;</span><span class="w">  </span><span class="c1">///&lt; décalage du stylo par rapport à A3, à gauche de A2-&gt;A3</span>
+<span class="p">};</span>
+
+<span class="c1">/// Angles absolus des deux moteurs (rad).</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">JointAngles</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">q1</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">q4</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">/// Position de la pointe du stylo dans R0 (m).</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">PenPosition</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">/// Modèle géométrique direct : (q1, q4) -&gt; (x, y) du stylo.</span>
+<span class="c1">/// @return std::nullopt si la chaîne ne peut pas se fermer pour ces angles.</span>
+<span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">PenPosition</span><span class="o">&gt;</span><span class="w"> </span><span class="n">forwardKinematics</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">JointAngles</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Geometry</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">geometry</span><span class="p">);</span>
+
+<span class="c1">/// Modèle géométrique inverse : (x, y) du stylo -&gt; (q1, q4), angles dans ]-pi, pi].</span>
+<span class="c1">/// @return std::nullopt si le point n'est pas atteignable.</span>
+<span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">JointAngles</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inverseKinematics</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">PenPosition</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Geometry</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">geometry</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-number">Code source 10 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">five_bars_kinematics/src/kinematics.cpp</span></code> — l’état initial du code à écrire</span><a class="headerlink" href="#id3" title="Lien vers ce code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Modèles géométriques du système 5 barres — À IMPLÉMENTER.</span>
+<span class="c1">// Voir include/five_bars_kinematics/kinematics.hpp pour les conventions.</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"five_bars_kinematics/kinematics.hpp"</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">five_bars_kinematics</span>
+<span class="p">{</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">PenPosition</span><span class="o">&gt;</span><span class="w"> </span><span class="n">forwardKinematics</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">JointAngles</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="cm">/*q*/</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Geometry</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="cm">/*geometry*/</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="c1">// TODO : implémenter le modèle géométrique direct.</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">nullopt</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">JointAngles</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inverseKinematics</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">PenPosition</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="cm">/*p*/</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Geometry</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="cm">/*geometry*/</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="c1">// TODO : implémenter le modèle géométrique inverse.</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">nullopt</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace five_bars_kinematics</span>
+</pre></div>
+</div>
+</div>
+<p>L’objectif de cette section n’est pas d’écrire ces deux fonctions, mais de comprendre <strong>les tests qui les jugent</strong>.</p>
+<section id="installer-l-environnement">
+<span id="five-bars-installation"></span><h3>Installer l’environnement<a class="headerlink" href="#installer-l-environnement" title="Lien vers cette rubrique"></a></h3>
+<p>Le projet a besoin de <strong>ROS 2 Jazzy</strong> et de <strong>MuJoCo 4.0.1</strong>. Il y a deux façons de les obtenir :</p>
+<ul class="simple">
+<li><p><strong>avec Docker</strong> : rien à installer sur votre machine à part Docker, l’image contient ROS 2, MuJoCo et Google Test. C’est la méthode <strong>recommandée</strong>, et c’est exactement ce que fait l’intégration continue du projet.</p></li>
+<li><p><strong>sans Docker</strong> : installation native. Elle n’a de sens que sur <strong>Ubuntu 24.04</strong> (<em>Noble</em>), la seule distribution pour laquelle ROS 2 Jazzy est distribué en paquets binaires.</p></li>
+</ul>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Comment installer Docker sur votre machine si besoin ?</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+Installer Docker sur Linux</label><div class="sd-tab-content docutils">
+<p class="sd-card-text">Suivez les instructions officielles : <a class="reference external" href="https://docs.docker.com/engine/install/">installer Docker Engine</a> (pour Ubuntu : <a class="reference external" href="https://docs.docker.com/engine/install/ubuntu/">installer Docker Engine sur Ubuntu</a>).</p>
+<p class="sd-card-text">Ajoutez ensuite votre compte au groupe <code class="docutils literal notranslate"><span class="pre">docker</span></code>, sans quoi il faudra préfixer chaque commande par <code class="docutils literal notranslate"><span class="pre">sudo</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span><span class="nv">$USER</span>
+</pre></div>
+</div>
+<p class="sd-card-text">Fermez puis rouvrez votre session (le changement de groupe n’est pris en compte qu’à la connexion), et vérifiez :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>hello-world
+</pre></div>
+</div>
+<p class="sd-card-text">Voir aussi les <a class="reference external" href="https://docs.docker.com/engine/install/linux-postinstall/">étapes post-installation</a> de la documentation Docker.</p>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+Installer Docker sur Windows</label><div class="sd-tab-content docutils">
+<p class="sd-card-text">Installez <a class="reference external" href="https://docs.docker.com/desktop/setup/install/windows-install/">Docker Desktop pour Windows</a>, en choisissant le moteur <strong>WSL 2</strong> (c’est le choix par défaut).</p>
+<p class="sd-card-text">Puis, dans <code class="docutils literal notranslate"><span class="pre">Settings</span></code> → <code class="docutils literal notranslate"><span class="pre">Resources</span></code> → <code class="docutils literal notranslate"><span class="pre">WSL</span> <span class="pre">integration</span></code>, activez l’intégration pour votre distribution <code class="docutils literal notranslate"><span class="pre">Ubuntu-24.04</span></code>. La commande <code class="docutils literal notranslate"><span class="pre">docker</span></code> devient alors utilisable <strong>depuis le terminal Ubuntu de WSL</strong>, ce qui est ce dont nous avons besoin.</p>
+<p class="sd-card-text">Vérifiez depuis le terminal Ubuntu :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>hello-world
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-2">
+Installer Docker sur Mac</label><div class="sd-tab-content docutils">
+<p class="sd-card-text">Installez <a class="reference external" href="https://docs.docker.com/desktop/setup/install/mac-install/">Docker Desktop pour Mac</a>, en prenant la version correspondant à votre processeur (Apple Silicon ou Intel).</p>
+<p class="sd-card-text">Vérifiez dans un terminal :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>hello-world
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</details><p>Choisissez maintenant l’onglet qui correspond à votre machine.</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="linux-docker" for="sd-tab-item-3">
+Linux avec Docker</label><div class="sd-tab-content docutils">
+<p>C’est la configuration de référence : celle des machines de la salle de cours, et celle de l’intégration continue.</p>
+<p>Tout passe par un seul script, <code class="docutils literal notranslate"><span class="pre">docker/start.sh</span></code>, qui construit l’image au premier appel (comptez une dizaine de minutes) :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker/start.sh<span class="w"> </span><span class="nb">test</span><span class="w">     </span><span class="c1"># compile et lance tous les tests, headless</span>
+</pre></div>
+</div>
+<p>Les autres usages du script :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker/start.sh<span class="w">                                        </span><span class="c1"># un shell dans le conteneur, workspace compilé</span>
+docker/start.sh<span class="w"> </span>--rebuild<span class="w">                              </span><span class="c1"># forcer la reconstruction de l'image</span>
+docker/start.sh<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>five_bars_mujoco<span class="w"> </span>direct_gui<span class="w">   </span><span class="c1"># lancer une seule commande</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Quelques propriétés utiles du script :</p>
+<ul class="simple">
+<li><p>le dossier <code class="docutils literal notranslate"><span class="pre">src/</span></code> de votre machine est <strong>monté</strong> dans le conteneur (<code class="docutils literal notranslate"><span class="pre">/ws/src</span></code>) : vous éditez le code avec votre éditeur habituel, sur votre machine, et vous compilez dans le conteneur ;</p></li>
+<li><p>l’affichage graphique est géré automatiquement (le script appelle <code class="docutils literal notranslate"><span class="pre">xhost</span> <span class="pre">+local:docker</span></code> et passe votre <code class="docutils literal notranslate"><span class="pre">DISPLAY</span></code>) : le viewer MuJoCo et RViz s’ouvrent comme des fenêtres normales ;</p></li>
+<li><p>si une carte graphique est disponible (<code class="docutils literal notranslate"><span class="pre">/dev/dri</span></code>), elle est passée au conteneur ;</p></li>
+<li><p>un second appel à <code class="docutils literal notranslate"><span class="pre">docker/start.sh</span></code>, pendant que le conteneur tourne, ouvre simplement <strong>un deuxième shell</strong> dedans.</p></li>
+</ul>
+</div>
+</div>
+<input id="sd-tab-item-4" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="linux-native" for="sd-tab-item-4">
+Linux sans Docker</label><div class="sd-tab-content docutils">
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>Cette installation n’est valable que sur <strong>Ubuntu 24.04</strong> (<em>Noble</em>). ROS 2 Jazzy n’est distribué en paquets binaires que pour cette version. Sur une autre distribution ou une autre version d’Ubuntu, utilisez Docker.</p>
+</div>
+<p class="rubric">1. Installer ROS 2 Jazzy</p>
+<p>Suivez la procédure officielle : <a class="reference external" href="https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html">installation de ROS 2 Jazzy par paquets Debian</a>, puis :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-jazzy-ros-base<span class="w"> </span>python3-colcon-common-extensions
+</pre></div>
+</div>
+<p class="rubric">2. Installer les dépendances du projet</p>
+<p>Ce sont exactement celles de l’image Docker (voir <code class="docutils literal notranslate"><span class="pre">docker/Dockerfile</span></code>) :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>build-essential<span class="w"> </span>cmake<span class="w"> </span>git<span class="w"> </span>python3-pip<span class="w"> </span>python3-numpy<span class="w"> </span>python3-yaml<span class="w"> </span>python3-pytest<span class="w"> </span>python3-tk<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>googletest<span class="w"> </span>libgtest-dev<span class="w"> </span>libgmock-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>ros-jazzy-ament-cmake-gtest<span class="w"> </span>ros-jazzy-ament-cmake-pytest<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>ros-jazzy-ros2-control<span class="w"> </span>ros-jazzy-ros2-controllers<span class="w"> </span>ros-jazzy-xacro<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>ros-jazzy-robot-state-publisher<span class="w"> </span>ros-jazzy-tf2-ros-py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>libgl1<span class="w"> </span>libegl1<span class="w"> </span>libglfw3<span class="w"> </span>libosmesa6
+</pre></div>
+</div>
+<p>Ajoutez <code class="docutils literal notranslate"><span class="pre">ros-jazzy-rviz2</span></code> si vous voulez visualiser le robot dans RViz.</p>
+<p class="rubric">3. Installer MuJoCo</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>--break-system-packages<span class="w"> </span><span class="s2">"mujoco==4.0.1"</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Deux points méritent une explication.</p>
+<p><code class="docutils literal notranslate"><span class="pre">--break-system-packages</span></code> est nécessaire parce qu’Ubuntu 24.04 protège les paquets Python du système (<a class="reference external" href="https://peps.python.org/pep-0668/">PEP 668</a>). Un environnement virtuel serait plus propre, mais il complique l’usage de <code class="docutils literal notranslate"><span class="pre">colcon</span></code>, qui s’attend à trouver les paquets Python de ROS 2. <br>
+La <strong>même</strong> roue pip fournit MuJoCo pour Python <strong>et</strong> la bibliothèque C utilisée par les tests gtest : Python et C++ utilisent ainsi strictement la même version. C’est le fichier <code class="docutils literal notranslate"><span class="pre">cmake/FindMuJoCo.cmake</span></code> du projet qui la localise, en interrogeant le module Python. Vous n’avez donc rien à configurer ; la variable <code class="docutils literal notranslate"><span class="pre">MUJOCO_DIR</span></code> ne sert que si vous préférez une archive officielle de MuJoCo.</p>
+</div>
+<p>Vérifiez l’installation :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import mujoco, os; print(mujoco.__version__, os.path.dirname(mujoco.__file__))"</span>
+</pre></div>
+</div>
+<p class="rubric">4. Compiler et lancer les tests</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.bash
+colcon<span class="w"> </span>build<span class="w"> </span>--cmake-args<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>RelWithDebInfo
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--event-handlers<span class="w"> </span>console_direct+
+colcon<span class="w"> </span>test-result<span class="w"> </span>--verbose
+</pre></div>
+</div>
+<p>Le <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">/opt/ros/jazzy/setup.bash</span></code> est à refaire dans <strong>chaque</strong> nouveau terminal : ajoutez-le à votre <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> si vous travaillez souvent sur le projet.</p>
+</div>
+<input id="sd-tab-item-5" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="rpi5" for="sd-tab-item-5">
+Raspberry Pi 5 sans Docker</label><div class="sd-tab-content docutils">
+<p>Sur un Raspberry Pi 5 sous <strong>Ubuntu 24.04 pour arm64</strong>, l’installation native fonctionne : ROS 2 Jazzy est publié pour <code class="docutils literal notranslate"><span class="pre">arm64</span></code>, et MuJoCo fournit des roues <code class="docutils literal notranslate"><span class="pre">aarch64</span></code>.</p>
+<p>Reprenez <strong>à l’identique</strong> les quatre étapes de l’onglet « Linux sans Docker ». Trois précautions s’ajoutent, propres au Pi.</p>
+<p class="rubric">Compiler sans saturer la mémoire</p>
+<p><code class="docutils literal notranslate"><span class="pre">colcon</span></code> compile tous les paquets en parallèle, ce qui suffit à faire tomber un Pi à court de mémoire : le compilateur se fait tuer par le noyau et la compilation échoue avec un message peu clair. Limitez le parallélisme :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>colcon<span class="w"> </span>build<span class="w"> </span>--parallel-workers<span class="w"> </span><span class="m">2</span><span class="w"> </span>--cmake-args<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>RelWithDebInfo
+</pre></div>
+</div>
+<p>Sur un modèle 4 Go, ajoutez en plus un fichier d’échange (<code class="docutils literal notranslate"><span class="pre">swap</span></code>) d’au moins 2 Go avant de compiler.</p>
+<p class="rubric">Rendu logiciel</p>
+<p>Le Pi n’a pas de pilote OpenGL utilisable par MuJoCo pour le rendu hors écran. Forcez le rendu logiciel, fourni par <code class="docutils literal notranslate"><span class="pre">libosmesa6</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MUJOCO_GL</span><span class="o">=</span>osmesa
+</pre></div>
+</div>
+<p>Ajoutez cette ligne à votre <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code>. <strong>Les tests n’en souffrent pas</strong> : ils utilisent la simulation en mode <em>headless</em>, sans fenêtre.</p>
+<p class="rubric">Le viewer 3D</p>
+<p>Un Pi 5 encaisse l’IHM avec sa fenêtre 3D. Utilisez donc la même commande que tout
+le monde :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>five_bars_mujoco<span class="w"> </span>direct_gui
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Astuce</p>
+<p>Si l’affichage devient poussif chez vous, deux portes de sortie, dans cet ordre :</p>
+<ol class="arabic">
+<li><p>la version <strong>sans fenêtre de rendu</strong> — les curseurs restent, la simulation
+tourne derrière, et c’est amplement suffisant pour manipuler <code class="docutils literal notranslate"><span class="pre">q1</span></code> et <code class="docutils literal notranslate"><span class="pre">q4</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>five_bars_mujoco<span class="w"> </span>direct_gui<span class="w"> </span>--no-viewer
+</pre></div>
+</div>
+</li>
+</ol>
+<p>#. <strong>une machine plus puissante</strong>, dans une approche industrielle, les single board computers comme le Raspberry Pi sont utilisés pour exécuter les nœuds ROS 2, mais le développement et la compilation et le rendu 3D se font sur des machines plus performantes.
+Néanmoins pour ce cours, le Pi 5 est normalement suffisant pour exécuter les nœuds ROS 2 et la simulation, même avec le rendu 3D.</p>
+</div>
+</div>
+<input id="sd-tab-item-6" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="windows-wsl" for="sd-tab-item-6">
+Windows avec WSL 2</label><div class="sd-tab-content docutils">
+<p>Sous Windows, on ne travaille pas directement dans Windows : on installe <strong>WSL 2</strong> (une vraie Ubuntu dans Windows), et tout le reste se fait depuis le terminal Ubuntu.</p>
+<p class="rubric">1. Installer WSL 2 avec Ubuntu 24.04</p>
+<p>Dans un terminal PowerShell <strong>en administrateur</strong> :</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">wsl</span> <span class="p">-</span><span class="n">-install</span> <span class="n">-d</span> <span class="n">Ubuntu</span><span class="p">-</span><span class="n">24</span><span class="p">.</span><span class="n">04</span>
+</pre></div>
+</div>
+<p>Redémarrez, puis ouvrez <code class="docutils literal notranslate"><span class="pre">Ubuntu-24.04</span></code> depuis le menu Démarrer et créez votre compte Linux. La procédure détaillée est celle de Microsoft : <a class="reference external" href="https://learn.microsoft.com/en-us/windows/wsl/install">installer WSL</a>. Le <a class="reference internal" href="../c01_create_and_publish_doc/p01s02_create_and_publish_doc.html"><span class="doc">chapitre 1</span></a> en donne aussi une version pas à pas.</p>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>Clonez le dépôt dans le système de fichiers <strong>de Linux</strong> (sous <code class="docutils literal notranslate"><span class="pre">~/</span></code>), et surtout <strong>pas</strong> dans <code class="docutils literal notranslate"><span class="pre">/mnt/c/...</span></code>. Les accès de WSL aux disques Windows sont très lents — une compilation peut prendre plusieurs fois plus de temps — et les permissions de fichiers n’y sont pas respectées, ce qui perturbe git et Docker.</p>
+</div>
+<p class="rubric">2. Puis, au choix</p>
+<p>À partir de ce point, votre terminal Ubuntu est un Linux ordinaire, et les deux autres onglets s’appliquent <strong>mot pour mot</strong> :</p>
+<ul class="simple">
+<li><p><strong>avec Docker</strong> (recommandé) : installez Docker Desktop en activant l’intégration WSL (voir le dépliant « Comment installer Docker » ci-dessus), puis suivez l’onglet « Linux avec Docker » ;</p></li>
+<li><p><strong>sans Docker</strong> : votre WSL <em>est</em> une Ubuntu 24.04, donc l’onglet « Linux sans Docker » s’applique tel quel.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Sous Windows 11, WSL affiche les fenêtres graphiques Linux sans configuration (WSLg) : le viewer MuJoCo et RViz s’ouvrent comme des applications Windows. Le rendu est logiciel par défaut, donc lent mais utilisable.</p>
+</div>
+</div>
+<input id="sd-tab-item-7" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="macos" for="sd-tab-item-7">
+macOS</label><div class="sd-tab-content docutils">
+<p>Sur Mac, <strong>Docker est la seule voie raisonnable</strong> : ROS 2 Jazzy n’est pas distribué en binaire pour macOS, il faudrait le compiler depuis les sources, ce qui dépasse largement le cadre de ce cours.</p>
+<p>Installez Docker Desktop (voir le dépliant ci-dessus), puis :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker/start.sh<span class="w"> </span><span class="nb">test</span>
+</pre></div>
+</div>
+<p>Cela fonctionne sur Apple Silicon comme sur Intel : l’image est une image Linux, et MuJoCo y est installé pour Linux.</p>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>Deux limites, propres à Docker Desktop et non au projet :</p>
+<ol class="arabic simple">
+<li><p>macOS n’a pas de serveur X11, donc <code class="docutils literal notranslate"><span class="pre">docker/start.sh</span></code> détecte l’absence de <code class="docutils literal notranslate"><span class="pre">DISPLAY</span></code> et bascule en mode <em>headless</em> : <strong>les tests tournent, mais aucune fenêtre ne s’ouvre</strong>. Pour obtenir le viewer 3D, installez <a class="reference external" href="https://www.xquartz.org/">XQuartz</a>, cochez « Allow connections from network clients » dans ses préférences, puis lancez <code class="docutils literal notranslate"><span class="pre">xhost</span> <span class="pre">+</span> <span class="pre">127.0.0.1</span></code> et exportez <code class="docutils literal notranslate"><span class="pre">DISPLAY=host.docker.internal:0</span></code> avant d’appeler le script.</p></li>
+<li><p>l’option <code class="docutils literal notranslate"><span class="pre">--network</span> <span class="pre">host</span></code> n’existe pas sur Docker Desktop. Les nœuds ROS 2 <strong>à l’intérieur</strong> du conteneur se voient entre eux sans problème, mais un nœud lancé sur le Mac lui-même ne les verra pas.</p></li>
+</ol>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Astuce</p>
+<p>Si vous voulez seulement jouer avec MuJoCo, sans ROS 2, une installation native est possible : <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">&quot;mujoco==4.0.1&quot;</span></code>. Attention, sur Mac le viewer interactif s’ouvre avec <code class="docutils literal notranslate"><span class="pre">mjpython</span></code> et non <code class="docutils literal notranslate"><span class="pre">python3</span></code>. Les tests de ce chapitre, eux, ont besoin de ROS 2 et donc du conteneur.</p>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Les sections suivantes supposent que vous savez lancer les tests, par <code class="docutils literal notranslate"><span class="pre">docker/start.sh</span> <span class="pre">test</span></code> ou par <code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">test</span></code>. Si votre environnement n’est pas encore en place, revenez à <a class="reference internal" href="#five-bars-installation"><span class="std std-ref">Installer l’environnement</span></a>.</p>
+</div>
+</section>
+<section id="voir-le-robot-avant-d-ecrire-une-ligne">
+<span id="five-bars-premier-lancement"></span><h3>Voir le robot avant d’écrire une ligne<a class="headerlink" href="#voir-le-robot-avant-d-ecrire-une-ligne" title="Lien vers cette rubrique"></a></h3>
+<p>Avant de parler de tests, regardez la machine bouger. Une seule commande ouvre le
+simulateur MuJoCo avec deux curseurs, un par moteur : vous imposez <code class="docutils literal notranslate"><span class="pre">q1</span></code> et <code class="docutils literal notranslate"><span class="pre">q4</span></code>,
+et le pantographe se referme sous vos yeux.</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-8" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="linux-docker" for="sd-tab-item-8">
+Avec Docker</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker/start.sh<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>five_bars_mujoco<span class="w"> </span>direct_gui
+</pre></div>
+</div>
+<p>Au premier appel, le script construit l’image puis compile l’espace de travail :
+comptez une dizaine de minutes. Ensuite, la fenêtre s’ouvre en quelques secondes.</p>
+</div>
+<input id="sd-tab-item-9" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="linux-native" for="sd-tab-item-9">
+Sans Docker</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.bash
+colcon<span class="w"> </span>build<span class="w"> </span>--cmake-args<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>RelWithDebInfo
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+ros2<span class="w"> </span>run<span class="w"> </span>five_bars_mujoco<span class="w"> </span>direct_gui
+</pre></div>
+</div>
+</div>
+</div>
+<p>Déplacez les deux curseurs : les quatre barres restent assemblées, parce que la
+fermeture de la chaîne en <code class="docutils literal notranslate"><span class="pre">A3</span></code> est une contrainte du modèle MuJoCo, et la pointe du
+stylo décrit l’espace de travail du mécanisme.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Pas d’affichage 3D — connexion en <code class="docutils literal notranslate"><span class="pre">ssh</span></code>, Raspberry Pi, Mac sans XQuartz, machine
+sans OpenGL ? La même commande existe sans fenêtre de rendu : seuls les curseurs
+s’affichent, et la simulation tourne derrière.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>five_bars_mujoco<span class="w"> </span>direct_gui<span class="w"> </span>--no-viewer
+</pre></div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Astuce</p>
+<p>Pour regarder le modèle seul, sans aucun nœud ROS 2, MuJoCo sait ouvrir le MJCF
+directement. Le panneau <code class="docutils literal notranslate"><span class="pre">Control</span></code> de la fenêtre donne alors les deux actionneurs
+<code class="docutils literal notranslate"><span class="pre">act_q1</span></code> et <code class="docutils literal notranslate"><span class="pre">act_q4</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>mujoco.viewer<span class="w"> </span>--mjcf<span class="o">=</span>/ws/install/five_bars_description/share/five_bars_description/mjcf/five_bars.xml
+</pre></div>
+</div>
+<p>Hors conteneur, remplacez <code class="docutils literal notranslate"><span class="pre">/ws</span></code> par le chemin de votre espace de travail. Sur
+macOS, il faut lancer <code class="docutils literal notranslate"><span class="pre">mjpython</span></code> et non <code class="docutils literal notranslate"><span class="pre">python3</span></code>.</p>
+</div>
+<p>Ce que vous venez de voir est la <strong>vérité terrain</strong> des tests de ce chapitre : ce sont
+exactement ces servos simulés et ce site <code class="docutils literal notranslate"><span class="pre">pen_tip</span></code> que les tests interrogent, en mode
+<em>headless</em>, pour juger vos modèles géométriques.</p>
+<p>Les autres façons de lancer la simulation — simulateur et IHM en nœuds séparés, chaîne
+<code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> complète, RViz — sont rassemblées dans l”<span class="xref std std-ref">aide-mémoire du 5 barres</span>, avec les commandes de compilation et de test.</p>
+</section>
+</section>
+<section id="commencer-par-les-tests-la-demarche-tdd">
+<h2>Commencer par les tests : la démarche TDD<a class="headerlink" href="#commencer-par-les-tests-la-demarche-tdd" title="Lien vers cette rubrique"></a></h2>
+<p id="index-1">Le projet est livré dans un état particulier : <strong>les tests existent, le code n’existe pas</strong>, donc les tests échouent.
+C’est le point de départ du développement piloté par les tests (<em>Test Driven Development</em>, TDD), dont le cycle est :</p>
+<ol class="arabic simple">
+<li><p><strong>Rouge</strong> : écrire (ou lire) un test qui échoue, et vérifier qu’il échoue <em>pour la bonne raison</em> ;</p></li>
+<li><p><strong>Vert</strong> : écrire le code le plus simple qui fait passer le test ;</p></li>
+<li><p><strong>Refactoriser</strong> : améliorer le code sans changer son comportement, les tests servant de filet de sécurité.</p></li>
+</ol>
+<p>Cette démarche a trois vertus, qui sont les raisons pour lesquelles ce projet vous est donné dans cet état :</p>
+<ol class="arabic simple">
+<li><p>Elle force à <strong>spécifier avant de coder</strong>. Les tests du 5 barres disent précisément ce qu’est une bonne implémentation : quelles tolérances, quel mode d’assemblage, que renvoyer pour une configuration impossible.</p></li>
+<li><p>Elle garantit que le test est <strong>capable d’échouer</strong>. Un test écrit après le code, et qui passe du premier coup, n’a rien prouvé : il peut très bien ne rien vérifier du tout.</p></li>
+<li><p>Elle donne un <strong>critère d’arrêt</strong> objectif : le travail est fini quand les tests passent, pas quand « ça a l’air de marcher ».</p></li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>Un test qui ne peut pas échouer est un test inutile, et même nuisible : il donne un faux sentiment de sécurité.
+Prenez l’habitude de vérifier qu’un test échoue quand vous cassez volontairement le code qu’il teste (changez un signe, supprimez un terme).
+Nous en donnons un exemple mesuré plus bas, dans <a class="reference internal" href="#gtest-lire-un-echec"><span class="std std-ref">Lire et interpréter un échec</span></a>.</p>
+</div>
+</section>
+<section id="les-briques-de-base-de-gtest">
+<h2>Les briques de base de gtest<a class="headerlink" href="#les-briques-de-base-de-gtest" title="Lien vers cette rubrique"></a></h2>
+<p><a class="reference external" href="https://google.github.io/googletest/">Google Test</a> (<code class="docutils literal notranslate"><span class="pre">gtest</span></code>) est la bibliothèque de test unitaire C++ utilisée par ROS 2.
+Un fichier de test est un fichier <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> ordinaire, sans <code class="docutils literal notranslate"><span class="pre">main()</span></code> : c’est la bibliothèque qui fournit le <code class="docutils literal notranslate"><span class="pre">main()</span></code>, découvre les tests déclarés et les exécute.</p>
+<section id="declarer-un-cas-de-test">
+<h3>Déclarer un cas de test<a class="headerlink" href="#declarer-un-cas-de-test" title="Lien vers cette rubrique"></a></h3>
+<p>La macro <code class="docutils literal notranslate"><span class="pre">TEST(SuiteDeTests,</span> <span class="pre">NomDuTest)</span></code> déclare un cas de test :</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;gtest/gtest.h&gt;</span>
+
+<span class="n">TEST</span><span class="p">(</span><span class="n">Arithmetique</span><span class="p">,</span><span class="w"> </span><span class="n">LAdditionEstCommutative</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">EXPECT_EQ</span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Le premier argument regroupe les tests en « suites » (c’est ce qui apparaît à gauche du point dans les rapports : <code class="docutils literal notranslate"><span class="pre">ForwardKinematics.HomeConfiguration</span></code>), le second nomme le test.</p>
+<div class="admonition tip">
+<p class="admonition-title">Astuce</p>
+<p>Nommez un test par <strong>ce qu’il affirme</strong>, pas par la fonction qu’il appelle.
+<code class="docutils literal notranslate"><span class="pre">PenOffsetIsTakenIntoAccount</span></code> ou <code class="docutils literal notranslate"><span class="pre">UnassemblableConfigurationReturnsNullopt</span></code> décrivent une propriété attendue ; <code class="docutils literal notranslate"><span class="pre">TestForwardKinematics2</span></code> ne dit rien et n’aide pas à diagnostiquer un échec.</p>
+</div>
+</section>
+<section id="assert-ou-expect-savoir-lequel-choisir">
+<h3><code class="docutils literal notranslate"><span class="pre">ASSERT_*</span></code> ou <code class="docutils literal notranslate"><span class="pre">EXPECT_*</span></code> : savoir lequel choisir<a class="headerlink" href="#assert-ou-expect-savoir-lequel-choisir" title="Lien vers cette rubrique"></a></h3>
+<p>Les vérifications existent en deux familles, et le choix entre les deux n’est pas cosmétique :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 18.0%" />
+<col style="width: 82.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Famille</p></th>
+<th class="head"><p>Comportement en cas d’échec</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">EXPECT_*</span></code></p></td>
+<td><p>Signale l’échec et <strong>continue</strong> le test. On obtient donc toutes les erreurs du test en une seule exécution.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ASSERT_*</span></code></p></td>
+<td><p>Signale l’échec et <strong>quitte immédiatement</strong> la fonction de test.</p></td>
+</tr>
+</tbody>
+</table>
+<p>La règle pratique est simple : on utilise <code class="docutils literal notranslate"><span class="pre">ASSERT_*</span></code> quand la suite du test n’aurait <strong>aucun sens</strong>, ou provoquerait un plantage, si la vérification échoue ; on utilise <code class="docutils literal notranslate"><span class="pre">EXPECT_*</span></code> partout ailleurs.</p>
+<p>Les tests du 5 barres en donnent une illustration directe : les fonctions renvoient un <code class="docutils literal notranslate"><span class="pre">std::optional</span></code>, et déréférencer un <code class="docutils literal notranslate"><span class="pre">std::optional</span></code> vide est un comportement indéfini.
+Il faut donc <strong>arrêter</strong> le test si la solution est absente, puis seulement comparer les coordonnées :</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-number">Code source 11 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">ASSERT_TRUE</span></code> avant déréférencement, puis <code class="docutils literal notranslate"><span class="pre">EXPECT_NEAR</span></code> sur chaque coordonnée</span><a class="headerlink" href="#id4" title="Lien vers ce code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TEST_F</span><span class="p">(</span><span class="n">ForwardKinematics</span><span class="p">,</span><span class="w"> </span><span class="n">HomeConfiguration</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sim_</span><span class="o">-&gt;</span><span class="n">measuredAngles</span><span class="p">();</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">pen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sim_</span><span class="o">-&gt;</span><span class="n">penPosition</span><span class="p">();</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">forwardKinematics</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="n">geometry_</span><span class="p">);</span>
+<span class="hll"><span class="w">  </span><span class="n">ASSERT_TRUE</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">has_value</span><span class="p">())</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"forwardKinematics n'a pas renvoyé de solution"</span><span class="p">;</span>
+</span><span class="w">  </span><span class="n">EXPECT_NEAR</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">pen</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">kPosTol</span><span class="p">);</span>
+<span class="w">  </span><span class="n">EXPECT_NEAR</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">pen</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">kPosTol</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="comparer-des-flottants-expect-near">
+<h3>Comparer des flottants : <code class="docutils literal notranslate"><span class="pre">EXPECT_NEAR</span></code><a class="headerlink" href="#comparer-des-flottants-expect-near" title="Lien vers cette rubrique"></a></h3>
+<p id="index-2">C’est le point le plus important pour un roboticien.
+Deux calculs flottants mathématiquement équivalents ne donnent presque jamais le même résultat binaire : comparer des positions avec <code class="docutils literal notranslate"><span class="pre">EXPECT_EQ</span></code> produit des tests qui échouent au hasard.</p>
+<p>On compare donc toujours <strong>à une tolérance près</strong> :</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">EXPECT_NEAR</span><span class="p">(</span><span class="n">valeur_obtenue</span><span class="p">,</span><span class="w"> </span><span class="n">valeur_attendue</span><span class="p">,</span><span class="w"> </span><span class="n">tolerance</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>La tolérance n’est pas une valeur magique : c’est une <strong>décision d’ingénierie</strong> qui doit être justifiée et documentée.
+Dans le projet, les trois tolérances utilisées sont déclarées et commentées en un seul endroit :</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-number">Code source 12 </span><span class="caption-text">Les tolérances du projet, avec leur justification physique</span><a class="headerlink" href="#id5" title="Lien vers ce code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">kPosTol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-4</span><span class="p">;</span><span class="w">     </span><span class="c1">// 0.1 mm entre modèle et simulation</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">kAngleTol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-3</span><span class="p">;</span><span class="w">   </span><span class="c1">// rad</span>
+<span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">kReachTol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5e-4</span><span class="p">;</span><span class="w">   </span><span class="c1">// 0.5 mm après asservissement simulé</span>
+</pre></div>
+</div>
+</div>
+<p>Chacune correspond à une exigence différente :</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">kPosTol</span></code> (0,1 mm) compare le <strong>modèle analytique</strong> à la <strong>géométrie de la simulation</strong> : les deux calculent la même chose, l’écart ne doit être qu’un résidu numérique ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kAngleTol</span></code> (10<sup>-3</sup> rad) compare des <strong>angles</strong> retrouvés par le modèle inverse, qui cumulent les erreurs de la chaîne de calcul ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kReachTol</span></code> (0,5 mm) juge la position atteinte <strong>après asservissement</strong> des servos simulés : s’y ajoutent l’erreur statique de l’asservissement et la raideur des liaisons, donc la tolérance est plus large.</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>Une tolérance trop large rend le test incapable de détecter une vraie erreur ; une tolérance trop serrée rend le test instable (<em>flaky</em>), c’est-à-dire qu’il échoue de façon aléatoire.
+Un test instable est pire qu’un test absent : l’équipe prend l’habitude de relancer la CI jusqu’à ce qu’elle passe, et finit par ignorer les vrais échecs.</p>
+</div>
+</section>
+<section id="documenter-un-echec-messages-et-scoped-trace">
+<h3>Documenter un échec : messages et <code class="docutils literal notranslate"><span class="pre">SCOPED_TRACE</span></code><a class="headerlink" href="#documenter-un-echec-messages-et-scoped-trace" title="Lien vers cette rubrique"></a></h3>
+<p>Un test qui échoue doit permettre de comprendre le problème <strong>sans ouvrir le débogueur</strong>.
+Deux mécanismes y contribuent.</p>
+<p>D’abord, tout message passé en flux à une vérification est affiché en cas d’échec :</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ASSERT_TRUE</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">has_value</span><span class="p">())</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"forwardKinematics n'a pas renvoyé de solution"</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Ensuite, quand un test boucle sur plusieurs jeux de données, l’affichage ne dit pas <em>quelle</em> itération a échoué.
+<code class="docutils literal notranslate"><span class="pre">SCOPED_TRACE</span></code> ajoute cette information à tous les échecs survenant dans sa portée :</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-number">Code source 13 </span><span class="caption-text">Une boucle sur 16 configurations, chaque échec étant daté par ses angles</span><a class="headerlink" href="#id6" title="Lien vers ce code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TEST_F</span><span class="p">(</span><span class="n">ForwardKinematics</span><span class="p">,</span><span class="w"> </span><span class="n">MatchesMujocoSimulation</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">[</span><span class="n">q1d</span><span class="p">,</span><span class="w"> </span><span class="n">q4d</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">jointGrid</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="hll"><span class="w">    </span><span class="n">SCOPED_TRACE</span><span class="p">(</span><span class="n">testing</span><span class="o">::</span><span class="n">Message</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"q1="</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">q1d</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"° q4="</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">q4d</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"°"</span><span class="p">);</span>
+</span><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="p">[</span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="n">pen</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">simulate</span><span class="p">(</span><span class="n">deg</span><span class="p">(</span><span class="n">q1d</span><span class="p">),</span><span class="w"> </span><span class="n">deg</span><span class="p">(</span><span class="n">q4d</span><span class="p">));</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">forwardKinematics</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="n">geometry_</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ASSERT_TRUE</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">has_value</span><span class="p">())</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"configuration atteignable déclarée impossible"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">EXPECT_NEAR</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">pen</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">kPosTol</span><span class="p">);</span>
+<span class="w">    </span><span class="n">EXPECT_NEAR</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">pen</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">kPosTol</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Sans la ligne <code class="docutils literal notranslate"><span class="pre">SCOPED_TRACE</span></code>, le rapport d’échec indiquerait seulement le numéro de ligne de la comparaison, identique pour les 16 configurations.
+Avec elle, il indique <code class="docutils literal notranslate"><span class="pre">q1=90°</span> <span class="pre">q4=20°</span></code> : on sait immédiatement quelle configuration pose problème.</p>
+</section>
+</section>
+<section id="les-fixtures-partager-un-contexte-entre-tests">
+<span id="gtest-fixture"></span><h2>Les fixtures : partager un contexte entre tests<a class="headerlink" href="#les-fixtures-partager-un-contexte-entre-tests" title="Lien vers cette rubrique"></a></h2>
+<p id="index-3">Les tests du 5 barres ont besoin d’un contexte coûteux : une simulation MuJoCo chargée depuis un fichier MJCF.
+Le charger dans chaque test serait lent et répétitif. C’est le rôle des <strong>fixtures</strong>.</p>
+<p>Une fixture est une classe qui dérive de <code class="docutils literal notranslate"><span class="pre">::testing::Test</span></code> ; les tests qui l’utilisent sont déclarés avec <code class="docutils literal notranslate"><span class="pre">TEST_F</span></code> (<code class="docutils literal notranslate"><span class="pre">F</span></code> pour <em>fixture</em>) et accèdent à ses membres protégés.
+Quatre points d’entrée sont disponibles :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28.0%" />
+<col style="width: 72.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Méthode</p></th>
+<th class="head"><p>Quand elle est appelée</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SetUpTestSuite()</span></code></p></td>
+<td><p><strong>Une fois</strong> avant le premier test de la suite (statique).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SetUp()</span></code></p></td>
+<td><p>Avant <strong>chaque</strong> test.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">TearDown()</span></code></p></td>
+<td><p>Après <strong>chaque</strong> test.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">TearDownTestSuite()</span></code></p></td>
+<td><p><strong>Une fois</strong> après le dernier test de la suite (statique).</p></td>
+</tr>
+</tbody>
+</table>
+<p>Dans le projet, le modèle MuJoCo est chargé une seule fois pour toute la suite, mais la simulation est <strong>remise à son état initial avant chaque test</strong> :</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-number">Code source 14 </span><span class="caption-text">La fixture <code class="docutils literal notranslate"><span class="pre">MujocoFixture</span></code></span><a class="headerlink" href="#id7" title="Lien vers ce code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Une simulation partagée par toute la suite (chargement du MJCF une seule fois).</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MujocoFixture</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="o">::</span><span class="n">testing</span><span class="o">::</span><span class="n">Test</span>
+<span class="p">{</span>
+<span class="k">protected</span><span class="o">:</span>
+<span class="hll"><span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">SetUpTestSuite</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="n">sim_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">MujocoFiveBars</span><span class="o">&gt;</span><span class="p">();}</span>
+</span><span class="hll"><span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">TearDownTestSuite</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="n">sim_</span><span class="p">.</span><span class="n">reset</span><span class="p">();}</span>
+</span>
+<span class="hll"><span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">SetUp</span><span class="p">()</span><span class="w"> </span><span class="k">override</span>
+</span><span class="hll"><span class="w">  </span><span class="p">{</span>
+</span><span class="hll"><span class="w">    </span><span class="n">sim_</span><span class="o">-&gt;</span><span class="n">reset</span><span class="p">();</span>
+</span><span class="hll"><span class="w">    </span><span class="n">geometry_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sim_</span><span class="o">-&gt;</span><span class="n">geometry</span><span class="p">();</span>
+</span><span class="hll"><span class="w">  </span><span class="p">}</span>
+</span>
+<span class="w">  </span><span class="c1">/// Asservit (q1, q4) depuis 'home' ; renvoie les angles mesurés et la position du stylo.</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">JointAngles</span><span class="p">,</span><span class="w"> </span><span class="n">PenPosition</span><span class="o">&gt;</span><span class="w"> </span><span class="n">simulate</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">q1</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">q4</span><span class="p">)</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="n">sim_</span><span class="o">-&gt;</span><span class="n">reset</span><span class="p">();</span>
+<span class="w">    </span><span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">sim_</span><span class="o">-&gt;</span><span class="n">settle</span><span class="p">(</span><span class="n">q1</span><span class="p">,</span><span class="w"> </span><span class="n">q4</span><span class="p">))</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"la simulation n'a pas convergé"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">EXPECT_LT</span><span class="p">(</span><span class="n">sim_</span><span class="o">-&gt;</span><span class="n">closureError</span><span class="p">(),</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"chaîne non fermée dans la simulation"</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="n">sim_</span><span class="o">-&gt;</span><span class="n">measuredAngles</span><span class="p">(),</span><span class="w"> </span><span class="n">sim_</span><span class="o">-&gt;</span><span class="n">penPosition</span><span class="p">()};</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">MujocoFiveBars</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sim_</span><span class="p">;</span>
+<span class="w">  </span><span class="n">Geometry</span><span class="w"> </span><span class="n">geometry_</span><span class="p">{};</span>
+<span class="p">};</span>
+<span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">MujocoFiveBars</span><span class="o">&gt;</span><span class="w"> </span><span class="n">MujocoFixture</span><span class="o">::</span><span class="n">sim_</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<p>C’est l’équilibre à rechercher dans toute fixture :</p>
+<ul class="simple">
+<li><p><strong>mutualiser ce qui est coûteux et immuable</strong> (ici le chargement du modèle) dans <code class="docutils literal notranslate"><span class="pre">SetUpTestSuite</span></code> ;</p></li>
+<li><p><strong>réinitialiser ce qui est mutable</strong> (ici l’état de la simulation) dans <code class="docutils literal notranslate"><span class="pre">SetUp</span></code>.</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Des tests doivent être <strong>indépendants</strong> : le résultat d’un test ne doit jamais dépendre de l’exécution d’un autre, ni de l’ordre d’exécution.
+Sans le <code class="docutils literal notranslate"><span class="pre">sim_-&gt;reset()</span></code> de <code class="docutils literal notranslate"><span class="pre">SetUp()</span></code>, un test hériterait de la configuration laissée par le précédent, et l’ensemble deviendrait impossible à diagnostiquer.
+C’est aussi ce qui permet de rejouer un test seul, ce dont on a besoin pour déboguer.</p>
+</div>
+<p>Enfin, la fixture factorise une opération métier répétée dans tous les tests — amener la simulation à l’équilibre et en lire le résultat — en vérifiant au passage deux conditions de validité de la mesure (convergence et fermeture de la chaîne).
+Une méthode d’aide de fixture est le bon endroit pour ce genre de vérification : écrite une fois, elle protège tous les tests.</p>
+<section id="reutiliser-une-fixture-sous-plusieurs-noms">
+<h3>Réutiliser une fixture sous plusieurs noms<a class="headerlink" href="#reutiliser-une-fixture-sous-plusieurs-noms" title="Lien vers cette rubrique"></a></h3>
+<p>Les trois suites de tests du projet partagent la même fixture, mais portent des noms différents, par un simple alias de type :</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// ------------------------------------------------------------- banc de test (passe)</span>
+<span class="k">using</span><span class="w"> </span><span class="n">SimulationHarness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MujocoFixture</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>C’est une technique utile : elle permet de <strong>regrouper les tests par sujet</strong> dans les rapports (<code class="docutils literal notranslate"><span class="pre">SimulationHarness.*</span></code>, <code class="docutils literal notranslate"><span class="pre">ForwardKinematics.*</span></code>, <code class="docutils literal notranslate"><span class="pre">InverseKinematics.*</span></code>) et de n’exécuter qu’un sujet à la fois, sans dupliquer le code de la fixture.</p>
+</section>
+</section>
+<section id="que-verifient-les-tests-du-5-barres">
+<h2>Que vérifient les tests du 5 barres ?<a class="headerlink" href="#que-verifient-les-tests-du-5-barres" title="Lien vers cette rubrique"></a></h2>
+<p>Au-delà de la syntaxe, la question intéressante est : <strong>quelles propriétés</strong> faut-il vérifier pour être sûr d’un modèle géométrique ?
+Le projet donne un répertoire de bonnes pratiques, applicable à tout code de calcul.</p>
+<section id="un-cas-nominal-simple-verifiable-a-la-main">
+<h3>Un cas nominal simple, vérifiable à la main<a class="headerlink" href="#un-cas-nominal-simple-verifiable-a-la-main" title="Lien vers cette rubrique"></a></h3>
+<p>Le premier test porte sur la configuration d’assemblage (<code class="docutils literal notranslate"><span class="pre">home</span></code>), dont la position du stylo a été mesurée sur la CAO.
+Il vaut mieux commencer par un cas unique que l’on peut vérifier à la main : s’il échoue, le diagnostic est immédiat.</p>
+</section>
+<section id="un-balayage-de-l-espace-de-travail">
+<h3>Un balayage de l’espace de travail<a class="headerlink" href="#un-balayage-de-l-espace-de-travail" title="Lien vers cette rubrique"></a></h3>
+<p>Un seul point ne prouve rien (un modèle faux peut être juste par accident en un point).
+Le test <code class="docutils literal notranslate"><span class="pre">MatchesMujocoSimulation</span></code>, montré plus haut, balaie 16 configurations réparties dans l’espace de travail, <strong>loin des singularités</strong>, et compare à chaque fois le modèle à la simulation.</p>
+</section>
+<section id="une-propriete-qui-attrape-une-erreur-precise">
+<h3>Une propriété qui attrape une erreur précise<a class="headerlink" href="#une-propriete-qui-attrape-une-erreur-precise" title="Lien vers cette rubrique"></a></h3>
+<p>Certains tests sont écrits pour piéger une <strong>erreur que l’on sait probable</strong>.
+Ici, l’erreur classique est de confondre la pointe du stylo avec le point de fermeture <code class="docutils literal notranslate"><span class="pre">A3</span></code>, alors que le stylo en est décalé de 16 mm et 21 mm :</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-number">Code source 15 </span><span class="caption-text">Un test dont le seul but est de détecter l’oubli du décalage du stylo</span><a class="headerlink" href="#id8" title="Lien vers ce code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TEST_F</span><span class="p">(</span><span class="n">ForwardKinematics</span><span class="p">,</span><span class="w"> </span><span class="n">PenOffsetIsTakenIntoAccount</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="c1">// Le stylo n'est PAS en A3 : un modèle qui l'oublie doit échouer ici.</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">forwardKinematics</span><span class="p">(</span><span class="n">sim_</span><span class="o">-&gt;</span><span class="n">measuredAngles</span><span class="p">(),</span><span class="w"> </span><span class="n">geometry_</span><span class="p">);</span>
+<span class="w">  </span><span class="n">ASSERT_TRUE</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">has_value</span><span class="p">());</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">a3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sim_</span><span class="o">-&gt;</span><span class="n">siteXY</span><span class="p">(</span><span class="s">"A3_link2"</span><span class="p">);</span>
+<span class="w">  </span><span class="n">EXPECT_NEAR</span><span class="p">(</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">hypot</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a3</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a3</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">hypot</span><span class="p">(</span><span class="n">geometry_</span><span class="p">.</span><span class="n">pen_dx</span><span class="p">,</span><span class="w"> </span><span class="n">geometry_</span><span class="p">.</span><span class="n">pen_dy</span><span class="p">),</span><span class="w"> </span><span class="n">kPosTol</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Ce test ne vérifie pas une valeur numérique attendue, mais une <strong>relation géométrique</strong> : quelle que soit la configuration, la distance entre la pointe du stylo et <code class="docutils literal notranslate"><span class="pre">A3</span></code> doit valoir la norme du décalage.</p>
+</section>
+<section id="des-invariants">
+<h3>Des invariants<a class="headerlink" href="#des-invariants" title="Lien vers cette rubrique"></a></h3>
+<p id="index-4">Un invariant est une propriété vraie pour <strong>toute</strong> entrée valide, sans qu’il soit nécessaire de connaître le résultat attendu.
+Les invariants sont des tests particulièrement rentables : ils sont courts et couvrent un grand nombre de cas.</p>
+<p>Ici, le modèle inverse doit défaire exactement ce que fait le modèle direct :</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-number">Code source 16 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">IK</span> <span class="pre">∘</span> <span class="pre">FK</span> <span class="pre">=</span> <span class="pre">identité</span></code>, vérifiée à 10<sup>-9</sup> rad</span><a class="headerlink" href="#id9" title="Lien vers ce code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TEST_F</span><span class="p">(</span><span class="n">InverseKinematics</span><span class="p">,</span><span class="w"> </span><span class="n">InverseOfForwardIsIdentity</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">[</span><span class="n">q1d</span><span class="p">,</span><span class="w"> </span><span class="n">q4d</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">jointGrid</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">SCOPED_TRACE</span><span class="p">(</span><span class="n">testing</span><span class="o">::</span><span class="n">Message</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"q1="</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">q1d</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"° q4="</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">q4d</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"°"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">forwardKinematics</span><span class="p">({</span><span class="n">deg</span><span class="p">(</span><span class="n">q1d</span><span class="p">),</span><span class="w"> </span><span class="n">deg</span><span class="p">(</span><span class="n">q4d</span><span class="p">)},</span><span class="w"> </span><span class="n">geometry_</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ASSERT_TRUE</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">has_value</span><span class="p">());</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inverseKinematics</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">geometry_</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ASSERT_TRUE</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">has_value</span><span class="p">());</span>
+<span class="w">    </span><span class="n">EXPECT_NEAR</span><span class="p">(</span><span class="n">wrap</span><span class="p">(</span><span class="n">r</span><span class="o">-&gt;</span><span class="n">q1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">deg</span><span class="p">(</span><span class="n">q1d</span><span class="p">)),</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-9</span><span class="p">);</span>
+<span class="w">    </span><span class="n">EXPECT_NEAR</span><span class="p">(</span><span class="n">wrap</span><span class="p">(</span><span class="n">r</span><span class="o">-&gt;</span><span class="n">q4</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">deg</span><span class="p">(</span><span class="n">q4d</span><span class="p">)),</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-9</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Notez la tolérance : 10<sup>-9</sup> rad, bien plus serrée qu’ailleurs.
+C’est cohérent, car cette comparaison ne fait intervenir <strong>aucune</strong> simulation : elle enchaîne deux calculs analytiques, et seule l’erreur d’arrondi est admissible.</p>
+<div class="admonition caution">
+<p class="admonition-title">Prudence</p>
+<p>Un invariant ne suffit jamais seul : deux fonctions <strong>toutes les deux fausses</strong> mais réciproques l’une de l’autre passeraient ce test.
+C’est pourquoi il faut le combiner avec les tests de comparaison à une référence externe (ici la simulation).</p>
+</div>
+</section>
+<section id="les-cas-d-erreur">
+<h3>Les cas d’erreur<a class="headerlink" href="#les-cas-d-erreur" title="Lien vers cette rubrique"></a></h3>
+<p>Un code n’est spécifié que si l’on sait ce qu’il fait des entrées invalides.
+Les deux fonctions doivent renvoyer un <code class="docutils literal notranslate"><span class="pre">std::optional</span></code> vide pour une configuration non assemblable ou un point inatteignable, et les tests le vérifient explicitement :</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-number">Code source 17 </span><span class="caption-text">Cas d’erreur du modèle inverse : point trop loin, et point sur l’axe moteur</span><a class="headerlink" href="#id10" title="Lien vers ce code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TEST_F</span><span class="p">(</span><span class="n">InverseKinematics</span><span class="p">,</span><span class="w"> </span><span class="n">UnreachablePointReturnsNullopt</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">inverseKinematics</span><span class="p">({</span><span class="mf">0.07</span><span class="p">,</span><span class="w"> </span><span class="mf">0.17</span><span class="p">},</span><span class="w"> </span><span class="n">geometry_</span><span class="p">).</span><span class="n">has_value</span><span class="p">());</span>
+<span class="w">  </span><span class="n">EXPECT_FALSE</span><span class="p">(</span><span class="n">inverseKinematics</span><span class="p">({</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">},</span><span class="w"> </span><span class="n">geometry_</span><span class="p">).</span><span class="n">has_value</span><span class="p">());</span><span class="w">  </span><span class="c1">// trop loin</span>
+<span class="w">  </span><span class="n">EXPECT_FALSE</span><span class="p">(</span><span class="n">inverseKinematics</span><span class="p">({</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">},</span><span class="w"> </span><span class="n">geometry_</span><span class="p">).</span><span class="n">has_value</span><span class="p">());</span><span class="w">  </span><span class="c1">// sur l'axe moteur</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Chacun de ces tests vérifie aussi <strong>un cas valide</strong> (<code class="docutils literal notranslate"><span class="pre">EXPECT_TRUE</span></code> en première ligne).
+C’est un détail important : sans lui, une fonction qui renverrait systématiquement <code class="docutils literal notranslate"><span class="pre">std::nullopt</span></code> passerait le test alors qu’elle ne calcule rien.</p>
+</section>
+<section id="un-test-du-banc-de-test-lui-meme">
+<h3>Un test du banc de test lui-même<a class="headerlink" href="#un-test-du-banc-de-test-lui-meme" title="Lien vers cette rubrique"></a></h3>
+<p>Enfin, la suite <code class="docutils literal notranslate"><span class="pre">SimulationHarness</span></code> ne teste pas le code de l’étudiant : elle vérifie que la <strong>référence</strong> est digne de confiance (le stylo est bien là où la CAO l’annonce, et la simulation suit bien les consignes).
+Ces deux tests doivent passer dès le départ.</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-number">Code source 18 </span><span class="caption-text">Les seuls tests qui passent dans le projet livré</span><a class="headerlink" href="#id11" title="Lien vers ce code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TEST_F</span><span class="p">(</span><span class="n">SimulationHarness</span><span class="p">,</span><span class="w"> </span><span class="n">HomePenPositionMatchesCad</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">pen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sim_</span><span class="o">-&gt;</span><span class="n">penPosition</span><span class="p">();</span>
+<span class="w">  </span><span class="n">EXPECT_NEAR</span><span class="p">(</span><span class="n">pen</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mf">0.07345</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-3</span><span class="p">);</span>
+<span class="w">  </span><span class="n">EXPECT_NEAR</span><span class="p">(</span><span class="n">pen</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="mf">0.20220</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-3</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">TEST_F</span><span class="p">(</span><span class="n">SimulationHarness</span><span class="p">,</span><span class="w"> </span><span class="n">SimulationTracksCommands</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="p">[</span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="n">pen</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">simulate</span><span class="p">(</span><span class="n">deg</span><span class="p">(</span><span class="mi">120</span><span class="p">),</span><span class="w"> </span><span class="n">deg</span><span class="p">(</span><span class="mi">50</span><span class="p">));</span>
+<span class="w">  </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">pen</span><span class="p">;</span>
+<span class="w">  </span><span class="n">EXPECT_NEAR</span><span class="p">(</span><span class="n">q</span><span class="p">.</span><span class="n">q1</span><span class="p">,</span><span class="w"> </span><span class="n">deg</span><span class="p">(</span><span class="mi">120</span><span class="p">),</span><span class="w"> </span><span class="mf">1e-4</span><span class="p">);</span>
+<span class="w">  </span><span class="n">EXPECT_NEAR</span><span class="p">(</span><span class="n">q</span><span class="p">.</span><span class="n">q4</span><span class="p">,</span><span class="w"> </span><span class="n">deg</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"> </span><span class="mf">1e-4</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>C’est une pratique essentielle, détaillée dans <a class="reference internal" href="p03s04_use_simulation_to_write_tests.html"><span class="doc">Utiliser la simulation pour écrire des tests</span></a> : <strong>quand un test s’appuie sur un oracle, il faut aussi tester l’oracle</strong>.
+Sinon, un échec est ambigu : le code est-il faux, ou la référence ?</p>
+</section>
+</section>
+<section id="integrer-les-tests-au-paquet-ros-2">
+<h2>Intégrer les tests au paquet ROS 2<a class="headerlink" href="#integrer-les-tests-au-paquet-ros-2" title="Lien vers cette rubrique"></a></h2>
+<section id="declarer-le-test-dans-cmakelists-txt">
+<span id="index-5"></span><h3>Déclarer le test dans <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code><a class="headerlink" href="#declarer-le-test-dans-cmakelists-txt" title="Lien vers cette rubrique"></a></h3>
+<p>ROS 2 fournit l’enrobage <code class="docutils literal notranslate"><span class="pre">ament_add_gtest</span></code>, qui compile le fichier de test, le lie à Google Test et l’enregistre auprès de <code class="docutils literal notranslate"><span class="pre">ctest</span></code> en produisant un rapport XML exploitable par <code class="docutils literal notranslate"><span class="pre">colcon</span></code> et par la CI.</p>
+<p>Tout le bloc de test est placé sous <code class="docutils literal notranslate"><span class="pre">if(BUILD_TESTING)</span></code> : les tests ne sont alors compilés que lorsqu’on le demande, et une compilation de production n’a pas besoin des dépendances de test.</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-number">Code source 19 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">five_bars_kinematics/CMakeLists.txt</span></code> — déclaration des tests</span><a class="headerlink" href="#id12" title="Lien vers ce code"></a></div>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c"># --- Tests : vérité terrain = simulation MuJoCo headless ---</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">BUILD_TESTING</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">find_package</span><span class="p">(</span><span class="s">ament_cmake_gtest</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">find_package</span><span class="p">(</span><span class="s">ament_cmake_pytest</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">find_package</span><span class="p">(</span><span class="s">five_bars_description</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+
+<span class="w">  </span><span class="nb">list</span><span class="p">(</span><span class="s">APPEND</span><span class="w"> </span><span class="s">CMAKE_MODULE_PATH</span><span class="w"> </span><span class="s2">"${CMAKE_CURRENT_SOURCE_DIR}/cmake"</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">find_package</span><span class="p">(</span><span class="s">MuJoCo</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span><span class="w"> </span><span class="s2">"MuJoCo : ${MuJoCo_LIBRARY} (version ${MuJoCo_VERSION})"</span><span class="p">)</span>
+
+<span class="w">  </span><span class="c"># share/five_bars_description/cmake/.. -&gt; share/five_bars_description</span>
+<span class="w">  </span><span class="nb">get_filename_component</span><span class="p">(</span><span class="s">_desc_share</span><span class="w"> </span><span class="s2">"${five_bars_description_DIR}/.."</span><span class="w"> </span><span class="s">ABSOLUTE</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">set</span><span class="p">(</span><span class="s">FIVE_BARS_MJCF</span><span class="w"> </span><span class="s2">"${_desc_share}/mjcf/five_bars.xml"</span><span class="p">)</span>
+
+<span class="hll"><span class="w">  </span><span class="nb">ament_add_gtest</span><span class="p">(</span><span class="s">test_kinematics_cpp</span><span class="w"> </span><span class="s">test/test_kinematics.cpp</span><span class="w"> </span><span class="s">TIMEOUT</span><span class="w"> </span><span class="s">300</span><span class="p">)</span>
+</span><span class="hll"><span class="w">  </span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">test_kinematics_cpp</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="w"> </span><span class="s">MuJoCo::MuJoCo</span><span class="p">)</span>
+</span><span class="hll"><span class="w">  </span><span class="nb">target_compile_definitions</span><span class="p">(</span><span class="s">test_kinematics_cpp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">FIVE_BARS_MJCF_PATH=</span><span class="s2">"${FIVE_BARS_MJCF}"</span><span class="p">)</span>
+</span>
+<span class="w">  </span><span class="nb">ament_add_pytest_test</span><span class="p">(</span><span class="s">test_kinematics_py</span><span class="w"> </span><span class="s">test/test_kinematics.py</span>
+<span class="w">    </span><span class="s">TIMEOUT</span><span class="w"> </span><span class="s">300</span>
+<span class="w">    </span><span class="s">ENV</span><span class="w"> </span><span class="s">FIVE_BARS_MJCF=</span><span class="o">${</span><span class="nv">FIVE_BARS_MJCF</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Trois points méritent attention :</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">target_link_libraries</span></code> lie le test à la bibliothèque testée (<code class="docutils literal notranslate"><span class="pre">${PROJECT_NAME}</span></code>) et à MuJoCo. Un test est un programme comme un autre : il doit être lié à ce qu’il teste.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TIMEOUT</span> <span class="pre">300</span></code> relève le délai maximal (60 s par défaut) : ces tests font tourner une simulation dynamique des dizaines de fois. <strong>Un test qui dépasse son délai est compté comme un échec.</strong></p></li>
+<li><p>Le chemin du modèle de simulation est passé au test <strong>par le système de compilation</strong>, via <code class="docutils literal notranslate"><span class="pre">target_compile_definitions</span></code>, plutôt qu’écrit en dur dans le code de test.</p></li>
+</ol>
+<p>Ce dernier point est une bonne pratique générale : un test ne doit pas dépendre du répertoire depuis lequel on le lance.
+Le code de test accepte les deux sources, la variable d’environnement ayant priorité, ce qui permet de rejouer le test à la main sur un autre modèle :</p>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-number">Code source 20 </span><span class="caption-text">Localisation du modèle : variable d’environnement, sinon valeur fournie à la compilation</span><a class="headerlink" href="#id13" title="Lien vers ce code"></a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">/// Chemin du MJCF : $FIVE_BARS_MJCF sinon celui fixé à la compilation (paquet five_bars_description).</span>
+<span class="kr">inline</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">modelPath</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">getenv</span><span class="p">(</span><span class="s">"FIVE_BARS_MJCF"</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">env</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="cp">#ifdef FIVE_BARS_MJCF_PATH</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">FIVE_BARS_MJCF_PATH</span><span class="p">;</span>
+<span class="cp">#else</span>
+<span class="w">  </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">"Définir FIVE_BARS_MJCF (chemin de five_bars.xml)"</span><span class="p">);</span>
+<span class="cp">#endif</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="declarer-les-dependances-dans-package-xml">
+<h3>Déclarer les dépendances dans <code class="docutils literal notranslate"><span class="pre">package.xml</span></code><a class="headerlink" href="#declarer-les-dependances-dans-package-xml" title="Lien vers cette rubrique"></a></h3>
+<p>Les dépendances utilisées <strong>uniquement</strong> par les tests se déclarent avec <code class="docutils literal notranslate"><span class="pre">&lt;test_depend&gt;</span></code>.
+Elles ne sont alors pas nécessaires pour installer et faire tourner le paquet en production.</p>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-number">Code source 21 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">five_bars_kinematics/package.xml</span></code> — dépendances de test</span><a class="headerlink" href="#id14" title="Lien vers ce code"></a></div>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">&lt;test_depend&gt;</span>ament_cmake_gtest<span class="nt">&lt;/test_depend&gt;</span>
+<span class="w">  </span><span class="nt">&lt;test_depend&gt;</span>ament_cmake_pytest<span class="nt">&lt;/test_depend&gt;</span>
+<span class="w">  </span><span class="nt">&lt;test_depend&gt;</span>five_bars_description<span class="nt">&lt;/test_depend&gt;</span>
+<span class="w">  </span><span class="nt">&lt;test_depend&gt;</span>five_bars_mujoco<span class="nt">&lt;/test_depend&gt;</span>
+<span class="w">  </span><span class="nt">&lt;test_depend&gt;</span>python3-numpy<span class="nt">&lt;/test_depend&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!-- MuJoCo (C et Python) : pip install mujoco, voir docker/Dockerfile --&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>MuJoCo n’a pas de clé <code class="docutils literal notranslate"><span class="pre">rosdep</span></code> officielle : il est installé par <code class="docutils literal notranslate"><span class="pre">pip</span></code> dans l’image Docker du projet (voir <a class="reference internal" href="p03s05_create_CI_for_automatically_runing_your_tests.html"><span class="doc">Exécuter les tests automatiquement : l’intégration continue</span></a>).
+C’est une situation courante, et la bonne réaction est de la <strong>documenter à l’endroit où elle surprendrait</strong> — ici, un commentaire dans le <code class="docutils literal notranslate"><span class="pre">package.xml</span></code> — et de figer l’installation dans l’image de la CI.</p>
+</div>
+</section>
+<section id="trouver-une-bibliotheque-sans-support-cmake">
+<h3>Trouver une bibliothèque sans support CMake<a class="headerlink" href="#trouver-une-bibliotheque-sans-support-cmake" title="Lien vers cette rubrique"></a></h3>
+<p>Pour que les tests C++ et les tests Python jugent le même code avec la <strong>même version</strong> de MuJoCo, le projet cherche la bibliothèque C à l’intérieur de la roue Python installée par <code class="docutils literal notranslate"><span class="pre">pip</span></code> :</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text"><code class="docutils literal notranslate"><span class="pre">cmake/FindMuJoCo.cmake</span></code></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="literal-block-wrapper docutils container" id="id15">
+<div class="code-block-caption"><span class="caption-number">Code source 22 </span><span class="caption-text">cmake/FindMuJoCo.cmake</span><a class="headerlink" href="#id15" title="Lien vers ce code"></a></div>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c"># FindMuJoCo.cmake — trouve la bibliothèque C de MuJoCo et crée la cible MuJoCo::MuJoCo.</span>
+<span class="c">#</span>
+<span class="c"># Ordre de recherche :</span>
+<span class="c">#   1. variable CMake / d'environnement MUJOCO_DIR (archive officielle :</span>
+<span class="c">#      https://github.com/google-deepmind/mujoco/releases -&gt; include/ et lib/) ;</span>
+<span class="c">#   2. la roue Python `mujoco` (pip install mujoco) qui embarque include/ et libmujoco.so.X.Y.Z :</span>
+<span class="c">#      garantit la MÊME version de MuJoCo en Python et en C++.</span>
+<span class="c">#</span>
+<span class="c"># Variables définies : MuJoCo_FOUND, MuJoCo_INCLUDE_DIR, MuJoCo_LIBRARY, MuJoCo_VERSION</span>
+
+<span class="nb">set</span><span class="p">(</span><span class="s">_mujoco_hints</span><span class="w"> </span><span class="s2">""</span><span class="p">)</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">DEFINED</span><span class="w"> </span><span class="s">MUJOCO_DIR</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">list</span><span class="p">(</span><span class="s">APPEND</span><span class="w"> </span><span class="s">_mujoco_hints</span><span class="w"> </span><span class="s2">"${MUJOCO_DIR}"</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">DEFINED</span><span class="w"> </span><span class="s">ENV{MUJOCO_DIR}</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">list</span><span class="p">(</span><span class="s">APPEND</span><span class="w"> </span><span class="s">_mujoco_hints</span><span class="w"> </span><span class="s2">"$ENV{MUJOCO_DIR}"</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+
+<span class="nb">find_package</span><span class="p">(</span><span class="s">Python3</span><span class="w"> </span><span class="s">COMPONENTS</span><span class="w"> </span><span class="s">Interpreter</span><span class="w"> </span><span class="s">QUIET</span><span class="p">)</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">Python3_Interpreter_FOUND</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">execute_process</span><span class="p">(</span>
+<span class="w">    </span><span class="s">COMMAND</span><span class="w"> </span><span class="o">${</span><span class="nv">Python3_EXECUTABLE</span><span class="o">}</span><span class="w"> </span><span class="s">-c</span><span class="w"> </span><span class="s2">"import mujoco, os; print(os.path.dirname(mujoco.__file__))"</span>
+<span class="w">    </span><span class="s">OUTPUT_VARIABLE</span><span class="w"> </span><span class="s">_mujoco_py_dir</span><span class="w"> </span><span class="s">OUTPUT_STRIP_TRAILING_WHITESPACE</span><span class="w"> </span><span class="s">ERROR_QUIET</span>
+<span class="w">    </span><span class="s">RESULT_VARIABLE</span><span class="w"> </span><span class="s">_mujoco_py_res</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">if</span><span class="p">(</span><span class="s">_mujoco_py_res</span><span class="w"> </span><span class="s">EQUAL</span><span class="w"> </span><span class="s">0</span><span class="w"> </span><span class="s">AND</span><span class="w"> </span><span class="s">EXISTS</span><span class="w"> </span><span class="s2">"${_mujoco_py_dir}"</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">list</span><span class="p">(</span><span class="s">APPEND</span><span class="w"> </span><span class="s">_mujoco_hints</span><span class="w"> </span><span class="s2">"${_mujoco_py_dir}"</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">endif</span><span class="p">()</span>
+<span class="nb">endif</span><span class="p">()</span>
+
+<span class="nb">find_path</span><span class="p">(</span><span class="s">MuJoCo_INCLUDE_DIR</span><span class="w"> </span><span class="s">mujoco/mujoco.h</span><span class="w"> </span><span class="s">HINTS</span><span class="w"> </span><span class="o">${</span><span class="nv">_mujoco_hints</span><span class="o">}</span><span class="w"> </span><span class="s">PATH_SUFFIXES</span><span class="w"> </span><span class="s">include</span><span class="p">)</span>
+
+<span class="c"># La roue pip ne fournit que libmujoco.so.X.Y.Z (sans lien libmujoco.so) : on cherche par motif.</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">MuJoCo_LIBRARY</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="s">CACHE</span><span class="w"> </span><span class="s">FILEPATH</span><span class="w"> </span><span class="s2">"Bibliothèque MuJoCo"</span><span class="p">)</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">NOT</span><span class="w"> </span><span class="s">MuJoCo_LIBRARY</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">foreach</span><span class="p">(</span><span class="s">_dir</span><span class="w"> </span><span class="o">${</span><span class="nv">_mujoco_hints</span><span class="o">}</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">file</span><span class="p">(</span><span class="s">GLOB</span><span class="w"> </span><span class="s">_cands</span><span class="w"> </span><span class="s2">"${_dir}/lib/libmujoco.so*"</span><span class="w"> </span><span class="s2">"${_dir}/libmujoco.so*"</span>
+<span class="w">                     </span><span class="s2">"${_dir}/lib/libmujoco*.dylib"</span><span class="w"> </span><span class="s2">"${_dir}/libmujoco*.dylib"</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">if</span><span class="p">(</span><span class="s">_cands</span><span class="p">)</span>
+<span class="w">      </span><span class="nb">list</span><span class="p">(</span><span class="s">SORT</span><span class="w"> </span><span class="s">_cands</span><span class="p">)</span>
+<span class="w">      </span><span class="nb">list</span><span class="p">(</span><span class="s">GET</span><span class="w"> </span><span class="s">_cands</span><span class="w"> </span><span class="s">0</span><span class="w"> </span><span class="s">_lib</span><span class="p">)</span>
+<span class="w">      </span><span class="nb">set</span><span class="p">(</span><span class="s">MuJoCo_LIBRARY</span><span class="w"> </span><span class="s2">"${_lib}"</span><span class="w"> </span><span class="s">CACHE</span><span class="w"> </span><span class="s">FILEPATH</span><span class="w"> </span><span class="s2">"Bibliothèque MuJoCo"</span><span class="w"> </span><span class="s">FORCE</span><span class="p">)</span>
+<span class="w">      </span><span class="nb">break</span><span class="p">()</span>
+<span class="w">    </span><span class="nb">endif</span><span class="p">()</span>
+<span class="w">  </span><span class="nb">endforeach</span><span class="p">()</span>
+<span class="nb">endif</span><span class="p">()</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">NOT</span><span class="w"> </span><span class="s">MuJoCo_LIBRARY</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">find_library</span><span class="p">(</span><span class="s">MuJoCo_LIBRARY</span><span class="w"> </span><span class="s">NAMES</span><span class="w"> </span><span class="s">mujoco</span><span class="w"> </span><span class="s">HINTS</span><span class="w"> </span><span class="o">${</span><span class="nv">_mujoco_hints</span><span class="o">}</span><span class="w"> </span><span class="s">PATH_SUFFIXES</span><span class="w"> </span><span class="s">lib</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+
+<span class="nb">if</span><span class="p">(</span><span class="s">MuJoCo_INCLUDE_DIR</span><span class="w"> </span><span class="s">AND</span><span class="w"> </span><span class="s">EXISTS</span><span class="w"> </span><span class="s2">"${MuJoCo_INCLUDE_DIR}/mujoco/mujoco.h"</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">file</span><span class="p">(</span><span class="s">STRINGS</span><span class="w"> </span><span class="s2">"${MuJoCo_INCLUDE_DIR}/mujoco/mujoco.h"</span><span class="w"> </span><span class="s">_ver</span><span class="w"> </span><span class="s">REGEX</span><span class="w"> </span><span class="s2">"^#define mjVERSION_HEADER"</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">string</span><span class="p">(</span><span class="s">REGEX</span><span class="w"> </span><span class="s">MATCH</span><span class="w"> </span><span class="s2">"[0-9]+"</span><span class="w"> </span><span class="s">MuJoCo_VERSION</span><span class="w"> </span><span class="s2">"${_ver}"</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+
+<span class="nb">include</span><span class="p">(</span><span class="s">FindPackageHandleStandardArgs</span><span class="p">)</span>
+<span class="nb">find_package_handle_standard_args</span><span class="p">(</span><span class="s">MuJoCo</span>
+<span class="w">  </span><span class="s">REQUIRED_VARS</span><span class="w"> </span><span class="s">MuJoCo_LIBRARY</span><span class="w"> </span><span class="s">MuJoCo_INCLUDE_DIR</span>
+<span class="w">  </span><span class="s">VERSION_VAR</span><span class="w"> </span><span class="s">MuJoCo_VERSION</span><span class="p">)</span>
+
+<span class="nb">if</span><span class="p">(</span><span class="s">MuJoCo_FOUND</span><span class="w"> </span><span class="s">AND</span><span class="w"> </span><span class="s">NOT</span><span class="w"> </span><span class="s">TARGET</span><span class="w"> </span><span class="s">MuJoCo::MuJoCo</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">add_library</span><span class="p">(</span><span class="s">MuJoCo::MuJoCo</span><span class="w"> </span><span class="s">SHARED</span><span class="w"> </span><span class="s">IMPORTED</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">set_target_properties</span><span class="p">(</span><span class="s">MuJoCo::MuJoCo</span><span class="w"> </span><span class="s">PROPERTIES</span>
+<span class="w">    </span><span class="s">IMPORTED_LOCATION</span><span class="w"> </span><span class="s2">"${MuJoCo_LIBRARY}"</span>
+<span class="w">    </span><span class="s">INTERFACE_INCLUDE_DIRECTORIES</span><span class="w"> </span><span class="s2">"${MuJoCo_INCLUDE_DIR}"</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+<span class="nb">mark_as_advanced</span><span class="p">(</span><span class="s">MuJoCo_INCLUDE_DIR</span><span class="w"> </span><span class="s">MuJoCo_LIBRARY</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</details><p>Retenez surtout l’intention : si deux implémentations d’un même calcul sont validées par deux versions différentes de la même référence, les écarts constatés ne sont plus interprétables.</p>
+</section>
+</section>
+<section id="lancer-les-tests">
+<h2>Lancer les tests<a class="headerlink" href="#lancer-les-tests" title="Lien vers cette rubrique"></a></h2>
+<p>Avec les commandes définies dans <a class="reference internal" href="../c02_first_ros2_project_pimped/p02s01_pimped_pubsub.html"><span class="doc">votre fichier .bashrc</span></a> et détaillées dans <a class="reference internal" href="p03s01_run_ros2_tests.html"><span class="doc">Lancer les tests de ROS2 et les analyser</span></a> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2_build
+ros2_test_only<span class="w"> </span>five_bars_kinematics
+ros2_view_tests
+</pre></div>
+</div>
+<p>Les commandes <code class="docutils literal notranslate"><span class="pre">colcon</span></code> équivalentes, utiles pour ne voir que la sortie des tests :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--packages-select<span class="w"> </span>five_bars_kinematics<span class="w"> </span>--event-handlers<span class="w"> </span>console_direct+
+colcon<span class="w"> </span>test-result<span class="w"> </span>--verbose
+</pre></div>
+</div>
+<p>Pendant le développement, il est beaucoup plus rapide d’exécuter <strong>directement l’exécutable de test</strong> : on évite le cycle complet de <code class="docutils literal notranslate"><span class="pre">colcon</span></code>, et on dispose des options de Google Test.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># tous les tests du fichier</span>
+./build/five_bars_kinematics/test_kinematics_cpp
+
+<span class="c1"># seulement une suite, ou un seul test (joker * accepté)</span>
+./build/five_bars_kinematics/test_kinematics_cpp<span class="w"> </span>--gtest_filter<span class="o">=</span><span class="s1">'ForwardKinematics.*'</span>
+./build/five_bars_kinematics/test_kinematics_cpp<span class="w"> </span>--gtest_filter<span class="o">=</span><span class="s1">'*PenOffset*'</span>
+
+<span class="c1"># s'arrêter au premier échec, et lister les tests sans les exécuter</span>
+./build/five_bars_kinematics/test_kinematics_cpp<span class="w"> </span>--gtest_break_on_failure
+./build/five_bars_kinematics/test_kinematics_cpp<span class="w"> </span>--gtest_list_tests
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Astuce</p>
+<p><code class="docutils literal notranslate"><span class="pre">--gtest_filter</span></code> est l’outil de travail quotidien en TDD : on se concentre sur <strong>un</strong> test, on le fait passer, puis on relance toute la suite pour vérifier qu’on n’a rien cassé.</p>
+</div>
+</section>
+<section id="lire-et-interpreter-un-echec">
+<span id="gtest-lire-un-echec"></span><h2>Lire et interpréter un échec<a class="headerlink" href="#lire-et-interpreter-un-echec" title="Lien vers cette rubrique"></a></h2>
+<section id="l-etat-initial-du-projet">
+<h3>L’état initial du projet<a class="headerlink" href="#l-etat-initial-du-projet" title="Lien vers cette rubrique"></a></h3>
+<p>Sur le projet livré, l’exécution donne ceci — 10 tests, 2 qui passent (ceux du banc de test), 8 qui échouent :</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[==========] Running 10 tests from 3 test suites.
+[----------] Global test environment set-up.
+[----------] 2 tests from SimulationHarness
+<span class="hll">[ RUN      ] SimulationHarness.HomePenPositionMatchesCad
+</span><span class="hll">[       OK ] SimulationHarness.HomePenPositionMatchesCad (0 ms)
+</span><span class="hll">[ RUN      ] SimulationHarness.SimulationTracksCommands
+</span><span class="hll">[       OK ] SimulationHarness.SimulationTracksCommands (4 ms)
+</span>[----------] 2 tests from SimulationHarness (4 ms total)
+[----------] 4 tests from ForwardKinematics
+[ RUN      ] ForwardKinematics.HomeConfiguration
+src/five_bars_kinematics/test/test_kinematics.cpp:114: Failure
+Value of: p.has_value()
+  Actual: false
+Expected: true
+forwardKinematics n'a pas renvoyé de solution
+[  FAILED  ] ForwardKinematics.HomeConfiguration (0 ms)
+[ RUN      ] ForwardKinematics.MatchesMujocoSimulation
+src/five_bars_kinematics/test/test_kinematics.cpp:125: Failure
+Value of: p.has_value()
+  Actual: false
+Expected: true
+configuration atteignable déclarée impossible
+Google Test trace:
+src/five_bars_kinematics/test/test_kinematics.cpp:122: q1=90° q4=20°
+[  FAILED  ] ForwardKinematics.MatchesMujocoSimulation (5 ms)
+[ RUN      ] ForwardKinematics.PenOffsetIsTakenIntoAccount
+src/five_bars_kinematics/test/test_kinematics.cpp:135: Failure
+Value of: p.has_value()
+  Actual: false
+Expected: true
+[  FAILED  ] ForwardKinematics.PenOffsetIsTakenIntoAccount (0 ms)
+[ RUN      ] ForwardKinematics.UnassemblableConfigurationReturnsNullopt
+src/five_bars_kinematics/test/test_kinematics.cpp:143: Failure
+Value of: forwardKinematics({deg(110), deg(60)}, geometry_).has_value()
+  Actual: false
+Expected: true
+[  FAILED  ] ForwardKinematics.UnassemblableConfigurationReturnsNullopt (0 ms)
+[----------] 4 tests from ForwardKinematics (7 ms total)
+[----------] 4 tests from InverseKinematics
+[ RUN      ] InverseKinematics.MatchesMujocoSimulation
+src/five_bars_kinematics/test/test_kinematics.cpp:157: Failure
+Value of: r.has_value()
+  Actual: false
+Expected: true
+point atteignable déclaré inatteignable
+Google Test trace:
+src/five_bars_kinematics/test/test_kinematics.cpp:154: q1=90° q4=20°
+[  FAILED  ] InverseKinematics.MatchesMujocoSimulation (4 ms)
+[ RUN      ] InverseKinematics.ReachesTargetsInSimulation
+src/five_bars_kinematics/test/test_kinematics.cpp:169: Failure
+Value of: r.has_value()
+  Actual: false
+Expected: true
+Google Test trace:
+src/five_bars_kinematics/test/test_kinematics.cpp:167: cible x=0.02 y=0.13
+[  FAILED  ] InverseKinematics.ReachesTargetsInSimulation (0 ms)
+[ RUN      ] InverseKinematics.InverseOfForwardIsIdentity
+src/five_bars_kinematics/test/test_kinematics.cpp:181: Failure
+Value of: p.has_value()
+  Actual: false
+Expected: true
+Google Test trace:
+src/five_bars_kinematics/test/test_kinematics.cpp:179: q1=90° q4=20°
+[  FAILED  ] InverseKinematics.InverseOfForwardIsIdentity (0 ms)
+[ RUN      ] InverseKinematics.UnreachablePointReturnsNullopt
+src/five_bars_kinematics/test/test_kinematics.cpp:191: Failure
+Value of: inverseKinematics({0.07, 0.17}, geometry_).has_value()
+  Actual: false
+Expected: true
+[  FAILED  ] InverseKinematics.UnreachablePointReturnsNullopt (0 ms)
+[----------] 4 tests from InverseKinematics (7 ms total)
+[----------] Global test environment tear-down
+<span class="hll">[==========] 10 tests from 3 test suites ran. (215 ms total)
+</span><span class="hll">[  PASSED  ] 2 tests.
+</span><span class="hll">[  FAILED  ] 8 tests, listed below:
+</span>[  FAILED  ] ForwardKinematics.HomeConfiguration
+[  FAILED  ] ForwardKinematics.MatchesMujocoSimulation
+[  FAILED  ] ForwardKinematics.PenOffsetIsTakenIntoAccount
+[  FAILED  ] ForwardKinematics.UnassemblableConfigurationReturnsNullopt
+[  FAILED  ] InverseKinematics.MatchesMujocoSimulation
+[  FAILED  ] InverseKinematics.ReachesTargetsInSimulation
+[  FAILED  ] InverseKinematics.InverseOfForwardIsIdentity
+[  FAILED  ] InverseKinematics.UnreachablePointReturnsNullopt
+ 8 FAILED TESTS
+</pre></div>
+</div>
+<p>Ces échecs sont <strong>sains</strong> : ils disent tous la même chose, à savoir que les fonctions renvoient <code class="docutils literal notranslate"><span class="pre">std::nullopt</span></code> parce qu’elles ne sont pas écrites.
+Remarquez au passage ce que l’on sait déjà sans avoir écrit une ligne de code : le banc de test fonctionne, la référence est cohérente avec la CAO, et les 8 tests restants sont la liste exacte du travail à faire.</p>
+</section>
+<section id="un-echec-qui-revele-une-vraie-erreur">
+<h3>Un échec qui révèle une vraie erreur<a class="headerlink" href="#un-echec-qui-revele-une-vraie-erreur" title="Lien vers cette rubrique"></a></h3>
+<p>Comparons avec un échec beaucoup plus instructif.
+Supposons un modèle direct <strong>presque</strong> correct : il calcule bien la fermeture de la chaîne en <code class="docutils literal notranslate"><span class="pre">A3</span></code>, choisit le bon mode d’assemblage, mais <strong>oublie le décalage du stylo</strong> et renvoie <code class="docutils literal notranslate"><span class="pre">A3</span></code> au lieu de la pointe du stylo.</p>
+<p>Voici ce que produisent alors les tests :</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Note: Google Test filter = ForwardKinematics.HomeConfiguration:ForwardKinematics.PenOffsetIsTakenIntoAccount
+[==========] Running 2 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 2 tests from ForwardKinematics
+[ RUN      ] ForwardKinematics.HomeConfiguration
+<span class="hll">src/five_bars_kinematics/test/test_kinematics.cpp:115: Failure
+</span><span class="hll">The difference between p-&gt;x and pen.x is 0.026381683914824094, which exceeds kPosTol, where
+</span><span class="hll">p-&gt;x evaluates to 0.099826288561126283,
+</span><span class="hll">pen.x evaluates to 0.073444604646302189, and
+</span>kPosTol evaluates to 0.0001.
+src/five_bars_kinematics/test/test_kinematics.cpp:116: Failure
+The difference between p-&gt;y and pen.y is 0.0010033712176293341, which exceeds kPosTol, where
+p-&gt;y evaluates to 0.20117638933642057,
+pen.y evaluates to 0.2021797605540499, and
+kPosTol evaluates to 0.0001.
+[  FAILED  ] ForwardKinematics.HomeConfiguration (0 ms)
+[ RUN      ] ForwardKinematics.PenOffsetIsTakenIntoAccount
+src/five_bars_kinematics/test/test_kinematics.cpp:137: Failure
+<span class="hll">The difference between std::hypot(p-&gt;x - a3[0], p-&gt;y - a3[1]) and std::hypot(geometry_.pen_dx, geometry_.pen_dy) is 0.026400757563753912, which exceeds kPosTol, where
+</span><span class="hll">std::hypot(p-&gt;x - a3[0], p-&gt;y - a3[1]) evaluates to 1.1342688738841454e-12,
+</span><span class="hll">std::hypot(geometry_.pen_dx, geometry_.pen_dy) evaluates to 0.026400757564888182, and
+</span><span class="hll">kPosTol evaluates to 0.0001.
+</span>[  FAILED  ] ForwardKinematics.PenOffsetIsTakenIntoAccount (0 ms)
+[----------] 2 tests from ForwardKinematics (1 ms total)
+[----------] Global test environment tear-down
+[==========] 2 tests from 1 test suite ran. (134 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 2 tests, listed below:
+[  FAILED  ] ForwardKinematics.HomeConfiguration
+[  FAILED  ] ForwardKinematics.PenOffsetIsTakenIntoAccount
+ 2 FAILED TESTS
+</pre></div>
+</div>
+<p>La lecture de ce rapport est très différente de la précédente :</p>
+<ul class="simple">
+<li><p>la première vérification donne un écart de <strong>26,4 mm</strong> en <code class="docutils literal notranslate"><span class="pre">x</span></code> pour une tolérance de 0,1 mm : l’ordre de grandeur de l’erreur est affiché, et il est parlant ;</p></li>
+<li><p>l’écart en <code class="docutils literal notranslate"><span class="pre">y</span></code> n’est que de 1,0 mm : un test qui n’aurait regardé que <code class="docutils literal notranslate"><span class="pre">y</span></code>, ou qui aurait eu une tolérance de 2 mm, <strong>serait passé</strong> malgré le bug ;</p></li>
+<li><p>le second test livre le diagnostic complet : la distance entre le point calculé et <code class="docutils literal notranslate"><span class="pre">A3</span></code> vaut 1,1·10<sup>-12</sup> m, c’est-à-dire <strong>zéro</strong>, là où elle devrait valoir 0,0264 m.</p></li>
+</ul>
+<p>Autrement dit, le test ne dit pas seulement « c’est faux », il dit « <strong>le point calculé est exactement A3</strong> », ce qui désigne la ligne de code à corriger.
+C’est cela que l’on cherche à obtenir en écrivant un test : non pas un verdict, mais un diagnostic.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Les valeurs ci-dessus ne sont pas des illustrations de principe : elles proviennent de l’exécution réelle de la suite de tests du projet contre une implémentation volontairement amputée du décalage du stylo.
+C’est précisément l’expérience à faire pour vérifier qu’un test « a des dents » — voir l’exercice 3.</p>
+</div>
+</section>
+<section id="les-trois-questions-a-se-poser-devant-un-echec">
+<h3>Les trois questions à se poser devant un échec<a class="headerlink" href="#les-trois-questions-a-se-poser-devant-un-echec" title="Lien vers cette rubrique"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>Qu’affirme le test ?</strong> Son nom et le message de la vérification le disent ; si ce n’est pas clair, le test est à réécrire.</p></li>
+<li><p><strong>Quel est l’ordre de grandeur de l’écart ?</strong> Un écart énorme évoque une erreur de modèle, de repère, de convention d’angle ou d’unité ; un écart juste au-delà de la tolérance évoque un problème de précision numérique, de convergence ou une tolérance mal choisie.</p></li>
+<li><p><strong>Le code est-il faux, ou le test ?</strong> Un test peut se tromper. Les tests <code class="docutils literal notranslate"><span class="pre">SimulationHarness</span></code> servent d’arbitre : s’ils échouent, c’est la référence ou l’environnement qu’il faut corriger d’abord, et il est inutile de chercher l’erreur dans le modèle.</p></li>
+</ol>
+<p>En suivant les indications de <a class="reference internal" href="p03s01_run_ros2_tests.html"><span class="doc">Lancer les tests de ROS2 et les analyser</span></a>, les rapports XML produits par <code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">test</span></code> (<code class="docutils literal notranslate"><span class="pre">build/&lt;paquet&gt;/test_results/&lt;paquet&gt;/*.gtest.xml</span></code>) contiennent les mêmes informations et s’ouvrent directement depuis le terminal de vscode.</p>
+</section>
+</section>
+<section id="ce-qui-fait-un-bon-test">
+<h2>Ce qui fait un bon test<a class="headerlink" href="#ce-qui-fait-un-bon-test" title="Lien vers cette rubrique"></a></h2>
+<p>En résumé, sur le modèle des tests de ce projet :</p>
+<ol class="arabic simple">
+<li><p><strong>Il affirme une propriété</strong>, et son nom la décrit.</p></li>
+<li><p><strong>Il est indépendant</strong> : des autres tests, de l’ordre d’exécution, du répertoire courant et de la machine.</p></li>
+<li><p><strong>Il est capable d’échouer</strong>, et on l’a vérifié en cassant volontairement le code.</p></li>
+<li><p><strong>Il échoue de façon lisible</strong> : messages, <code class="docutils literal notranslate"><span class="pre">SCOPED_TRACE</span></code>, écarts chiffrés.</p></li>
+<li><p><strong>Il compare à une tolérance justifiée</strong>, documentée au même endroit que sa valeur.</p></li>
+<li><p><strong>Il couvre les cas nominaux, les invariants et les cas d’erreur</strong>, y compris un cas valide dans les tests de cas d’erreur.</p></li>
+<li><p><strong>Il est rapide</strong> : la suite C++ du projet s’exécute en moins d’une seconde — 215 ms dans l’état initial, et un balayage complet des 16 configurations simulées ne coûte qu’une soixantaine de millisecondes. Une suite lente finit par ne plus être exécutée.</p></li>
+</ol>
+</section>
+<section id="exercices">
+<h2>Exercices<a class="headerlink" href="#exercices" title="Lien vers cette rubrique"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Prendre la mesure de l’état initial.</strong> Compilez le projet et lancez <code class="docutils literal notranslate"><span class="pre">test_kinematics_cpp</span></code>. Combien de tests passent ? Lesquels, et pourquoi ceux-là ?</p></li>
+<li><p><strong>Isoler un test.</strong> Avec <code class="docutils literal notranslate"><span class="pre">--gtest_filter</span></code>, n’exécutez que <code class="docutils literal notranslate"><span class="pre">ForwardKinematics.HomeConfiguration</span></code>. C’est le test par lequel commencer l’implémentation : expliquez pourquoi.</p></li>
+<li><p><strong>Vérifier qu’un test détecte un bug.</strong> Implémentez le modèle direct en plaçant volontairement la pointe du stylo en <code class="docutils literal notranslate"><span class="pre">A3</span></code>. Retrouvez-vous les écarts de 26,4 mm et de 1,1·10<sup>-12</sup> m montrés plus haut ? Lesquels des 4 tests de <code class="docutils literal notranslate"><span class="pre">ForwardKinematics</span></code> détectent le bug, et lequel passe malgré lui ?</p></li>
+<li><p><strong>Casser une tolérance.</strong> Remplacez <code class="docutils literal notranslate"><span class="pre">kPosTol</span></code> par <code class="docutils literal notranslate"><span class="pre">2e-3</span></code> (2 mm) et relancez le test précédent. Que se passe-t-il ? Quelle leçon en tirez-vous sur le choix d’une tolérance ?</p></li>
+<li><p><strong>Ajouter un test.</strong> Les tests actuels ne vérifient pas les <strong>limites articulaires</strong> (<code class="docutils literal notranslate"><span class="pre">q1</span> <span class="pre">∈</span> <span class="pre">[30°,</span> <span class="pre">170°]</span></code>, <code class="docutils literal notranslate"><span class="pre">q4</span> <span class="pre">∈</span> <span class="pre">[10°,</span> <span class="pre">150°]</span></code>, voir <code class="docutils literal notranslate"><span class="pre">geometry.yaml</span></code>). Écrivez un test de la suite <code class="docutils literal notranslate"><span class="pre">InverseKinematics</span></code> qui vérifie qu’un point n’est accepté que si les angles renvoyés sont dans ces débattements. Faut-il modifier la spécification des fonctions ? Pourquoi ce choix n’est-il pas anodin ?</p></li>
+<li><p><strong>Supprimer une protection.</strong> Enlevez le <code class="docutils literal notranslate"><span class="pre">sim_-&gt;reset()</span></code> de <code class="docutils literal notranslate"><span class="pre">SetUp()</span></code> et relancez toute la suite, puis chaque test isolément avec <code class="docutils literal notranslate"><span class="pre">--gtest_filter</span></code>. Expliquez les différences observées.</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="p03s01_run_ros2_tests.html" class="btn btn-neutral float-left" title="Lancer les tests de ROS2 et les analyser" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="p03s03_write_tests_for_python.html" class="btn btn-neutral float-right" title="Écrire des tests pour du code Python" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Manuel YGUEL.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,756 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exécuter les tests automatiquement : l’intégration continue &mdash; Documentation Cours d&#39;Informatique Industrielle avec ROS2 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2f145f6b" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=05dadb3a"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=30646c52"></script>
+      <script src="../_static/translations.js?v=e6b791cb"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Les outils nécessaires pour collaborer entre codeurs" href="../c04_collaborate_with_coders/p04s00_index.html" />
+    <link rel="prev" title="Utiliser la simulation pour écrire des tests" href="p03s04_use_simulation_to_write_tests.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Cours d'Informatique Industrielle avec ROS2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Informatique Industrielle &amp; ROS2</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../c00_introduction/p00s00_index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c01_create_and_publish_doc/p01s00_index.html">Premier projet &amp; doc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c02_first_ros2_project_pimped/p02s00_index.html">Tutoriel ROS2 épicé</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="p03s00_index.html">Tester le code</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="p03s01_run_ros2_tests.html">Lancer les tests de ROS2 et les analyser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s02_write_tests_with_gtest.html">Écrire des tests C++ avec Google Test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s03_write_tests_for_python.html">Écrire des tests pour du code Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s04_use_simulation_to_write_tests.html">Utiliser la simulation pour écrire des tests</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Exécuter les tests automatiquement : l’intégration continue</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ce-que-la-ci-apporte-reellement">Ce que la CI apporte réellement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#premiere-condition-un-environnement-reproductible">Première condition : un environnement reproductible</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#le-probleme-que-docker-resout">Le problème que Docker résout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trois-etages-pour-trois-usages">Trois étages, pour trois usages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#figer-les-versions">Figer les versions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#une-seule-version-de-mujoco-pour-les-deux-langages">Une seule version de MuJoCo pour les deux langages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#le-point-d-entree">Le point d’entrée</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#le-workflow-github-actions">Le workflow GitHub Actions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#quand-la-ci-se-declenche">Quand la CI se déclenche</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#les-permissions">Les permissions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#les-etapes">Les étapes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#executer-la-meme-chose-sur-sa-machine">Exécuter la même chose sur sa machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#le-cas-particulier-de-ce-projet-une-ci-rouge-volontairement">Le cas particulier de ce projet : une CI rouge, volontairement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#completer-la-ci">Compléter la CI</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#proteger-la-branche-principale">Protéger la branche principale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#verifier-aussi-le-style">Vérifier aussi le style</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#quelques-extensions-utiles">Quelques extensions utiles</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#exercices">Exercices</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../c04_collaborate_with_coders/p04s00_index.html">Les outils nécessaires pour collaborer entre codeurs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Travaux Pratiques</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../p00_5_bars_system_pencil_holder_with_rpi_and_dynamixel/p50s00_index.html">système 5 barres de dessin robotisé avec Raspberry Pi et ROS2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p01_rpi_ubuntu_as_a_ros2_robotic_platform/p51s00_index.html">Ubuntu &amp; RPi &amp; ROS2</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cours d'Informatique Industrielle avec ROS2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="p03s00_index.html">Tester le code</a></li>
+      <li class="breadcrumb-item active">Exécuter les tests automatiquement : l’intégration continue</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/c03_test_your_code/p03s05_create_CI_for_automatically_runing_your_tests.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="executer-les-tests-automatiquement-l-integration-continue">
+<span id="create-ci-for-tests"></span><h1>Exécuter les tests automatiquement : l’intégration continue<a class="headerlink" href="#executer-les-tests-automatiquement-l-integration-continue" title="Lien vers cette rubrique"></a></h1>
+<p id="index-0">Une suite de tests n’a de valeur que si elle est <strong>effectivement exécutée</strong>.
+Or un test lancé à la main est un test qu’on oublie de lancer : le jour où l’on est pressé, où l’on « ne touche qu’à un détail », ou simplement sur la machine d’un collègue dont l’environnement diffère du nôtre.</p>
+<p>L”<strong>intégration continue</strong> (<em>Continuous Integration</em>, CI) consiste à faire exécuter la suite de tests par un serveur, automatiquement, à chaque modification publiée du code.
+Cette section montre comment le projet 5 barres s’y prend, et pourquoi chacun de ses choix est fait.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Vous avez déjà mis en place une CI dans <a class="reference internal" href="../c01_create_and_publish_doc/p01s05_www_doc.html"><span class="doc">Publier la documentation</span></a> : la publication automatique de la documentation sur GitHub Pages.
+Le mécanisme est le même (un <em>workflow</em> GitHub Actions) ; ce qui change ici est l’objet du contrôle — non plus produire un site, mais <strong>rendre un verdict</strong> sur le code.</p>
+</div>
+<section id="ce-que-la-ci-apporte-reellement">
+<h2>Ce que la CI apporte réellement<a class="headerlink" href="#ce-que-la-ci-apporte-reellement" title="Lien vers cette rubrique"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Elle exécute les tests, systématiquement.</strong> C’est la raison première, et elle suffirait.</p></li>
+<li><p><strong>Elle les exécute dans un environnement propre.</strong> Votre machine contient des paquets installés il y a six mois, des variables d’environnement oubliées et un espace de travail à moitié compilé. La CI part d’une base vierge à chaque fois, et détecte donc les dépendances que vous avez oublié de déclarer — l’erreur la plus courante et la plus pénible dans un projet ROS.</p></li>
+<li><p><strong>Elle rend le verdict public.</strong> Sur une <em>pull request</em> (voir <a class="reference internal" href="../c01_create_and_publish_doc/p01s06_cooperate_by_pull_request.html"><span class="doc">Coopérer grâce aux pull requests</span></a>), le relecteur voit immédiatement si la contribution casse quelque chose, sans avoir à récupérer la branche et à la compiler. La discussion peut alors porter sur le fond.</p></li>
+<li><p><strong>Elle date les régressions.</strong> Un historique de CI indique le commit exact à partir duquel un test a commencé à échouer, ce qui transforme une enquête en une simple lecture.</p></li>
+<li><p><strong>Elle protège la branche principale.</strong> On peut configurer GitHub pour interdire la fusion d’une branche dont la CI est rouge, ce qui garantit qu’une branche officielle reste toujours compilable et testée.</p></li>
+</ol>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Pour que ces promesses tiennent, une règle de discipline prime sur toute considération technique : <strong>une CI rouge est un problème que l’on traite immédiatement</strong>.
+Une équipe qui s’habitue à voir du rouge perd en quelques semaines tout le bénéfice de son investissement, et il ne lui reste qu’une facture de temps de calcul.
+C’est aussi pourquoi il faut à tout prix éliminer les tests instables (<em>flaky</em>) évoqués dans <a class="reference internal" href="p03s02_write_tests_with_gtest.html"><span class="doc">Écrire des tests C++ avec Google Test</span></a>.</p>
+</div>
+</section>
+<section id="premiere-condition-un-environnement-reproductible">
+<h2>Première condition : un environnement reproductible<a class="headerlink" href="#premiere-condition-un-environnement-reproductible" title="Lien vers cette rubrique"></a></h2>
+<section id="le-probleme-que-docker-resout">
+<span id="index-1"></span><h3>Le problème que Docker résout<a class="headerlink" href="#le-probleme-que-docker-resout" title="Lien vers cette rubrique"></a></h3>
+<p>Les tests du projet ont besoin de ROS 2 Jazzy, de MuJoCo (en Python <strong>et</strong> en C), de Google Test, de <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code>, de <code class="docutils literal notranslate"><span class="pre">xacro</span></code>…
+Installer cela « à la main » sur le serveur de CI serait long, fragile et non reproductible : la version installée dépendrait du jour de l’installation.</p>
+<p>C’est précisément le problème que résout une <strong>image Docker</strong> : une description exécutable d’un système complet, qui donne le même environnement sur le serveur de CI, sur votre machine, et sur celle de votre collègue — quelle que soit la distribution qu’il utilise.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-number">Code source 45 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">docker/Dockerfile</span></code></span><a class="headerlink" href="#id1" title="Lien vers ce code"></a></div>
+<div class="highlight-docker notranslate"><div class="highlight"><pre><span></span><span class="c"># Image ROS 2 Jazzy + MuJoCo (Python ET C) + Google Test + système 5 barres.</span>
+<span class="c">#</span>
+<span class="c"># Build context = repository root (the image copies src/). From the repository root:</span>
+<span class="c">#   docker build -f docker/Dockerfile --target ci      -t five_bars:ci .   # headless (CI, tests)</span>
+<span class="c">#   docker build -f docker/Dockerfile --target desktop -t five_bars:dev .  # + RViz, GUI (X11)</span>
+<span class="c"># or simply: docker/start.sh   /   docker compose -f docker/docker-compose.yml build</span>
+<span class="c">#</span>
+<span class="c"># La bibliothèque C de MuJoCo utilisée par les tests gtest est celle livrée dans la roue</span>
+<span class="c"># pip `mujoco` (include/ + libmujoco.so.X.Y.Z) : Python et C++ utilisent EXACTEMENT la</span>
+<span class="c"># même version de MuJoCo. Pour utiliser une archive officielle à la place, définir MUJOCO_DIR.</span>
+
+<span class="k">ARG</span><span class="w"> </span><span class="nv">ROS_DISTRO</span><span class="o">=</span>jazzy
+
+<span class="c"># ----------------------------------------------------------------------------- base</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">ros:${ROS_DISTRO}-ros-base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">base</span>
+<span class="k">ARG</span><span class="w"> </span>ROS_DISTRO
+<span class="k">ARG</span><span class="w"> </span><span class="nv">MUJOCO_VERSION</span><span class="o">=</span><span class="m">4</span>.0.1
+<span class="k">ENV</span><span class="w"> </span><span class="nv">DEBIAN_FRONTEND</span><span class="o">=</span>noninteractive<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">PYTHONUNBUFFERED</span><span class="o">=</span><span class="m">1</span>
+
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>build-essential<span class="w"> </span>cmake<span class="w"> </span>git<span class="w"> </span>python3-pip<span class="w"> </span>python3-numpy<span class="w"> </span>python3-yaml<span class="w"> </span>python3-pytest<span class="w"> </span>python3-tk<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>googletest<span class="w"> </span>libgtest-dev<span class="w"> </span>libgmock-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>ros-<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>-ament-cmake-gtest<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>ros-<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>-ament-cmake-pytest<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>ros-<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>-ros2-control<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>ros-<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>-ros2-controllers<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>ros-<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>-xacro<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>ros-<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>-robot-state-publisher<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>ros-<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>-tf2-ros-py<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>libgl1<span class="w"> </span>libegl1<span class="w"> </span>libglfw3<span class="w"> </span>libosmesa6<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
+
+<span class="c"># MuJoCo (Python + bibliothèque C embarquée dans la roue)</span>
+<span class="k">RUN</span><span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>--break-system-packages<span class="w"> </span><span class="s2">"mujoco==</span><span class="si">${</span><span class="nv">MUJOCO_VERSION</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">MJ</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s1">'import mujoco, os; print(os.path.dirname(mujoco.__file__))'</span><span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">MJ</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span>/opt/mujoco<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">MJ</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/ld.so.conf.d/mujoco.conf<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>ldconfig<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import mujoco; print('MuJoCo', mujoco.__version__)"</span><span class="w"> </span><span class="se">\</span>
+<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>ls<span class="w"> </span>/opt/mujoco/include/mujoco/mujoco.h<span class="w"> </span>/opt/mujoco/libmujoco.so*
+<span class="k">ENV</span><span class="w"> </span><span class="nv">MUJOCO_DIR</span><span class="o">=</span>/opt/mujoco
+
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/ws</span>
+<span class="k">COPY</span><span class="w"> </span>docker/entrypoint.sh<span class="w"> </span>/entrypoint.sh
+<span class="k">RUN</span><span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/entrypoint.sh
+<span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">"/entrypoint.sh"</span><span class="p">]</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">"bash"</span><span class="p">]</span>
+
+<span class="c"># ------------------------------------------------------------------------------- ci</span>
+<span class="c"># Workspace compilé, prêt pour `colcon test` (tout est headless).</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">ci</span>
+<span class="k">COPY</span><span class="w"> </span>src<span class="w"> </span>/ws/src
+<span class="k">RUN</span><span class="w"> </span>.<span class="w"> </span>/opt/ros/<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>/setup.sh<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>colcon<span class="w"> </span>build<span class="w"> </span>--event-handlers<span class="w"> </span>console_direct+<span class="w"> </span>--cmake-args<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>RelWithDebInfo
+
+<span class="c"># -------------------------------------------------------------------------- desktop</span>
+<span class="c"># Pour le développement : RViz, outils graphiques et conversion CAO (trimesh).</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">ci</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">desktop</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>ros-<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>-rviz2<span class="w"> </span>ros-<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>-rqt-graph<span class="w"> </span>ros-<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>-rqt-plot<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>mesa-utils<span class="w"> </span>xvfb<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>--break-system-packages<span class="w"> </span>trimesh<span class="w"> </span>pycollada<span class="w"> </span>fast_simplification
+</pre></div>
+</div>
+</div>
+<p>Lisons-le à la lumière de ce qui précède.</p>
+</section>
+<section id="trois-etages-pour-trois-usages">
+<h3>Trois étages, pour trois usages<a class="headerlink" href="#trois-etages-pour-trois-usages" title="Lien vers cette rubrique"></a></h3>
+<p>Le fichier définit une image en plusieurs étapes (<em>multi-stage build</em>), chaque étape prolongeant la précédente :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16.0%" />
+<col style="width: 22.0%" />
+<col style="width: 62.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Étage</p></th>
+<th class="head"><p>Usage</p></th>
+<th class="head"><p>Contenu</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">base</span></code></p></td>
+<td><p>commun</p></td>
+<td><p>ROS 2, compilateur, Google Test, MuJoCo, dépendances système. <strong>Aucune</strong> dépendance graphique lourde.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ci</span></code></p></td>
+<td><p>tests, CI</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">base</span></code> + les sources copiées et <strong>déjà compilées</strong>. Entièrement headless.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">desktop</span></code></p></td>
+<td><p>développement</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ci</span></code> + RViz, outils <code class="docutils literal notranslate"><span class="pre">rqt</span></code> et bibliothèques de conversion CAO.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Ce découpage n’est pas une coquetterie. L’image de CI ne contient ni RViz ni serveur X : elle est donc <strong>plus petite, plus rapide à construire et plus rapide à télécharger</strong>, ce qui compte quand elle est reconstruite à chaque <code class="docutils literal notranslate"><span class="pre">push</span></code>.
+C’est la contrepartie directe du choix de tests <em>headless</em> expliqué dans <a class="reference internal" href="p03s04_use_simulation_to_write_tests.html"><span class="doc">Utiliser la simulation pour écrire des tests</span></a> : parce que les tests n’ont pas besoin d’affichage, la CI n’a pas besoin d’en installer.</p>
+</section>
+<section id="figer-les-versions">
+<h3>Figer les versions<a class="headerlink" href="#figer-les-versions" title="Lien vers cette rubrique"></a></h3>
+<p>Deux lignes méritent une attention particulière :</p>
+<div class="highlight-docker notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="k">ARG</span><span class="w"> </span><span class="nv">ROS_DISTRO</span><span class="o">=</span>jazzy
+</span>
+<span class="c"># ----------------------------------------------------------------------------- base</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">ros:${ROS_DISTRO}-ros-base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">base</span>
+<span class="k">ARG</span><span class="w"> </span>ROS_DISTRO
+<span class="hll"><span class="k">ARG</span><span class="w"> </span><span class="nv">MUJOCO_VERSION</span><span class="o">=</span><span class="m">4</span>.0.1
+</span></pre></div>
+</div>
+<p>La version de MuJoCo est <strong>épinglée</strong> (<code class="docutils literal notranslate"><span class="pre">MUJOCO_VERSION=4.0.1</span></code>), et la distribution ROS aussi.
+Sans cela, une mise à jour de MuJoCo publiée un mardi matin pourrait faire échouer la CI d’un code que personne n’a modifié — l’un des échecs les plus déroutants qui soient, parce que rien dans l’historique du projet ne l’explique.</p>
+<div class="admonition tip">
+<p class="admonition-title">Astuce</p>
+<p>Épingler les versions a une contrepartie : il faut les mettre à jour volontairement, de temps en temps, dans un commit dédié dont c’est le seul objet.
+Un tel commit a un énorme avantage : si la CI devient rouge, on sait <strong>exactement</strong> pourquoi, et on peut revenir en arrière en une commande.</p>
+</div>
+</section>
+<section id="une-seule-version-de-mujoco-pour-les-deux-langages">
+<h3>Une seule version de MuJoCo pour les deux langages<a class="headerlink" href="#une-seule-version-de-mujoco-pour-les-deux-langages" title="Lien vers cette rubrique"></a></h3>
+<p>La façon dont MuJoCo est installé mérite d’être soulignée :</p>
+<div class="highlight-docker notranslate"><div class="highlight"><pre><span></span><span class="c"># MuJoCo (Python + bibliothèque C embarquée dans la roue)</span>
+<span class="k">RUN</span><span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>--break-system-packages<span class="w"> </span><span class="s2">"mujoco==</span><span class="si">${</span><span class="nv">MUJOCO_VERSION</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">MJ</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s1">'import mujoco, os; print(os.path.dirname(mujoco.__file__))'</span><span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">MJ</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span>/opt/mujoco<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">MJ</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/ld.so.conf.d/mujoco.conf<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>ldconfig<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import mujoco; print('MuJoCo', mujoco.__version__)"</span><span class="w"> </span><span class="se">\</span>
+<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>ls<span class="w"> </span>/opt/mujoco/include/mujoco/mujoco.h<span class="w"> </span>/opt/mujoco/libmujoco.so*
+<span class="k">ENV</span><span class="w"> </span><span class="nv">MUJOCO_DIR</span><span class="o">=</span>/opt/mujoco
+</pre></div>
+</div>
+<p>L’installation se fait par <code class="docutils literal notranslate"><span class="pre">pip</span></code>, et la roue Python embarque <strong>à la fois</strong> le module Python et la bibliothèque C (<code class="docutils literal notranslate"><span class="pre">include/</span></code> et <code class="docutils literal notranslate"><span class="pre">libmujoco.so.X.Y.Z</span></code>).
+Le <code class="docutils literal notranslate"><span class="pre">ln</span> <span class="pre">-s</span></code> et la ligne <code class="docutils literal notranslate"><span class="pre">ld.so.conf.d</span></code> rendent cette bibliothèque visible au compilateur et à l’éditeur de liens, et c’est elle que <code class="docutils literal notranslate"><span class="pre">cmake/FindMuJoCo.cmake</span></code> (voir <a class="reference internal" href="p03s02_write_tests_with_gtest.html"><span class="doc">Écrire des tests C++ avec Google Test</span></a>) retrouve.</p>
+<p>Conséquence : les tests C++ et les tests Python sont jugés par <strong>exactement la même version</strong> de l’oracle.
+C’est indispensable pour que la comparaison entre les deux implémentations, évoquée dans <a class="reference internal" href="p03s03_write_tests_for_python.html"><span class="doc">Écrire des tests pour du code Python</span></a>, soit interprétable.</p>
+<p>Notez aussi les deux dernières lignes de cette commande : elles <strong>vérifient</strong> que l’installation a réussi (le module s’importe, les fichiers attendus existent).
+Une image Docker qui échoue à la construction est un problème facile ; une image qui se construit en étant subtilement incomplète est un problème coûteux.</p>
+</section>
+<section id="le-point-d-entree">
+<h3>Le point d’entrée<a class="headerlink" href="#le-point-d-entree" title="Lien vers cette rubrique"></a></h3>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-number">Code source 46 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">docker/entrypoint.sh</span></code></span><a class="headerlink" href="#id2" title="Lien vers ce code"></a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nb">set</span><span class="w"> </span>-e
+<span class="nb">source</span><span class="w"> </span><span class="s2">"/opt/ros/</span><span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span><span class="s2">/setup.bash"</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span>/ws/install/setup.bash<span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">source</span><span class="w"> </span>/ws/install/setup.bash
+<span class="k">fi</span>
+<span class="nb">exec</span><span class="w"> </span><span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
+</pre></div>
+</div>
+</div>
+<p>Ce petit script garantit que <strong>toute</strong> commande lancée dans le conteneur dispose d’un environnement ROS initialisé — ce que l’on oublie une fois sur deux à la main, avec des messages d’erreur peu explicites à la clé.</p>
+</section>
+</section>
+<section id="le-workflow-github-actions">
+<h2>Le workflow GitHub Actions<a class="headerlink" href="#le-workflow-github-actions" title="Lien vers cette rubrique"></a></h2>
+<p id="index-2">Voici le fichier qui décrit ce que fait le serveur à chaque modification :</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-number">Code source 47 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">.github/workflows/ci.yml</span></code></span><a class="headerlink" href="#id3" title="Lien vers ce code"></a></div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CI</span>
+
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span>
+
+<span class="nt">permissions</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">contents</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">read</span>
+<span class="w">  </span><span class="nt">checks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">write</span><span class="w">          </span><span class="c1"># publication du rapport de tests</span>
+<span class="w">  </span><span class="nt">pull-requests</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">write</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">build-and-test</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-24.04</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker/setup-buildx-action@v3</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Image Docker (ROS 2 Jazzy + MuJoCo + gtest) et compilation du workspace</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker/build-push-action@v6</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">          </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker/Dockerfile</span>
+<span class="w">          </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ci</span>
+<span class="w">          </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">five_bars:ci</span>
+<span class="w">          </span><span class="nt">load</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">          </span><span class="nt">cache-from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">type=gha</span>
+<span class="w">          </span><span class="nt">cache-to</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">type=gha,mode=max</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tests unitaires headless (gtest + unittest + simulation MuJoCo)</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">mkdir -p test_results</span>
+<span class="w">          </span><span class="no">docker run --rm -v "$PWD/test_results:/ws/test_results" five_bars:ci bash -c '</span>
+<span class="w">            </span><span class="no">colcon test --event-handlers console_direct+ --return-code-on-test-failure; ret=$?</span>
+<span class="w">            </span><span class="no">colcon test-result --verbose</span>
+<span class="w">            </span><span class="no">cp build/*/test_results/*/*.xml /ws/test_results/ 2&gt;/dev/null || true</span>
+<span class="w">            </span><span class="no">exit $ret'</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Rapport de tests</span>
+<span class="w">        </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always()</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EnricoMi/publish-unit-test-result-action@v2</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">files</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test_results/*.xml</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Archive des résultats</span>
+<span class="w">        </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always()</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/upload-artifact@v4</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test-results</span>
+<span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test_results/</span>
+</pre></div>
+</div>
+</div>
+<section id="quand-la-ci-se-declenche">
+<h3>Quand la CI se déclenche<a class="headerlink" href="#quand-la-ci-se-declenche" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">push</span></code> : à chaque publication de commits, <strong>sur toutes les branches</strong>. C’est ce qui permet de travailler sur une branche en sachant en permanence où l’on en est.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pull_request</span></code> : à chaque ouverture ou mise à jour d’une demande de fusion.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">workflow_dispatch</span></code> : ajoute un bouton pour lancer la CI à la main depuis l’interface de GitHub, ce qui est précieux pour vérifier qu’un échec était bien dû à une cause extérieure.</p></li>
+</ul>
+</section>
+<section id="les-permissions">
+<h3>Les permissions<a class="headerlink" href="#les-permissions" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">permissions</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">contents</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">read</span>
+<span class="w">  </span><span class="nt">checks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">write</span><span class="w">          </span><span class="c1"># publication du rapport de tests</span>
+<span class="w">  </span><span class="nt">pull-requests</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">write</span>
+</pre></div>
+</div>
+<p>Le <em>workflow</em> ne demande que ce dont il a besoin : lire le code, écrire un rapport de test et commenter une <em>pull request</em>.
+C’est l’application du <strong>principe de moindre privilège</strong> : un <em>workflow</em> qui n’a pas le droit d’écrire dans le dépôt ne peut pas le casser, même si l’une des actions qu’il utilise se révélait malveillante.</p>
+</section>
+<section id="les-etapes">
+<h3>Les étapes<a class="headerlink" href="#les-etapes" title="Lien vers cette rubrique"></a></h3>
+<p><strong>1. Récupérer le code et préparer le constructeur d’images.</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker/setup-buildx-action@v3</span>
+</pre></div>
+</div>
+<p><strong>2. Construire l’image, ce qui compile le workspace.</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Image Docker (ROS 2 Jazzy + MuJoCo + gtest) et compilation du workspace</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker/build-push-action@v6</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">          </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker/Dockerfile</span>
+<span class="hll"><span class="w">          </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ci</span>
+</span><span class="w">          </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">five_bars:ci</span>
+<span class="w">          </span><span class="nt">load</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="hll"><span class="w">          </span><span class="nt">cache-from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">type=gha</span>
+</span><span class="hll"><span class="w">          </span><span class="nt">cache-to</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">type=gha,mode=max</span>
+</span></pre></div>
+</div>
+<p>Deux détails importants.</p>
+<p><code class="docutils literal notranslate"><span class="pre">target:</span> <span class="pre">ci</span></code> sélectionne l’étage headless : on ne construit pas RViz pour rien.</p>
+<p>Les lignes <code class="docutils literal notranslate"><span class="pre">cache-from</span></code> / <code class="docutils literal notranslate"><span class="pre">cache-to</span></code> mettent en cache les couches de l’image chez GitHub.
+Sans elles, chaque exécution réinstallerait ROS, MuJoCo et toutes les dépendances — une dizaine de minutes à chaque <code class="docutils literal notranslate"><span class="pre">push</span></code>.
+Avec elles, seules les couches réellement modifiées sont reconstruites : comme les sources sont copiées <strong>à la fin</strong> du <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code>, une modification du code ne réinstalle rien.</p>
+<div class="admonition tip">
+<p class="admonition-title">Astuce</p>
+<p>C’est la raison pour laquelle on place dans un <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> les instructions de la plus stable à la plus changeante.
+Une ligne <code class="docutils literal notranslate"><span class="pre">COPY</span> <span class="pre">src</span></code> placée en haut du fichier invaliderait le cache de tout ce qui suit, et la CI deviendrait dix fois plus lente pour un résultat identique.</p>
+</div>
+<p><strong>3. Exécuter les tests.</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tests unitaires headless (gtest + unittest + simulation MuJoCo)</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">mkdir -p test_results</span>
+<span class="w">          </span><span class="no">docker run --rm -v "$PWD/test_results:/ws/test_results" five_bars:ci bash -c '</span>
+<span class="hll"><span class="w">            </span><span class="no">colcon test --event-handlers console_direct+ --return-code-on-test-failure; ret=$?</span>
+</span><span class="w">            </span><span class="no">colcon test-result --verbose</span>
+<span class="w">            </span><span class="no">cp build/*/test_results/*/*.xml /ws/test_results/ 2&gt;/dev/null || true</span>
+<span class="hll"><span class="w">            </span><span class="no">exit $ret'</span>
+</span></pre></div>
+</div>
+<p>Cette étape est le cœur du <em>workflow</em>, et chacun de ses morceaux a une raison d’être :</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--return-code-on-test-failure</span></code> : sans cette option, <code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">test</span></code> renvoie un code de succès <strong>même si des tests échouent</strong> ! La CI serait alors verte en permanence, ce qui est le pire des cas de figure. C’est l’erreur la plus fréquente dans une CI ROS 2 ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ret=$?</span></code> puis <code class="docutils literal notranslate"><span class="pre">exit</span> <span class="pre">$ret</span></code> : le code de retour est mémorisé <strong>avant</strong> les commandes suivantes, puis restitué à la fin, pour que le rapport et l’archive soient produits sans masquer le verdict ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">test-result</span> <span class="pre">--verbose</span></code> affiche le détail des échecs dans le journal de la CI, exactement comme la commande <code class="docutils literal notranslate"><span class="pre">ros2_view_tests</span></code> de <a class="reference internal" href="p03s01_run_ros2_tests.html"><span class="doc">Lancer les tests de ROS2 et les analyser</span></a> le fait sur votre machine ;</p></li>
+<li><p>les fichiers XML de résultats sont copiés dans un volume partagé, pour pouvoir être exploités par les étapes suivantes.</p></li>
+</ul>
+<p><strong>4. Publier un rapport lisible, et archiver les résultats.</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Rapport de tests</span>
+<span class="hll"><span class="w">        </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always()</span>
+</span><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EnricoMi/publish-unit-test-result-action@v2</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">files</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test_results/*.xml</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Archive des résultats</span>
+<span class="hll"><span class="w">        </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always()</span>
+</span><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/upload-artifact@v4</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test-results</span>
+<span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test_results/</span>
+</pre></div>
+</div>
+<p>Les fichiers XML produits par <code class="docutils literal notranslate"><span class="pre">colcon</span></code> sont au format <strong>JUnit</strong>, un format d’échange compris par tous les outils d’intégration continue.
+L’action <code class="docutils literal notranslate"><span class="pre">publish-unit-test-result-action</span></code> les transforme en un tableau lisible, directement visible sur la <em>pull request</em> : nombre de tests, lesquels ont échoué et avec quel message.
+Le relecteur n’a donc pas à lire le journal brut.</p>
+<p>Le <code class="docutils literal notranslate"><span class="pre">if:</span> <span class="pre">always()</span></code> qui précède ces deux étapes est essentiel : par défaut, une étape est ignorée si une étape précédente a échoué.
+Or c’est <strong>exactement</strong> quand les tests échouent que l’on veut le rapport. Sans <code class="docutils literal notranslate"><span class="pre">if:</span> <span class="pre">always()</span></code>, la CI ne produirait de rapport que lorsqu’il n’y a rien à signaler.</p>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>Cette combinaison — <code class="docutils literal notranslate"><span class="pre">--return-code-on-test-failure</span></code> pour que l’échec compte, et <code class="docutils literal notranslate"><span class="pre">if:</span> <span class="pre">always()</span></code> pour que le rapport soit tout de même publié — est la partie délicate de toute CI de test.
+Une CI qui ne distingue pas « les tests ont échoué » de « la CI a échoué » ne sert à rien, et les deux erreurs symétriques (verte alors que les tests échouent, muette alors qu’ils échouent) sont faciles à commettre.</p>
+</div>
+</section>
+</section>
+<section id="executer-la-meme-chose-sur-sa-machine">
+<h2>Exécuter la même chose sur sa machine<a class="headerlink" href="#executer-la-meme-chose-sur-sa-machine" title="Lien vers cette rubrique"></a></h2>
+<p>C’est la propriété la plus utile du dispositif, et celle qu’il faut rechercher dans tout projet : <strong>la CI ne fait rien que vous ne puissiez reproduire à l’identique chez vous</strong>.</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-number">Code source 48 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">docker/docker-compose.yml</span></code></span><a class="headerlink" href="#id4" title="Lien vers ce code"></a></div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># docker-compose.yml lives in docker/ ; every relative path is relative to this folder:</span>
+<span class="c1">#   build context ".." = repository root, sources mounted from ../src.</span>
+<span class="c1">#</span>
+<span class="c1"># Usage (from the repository root):</span>
+<span class="c1">#   xhost +local:docker                                   # allow X11 windows (Linux)</span>
+<span class="c1">#   docker compose -f docker/docker-compose.yml build</span>
+<span class="c1">#   docker compose -f docker/docker-compose.yml run --rm dev    # shell, ../src mounted in /ws/src</span>
+<span class="c1">#   docker compose -f docker/docker-compose.yml run --rm test   # build + headless tests (like the CI)</span>
+<span class="c1"># or from docker/:  cd docker &amp;&amp; docker compose run --rm dev</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">dev</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">..</span>
+<span class="w">      </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker/Dockerfile</span>
+<span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">desktop</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">five_bars:dev</span>
+<span class="w">    </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span>
+<span class="w">    </span><span class="nt">ipc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DISPLAY=${DISPLAY:-:0}</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">QT_X11_NO_MITSHM=1</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-0}</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/tmp/.X11-unix:/tmp/.X11-unix:rw</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../src:/ws/src</span>
+<span class="w">    </span><span class="nt">devices</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/dev/dri:/dev/dri</span><span class="w">   </span><span class="c1"># GPU acceleration (remove if /dev/dri does not exist)</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
+<span class="w">      </span><span class="no">bash -c "colcon build --event-handlers console_cohesion- &amp;&amp; source /ws/install/setup.bash &amp;&amp; exec bash"</span>
+
+<span class="w">  </span><span class="nt">test</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">..</span>
+<span class="w">      </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker/Dockerfile</span>
+<span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ci</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">five_bars:ci</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../src:/ws/src</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../test_results:/ws/test_results</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
+<span class="w">      </span><span class="no">bash -c "colcon build --event-handlers console_cohesion+ &amp;&amp;</span>
+<span class="w">               </span><span class="no">colcon test --event-handlers console_direct+ --return-code-on-test-failure;</span>
+<span class="w">               </span><span class="no">ret=$$?; colcon test-result --verbose;</span>
+<span class="w">               </span><span class="no">mkdir -p /ws/test_results &amp;&amp; cp build/*/test_results/*/*.xml /ws/test_results/ 2&gt;/dev/null;</span>
+<span class="w">               </span><span class="no">exit $$ret"</span>
+</pre></div>
+</div>
+</div>
+<p>Le service <code class="docutils literal notranslate"><span class="pre">test</span></code> est l’équivalent exact de la CI : <strong>même étage d’image</strong> (<code class="docutils literal notranslate"><span class="pre">target:</span> <span class="pre">ci</span></code>), mêmes options de <code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">test</span></code>, y compris le <code class="docutils literal notranslate"><span class="pre">--return-code-on-test-failure</span></code> qui donne son sens au verdict.
+La seule différence est qu’il recompile le workspace au démarrage, puisque les sources sont montées depuis votre machine au lieu d’être figées dans l’image.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># depuis la racine du workspace</span>
+docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker/docker-compose.yml<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="nb">test</span>
+</pre></div>
+</div>
+<p>Le projet fournit également un script d’enrobage plus commode, qui construit l’image si elle manque :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker/start.sh<span class="w"> </span><span class="nb">test</span><span class="w">      </span><span class="c1"># compile, puis lance tous les tests, headless</span>
+docker/start.sh<span class="w">           </span><span class="c1"># un shell dans le conteneur, workspace compilé</span>
+docker/start.sh<span class="w"> </span>--rebuild<span class="w"> </span><span class="c1"># forcer la reconstruction de l'image</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">docker/start.sh</span> <span class="pre">test</span></code> utilise l’image de développement (<code class="docutils literal notranslate"><span class="pre">desktop</span></code>) et non l’étage <code class="docutils literal notranslate"><span class="pre">ci</span></code>, et appelle <code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">test</span></code> sans <code class="docutils literal notranslate"><span class="pre">--return-code-on-test-failure</span></code> : il affiche donc le détail des tests, mais son code de retour ne reflète pas leur verdict.
+C’est le bon outil pour <strong>travailler</strong> ; pour vérifier exactement ce que dira la CI, utilisez le service <code class="docutils literal notranslate"><span class="pre">test</span></code> de <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">compose</span></code>.</p>
+</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text"><code class="docutils literal notranslate"><span class="pre">docker/start.sh</span></code></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-number">Code source 49 </span><span class="caption-text">docker/start.sh</span><a class="headerlink" href="#id5" title="Lien vers ce code"></a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
+<span class="c1"># Build the Docker image (if needed) and open a shell in the five-bar container.</span>
+<span class="c1">#</span>
+<span class="c1"># Can be called from anywhere (paths are resolved from this script's location):</span>
+<span class="c1">#   docker/start.sh            build the image if missing, then open an interactive shell</span>
+<span class="c1">#   docker/start.sh --rebuild  force a rebuild of the image, then open a shell</span>
+<span class="c1">#   docker/start.sh test       run all unit tests headless (same as the GitHub CI)</span>
+<span class="c1">#   docker/start.sh &lt;cmd...&gt;   run any command in the container, e.g. docker/start.sh ros2 run five_bars_mujoco direct_gui</span>
+<span class="c1">#</span>
+<span class="c1"># Layout: this script and docker-compose.yml live in docker/, the sources in ../src.</span>
+<span class="c1"># The build context is the repository root (the image copies src/ into /ws/src).</span>
+<span class="c1">#</span>
+<span class="c1"># Your ../src folder is mounted in the container (/ws/src): edit on the host, then run</span>
+<span class="c1"># `colcon build` in the container. The workspace is rebuilt automatically at startup.</span>
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+
+<span class="nv">IMAGE</span><span class="o">=</span><span class="s2">"five_bars:dev"</span>
+<span class="nv">CONTAINER</span><span class="o">=</span><span class="s2">"five_bars_dev"</span>
+<span class="nv">DOCKER_DIR</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">cd</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>dirname<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">BASH_SOURCE</span><span class="p">[0]</span><span class="si">}</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">pwd</span><span class="k">)</span><span class="s2">"</span><span class="w">   </span><span class="c1"># .../five_bars_ws/docker</span>
+<span class="nv">ROOT</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">cd</span><span class="w"> </span><span class="s2">"</span><span class="nv">$DOCKER_DIR</span><span class="s2">/.."</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">pwd</span><span class="k">)</span><span class="s2">"</span><span class="w">                          </span><span class="c1"># .../five_bars_ws (build context)</span>
+<span class="nv">SRC_DIR</span><span class="o">=</span><span class="s2">"</span><span class="nv">$ROOT</span><span class="s2">/src"</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-d<span class="w"> </span><span class="s2">"</span><span class="nv">$SRC_DIR</span><span class="s2">"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Error: sources not found in </span><span class="nv">$SRC_DIR</span><span class="s2"> (expected layout: docker/ and src/ side by side)."</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span>!<span class="w"> </span><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span>docker<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Error: docker is not installed (https://docs.docker.com/engine/install/)."</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="c1"># ---------------------------------------------------------------- build the image</span>
+<span class="nv">REBUILD</span><span class="o">=</span><span class="m">0</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"--rebuild"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nv">REBUILD</span><span class="o">=</span><span class="m">1</span>
+<span class="w">  </span><span class="nb">shift</span>
+<span class="k">fi</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$REBUILD</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>!<span class="w"> </span>docker<span class="w"> </span>image<span class="w"> </span>inspect<span class="w"> </span><span class="s2">"</span><span class="nv">$IMAGE</span><span class="s2">"</span><span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"&gt;&gt;&gt; Building image </span><span class="nv">$IMAGE</span><span class="s2"> (first time: ~10 min)..."</span>
+<span class="w">  </span>docker<span class="w"> </span>build<span class="w"> </span>-f<span class="w"> </span><span class="s2">"</span><span class="nv">$DOCKER_DIR</span><span class="s2">/Dockerfile"</span><span class="w"> </span>--target<span class="w"> </span>desktop<span class="w"> </span>-t<span class="w"> </span><span class="s2">"</span><span class="nv">$IMAGE</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ROOT</span><span class="s2">"</span>
+<span class="k">fi</span>
+
+<span class="c1"># ------------------------------------------------------------ what to run inside</span>
+<span class="nv">BUILD_CMD</span><span class="o">=</span><span class="s2">"colcon build --event-handlers console_cohesion- --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo &gt; /tmp/colcon_build.log 2&gt;&amp;1 \</span>
+<span class="s2">  || { cat /tmp/colcon_build.log; echo '!!! colcon build failed'; }; source /ws/install/setup.bash"</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nv">INNER</span><span class="o">=</span><span class="s2">"</span><span class="nv">$BUILD_CMD</span><span class="s2">; echo '&gt;&gt;&gt; Workspace built. Try: ros2 run five_bars_mujoco direct_gui'; exec bash"</span>
+<span class="k">elif</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"test"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nv">INNER</span><span class="o">=</span><span class="s2">"</span><span class="nv">$BUILD_CMD</span><span class="s2">; colcon test --event-handlers console_direct+; colcon test-result --verbose"</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="nv">INNER</span><span class="o">=</span><span class="s2">"</span><span class="nv">$BUILD_CMD</span><span class="s2">; exec </span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'%q '</span><span class="w"> </span><span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span>
+<span class="k">fi</span>
+
+<span class="c1"># --------------------------------------------------- display (X11) and GPU options</span>
+<span class="nv">DOCKER_ARGS</span><span class="o">=(</span>--rm<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span><span class="s2">"</span><span class="nv">$CONTAINER</span><span class="s2">"</span><span class="w"> </span>--network<span class="w"> </span>host<span class="w"> </span>--ipc<span class="w"> </span>host
+<span class="w">             </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$SRC_DIR</span><span class="s2">:/ws/src"</span>
+<span class="w">             </span>-e<span class="w"> </span><span class="s2">"ROS_DOMAIN_ID=</span><span class="si">${</span><span class="nv">ROS_DOMAIN_ID</span><span class="k">:-</span><span class="nv">0</span><span class="si">}</span><span class="s2">"</span><span class="o">)</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">DISPLAY</span><span class="k">:-</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="c1"># Allow local containers to open windows on your X server (Linux, also XWayland).</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span>xhost<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>xhost<span class="w"> </span>+local:docker<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+<span class="w">  </span><span class="k">fi</span>
+<span class="w">  </span><span class="nv">DOCKER_ARGS</span><span class="o">+=(</span>-e<span class="w"> </span><span class="s2">"DISPLAY=</span><span class="nv">$DISPLAY</span><span class="s2">"</span><span class="w"> </span>-e<span class="w"> </span><span class="nv">QT_X11_NO_MITSHM</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>-v<span class="w"> </span>/tmp/.X11-unix:/tmp/.X11-unix:rw<span class="o">)</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"&gt;&gt;&gt; No DISPLAY: GUIs (MuJoCo viewer, sliders, RViz) will not open; headless use only."</span>
+<span class="k">fi</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-e<span class="w"> </span>/dev/dri<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nv">DOCKER_ARGS</span><span class="o">+=(</span>--device<span class="w"> </span>/dev/dri<span class="o">)</span><span class="w">   </span><span class="c1"># GPU acceleration for the viewer (Intel/AMD)</span>
+<span class="k">fi</span>
+
+<span class="c1"># A second docker/start.sh opens a new shell in the container that is already running.</span>
+<span class="k">if</span><span class="w"> </span>docker<span class="w"> </span>ps<span class="w"> </span>--format<span class="w"> </span><span class="s1">'{{.Names}}'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-qx<span class="w"> </span><span class="s2">"</span><span class="nv">$CONTAINER</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"&gt;&gt;&gt; Container </span><span class="nv">$CONTAINER</span><span class="s2"> is already running: opening another shell in it."</span>
+<span class="w">  </span><span class="nb">exec</span><span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span><span class="s2">"</span><span class="nv">$CONTAINER</span><span class="s2">"</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s1">'source /opt/ros/$ROS_DISTRO/setup.bash &amp;&amp; source /ws/install/setup.bash &amp;&amp; exec bash'</span>
+<span class="k">fi</span>
+
+<span class="nb">exec</span><span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">DOCKER_ARGS</span><span class="p">[@]</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$IMAGE</span><span class="s2">"</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span><span class="nv">$INNER</span><span class="s2">"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</details><p>Deux différences entre les services <code class="docutils literal notranslate"><span class="pre">dev</span></code> et <code class="docutils literal notranslate"><span class="pre">test</span></code> du fichier <code class="docutils literal notranslate"><span class="pre">compose</span></code> méritent d’être relevées :</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dev</span></code> monte le serveur graphique X11 et le périphérique <code class="docutils literal notranslate"><span class="pre">/dev/dri</span></code> pour afficher le <em>viewer</em> MuJoCo et RViz ; <code class="docutils literal notranslate"><span class="pre">test</span></code> n’en a pas besoin, puisque les tests sont headless ;</p></li>
+<li><p>dans les deux cas, <code class="docutils literal notranslate"><span class="pre">../src</span></code> est <strong>monté</strong> dans le conteneur plutôt que copié : vous éditez le code sur votre machine, avec votre éditeur, et vous le compilez dans le conteneur.</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>« Ça marche chez moi » cesse d’être un argument dès lors que vous pouvez lancer, en une commande, exactement ce que lance la CI.
+Avant d’ouvrir une <em>pull request</em>, exécutez <code class="docutils literal notranslate"><span class="pre">docker/start.sh</span> <span class="pre">test</span></code> : c’est le même verdict, obtenu quelques minutes plus tôt, et sans mobiliser le serveur.</p>
+</div>
+</section>
+<section id="le-cas-particulier-de-ce-projet-une-ci-rouge-volontairement">
+<h2>Le cas particulier de ce projet : une CI rouge, volontairement<a class="headerlink" href="#le-cas-particulier-de-ce-projet-une-ci-rouge-volontairement" title="Lien vers cette rubrique"></a></h2>
+<p>Rappelons l’état dans lequel le projet est livré : les tests existent, le code ne l’est pas, <strong>la CI est donc rouge</strong>.</p>
+<p>Ce n’est pas une anomalie, c’est la traduction en CI du cycle TDD décrit dans <a class="reference internal" href="p03s02_write_tests_with_gtest.html"><span class="doc">Écrire des tests C++ avec Google Test</span></a>.
+La CI y gagne un rôle supplémentaire, celui de <strong>tableau d’avancement</strong> : le rapport de tests publié à chaque <code class="docutils literal notranslate"><span class="pre">push</span></code> indique précisément combien de tests passent, et lesquels.
+Votre travail consiste à faire passer la CI du rouge au vert, et vous en mesurez l’avancement sans avoir à y penser.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>État attendu</p></th>
+<th class="head"><p>Interprétation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>2 tests verts (banc de test), 8 rouges</p></td>
+<td><p>Point de départ : l’environnement et l’oracle fonctionnent, rien n’est implémenté.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Les tests <code class="docutils literal notranslate"><span class="pre">SimulationHarness</span></code> rouges</p></td>
+<td><p><strong>Anomalie</strong> : problème d’environnement, de modèle MJCF ou de géométrie. À traiter en priorité, avant toute implémentation.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ForwardKinematics</span></code> verts, <code class="docutils literal notranslate"><span class="pre">InverseKinematics</span></code> rouges</p></td>
+<td><p>Avancement normal : le modèle direct est fait, le modèle inverse reste à écrire.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tous verts</p></td>
+<td><p>Les deux modèles sont conformes à la spécification, dans les deux langages.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition caution">
+<p class="admonition-title">Prudence</p>
+<p>Un projet dont la CI est durablement rouge est un projet où plus personne ne lit la CI.
+Tant que cet état est <strong>volontaire et documenté</strong> — c’est le cas ici, le <code class="docutils literal notranslate"><span class="pre">README</span></code> du projet l’annonce — il est acceptable.
+Dans un projet en production, la règle est l’inverse : la branche principale doit toujours être verte, et le travail en cours se fait sur une branche.</p>
+</div>
+</section>
+<section id="completer-la-ci">
+<h2>Compléter la CI<a class="headerlink" href="#completer-la-ci" title="Lien vers cette rubrique"></a></h2>
+<section id="proteger-la-branche-principale">
+<h3>Protéger la branche principale<a class="headerlink" href="#proteger-la-branche-principale" title="Lien vers cette rubrique"></a></h3>
+<p>Une CI qui rend un verdict que l’on peut ignorer n’est qu’une indication.
+Dans les réglages GitHub du dépôt (<em>Settings → Branches → Branch protection rules</em>), on peut exiger que la CI soit verte pour autoriser la fusion d’une <em>pull request</em>.
+C’est le complément naturel de la méthodologie de contribution décrite dans <a class="reference internal" href="../c01_create_and_publish_doc/p01s06_cooperate_by_pull_request.html"><span class="doc">Coopérer grâce aux pull requests</span></a>.</p>
+</section>
+<section id="verifier-aussi-le-style">
+<h3>Vérifier aussi le style<a class="headerlink" href="#verifier-aussi-le-style" title="Lien vers cette rubrique"></a></h3>
+<p>Les tests de style (<code class="docutils literal notranslate"><span class="pre">flake8</span></code>, <code class="docutils literal notranslate"><span class="pre">ament_cmake_copyright</span></code>, formatage C++) sont exécutés par <code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">test</span></code> au même titre que les autres : la CI les contrôle donc déjà.
+Pour éviter de découvrir un problème de formatage après plusieurs minutes d’attente, mieux vaut le détecter <strong>avant</strong> de valider le commit, avec <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> : voir <a class="reference internal" href="../c04_collaborate_with_coders/p04s10_precommit.html"><span class="doc">L’outil pre-commit</span></a>.</p>
+<p>La règle d’usage est la suivante : <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> sur votre machine pour un retour en une seconde, la CI comme filet de sécurité qui ne peut pas être contourné.</p>
+</section>
+<section id="quelques-extensions-utiles">
+<h3>Quelques extensions utiles<a class="headerlink" href="#quelques-extensions-utiles" title="Lien vers cette rubrique"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>Une matrice de distributions</strong> : faire tourner le même <em>workflow</em> sur Humble et Jazzy, grâce à l’argument <code class="docutils literal notranslate"><span class="pre">ROS_DISTRO</span></code> déjà prévu dans le <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code>.</p></li>
+<li><p><strong>La couverture de code</strong> (<code class="docutils literal notranslate"><span class="pre">lcov</span></code> pour le C++, <code class="docutils literal notranslate"><span class="pre">coverage</span></code> pour Python) : elle indique quelles lignes ne sont exécutées par aucun test. À lire comme un indicateur de ce qui n’est pas testé, et non comme une note à maximiser.</p></li>
+<li><p><strong>Un délai maximal</strong> sur le <em>job</em> (<code class="docutils literal notranslate"><span class="pre">timeout-minutes</span></code>), pour qu’un test bloqué n’occupe pas un serveur pendant des heures.</p></li>
+<li><p><strong>Une exécution planifiée</strong> (<code class="docutils literal notranslate"><span class="pre">schedule</span></code>) : lancer la CI chaque nuit détecte les ruptures venues de l’extérieur, sur un code que personne n’a modifié.</p></li>
+</ol>
+</section>
+</section>
+<section id="exercices">
+<h2>Exercices<a class="headerlink" href="#exercices" title="Lien vers cette rubrique"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Reproduire la CI localement.</strong> Lancez <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">compose</span> <span class="pre">-f</span> <span class="pre">docker/docker-compose.yml</span> <span class="pre">run</span> <span class="pre">--rm</span> <span class="pre">test</span></code>. Comparez le nombre de tests passés et échoués avec ce qu’annonce le rapport de la CI sur GitHub. Les deux doivent coïncider : si ce n’est pas le cas, qu’est-ce que cela révèle ?</p></li>
+<li><p><strong>Casser le verdict.</strong> Enlevez <code class="docutils literal notranslate"><span class="pre">--return-code-on-test-failure</span></code> du <em>workflow</em>, poussez la modification et observez. La CI est-elle verte ou rouge ? Combien de tests échouent réellement ? Pourquoi est-ce la panne la plus grave possible pour une CI ?</p></li>
+<li><p><strong>Supprimer le rapport.</strong> Enlevez les deux <code class="docutils literal notranslate"><span class="pre">if:</span> <span class="pre">always()</span></code> et poussez. Que devient le rapport de tests quand les tests échouent ? Que reste-t-il pour diagnostiquer ?</p></li>
+<li><p><strong>Mesurer le cache.</strong> Relevez la durée de l’étape de construction de l’image lors de deux exécutions successives, la seconde ne modifiant qu’un commentaire dans un fichier source. Expliquez l’écart. Que se passerait-il si la ligne <code class="docutils literal notranslate"><span class="pre">COPY</span> <span class="pre">src</span> <span class="pre">/ws/src</span></code> était placée juste après le <code class="docutils literal notranslate"><span class="pre">FROM</span></code> de l’étage <code class="docutils literal notranslate"><span class="pre">base</span></code> ?</p></li>
+<li><p><strong>Épingler, ou pas.</strong> Remplacez <code class="docutils literal notranslate"><span class="pre">MUJOCO_VERSION=4.0.1</span></code> par la dernière version disponible. Les tests passent-ils toujours ? Quel est l’intérêt, et quel est le risque, de ne pas épingler cette version ?</p></li>
+<li><p><strong>Faire verdir la CI.</strong> Implémentez le modèle géométrique direct, dans les deux langages, et poussez sur une branche. Combien de tests deviennent verts ? Le rapport publié par la CI correspond-il à ce que vous attendiez ?</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="p03s04_use_simulation_to_write_tests.html" class="btn btn-neutral float-left" title="Utiliser la simulation pour écrire des tests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="../c04_collaborate_with_coders/p04s00_index.html" class="btn btn-neutral float-right" title="Les outils nécessaires pour collaborer entre codeurs" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Manuel YGUEL.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

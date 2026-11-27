@@ -71,7 +71,12 @@
 <li class="toctree-l4"><a class="reference internal" href="#pousser-le-code-sur-github">Pousser le code sur github</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#creer-le-workflow-git-et-voir-la-documentation-apparaitre-sur-le-web-en-temps-reel">Créer le workflow git et voir la documentation apparaître sur le web en temps réel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creer-le-workflow-git-et-voir-la-documentation-apparaitre-sur-le-web-en-temps-reel">Créer le workflow git et voir la documentation apparaître sur le web en temps réel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#modifier-les-settings-github">Modifier les settings github</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#push-the-workflow-file">Push the workflow file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#workflow-in-action">Workflow in action</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="p01s06_cooperate_by_pull_request.html">Coopérer grâce aux pull requests</a></li>
@@ -250,8 +255,8 @@ Vous devriez voir les fichiers de votre projet s’afficher sur github.</p>
 </pre></div>
 </div>
 <p>Ajouter le contenu suivant dans le fichier <code class="docutils literal notranslate"><span class="pre">.github/workflows/documentation.yml</span></code>:</p>
-<div class="literal-block-wrapper docutils container" id="id1">
-<span id="github-workflow-doc"></span><div class="code-block-caption"><span class="caption-text">Fichier de CI (action de workflow github) documentation.yml</span><a class="headerlink" href="#id1" title="Lien vers ce code"></a></div>
+<div class="literal-block-wrapper docutils container" id="id2">
+<span id="github-workflow-doc"></span><div class="code-block-caption"><span class="caption-number">Code source 5 </span><span class="caption-text">Fichier de CI (action de workflow github) documentation.yml</span><a class="headerlink" href="#id2" title="Lien vers ce code"></a></div>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Documentation</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="c1"># Controls when the workflow will run</span>
@@ -311,8 +316,23 @@ Vous devriez voir les fichiers de votre projet s’afficher sur github.</p>
 </div>
 <p>Modifiez la ligne surlignée du fichier de workflow commençant par <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">...</span></code>, pour que dans le workflow ce soit bien votre projet qui soit téléchargé. Remplacez <code class="docutils literal notranslate"><span class="pre">https://github.com/yguel/informatique_industrielle_avec_ROS2.git</span></code> par l’adresse <code class="docutils literal notranslate"><span class="pre">HTTPS</span></code> de votre dépôt github (MY_GIT_REMOTE_ADDRESS que vous pouvez récupérer en suivant la <a class="reference internal" href="#get-git-remote-project-address"><span class="std std-ref">procédure ci-dessus</span></a> (procédure pas-à-pas). Nous utilisons ici, l’adresse <code class="docutils literal notranslate"><span class="pre">HTTPS</span></code> pour que le workflow n’ait pas besoin de code d’accès pour cloner le dépôt. Comme le dépôt est publique c’est la méthode d’accès la plus simple pour le workflow.</p>
 <p>Par contre pour modifier le dépôt: action <code class="docutils literal notranslate"><span class="pre">push</span></code>, il faut forcément des autorisations car le dépôt n’est pas en écriture pour tout le monde. C’est pour cela que dans le ::ref:` workflow&lt;github_workflow_doc&gt;`, l’action <code class="docutils literal notranslate"><span class="pre">Push</span> <span class="pre">changes</span></code> lignes 49-54, a un champ particulier <code class="docutils literal notranslate"><span class="pre">github_token</span></code> qui permet d’authentifier le workflow pour qu’il puisse pousser les modifications sur le dépôt. Le mot de passe est généré automatiquement par GitHub, et les actions github auront le droit de pousser sur le dépôt une fois que vous aurez fait <a class="reference internal" href="#setup-git-actions"><span class="std std-ref">les modifications dans les settings du projet ci-après</span></a>.</p>
-<p>Il faut maintenant faire quelques modifications dans les settings du projet sur github
-Il faut:</p>
+<section id="modifier-les-settings-github">
+<h3>Modifier les settings github<a class="headerlink" href="#modifier-les-settings-github" title="Lien vers cette rubrique"></a></h3>
+<p>Il faut maintenant faire quelques modifications dans les settings du projet sur github.</p>
+<p><strong>Modifications des github pages</strong></p>
+<ol class="arabic simple">
+<li><p>aller dans les settings du projet</p></li>
+<li><p>aller dans la section <code class="docutils literal notranslate"><span class="pre">Pages</span></code></p></li>
+<li><p>Assurez-vous que votre site GitHub Pages est actuellement construit à partir de la branche gh-pages (Your GitHub Pages site is currently being built from the gh-pages branch) comme sur la figure ci-dessous <a class="reference internal" href="#setup-git-pages"><span class="std std-numref">Fig. 6</span></a> .</p></li>
+</ol>
+<figure class="align-center" id="setup-git-pages">
+<a class="reference internal image-reference" href="../_images/github_pages_config.png"><img alt="../_images/github_pages_config.png" src="../_images/github_pages_config.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Configuration des GitHub Pages</span><a class="headerlink" href="#setup-git-pages" title="Lien vers cette image"></a></p>
+</figcaption>
+</figure>
+<p><strong>Modifications des actions GitHub</strong></p>
 <ol class="arabic">
 <li><p>aller dans les settings du projet</p></li>
 <li><p>aller dans la section <code class="docutils literal notranslate"><span class="pre">Actions</span></code></p></li>
@@ -346,6 +366,9 @@ Il faut:</p>
 <a class="reference internal image-reference" href="../_images/setup_git_actions_04.png"><img alt="../_images/setup_git_actions_04.png" src="../_images/setup_git_actions_04.png" style="width: 80%;" />
 </a>
 </figure>
+</section>
+<section id="push-the-workflow-file">
+<h3>Push the workflow file<a class="headerlink" href="#push-the-workflow-file" title="Lien vers cette rubrique"></a></h3>
 <p>Maintenant vous pouvez ajouter le fichier de workflow à git et pusher:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>.github/workflows/documentation.yml
 </pre></div>
@@ -356,14 +379,18 @@ Il faut:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push
 </pre></div>
 </div>
+</section>
+<section id="workflow-in-action">
+<h3>Workflow in action<a class="headerlink" href="#workflow-in-action" title="Lien vers cette rubrique"></a></h3>
 <p>Maintenant, vous pouvez voir la documentation apparaître sur le web en temps réel en allant sur la page de votre dépôt github et en cliquant sur le lien <code class="docutils literal notranslate"><span class="pre">Actions</span></code>.</p>
 <p>Vous avez peut-être besoin de faire un nouveau commit pour que le workflow se déclenche.</p>
 <p>Petit exercice: modifiez le fichier <code class="docutils literal notranslate"><span class="pre">doc/sphinx/source/index.rst</span></code> et ajoutez une ligne de texte. Poussez les modifications sur github à l’aide des commandes git : <code class="docutils literal notranslate"><span class="pre">add,</span> <span class="pre">commit</span> <span class="pre">puis</span> <span class="pre">push</span></code> et regardez la documentation se mettre à jour en temps réel.</p>
 <p>Allez sur l’onglet <code class="docutils literal notranslate"><span class="pre">Actions</span></code> de votre dépôt github pour voir le workflow se déclencher et construire la documentation, vous pouvez suivre en temps réel ce qui se passe et notamment voir les logs ou les erreurs s’il y en a.</p>
-<figure class="align-center" id="workflow-in-action">
+<figure class="align-center" id="id1">
 <a class="reference internal image-reference" href="../_images/workflow_in_action.gif"><img alt="../_images/workflow_in_action.gif" src="../_images/workflow_in_action.gif" style="width: 80%;" />
 </a>
 </figure>
+</section>
 </section>
 </section>
 

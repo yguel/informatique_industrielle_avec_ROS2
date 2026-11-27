@@ -192,7 +192,7 @@ Il est courant, par exemple, de préfixer une librairie python avec le préfix <
 <li><p>donner le chemin du fichier css</p></li>
 </ol>
 <div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text">Fichier de configuration de Sphinx (et oui! c’est du python)</span><a class="headerlink" href="#id1" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 3 </span><span class="caption-text">Fichier de configuration de Sphinx (et oui! c’est du python)</span><a class="headerlink" href="#id1" title="Lien vers ce code"></a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># Configuration file for the Sphinx documentation builder.</span>
 <span class="linenos">  2</span><span class="c1">#</span>
 <span class="linenos">  3</span><span class="c1"># This file only contains a selection of the most common options. For a full</span>
@@ -255,44 +255,46 @@ Il est courant, par exemple, de préfixer une librairie python avec le préfix <
 <span class="linenos"> 60</span><span class="n">source_suffix</span> <span class="o">=</span> <span class="p">[</span><span class="s2">".rst"</span><span class="p">,</span> <span class="s2">".md"</span><span class="p">]</span>
 <span class="linenos"> 61</span>
 <span class="linenos"> 62</span>
-<span class="linenos"> 63</span><span class="c1"># -- Options for HTML output -------------------------------------------------</span>
+<span class="linenos"> 63</span><span class="n">numfig</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="linenos"> 64</span>
-<span class="hll"><span class="linenos"> 65</span><span class="c1"># The theme to use for HTML and HTML Help pages.  See the documentation for</span>
-</span><span class="linenos"> 66</span><span class="c1"># a list of builtin themes.</span>
-<span class="hll"><span class="linenos"> 67</span><span class="c1">#</span>
-</span><span class="hll"><span class="linenos"> 68</span><span class="n">html_theme</span> <span class="o">=</span> <span class="s2">"sphinx_rtd_theme"</span>
-</span><span class="hll"><span class="linenos"> 69</span>
-</span><span class="linenos"> 70</span><span class="n">html_sidebars</span> <span class="o">=</span> <span class="p">{</span>
-<span class="linenos"> 71</span>    <span class="s2">"**"</span><span class="p">:</span> <span class="p">[</span>
-<span class="linenos"> 72</span>        <span class="s2">"globaltoc.html"</span><span class="p">,</span>  <span class="c1"># Use the global TOC instead of the local one</span>
-<span class="linenos"> 73</span>        <span class="s2">"relations.html"</span><span class="p">,</span>  <span class="c1"># Adds links to the previous and next chapters</span>
-<span class="linenos"> 74</span>        <span class="s2">"searchbox.html"</span><span class="p">,</span>  <span class="c1"># Adds a search box</span>
-<span class="linenos"> 75</span>    <span class="p">]</span>
-<span class="hll"><span class="linenos"> 76</span><span class="p">}</span>
-</span><span class="hll"><span class="linenos"> 77</span>
-</span><span class="hll"><span class="linenos"> 78</span><span class="c1"># -- Options for copybutton extension ----------------------------------------</span>
-</span><span class="linenos"> 79</span><span class="n">copybutton_prompt_text</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"&gt;&gt;&gt; |\.\.\. |\$ |In \[\d*\]: | {2,5}\.\.\.: | {5,8}: "</span>
-<span class="linenos"> 80</span><span class="n">copybutton_prompt_is_regexp</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="linenos"> 81</span>
-<span class="linenos"> 82</span><span class="c1"># Add any paths that contain custom static files (such as style sheets) here,</span>
-<span class="linenos"> 83</span><span class="c1"># relative to this directory. They are copied after the builtin static files,</span>
-<span class="linenos"> 84</span><span class="c1"># so a file named "default.css" will overwrite the builtin "default.css".</span>
-<span class="linenos"> 85</span><span class="n">html_static_path</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"_static"</span><span class="p">]</span>
-<span class="linenos"> 86</span>
-<span class="linenos"> 87</span><span class="n">html_css_files</span> <span class="o">=</span> <span class="p">[</span>
-<span class="linenos"> 88</span>    <span class="s2">"css/custom.css"</span><span class="p">,</span>
-<span class="linenos"> 89</span><span class="p">]</span>
-<span class="linenos"> 90</span>
-<span class="linenos"> 91</span><span class="c1"># -- Custom prolog</span>
+<span class="hll"><span class="linenos"> 65</span><span class="c1"># -- Options for HTML output -------------------------------------------------</span>
+</span><span class="linenos"> 66</span>
+<span class="hll"><span class="linenos"> 67</span><span class="c1"># The theme to use for HTML and HTML Help pages.  See the documentation for</span>
+</span><span class="hll"><span class="linenos"> 68</span><span class="c1"># a list of builtin themes.</span>
+</span><span class="hll"><span class="linenos"> 69</span><span class="c1">#</span>
+</span><span class="linenos"> 70</span><span class="n">html_theme</span> <span class="o">=</span> <span class="s2">"sphinx_rtd_theme"</span>
+<span class="linenos"> 71</span>
+<span class="linenos"> 72</span><span class="n">html_sidebars</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos"> 73</span>    <span class="s2">"**"</span><span class="p">:</span> <span class="p">[</span>
+<span class="linenos"> 74</span>        <span class="s2">"globaltoc.html"</span><span class="p">,</span>  <span class="c1"># Use the global TOC instead of the local one</span>
+<span class="linenos"> 75</span>        <span class="s2">"relations.html"</span><span class="p">,</span>  <span class="c1"># Adds links to the previous and next chapters</span>
+<span class="hll"><span class="linenos"> 76</span>        <span class="s2">"searchbox.html"</span><span class="p">,</span>  <span class="c1"># Adds a search box</span>
+</span><span class="hll"><span class="linenos"> 77</span>    <span class="p">]</span>
+</span><span class="hll"><span class="linenos"> 78</span><span class="p">}</span>
+</span><span class="linenos"> 79</span>
+<span class="linenos"> 80</span><span class="c1"># -- Options for copybutton extension ----------------------------------------</span>
+<span class="linenos"> 81</span><span class="n">copybutton_prompt_text</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"&gt;&gt;&gt; |\.\.\. |\$ |In \[\d*\]: | {2,5}\.\.\.: | {5,8}: "</span>
+<span class="linenos"> 82</span><span class="n">copybutton_prompt_is_regexp</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos"> 83</span>
+<span class="linenos"> 84</span><span class="c1"># Add any paths that contain custom static files (such as style sheets) here,</span>
+<span class="linenos"> 85</span><span class="c1"># relative to this directory. They are copied after the builtin static files,</span>
+<span class="linenos"> 86</span><span class="c1"># so a file named "default.css" will overwrite the builtin "default.css".</span>
+<span class="linenos"> 87</span><span class="n">html_static_path</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"_static"</span><span class="p">]</span>
+<span class="linenos"> 88</span>
+<span class="linenos"> 89</span><span class="n">html_css_files</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos"> 90</span>    <span class="s2">"css/custom.css"</span><span class="p">,</span>
+<span class="linenos"> 91</span><span class="p">]</span>
 <span class="linenos"> 92</span>
-<span class="linenos"> 93</span><span class="n">rst_prolog</span> <span class="o">=</span> <span class="s2">"""</span>
-<span class="linenos"> 94</span><span class="s2">.. role:: text-bold-black-on-red</span>
-<span class="linenos"> 95</span><span class="s2">   :class: text-bold-black-on-red</span>
-<span class="linenos"> 96</span>
-<span class="linenos"> 97</span><span class="s2">.. |br| raw:: html</span>
+<span class="linenos"> 93</span><span class="c1"># -- Custom prolog</span>
+<span class="linenos"> 94</span>
+<span class="linenos"> 95</span><span class="n">rst_prolog</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="linenos"> 96</span><span class="s2">.. role:: text-bold-black-on-red</span>
+<span class="linenos"> 97</span><span class="s2">   :class: text-bold-black-on-red</span>
 <span class="linenos"> 98</span>
-<span class="linenos"> 99</span><span class="s2">        &lt;br&gt;</span>
-<span class="linenos">100</span><span class="s2">"""</span>
+<span class="linenos"> 99</span><span class="s2">.. |br| raw:: html</span>
+<span class="linenos">100</span>
+<span class="linenos">101</span><span class="s2">        &lt;br&gt;</span>
+<span class="linenos">102</span><span class="s2">"""</span>
 </pre></div>
 </div>
 </div>
@@ -305,7 +307,7 @@ Il est courant, par exemple, de préfixer une librairie python avec le préfix <
 </pre></div>
 </div>
 <div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">Fichier css custom.css</span><a class="headerlink" href="#id2" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 4 </span><span class="caption-text">Fichier css custom.css</span><a class="headerlink" href="#id2" title="Lien vers ce code"></a></div>
 <div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c">/* Force line wraping in code instead of horizontal scrolling */</span>
 <span class="linenos"> 2</span><span class="nt">pre</span><span class="w"> </span><span class="p">{</span>
 <span class="linenos"> 3</span><span class="w">    </span><span class="k">white-space</span><span class="p">:</span><span class="w"> </span><span class="kc">pre-wrap</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>

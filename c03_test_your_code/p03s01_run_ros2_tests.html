@@ -27,7 +27,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Recherche" href="../search.html" />
-    <link rel="next" title="Les outils nécessaires pour collaborer entre codeurs" href="../c04_collaborate_with_coders/p04s00_index.html" />
+    <link rel="next" title="Écrire des tests C++ avec Google Test" href="p03s02_write_tests_with_gtest.html" />
     <link rel="prev" title="Tester le code" href="p03s00_index.html" /> 
 </head>
 
@@ -66,6 +66,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#analyser-les-resultats-des-tests">Analyser les résultats des tests</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="p03s02_write_tests_with_gtest.html">Écrire des tests C++ avec Google Test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s03_write_tests_for_python.html">Écrire des tests pour du code Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s04_use_simulation_to_write_tests.html">Utiliser la simulation pour écrire des tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s05_create_CI_for_automatically_runing_your_tests.html">Exécuter les tests automatiquement : l’intégration continue</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../c04_collaborate_with_coders/p04s00_index.html">Les outils nécessaires pour collaborer entre codeurs</a></li>
@@ -222,7 +226,7 @@ Les cas d’usage sont très rares: principalement pour débuguer les CMakeLists
 <label class="sd-tab-label" for="sd-tab-item-0">
 Humble</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">settings.json</span><a class="headerlink" href="#id2" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 6 </span><span class="caption-text">settings.json</span><a class="headerlink" href="#id2" title="Lien vers ce code"></a></div>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">    </span><span class="nt">"editor.formatOnSave"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">"editor.detectIndentation"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
@@ -318,7 +322,7 @@ Humble</label><div class="sd-tab-content docutils">
 <label class="sd-tab-label" for="sd-tab-item-1">
 Jazzy</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">settings.json</span><a class="headerlink" href="#id3" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 7 </span><span class="caption-text">settings.json</span><a class="headerlink" href="#id3" title="Lien vers ce code"></a></div>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">    </span><span class="nt">"editor.formatOnSave"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">"editor.detectIndentation"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
@@ -431,7 +435,7 @@ Ils devront néanmoins être corrigés pour que le code soit conforme aux standa
 <summary class="sd-summary-title sd-card-header">
 <span class="sd-summary-text">tasks.json</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text">tasks.json</span><a class="headerlink" href="#id4" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 8 </span><span class="caption-text">tasks.json</span><a class="headerlink" href="#id4" title="Lien vers ce code"></a></div>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// See https://go.microsoft.com/fwlink/?LinkId=733558</span>
 <span class="w">    </span><span class="c1">// for the documentation about the tasks.json format</span>
@@ -684,6 +688,10 @@ Ils devront néanmoins être corrigés pour que le code soit conforme aux standa
 </div>
 </div>
 </details><p>Ce fichier est intégralement repris du projet git: <a class="reference external" href="https://github.com/athackst/vscode_ros2_workspace">vscode_ros2_workspace d’athackst (Allison Thackston)</a></p>
+<p>Un <code class="docutils literal notranslate"><span class="pre">linter</span></code> est un outil qui analyse le code source pour détecter des erreurs de style, de formatage ou de bonnes pratiques. <br>
+C’est très utile pour maintenir un code propre et cohérent, surtout dans des projets collaboratifs. <br>
+Ainsi pour un même texte de code, tous les développeurs produiront le même code finale, la même ligne de code sera formatée de la même manière et donc il n’y aura pas de différences inutiles dans les commits. <br>
+Plus d’information sur ces outils sont fournies dans le chapitre <a class="reference internal" href="../c04_collaborate_with_coders/p04s00_index.html#collaborate-with-coders"><span class="std std-ref">Les outils nécessaires pour collaborer entre codeurs</span></a>.</p>
 <p>Pour exécuter une tache de linter, il suffit de taper <code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+P</span></code> puis de taper <code class="docutils literal notranslate"><span class="pre">Run</span> <span class="pre">Task</span></code> et de sélectionner la tâche voulue.</p>
 <p>Dans notre cas, il faut sélectionner la tâche <code class="docutils literal notranslate"><span class="pre">flake8</span></code> pour exécuter les tests de formatage de code python.</p>
 <p>De manière plus générale, pour les problèmes de linter, il est possible d’exécuter la tâche <code class="docutils literal notranslate"><span class="pre">lint</span> <span class="pre">all</span></code> qui exécute tous les tests de linter.</p>
@@ -695,7 +703,7 @@ Ils devront néanmoins être corrigés pour que le code soit conforme aux standa
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
         <a href="p03s00_index.html" class="btn btn-neutral float-left" title="Tester le code" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
-        <a href="../c04_collaborate_with_coders/p04s00_index.html" class="btn btn-neutral float-right" title="Les outils nécessaires pour collaborer entre codeurs" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="p03s02_write_tests_with_gtest.html" class="btn btn-neutral float-right" title="Écrire des tests C++ avec Google Test" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

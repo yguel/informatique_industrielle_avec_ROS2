@@ -24,6 +24,7 @@
       <script src="../_static/copybutton.js?v=30646c52"></script>
       <script src="../_static/translations.js?v=e6b791cb"></script>
       <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Recherche" href="../search.html" />
@@ -57,6 +58,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../c02_first_ros2_project_pimped/p02s00_index.html">Tutoriel ROS2 épicé</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Tester le code</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="p03s01_run_ros2_tests.html">Lancer les tests de ROS2 et les analyser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s02_write_tests_with_gtest.html">Écrire des tests C++ avec Google Test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s03_write_tests_for_python.html">Écrire des tests pour du code Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s04_use_simulation_to_write_tests.html">Utiliser la simulation pour écrire des tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s05_create_CI_for_automatically_runing_your_tests.html">Exécuter les tests automatiquement : l’intégration continue</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../c04_collaborate_with_coders/p04s00_index.html">Les outils nécessaires pour collaborer entre codeurs</a></li>
@@ -93,12 +98,60 @@
              
   <section id="tester-le-code">
 <h1>Tester le code<a class="headerlink" href="#tester-le-code" title="Lien vers cette rubrique"></a></h1>
+<p>Un code qui n’est pas testé est un code dont personne ne sait ce qu’il fait — y compris son auteur, dès qu’il y revient quelques semaines plus tard.
+Ce chapitre présente comment écrire des tests, comment les faire exécuter par ROS 2, et comment les faire exécuter automatiquement à chaque modification publiée.</p>
+<p>Les quatre dernières sections s’appuient sur un <strong>projet support commun</strong> : la simulation MuJoCo du système 5 barres du cours (voir <a class="reference internal" href="../p00_5_bars_system_pencil_holder_with_rpi_and_dynamixel/p50s02_mechanical_description.html#mechanical-description"><span class="std std-ref">Description mécanique de la plateforme système 5 barres</span></a>), dans laquelle les modèles géométriques direct et inverse sont à écrire, en C++ et en Python, et dont les tests sont fournis.
+La démarche suivie est celle du développement piloté par les tests : <strong>les tests existent avant le code, et échouent</strong>.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="p03s01_run_ros2_tests.html">Lancer les tests de ROS2 et les analyser</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="p03s01_run_ros2_tests.html#lancer-les-tests-sur-tous-les-paquets-du-repertoire-de-travail">Lancer les tests sur tous les paquets du répertoire de travail</a></li>
 <li class="toctree-l2"><a class="reference internal" href="p03s01_run_ros2_tests.html#lancer-les-tests-pour-un-paquet-specifique">Lancer les tests pour un paquet spécifique</a></li>
 <li class="toctree-l2"><a class="reference internal" href="p03s01_run_ros2_tests.html#analyser-les-resultats-des-tests">Analyser les résultats des tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="p03s02_write_tests_with_gtest.html">Écrire des tests C++ avec Google Test</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="p03s02_write_tests_with_gtest.html#le-projet-support-5-barres">Le projet support : 5 barres</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s02_write_tests_with_gtest.html#commencer-par-les-tests-la-demarche-tdd">Commencer par les tests : la démarche TDD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s02_write_tests_with_gtest.html#les-briques-de-base-de-gtest">Les briques de base de gtest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s02_write_tests_with_gtest.html#les-fixtures-partager-un-contexte-entre-tests">Les fixtures : partager un contexte entre tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s02_write_tests_with_gtest.html#que-verifient-les-tests-du-5-barres">Que vérifient les tests du 5 barres ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s02_write_tests_with_gtest.html#integrer-les-tests-au-paquet-ros-2">Intégrer les tests au paquet ROS 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s02_write_tests_with_gtest.html#lancer-les-tests">Lancer les tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s02_write_tests_with_gtest.html#lire-et-interpreter-un-echec">Lire et interpréter un échec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s02_write_tests_with_gtest.html#ce-qui-fait-un-bon-test">Ce qui fait un bon test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s02_write_tests_with_gtest.html#exercices">Exercices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="p03s03_write_tests_for_python.html">Écrire des tests pour du code Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="p03s03_write_tests_for_python.html#unittest-ou-pytest-lequel-utiliser"><code class="docutils literal notranslate"><span class="pre">unittest</span></code> ou <code class="docutils literal notranslate"><span class="pre">pytest</span></code> : lequel utiliser ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s03_write_tests_for_python.html#structure-d-un-fichier-de-tests">Structure d’un fichier de tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s03_write_tests_for_python.html#integrer-les-tests-python-au-paquet-ros-2">Intégrer les tests Python au paquet ROS 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s03_write_tests_for_python.html#lancer-les-tests-python">Lancer les tests Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s03_write_tests_for_python.html#lire-et-interpreter-les-resultats">Lire et interpréter les résultats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s03_write_tests_for_python.html#deux-langages-une-seule-specification">Deux langages, une seule spécification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s03_write_tests_for_python.html#exercices">Exercices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="p03s04_use_simulation_to_write_tests.html">Utiliser la simulation pour écrire des tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="p03s04_use_simulation_to_write_tests.html#le-probleme-de-l-oracle">Le problème de l’oracle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s04_use_simulation_to_write_tests.html#la-simulation-comme-verite-terrain-et-pourquoi-c-est-valide">La simulation comme vérité terrain, et pourquoi c’est valide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s04_use_simulation_to_write_tests.html#le-banc-de-test-du-projet">Le banc de test du projet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s04_use_simulation_to_write_tests.html#valider-l-oracle-avant-de-s-en-servir">Valider l’oracle avant de s’en servir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s04_use_simulation_to_write_tests.html#une-seule-source-de-verite-pour-la-geometrie">Une seule source de vérité pour la géométrie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s04_use_simulation_to_write_tests.html#choisir-les-cas-de-test-et-les-tolerances">Choisir les cas de test et les tolérances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s04_use_simulation_to_write_tests.html#ce-que-la-simulation-ne-testera-jamais">Ce que la simulation ne testera jamais</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s04_use_simulation_to_write_tests.html#exercices">Exercices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="p03s05_create_CI_for_automatically_runing_your_tests.html">Exécuter les tests automatiquement : l’intégration continue</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="p03s05_create_CI_for_automatically_runing_your_tests.html#ce-que-la-ci-apporte-reellement">Ce que la CI apporte réellement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s05_create_CI_for_automatically_runing_your_tests.html#premiere-condition-un-environnement-reproductible">Première condition : un environnement reproductible</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s05_create_CI_for_automatically_runing_your_tests.html#le-workflow-github-actions">Le workflow GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s05_create_CI_for_automatically_runing_your_tests.html#executer-la-meme-chose-sur-sa-machine">Exécuter la même chose sur sa machine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s05_create_CI_for_automatically_runing_your_tests.html#le-cas-particulier-de-ce-projet-une-ci-rouge-volontairement">Le cas particulier de ce projet : une CI rouge, volontairement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s05_create_CI_for_automatically_runing_your_tests.html#completer-la-ci">Compléter la CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s05_create_CI_for_automatically_runing_your_tests.html#exercices">Exercices</a></li>
 </ul>
 </li>
 </ul>
