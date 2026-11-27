@@ -1,0 +1,386 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aide-mémoire : les commandes du 5 barres &mdash; Documentation Cours d&#39;Informatique Industrielle avec ROS2 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2f145f6b" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=05dadb3a"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=30646c52"></script>
+      <script src="../_static/translations.js?v=e6b791cb"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Les outils nécessaires pour collaborer entre codeurs" href="../c04_collaborate_with_coders/p04s00_index.html" />
+    <link rel="prev" title="Exécuter les tests automatiquement : l’intégration continue" href="p03s05_create_CI_for_automatically_runing_your_tests.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Cours d'Informatique Industrielle avec ROS2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Informatique Industrielle &amp; ROS2</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../c00_introduction/p00s00_index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c01_create_and_publish_doc/p01s00_index.html">Premier projet &amp; doc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c02_first_ros2_project_pimped/p02s00_index.html">Tutoriel ROS2 épicé</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="p03s00_index.html">Tester le code</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="p03s01_run_ros2_tests.html">Lancer les tests de ROS2 et les analyser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s02_write_tests_with_gtest.html">Écrire des tests C++ avec Google Test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s03_write_tests_for_python.html">Écrire des tests pour du code Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s04_use_simulation_to_write_tests.html">Utiliser la simulation pour écrire des tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s05_create_CI_for_automatically_runing_your_tests.html">Exécuter les tests automatiquement : l’intégration continue</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Aide-mémoire : les commandes du 5 barres</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#voir-et-piloter-le-robot">Voir et piloter le robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compiler-et-tester">Compiler et tester</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#le-conteneur-docker">Le conteneur Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#les-maillages-et-la-geometrie">Les maillages et la géométrie</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../c04_collaborate_with_coders/p04s00_index.html">Les outils nécessaires pour collaborer entre codeurs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Travaux Pratiques</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../p00_5_bars_system_pencil_holder_with_rpi_and_dynamixel/p50s00_index.html">système 5 barres de dessin robotisé avec Raspberry Pi et ROS2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p01_rpi_ubuntu_as_a_ros2_robotic_platform/p51s00_index.html">Ubuntu &amp; RPi &amp; ROS2</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cours d'Informatique Industrielle avec ROS2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="p03s00_index.html">Tester le code</a></li>
+      <li class="breadcrumb-item active">Aide-mémoire : les commandes du 5 barres</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/c03_test_your_code/p03s06_cheatsheet_five_bars.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="aide-memoire-les-commandes-du-5-barres">
+<span id="cheatsheet-five-bars"></span><h1>Aide-mémoire : les commandes du 5 barres<a class="headerlink" href="#aide-memoire-les-commandes-du-5-barres" title="Lien vers cette rubrique"></a></h1>
+<p id="index-0">Toutes les commandes de ce chapitre, rassemblées. Elles sont données <strong>en clair</strong>,
+sans raccourci : ce sont celles que vous taperez sur n’importe quelle machine, dans
+le conteneur comme en installation native.</p>
+<p>Deux conventions pour lire ce qui suit :</p>
+<ul class="simple">
+<li><p>les commandes s’exécutent <strong>depuis la racine de l’espace de travail</strong>,
+<code class="docutils literal notranslate"><span class="pre">mujoco/five_bars_ws</span></code> ;</p></li>
+<li><p>dans le conteneur, elles se tapent telles quelles. Depuis l’extérieur, préfixez-les
+par <code class="docutils literal notranslate"><span class="pre">docker/start.sh</span></code> — par exemple
+<code class="docutils literal notranslate"><span class="pre">docker/start.sh</span> <span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">five_bars_mujoco</span> <span class="pre">direct_gui</span></code>.</p></li>
+</ul>
+<section id="voir-et-piloter-le-robot">
+<h2>Voir et piloter le robot<a class="headerlink" href="#voir-et-piloter-le-robot" title="Lien vers cette rubrique"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 58.0%" />
+<col style="width: 42.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Commande</p></th>
+<th class="head"><p>Ce que vous obtenez</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">five_bars_mujoco</span> <span class="pre">direct_gui</span></code></p></td>
+<td><p>les deux curseurs <code class="docutils literal notranslate"><span class="pre">q1</span></code> / <code class="docutils literal notranslate"><span class="pre">q4</span></code> <strong>et</strong> la fenêtre 3D MuJoCo. C’est le point
+de départ : pas de nœud ROS 2 intermédiaire, la simulation est dans le même
+processus que l’IHM.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">five_bars_mujoco</span> <span class="pre">direct_gui</span> <span class="pre">--no-viewer</span></code></p></td>
+<td><p>les mêmes curseurs, <strong>sans fenêtre de rendu</strong>. À utiliser en <code class="docutils literal notranslate"><span class="pre">ssh</span></code>, sur une
+machine sans OpenGL, ou si l’affichage 3D est trop lent.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">launch</span> <span class="pre">five_bars_bringup</span> <span class="pre">sim_gui.launch.py</span> <span class="pre">rviz:=true</span></code></p></td>
+<td><p>le simulateur et l’IHM en <strong>nœuds séparés</strong>, reliés par le topic
+<code class="docutils literal notranslate"><span class="pre">/five_bars/joint_commands</span></code>, plus RViz qui affiche le robot depuis <code class="docutils literal notranslate"><span class="pre">/joint_states</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">launch</span> <span class="pre">five_bars_bringup</span> <span class="pre">ros2_control_sim.launch.py</span> <span class="pre">gui:=true</span> <span class="pre">rviz:=true</span></code></p></td>
+<td><p>la chaîne complète avec <strong>ros2_control</strong> : le <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code>, le
+<code class="docutils literal notranslate"><span class="pre">forward_position_controller</span></code> et l’interface matérielle qui parle au
+simulateur. C’est l’architecture du vrai robot, avec MuJoCo à la place des servos.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Une fois <code class="docutils literal notranslate"><span class="pre">ros2_control_sim.launch.py</span></code> lancé, on commande les deux moteurs depuis un
+autre terminal :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>--once<span class="w"> </span>/forward_position_controller/commands<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>std_msgs/msg/Float64MultiArray<span class="w"> </span><span class="s2">"{data: [2.2, 1.0]}"</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Les deux <code class="docutils literal notranslate"><span class="pre">launch</span></code> acceptent <code class="docutils literal notranslate"><span class="pre">use_viewer:=false</span></code> (pas de fenêtre MuJoCo) et
+<code class="docutils literal notranslate"><span class="pre">rviz:=false</span></code>. <code class="docutils literal notranslate"><span class="pre">ros2_control_sim.launch.py</span></code> a en plus <code class="docutils literal notranslate"><span class="pre">gui:=false</span></code>, qui retire
+les curseurs. Sur une machine sans affichage, c’est la combinaison à retenir.</p>
+<p><code class="docutils literal notranslate"><span class="pre">direct_gui</span></code> accepte aussi <code class="docutils literal notranslate"><span class="pre">--model</span> <span class="pre">chemin/vers/five_bars.xml</span></code> pour charger un
+MJCF autre que celui du paquet.</p>
+</div>
+</section>
+<section id="compiler-et-tester">
+<h2>Compiler et tester<a class="headerlink" href="#compiler-et-tester" title="Lien vers cette rubrique"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2_jazzy
+ros2_build_reldebug
+</pre></div>
+</div>
+<p>Ce sont les raccourcis du cours, définis dans le <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> du
+<a class="reference internal" href="../c02_first_ros2_project_pimped/p02s01_pimped_pubsub.html"><span class="doc">chapitre 2</span></a> et déjà chargés
+dans le conteneur. Ce qu’ils font :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 32.0%" />
+<col style="width: 68.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Raccourci</p></th>
+<th class="head"><p>Commandes équivalentes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ros2_jazzy</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">/opt/ros/jazzy/setup.bash</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ros2_dep</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rosdep</span> <span class="pre">install</span> <span class="pre">--ignore-src</span> <span class="pre">--from-paths</span> <span class="pre">.</span> <span class="pre">-y</span> <span class="pre">-r</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ros2_build_reldebug</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ros2_dep</span> <span class="pre">&amp;&amp;</span> <span class="pre">colcon</span> <span class="pre">build</span> <span class="pre">--cmake-args</span> <span class="pre">-DCMAKE_BUILD_TYPE=RelWithDebInfo</span>
+<span class="pre">--symlink-install</span> <span class="pre">&amp;&amp;</span> <span class="pre">source</span> <span class="pre">install/setup.bash</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ros2_build</span></code></p></td>
+<td><p>la même chose en <code class="docutils literal notranslate"><span class="pre">Release</span></code>, et <code class="docutils literal notranslate"><span class="pre">ros2_build_debug</span></code> en <code class="docutils literal notranslate"><span class="pre">Debug</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p><code class="docutils literal notranslate"><span class="pre">ros2_build_*</span></code> ajoute <code class="docutils literal notranslate"><span class="pre">--symlink-install</span></code>, alors que l’espace de travail livré
+dans l’image Docker a été compilé <strong>sans</strong>. Au premier usage du raccourci dans le
+conteneur, si <code class="docutils literal notranslate"><span class="pre">colcon</span></code> se plaint de ce changement de mode, repartez d’un espace
+propre — une fois suffit :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>build<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>ros2_build_reldebug
+</pre></div>
+</div>
+<p>Bonne nouvelle au passage : avec <code class="docutils literal notranslate"><span class="pre">--symlink-install</span></code>, un maillage modifié dans
+<code class="docutils literal notranslate"><span class="pre">src/</span></code> est vu immédiatement, sans recopie dans <code class="docutils literal notranslate"><span class="pre">install/</span></code>.</p>
+</div>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 58.0%" />
+<col style="width: 42.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Commande</p></th>
+<th class="head"><p>Ce qu’elle fait</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ros2_test</span></code></p></td>
+<td><p>lance les tests de <strong>tous</strong> les paquets</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ros2_test_only</span> <span class="pre">five_bars_kinematics</span></code></p></td>
+<td><p>seulement les tests de la cinématique, ceux que vous devez faire passer</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ros2_view_tests</span></code></p></td>
+<td><p>le <strong>verdict</strong> : les échecs et leur détail, à lancer après les tests</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ros2_view_tests_all</span></code></p></td>
+<td><p>le même verdict, tests réussis compris</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">./build/five_bars_kinematics/test_kinematics_cpp</span></code></p></td>
+<td><p>l’exécutable gtest directement, sans passer par colcon</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">unittest</span> <span class="pre">discover</span> <span class="pre">-s</span> <span class="pre">src/five_bars_kinematics/test</span> <span class="pre">-p</span> <span class="pre">&quot;test_*.py&quot;</span> <span class="pre">-v</span></code></p></td>
+<td><p>les tests Python seuls</p></td>
+</tr>
+</tbody>
+</table>
+<p>Ce que ces raccourcis recouvrent :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 32.0%" />
+<col style="width: 68.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Raccourci</p></th>
+<th class="head"><p>Commande équivalente</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ros2_test</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">test</span> <span class="pre">--ctest-args</span> <span class="pre">tests</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ros2_test_only</span> <span class="pre">&lt;paquet&gt;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">test</span> <span class="pre">--ctest-args</span> <span class="pre">&quot;--debug</span> <span class="pre">--verbose</span> <span class="pre">tests&quot;</span> <span class="pre">--packages-select</span> <span class="pre">&lt;paquet&gt;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ros2_view_tests</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">test-result</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ros2_view_tests_all</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">test-result</span> <span class="pre">--all</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p><code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">test</span></code>, et donc <code class="docutils literal notranslate"><span class="pre">ros2_test</span></code>, renvoie un code de retour qui ne reflète
+<strong>pas</strong> le verdict des tests. C’est <code class="docutils literal notranslate"><span class="pre">ros2_view_tests</span></code> qui vous dit si quelque chose
+a échoué : lancez-le toujours derrière, et ne vous fiez pas au silence de
+<code class="docutils literal notranslate"><span class="pre">ros2_test</span></code>.</p>
+</div>
+</section>
+<section id="le-conteneur-docker">
+<h2>Le conteneur Docker<a class="headerlink" href="#le-conteneur-docker" title="Lien vers cette rubrique"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 58.0%" />
+<col style="width: 42.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Commande</p></th>
+<th class="head"><p>Ce qu’elle fait</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">docker/start.sh</span></code></p></td>
+<td><p>compile l’espace de travail et ouvre un shell dans le conteneur</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">docker/start.sh</span> <span class="pre">test</span></code></p></td>
+<td><p>compile puis lance tous les tests, sans fenêtre — exactement ce que fait
+l’intégration continue</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">docker/start.sh</span> <span class="pre">&lt;commande&gt;</span></code></p></td>
+<td><p>exécute une seule commande dans le conteneur, puis rend la main</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">docker/start.sh</span> <span class="pre">--rebuild</span></code></p></td>
+<td><p>force la reconstruction de l”<strong>image</strong>. Inutile pour un changement de code ou
+de maillage : <code class="docutils literal notranslate"><span class="pre">src/</span></code> est monté depuis votre machine.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>Si un conteneur <code class="docutils literal notranslate"><span class="pre">five_bars_dev</span></code> tourne déjà, <code class="docutils literal notranslate"><span class="pre">docker/start.sh</span></code> ouvre simplement
+un second shell dedans et <strong>ne recompile pas</strong>. Après avoir modifié un maillage ou
+un fichier de description, relancez <code class="docutils literal notranslate"><span class="pre">ros2_build_reldebug</span></code> dans le conteneur, ou sortez-en
+et rappelez <code class="docutils literal notranslate"><span class="pre">docker/start.sh</span></code>. Sinon vous continuerez à voir l’ancienne version :
+MuJoCo et RViz lisent <code class="docutils literal notranslate"><span class="pre">install/</span></code>, pas <code class="docutils literal notranslate"><span class="pre">src/</span></code>.</p>
+</div>
+</section>
+<section id="les-maillages-et-la-geometrie">
+<h2>Les maillages et la géométrie<a class="headerlink" href="#les-maillages-et-la-geometrie" title="Lien vers cette rubrique"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 58.0%" />
+<col style="width: 42.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Commande</p></th>
+<th class="head"><p>Ce qu’elle fait</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">src/five_bars_description/tools/check_meshes.py</span></code></p></td>
+<td><p>vérifie les maillages : format, nombre de faces, unités, repère, puis charge
+le modèle complet</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">src/five_bars_description/tools/measure_cad.py</span> <span class="pre">../../cad/pentograph</span></code></p></td>
+<td><p>remesure A1…A5, les longueurs et le décalage du stylo sur la CAO</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">src/five_bars_description/tools/generate_models.py</span></code></p></td>
+<td><p>régénère le MJCF à partir de <code class="docutils literal notranslate"><span class="pre">config/geometry.yaml</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">mujoco.viewer</span> <span class="pre">--mjcf=install/five_bars_description/share/five_bars_description/mjcf/five_bars.xml</span></code></p></td>
+<td><p>ouvre le modèle seul, sans ROS 2. Le panneau <code class="docutils literal notranslate"><span class="pre">Control</span></code> donne <code class="docutils literal notranslate"><span class="pre">act_q1</span></code> et
+<code class="docutils literal notranslate"><span class="pre">act_q4</span></code>. Sur macOS, <code class="docutils literal notranslate"><span class="pre">mjpython</span></code> remplace <code class="docutils literal notranslate"><span class="pre">python3</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Astuce</p>
+<p>Toute la géométrie vient d’un seul fichier, <code class="docutils literal notranslate"><span class="pre">src/five_bars_description/config/geometry.yaml</span></code>.
+Pour changer une cote — longueur d’un bras, débattement d’un moteur, position du
+stylo — éditez-le puis relancez <code class="docutils literal notranslate"><span class="pre">generate_models.py</span></code> : le MJCF et l’URDF suivent.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="p03s05_create_CI_for_automatically_runing_your_tests.html" class="btn btn-neutral float-left" title="Exécuter les tests automatiquement : l’intégration continue" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="../c04_collaborate_with_coders/p04s00_index.html" class="btn btn-neutral float-right" title="Les outils nécessaires pour collaborer entre codeurs" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Manuel YGUEL.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

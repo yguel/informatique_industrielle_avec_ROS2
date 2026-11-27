@@ -27,7 +27,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Recherche" href="../search.html" />
-    <link rel="next" title="Les outils nécessaires pour collaborer entre codeurs" href="../c04_collaborate_with_coders/p04s00_index.html" />
+    <link rel="next" title="Aide-mémoire : les commandes du 5 barres" href="p03s06_cheatsheet_five_bars.html" />
     <link rel="prev" title="Utiliser la simulation pour écrire des tests" href="p03s04_use_simulation_to_write_tests.html" /> 
 </head>
 
@@ -87,6 +87,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#exercices">Exercices</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="p03s06_cheatsheet_five_bars.html">Aide-mémoire : les commandes du 5 barres</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../c04_collaborate_with_coders/p04s00_index.html">Les outils nécessaires pour collaborer entre codeurs</a></li>
@@ -157,7 +158,7 @@ C’est aussi pourquoi il faut à tout prix éliminer les tests instables (<em>f
 Installer cela « à la main » sur le serveur de CI serait long, fragile et non reproductible : la version installée dépendrait du jour de l’installation.</p>
 <p>C’est précisément le problème que résout une <strong>image Docker</strong> : une description exécutable d’un système complet, qui donne le même environnement sur le serveur de CI, sur votre machine, et sur celle de votre collègue — quelle que soit la distribution qu’il utilise.</p>
 <div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-number">Code source 45 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">docker/Dockerfile</span></code></span><a class="headerlink" href="#id1" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 46 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">docker/Dockerfile</span></code></span><a class="headerlink" href="#id1" title="Lien vers ce code"></a></div>
 <div class="highlight-docker notranslate"><div class="highlight"><pre><span></span><span class="c"># Image ROS 2 Jazzy + MuJoCo (Python ET C) + Google Test + système 5 barres.</span>
 <span class="c">#</span>
 <span class="c"># Build context = repository root (the image copies src/). From the repository root:</span>
@@ -301,7 +302,7 @@ Une image Docker qui échoue à la construction est un problème facile ; une im
 <section id="le-point-d-entree">
 <h3>Le point d’entrée<a class="headerlink" href="#le-point-d-entree" title="Lien vers cette rubrique"></a></h3>
 <div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-number">Code source 46 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">docker/entrypoint.sh</span></code></span><a class="headerlink" href="#id2" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 47 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">docker/entrypoint.sh</span></code></span><a class="headerlink" href="#id2" title="Lien vers ce code"></a></div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="nb">set</span><span class="w"> </span>-e
 <span class="nb">source</span><span class="w"> </span><span class="s2">"/opt/ros/</span><span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span><span class="s2">/setup.bash"</span>
@@ -319,7 +320,7 @@ Une image Docker qui échoue à la construction est un problème facile ; une im
 <h2>Le workflow GitHub Actions<a class="headerlink" href="#le-workflow-github-actions" title="Lien vers cette rubrique"></a></h2>
 <p id="index-2">Voici le fichier qui décrit ce que fait le serveur à chaque modification :</p>
 <div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-number">Code source 47 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">.github/workflows/ci.yml</span></code></span><a class="headerlink" href="#id3" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 48 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">.github/workflows/ci.yml</span></code></span><a class="headerlink" href="#id3" title="Lien vers ce code"></a></div>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CI</span>
 
 <span class="nt">on</span><span class="p">:</span>
@@ -480,7 +481,7 @@ Une CI qui ne distingue pas « les tests ont échoué » de « la CI a échoué 
 <h2>Exécuter la même chose sur sa machine<a class="headerlink" href="#executer-la-meme-chose-sur-sa-machine" title="Lien vers cette rubrique"></a></h2>
 <p>C’est la propriété la plus utile du dispositif, et celle qu’il faut rechercher dans tout projet : <strong>la CI ne fait rien que vous ne puissiez reproduire à l’identique chez vous</strong>.</p>
 <div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-number">Code source 48 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">docker/docker-compose.yml</span></code></span><a class="headerlink" href="#id4" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 49 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">docker/docker-compose.yml</span></code></span><a class="headerlink" href="#id4" title="Lien vers ce code"></a></div>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># docker-compose.yml lives in docker/ ; every relative path is relative to this folder:</span>
 <span class="c1">#   build context ".." = repository root, sources mounted from ../src.</span>
 <span class="c1">#</span>
@@ -550,7 +551,7 @@ C’est le bon outil pour <strong>travailler</strong> ; pour vérifier exactemen
 <summary class="sd-summary-title sd-card-header">
 <span class="sd-summary-text"><code class="docutils literal notranslate"><span class="pre">docker/start.sh</span></code></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-number">Code source 49 </span><span class="caption-text">docker/start.sh</span><a class="headerlink" href="#id5" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 50 </span><span class="caption-text">docker/start.sh</span><a class="headerlink" href="#id5" title="Lien vers ce code"></a></div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
 <span class="c1"># Build the Docker image (if needed) and open a shell in the five-bar container.</span>
 <span class="c1">#</span>
@@ -727,7 +728,7 @@ Pour éviter de découvrir un problème de formatage après plusieurs minutes d�
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
         <a href="p03s04_use_simulation_to_write_tests.html" class="btn btn-neutral float-left" title="Utiliser la simulation pour écrire des tests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
-        <a href="../c04_collaborate_with_coders/p04s00_index.html" class="btn btn-neutral float-right" title="Les outils nécessaires pour collaborer entre codeurs" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="p03s06_cheatsheet_five_bars.html" class="btn btn-neutral float-right" title="Aide-mémoire : les commandes du 5 barres" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -104,6 +104,7 @@
 <li class="toctree-l2"><a class="reference internal" href="p03s03_write_tests_for_python.html">Écrire des tests pour du code Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="p03s04_use_simulation_to_write_tests.html">Utiliser la simulation pour écrire des tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="p03s05_create_CI_for_automatically_runing_your_tests.html">Exécuter les tests automatiquement : l’intégration continue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s06_cheatsheet_five_bars.html">Aide-mémoire : les commandes du 5 barres</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../c04_collaborate_with_coders/p04s00_index.html">Les outils nécessaires pour collaborer entre codeurs</a></li>
@@ -190,7 +191,7 @@ Il simule le système 5 barres étudié en travaux pratiques (voir <a class="ref
 </table>
 <p>Le code à écrire est volontairement livré vide : seules les signatures et les conventions sont données.</p>
 <div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-number">Code source 9 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">five_bars_kinematics/include/five_bars_kinematics/kinematics.hpp</span></code> — les structures et les deux fonctions à implémenter</span><a class="headerlink" href="#id2" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 10 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">five_bars_kinematics/include/five_bars_kinematics/kinematics.hpp</span></code> — les structures et les deux fonctions à implémenter</span><a class="headerlink" href="#id2" title="Lien vers ce code"></a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">/// Paramètres géométriques (m). Voir five_bars_description/config/geometry.yaml.</span>
 <span class="k">struct</span><span class="w"> </span><span class="nc">Geometry</span>
 <span class="p">{</span>
@@ -228,7 +229,7 @@ Il simule le système 5 barres étudié en travaux pratiques (voir <a class="ref
 </div>
 </div>
 <div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-number">Code source 10 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">five_bars_kinematics/src/kinematics.cpp</span></code> — l’état initial du code à écrire</span><a class="headerlink" href="#id3" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 11 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">five_bars_kinematics/src/kinematics.cpp</span></code> — l’état initial du code à écrire</span><a class="headerlink" href="#id3" title="Lien vers ce code"></a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Modèles géométriques du système 5 barres — À IMPLÉMENTER.</span>
 <span class="c1">// Voir include/five_bars_kinematics/kinematics.hpp pour les conventions.</span>
 
@@ -366,26 +367,41 @@ La <strong>même</strong> roue pip fournit MuJoCo pour Python <strong>et</strong
 </pre></div>
 </div>
 <p class="rubric">4. Compiler et lancer les tests</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.bash
-colcon<span class="w"> </span>build<span class="w"> </span>--cmake-args<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>RelWithDebInfo
-<span class="nb">source</span><span class="w"> </span>install/setup.bash
-colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--event-handlers<span class="w"> </span>console_direct+
-colcon<span class="w"> </span>test-result<span class="w"> </span>--verbose
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2_jazzy
+ros2_build_reldebug
+ros2_test
+ros2_view_tests
 </pre></div>
 </div>
-<p>Le <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">/opt/ros/jazzy/setup.bash</span></code> est à refaire dans <strong>chaque</strong> nouveau terminal : ajoutez-le à votre <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> si vous travaillez souvent sur le projet.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ce sont les raccourcis du cours, définis dans le <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> présenté au
+<a class="reference internal" href="../c02_first_ros2_project_pimped/p02s01_pimped_pubsub.html"><span class="doc">chapitre 2</span></a> et
+détaillés dans <a class="reference internal" href="p03s01_run_ros2_tests.html"><span class="doc">Lancer les tests de ROS2 et les analyser</span></a>. <code class="docutils literal notranslate"><span class="pre">ros2_jazzy</span></code> remplace
+<code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">/opt/ros/jazzy/setup.bash</span></code> et reste à relancer dans <strong>chaque</strong>
+nouveau terminal ; <code class="docutils literal notranslate"><span class="pre">ros2_build_reldebug</span></code> enchaîne <code class="docutils literal notranslate"><span class="pre">rosdep</span> <span class="pre">install</span></code>, la
+compilation en <code class="docutils literal notranslate"><span class="pre">RelWithDebInfo</span></code> et <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">install/setup.bash</span></code>. <br>
+Ils sont déjà chargés dans le conteneur Docker. En installation native,
+installez ce <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> une fois pour toutes.</p>
+</div>
 </div>
 <input id="sd-tab-item-5" name="sd-tab-set-1" type="radio">
 <label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="rpi5" for="sd-tab-item-5">
 Raspberry Pi 5 sans Docker</label><div class="sd-tab-content docutils">
 <p>Sur un Raspberry Pi 5 sous <strong>Ubuntu 24.04 pour arm64</strong>, l’installation native fonctionne : ROS 2 Jazzy est publié pour <code class="docutils literal notranslate"><span class="pre">arm64</span></code>, et MuJoCo fournit des roues <code class="docutils literal notranslate"><span class="pre">aarch64</span></code>.</p>
-<p>Reprenez <strong>à l’identique</strong> les quatre étapes de l’onglet « Linux sans Docker ». Trois précautions s’ajoutent, propres au Pi.</p>
-<p class="rubric">Compiler sans saturer la mémoire</p>
-<p><code class="docutils literal notranslate"><span class="pre">colcon</span></code> compile tous les paquets en parallèle, ce qui suffit à faire tomber un Pi à court de mémoire : le compilateur se fait tuer par le noyau et la compilation échoue avec un message peu clair. Limitez le parallélisme :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>colcon<span class="w"> </span>build<span class="w"> </span>--parallel-workers<span class="w"> </span><span class="m">2</span><span class="w"> </span>--cmake-args<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>RelWithDebInfo
+<p>Reprenez <strong>à l’identique</strong> les quatre étapes de l’onglet « Linux sans Docker », compilation comprise :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2_jazzy
+ros2_build_reldebug
 </pre></div>
 </div>
-<p>Sur un modèle 4 Go, ajoutez en plus un fichier d’échange (<code class="docutils literal notranslate"><span class="pre">swap</span></code>) d’au moins 2 Go avant de compiler.</p>
+<p>Deux précautions s’ajoutent, propres au Pi.</p>
+<p class="rubric">Si la compilation se fait tuer</p>
+<p><code class="docutils literal notranslate"><span class="pre">colcon</span></code> compile tous les paquets en parallèle. Avec les 8 Go d’un Pi 5 cela passe, mais sur un modèle 4 Go le compilateur peut se faire tuer par le noyau, et la compilation échoue sur un message peu clair. Dans ce cas seulement, laissez le raccourci de côté et bridez le parallélisme :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>colcon<span class="w"> </span>build<span class="w"> </span>--parallel-workers<span class="w"> </span><span class="m">2</span><span class="w"> </span>--cmake-args<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>RelWithDebInfo<span class="w"> </span>--symlink-install
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+<p>Ajoutez aussi un fichier d’échange (<code class="docutils literal notranslate"><span class="pre">swap</span></code>) d’au moins 2 Go avant de compiler.</p>
 <p class="rubric">Rendu logiciel</p>
 <p>Le Pi n’a pas de pilote OpenGL utilisable par MuJoCo pour le rendu hors écran. Forcez le rendu logiciel, fourni par <code class="docutils literal notranslate"><span class="pre">libosmesa6</span></code> :</p>
 <p>Ajoutez cette ligne à votre <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code>.</p>
@@ -460,7 +476,7 @@ macOS</label><div class="sd-tab-content docutils">
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Les sections suivantes supposent que vous savez lancer les tests, par <code class="docutils literal notranslate"><span class="pre">docker/start.sh</span> <span class="pre">test</span></code> ou par <code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">test</span></code>. Si votre environnement n’est pas encore en place, revenez à <a class="reference internal" href="#five-bars-installation"><span class="std std-ref">Installer l’environnement</span></a>.</p>
+<p>Les sections suivantes supposent que vous savez lancer les tests, par <code class="docutils literal notranslate"><span class="pre">docker/start.sh</span> <span class="pre">test</span></code> ou par <code class="docutils literal notranslate"><span class="pre">ros2_test</span></code>. Si votre environnement n’est pas encore en place, revenez à <a class="reference internal" href="#five-bars-installation"><span class="std std-ref">Installer l’environnement</span></a>.</p>
 </div>
 </section>
 <section id="voir-le-robot-avant-d-ecrire-une-ligne">
@@ -490,9 +506,8 @@ comptez une dizaine de minutes. Ensuite, la fenêtre s’ouvre en quelques secon
 <input id="sd-tab-item-9" name="sd-tab-set-2" type="radio">
 <label class="sd-tab-label" data-sync-group="five-bars-env" data-sync-id="linux-native" for="sd-tab-item-9">
 Sans Docker</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.bash
-colcon<span class="w"> </span>build<span class="w"> </span>--cmake-args<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>RelWithDebInfo
-<span class="nb">source</span><span class="w"> </span>install/setup.bash
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2_jazzy
+ros2_build_reldebug
 ros2<span class="w"> </span>run<span class="w"> </span>five_bars_mujoco<span class="w"> </span>direct_gui
 </pre></div>
 </div>
@@ -525,7 +540,7 @@ macOS, il faut lancer <code class="docutils literal notranslate"><span class="pr
 exactement ces servos simulés et ce site <code class="docutils literal notranslate"><span class="pre">pen_tip</span></code> que les tests interrogent, en mode
 <em>headless</em>, pour juger vos modèles géométriques.</p>
 <p>Les autres façons de lancer la simulation — simulateur et IHM en nœuds séparés, chaîne
-<code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> complète, RViz — sont rassemblées dans l”<span class="xref std std-ref">aide-mémoire du 5 barres</span>, avec les commandes de compilation et de test.</p>
+<code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> complète, RViz — sont rassemblées dans l”<a class="reference internal" href="p03s06_cheatsheet_five_bars.html#cheatsheet-five-bars"><span class="std std-ref">aide-mémoire du 5 barres</span></a>, avec les commandes de compilation et de test.</p>
 </section>
 </section>
 <section id="commencer-par-les-tests-la-demarche-tdd">
@@ -598,7 +613,7 @@ Un fichier de test est un fichier <code class="docutils literal notranslate"><sp
 <p>Les tests du 5 barres en donnent une illustration directe : les fonctions renvoient un <code class="docutils literal notranslate"><span class="pre">std::optional</span></code>, et déréférencer un <code class="docutils literal notranslate"><span class="pre">std::optional</span></code> vide est un comportement indéfini.
 Il faut donc <strong>arrêter</strong> le test si la solution est absente, puis seulement comparer les coordonnées :</p>
 <div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-number">Code source 11 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">ASSERT_TRUE</span></code> avant déréférencement, puis <code class="docutils literal notranslate"><span class="pre">EXPECT_NEAR</span></code> sur chaque coordonnée</span><a class="headerlink" href="#id4" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 12 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">ASSERT_TRUE</span></code> avant déréférencement, puis <code class="docutils literal notranslate"><span class="pre">EXPECT_NEAR</span></code> sur chaque coordonnée</span><a class="headerlink" href="#id4" title="Lien vers ce code"></a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TEST_F</span><span class="p">(</span><span class="n">ForwardKinematics</span><span class="p">,</span><span class="w"> </span><span class="n">HomeConfiguration</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sim_</span><span class="o">-&gt;</span><span class="n">measuredAngles</span><span class="p">();</span>
@@ -623,7 +638,7 @@ Deux calculs flottants mathématiquement équivalents ne donnent presque jamais 
 <p>La tolérance n’est pas une valeur magique : c’est une <strong>décision d’ingénierie</strong> qui doit être justifiée et documentée.
 Dans le projet, les trois tolérances utilisées sont déclarées et commentées en un seul endroit :</p>
 <div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-number">Code source 12 </span><span class="caption-text">Les tolérances du projet, avec leur justification physique</span><a class="headerlink" href="#id5" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 13 </span><span class="caption-text">Les tolérances du projet, avec leur justification physique</span><a class="headerlink" href="#id5" title="Lien vers ce code"></a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">kPosTol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-4</span><span class="p">;</span><span class="w">     </span><span class="c1">// 0.1 mm entre modèle et simulation</span>
 <span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">kAngleTol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-3</span><span class="p">;</span><span class="w">   </span><span class="c1">// rad</span>
 <span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">kReachTol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5e-4</span><span class="p">;</span><span class="w">   </span><span class="c1">// 0.5 mm après asservissement simulé</span>
@@ -653,7 +668,7 @@ Deux mécanismes y contribuent.</p>
 <p>Ensuite, quand un test boucle sur plusieurs jeux de données, l’affichage ne dit pas <em>quelle</em> itération a échoué.
 <code class="docutils literal notranslate"><span class="pre">SCOPED_TRACE</span></code> ajoute cette information à tous les échecs survenant dans sa portée :</p>
 <div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-number">Code source 13 </span><span class="caption-text">Une boucle sur 16 configurations, chaque échec étant daté par ses angles</span><a class="headerlink" href="#id6" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 14 </span><span class="caption-text">Une boucle sur 16 configurations, chaque échec étant daté par ses angles</span><a class="headerlink" href="#id6" title="Lien vers ce code"></a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TEST_F</span><span class="p">(</span><span class="n">ForwardKinematics</span><span class="p">,</span><span class="w"> </span><span class="n">MatchesMujocoSimulation</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">[</span><span class="n">q1d</span><span class="p">,</span><span class="w"> </span><span class="n">q4d</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">jointGrid</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
@@ -705,7 +720,7 @@ Quatre points d’entrée sont disponibles :</p>
 </table>
 <p>Dans le projet, le modèle MuJoCo est chargé une seule fois pour toute la suite, mais la simulation est <strong>remise à son état initial avant chaque test</strong> :</p>
 <div class="literal-block-wrapper docutils container" id="id7">
-<div class="code-block-caption"><span class="caption-number">Code source 14 </span><span class="caption-text">La fixture <code class="docutils literal notranslate"><span class="pre">MujocoFixture</span></code></span><a class="headerlink" href="#id7" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 15 </span><span class="caption-text">La fixture <code class="docutils literal notranslate"><span class="pre">MujocoFixture</span></code></span><a class="headerlink" href="#id7" title="Lien vers ce code"></a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Une simulation partagée par toute la suite (chargement du MJCF une seule fois).</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">MujocoFixture</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="o">::</span><span class="n">testing</span><span class="o">::</span><span class="n">Test</span>
 <span class="p">{</span>
@@ -777,7 +792,7 @@ Le test <code class="docutils literal notranslate"><span class="pre">MatchesMujo
 <p>Certains tests sont écrits pour piéger une <strong>erreur que l’on sait probable</strong>.
 Ici, l’erreur classique est de confondre la pointe du stylo avec le point de fermeture <code class="docutils literal notranslate"><span class="pre">A3</span></code>, alors que le stylo en est décalé de 16 mm et 21 mm :</p>
 <div class="literal-block-wrapper docutils container" id="id8">
-<div class="code-block-caption"><span class="caption-number">Code source 15 </span><span class="caption-text">Un test dont le seul but est de détecter l’oubli du décalage du stylo</span><a class="headerlink" href="#id8" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 16 </span><span class="caption-text">Un test dont le seul but est de détecter l’oubli du décalage du stylo</span><a class="headerlink" href="#id8" title="Lien vers ce code"></a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TEST_F</span><span class="p">(</span><span class="n">ForwardKinematics</span><span class="p">,</span><span class="w"> </span><span class="n">PenOffsetIsTakenIntoAccount</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">  </span><span class="c1">// Le stylo n'est PAS en A3 : un modèle qui l'oublie doit échouer ici.</span>
@@ -798,7 +813,7 @@ Ici, l’erreur classique est de confondre la pointe du stylo avec le point de f
 Les invariants sont des tests particulièrement rentables : ils sont courts et couvrent un grand nombre de cas.</p>
 <p>Ici, le modèle inverse doit défaire exactement ce que fait le modèle direct :</p>
 <div class="literal-block-wrapper docutils container" id="id9">
-<div class="code-block-caption"><span class="caption-number">Code source 16 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">IK</span> <span class="pre">∘</span> <span class="pre">FK</span> <span class="pre">=</span> <span class="pre">identité</span></code>, vérifiée à 10<sup>-9</sup> rad</span><a class="headerlink" href="#id9" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 17 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">IK</span> <span class="pre">∘</span> <span class="pre">FK</span> <span class="pre">=</span> <span class="pre">identité</span></code>, vérifiée à 10<sup>-9</sup> rad</span><a class="headerlink" href="#id9" title="Lien vers ce code"></a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TEST_F</span><span class="p">(</span><span class="n">InverseKinematics</span><span class="p">,</span><span class="w"> </span><span class="n">InverseOfForwardIsIdentity</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">[</span><span class="n">q1d</span><span class="p">,</span><span class="w"> </span><span class="n">q4d</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">jointGrid</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
@@ -827,7 +842,7 @@ C’est pourquoi il faut le combiner avec les tests de comparaison à une réfé
 <p>Un code n’est spécifié que si l’on sait ce qu’il fait des entrées invalides.
 Les deux fonctions doivent renvoyer un <code class="docutils literal notranslate"><span class="pre">std::optional</span></code> vide pour une configuration non assemblable ou un point inatteignable, et les tests le vérifient explicitement :</p>
 <div class="literal-block-wrapper docutils container" id="id10">
-<div class="code-block-caption"><span class="caption-number">Code source 17 </span><span class="caption-text">Cas d’erreur du modèle inverse : point trop loin, et point sur l’axe moteur</span><a class="headerlink" href="#id10" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 18 </span><span class="caption-text">Cas d’erreur du modèle inverse : point trop loin, et point sur l’axe moteur</span><a class="headerlink" href="#id10" title="Lien vers ce code"></a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TEST_F</span><span class="p">(</span><span class="n">InverseKinematics</span><span class="p">,</span><span class="w"> </span><span class="n">UnreachablePointReturnsNullopt</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">  </span><span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">inverseKinematics</span><span class="p">({</span><span class="mf">0.07</span><span class="p">,</span><span class="w"> </span><span class="mf">0.17</span><span class="p">},</span><span class="w"> </span><span class="n">geometry_</span><span class="p">).</span><span class="n">has_value</span><span class="p">());</span>
@@ -845,7 +860,7 @@ C’est un détail important : sans lui, une fonction qui renverrait systématiq
 <p>Enfin, la suite <code class="docutils literal notranslate"><span class="pre">SimulationHarness</span></code> ne teste pas le code de l’étudiant : elle vérifie que la <strong>référence</strong> est digne de confiance (le stylo est bien là où la CAO l’annonce, et la simulation suit bien les consignes).
 Ces deux tests doivent passer dès le départ.</p>
 <div class="literal-block-wrapper docutils container" id="id11">
-<div class="code-block-caption"><span class="caption-number">Code source 18 </span><span class="caption-text">Les seuls tests qui passent dans le projet livré</span><a class="headerlink" href="#id11" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 19 </span><span class="caption-text">Les seuls tests qui passent dans le projet livré</span><a class="headerlink" href="#id11" title="Lien vers ce code"></a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TEST_F</span><span class="p">(</span><span class="n">SimulationHarness</span><span class="p">,</span><span class="w"> </span><span class="n">HomePenPositionMatchesCad</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">pen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sim_</span><span class="o">-&gt;</span><span class="n">penPosition</span><span class="p">();</span>
@@ -874,7 +889,7 @@ Sinon, un échec est ambigu : le code est-il faux, ou la référence ?</p>
 <p>ROS 2 fournit l’enrobage <code class="docutils literal notranslate"><span class="pre">ament_add_gtest</span></code>, qui compile le fichier de test, le lie à Google Test et l’enregistre auprès de <code class="docutils literal notranslate"><span class="pre">ctest</span></code> en produisant un rapport XML exploitable par <code class="docutils literal notranslate"><span class="pre">colcon</span></code> et par la CI.</p>
 <p>Tout le bloc de test est placé sous <code class="docutils literal notranslate"><span class="pre">if(BUILD_TESTING)</span></code> : les tests ne sont alors compilés que lorsqu’on le demande, et une compilation de production n’a pas besoin des dépendances de test.</p>
 <div class="literal-block-wrapper docutils container" id="id12">
-<div class="code-block-caption"><span class="caption-number">Code source 19 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">five_bars_kinematics/CMakeLists.txt</span></code> — déclaration des tests</span><a class="headerlink" href="#id12" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 20 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">five_bars_kinematics/CMakeLists.txt</span></code> — déclaration des tests</span><a class="headerlink" href="#id12" title="Lien vers ce code"></a></div>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c"># --- Tests : vérité terrain = simulation MuJoCo headless ---</span>
 <span class="nb">if</span><span class="p">(</span><span class="s">BUILD_TESTING</span><span class="p">)</span>
 <span class="w">  </span><span class="nb">find_package</span><span class="p">(</span><span class="s">ament_cmake_gtest</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
@@ -909,7 +924,7 @@ Sinon, un échec est ambigu : le code est-il faux, ou la référence ?</p>
 <p>Ce dernier point est une bonne pratique générale : un test ne doit pas dépendre du répertoire depuis lequel on le lance.
 Le code de test accepte les deux sources, la variable d’environnement ayant priorité, ce qui permet de rejouer le test à la main sur un autre modèle :</p>
 <div class="literal-block-wrapper docutils container" id="id13">
-<div class="code-block-caption"><span class="caption-number">Code source 20 </span><span class="caption-text">Localisation du modèle : variable d’environnement, sinon valeur fournie à la compilation</span><a class="headerlink" href="#id13" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 21 </span><span class="caption-text">Localisation du modèle : variable d’environnement, sinon valeur fournie à la compilation</span><a class="headerlink" href="#id13" title="Lien vers ce code"></a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">/// Chemin du MJCF : $FIVE_BARS_MJCF sinon celui fixé à la compilation (paquet five_bars_description).</span>
 <span class="kr">inline</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">modelPath</span><span class="p">()</span>
 <span class="p">{</span>
@@ -931,7 +946,7 @@ Le code de test accepte les deux sources, la variable d’environnement ayant pr
 <p>Les dépendances utilisées <strong>uniquement</strong> par les tests se déclarent avec <code class="docutils literal notranslate"><span class="pre">&lt;test_depend&gt;</span></code>.
 Elles ne sont alors pas nécessaires pour installer et faire tourner le paquet en production.</p>
 <div class="literal-block-wrapper docutils container" id="id14">
-<div class="code-block-caption"><span class="caption-number">Code source 21 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">five_bars_kinematics/package.xml</span></code> — dépendances de test</span><a class="headerlink" href="#id14" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 22 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">five_bars_kinematics/package.xml</span></code> — dépendances de test</span><a class="headerlink" href="#id14" title="Lien vers ce code"></a></div>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">&lt;test_depend&gt;</span>ament_cmake_gtest<span class="nt">&lt;/test_depend&gt;</span>
 <span class="w">  </span><span class="nt">&lt;test_depend&gt;</span>ament_cmake_pytest<span class="nt">&lt;/test_depend&gt;</span>
 <span class="w">  </span><span class="nt">&lt;test_depend&gt;</span>five_bars_description<span class="nt">&lt;/test_depend&gt;</span>
@@ -954,7 +969,7 @@ C’est une situation courante, et la bonne réaction est de la <strong>document
 <summary class="sd-summary-title sd-card-header">
 <span class="sd-summary-text"><code class="docutils literal notranslate"><span class="pre">cmake/FindMuJoCo.cmake</span></code></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <div class="literal-block-wrapper docutils container" id="id15">
-<div class="code-block-caption"><span class="caption-number">Code source 22 </span><span class="caption-text">cmake/FindMuJoCo.cmake</span><a class="headerlink" href="#id15" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 23 </span><span class="caption-text">cmake/FindMuJoCo.cmake</span><a class="headerlink" href="#id15" title="Lien vers ce code"></a></div>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c"># FindMuJoCo.cmake — trouve la bibliothèque C de MuJoCo et crée la cible MuJoCo::MuJoCo.</span>
 <span class="c">#</span>
 <span class="c"># Ordre de recherche :</span>
@@ -1031,16 +1046,13 @@ C’est une situation courante, et la bonne réaction est de la <strong>document
 <section id="lancer-les-tests">
 <h2>Lancer les tests<a class="headerlink" href="#lancer-les-tests" title="Lien vers cette rubrique"></a></h2>
 <p>Avec les commandes définies dans <a class="reference internal" href="../c02_first_ros2_project_pimped/p02s01_pimped_pubsub.html"><span class="doc">votre fichier .bashrc</span></a> et détaillées dans <a class="reference internal" href="p03s01_run_ros2_tests.html"><span class="doc">Lancer les tests de ROS2 et les analyser</span></a> :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2_build
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2_jazzy
+ros2_build_reldebug
 ros2_test_only<span class="w"> </span>five_bars_kinematics
 ros2_view_tests
 </pre></div>
 </div>
-<p>Les commandes <code class="docutils literal notranslate"><span class="pre">colcon</span></code> équivalentes, utiles pour ne voir que la sortie des tests :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--packages-select<span class="w"> </span>five_bars_kinematics<span class="w"> </span>--event-handlers<span class="w"> </span>console_direct+
-colcon<span class="w"> </span>test-result<span class="w"> </span>--verbose
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">ros2_test</span></code> lance les tests de <strong>tous</strong> les paquets, et <code class="docutils literal notranslate"><span class="pre">ros2_view_tests_all</span></code> affiche aussi ceux qui passent, pas seulement les échecs. Les commandes <code class="docutils literal notranslate"><span class="pre">colcon</span></code> que ces raccourcis recouvrent sont rassemblées dans l”<a class="reference internal" href="p03s06_cheatsheet_five_bars.html#cheatsheet-five-bars"><span class="std std-ref">aide-mémoire</span></a>.</p>
 <p>Pendant le développement, il est beaucoup plus rapide d’exécuter <strong>directement l’exécutable de test</strong> : on évite le cycle complet de <code class="docutils literal notranslate"><span class="pre">colcon</span></code>, et on dispose des options de Google Test.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># tous les tests du fichier</span>
 ./build/five_bars_kinematics/test_kinematics_cpp

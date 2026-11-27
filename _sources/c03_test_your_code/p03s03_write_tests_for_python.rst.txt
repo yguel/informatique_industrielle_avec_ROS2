@@ -279,8 +279,8 @@ Via ``colcon``, comme tous les autres tests :
 
 .. code-block:: bash
 
-   colcon test --packages-select five_bars_kinematics --event-handlers console_direct+
-   colcon test-result --verbose
+   ros2_test_only five_bars_kinematics
+   ros2_view_tests
 
 Directement, ce qui est bien plus rapide en phase de développement :
 

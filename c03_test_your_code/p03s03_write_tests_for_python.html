@@ -87,6 +87,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="p03s04_use_simulation_to_write_tests.html">Utiliser la simulation pour écrire des tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="p03s05_create_CI_for_automatically_runing_your_tests.html">Exécuter les tests automatiquement : l’intégration continue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s06_cheatsheet_five_bars.html">Aide-mémoire : les commandes du 5 barres</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../c04_collaborate_with_coders/p04s00_index.html">Les outils nécessaires pour collaborer entre codeurs</a></li>
@@ -129,7 +130,7 @@ Les tests sont donc eux aussi écrits deux fois, et cela tombe bien : comparer l
 <p>Cette section suppose la lecture de <a class="reference internal" href="p03s02_write_tests_with_gtest.html"><span class="doc">Écrire des tests C++ avec Google Test</span></a>, dont elle reprend le vocabulaire (cas de test, fixture, tolérance, invariant, oracle) sans le redéfinir.</p>
 <p>Le code à écrire côté Python est le pendant exact du code C++ :</p>
 <div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-number">Code source 23 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">five_bars_kinematics/five_bars_kinematics/kinematics.py</span></code> — les paramètres géométriques</span><a class="headerlink" href="#id1" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 24 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">five_bars_kinematics/five_bars_kinematics/kinematics.py</span></code> — les paramètres géométriques</span><a class="headerlink" href="#id1" title="Lien vers ce code"></a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Geometry</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Paramètres géométriques (m). Voir five_bars_description/config/geometry.yaml."""</span>
@@ -145,7 +146,7 @@ Les tests sont donc eux aussi écrits deux fois, et cela tombe bien : comparer l
 </div>
 </div>
 <div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-number">Code source 24 </span><span class="caption-text">La fonction à implémenter, avec son contrat</span><a class="headerlink" href="#id2" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 25 </span><span class="caption-text">La fonction à implémenter, avec son contrat</span><a class="headerlink" href="#id2" title="Lien vers ce code"></a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">forward_kinematics</span><span class="p">(</span><span class="n">q1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">q4</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">geometry</span><span class="p">:</span> <span class="n">Geometry</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">"""Modèle géométrique direct.</span>
 
@@ -215,7 +216,7 @@ Un test écrit en <code class="docutils literal notranslate"><span class="pre">u
 <p><code class="docutils literal notranslate"><span class="pre">setUpClass</span></code> est l’équivalent de <code class="docutils literal notranslate"><span class="pre">SetUpTestSuite</span></code> en gtest : il est appelé <strong>une seule fois</strong> pour la classe, ce qui permet de ne charger qu’une fois le modèle de simulation.
 <code class="docutils literal notranslate"><span class="pre">setUp</span></code>, lui, est appelé avant <strong>chaque</strong> méthode de test.</p>
 <div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-number">Code source 25 </span><span class="caption-text">La classe de base, qui joue le rôle de la fixture C++</span><a class="headerlink" href="#id3" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 26 </span><span class="caption-text">La classe de base, qui joue le rôle de la fixture C++</span><a class="headerlink" href="#id3" title="Lien vers ce code"></a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MujocoTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Fournit une simulation MuJoCo headless et la géométrie extraite du modèle."""</span>
 
@@ -287,7 +288,7 @@ Indiquez toujours explicitement <code class="docutils literal notranslate"><span
 </div>
 <p>Les tolérances du projet sont, comme en C++, déclarées et commentées en un seul endroit, avec les mêmes valeurs :</p>
 <div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-number">Code source 26 </span><span class="caption-text">Les tolérances, identiques à celles de la suite C++</span><a class="headerlink" href="#id4" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 27 </span><span class="caption-text">Les tolérances, identiques à celles de la suite C++</span><a class="headerlink" href="#id4" title="Lien vers ce code"></a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">POS_TOL</span> <span class="o">=</span> <span class="mf">1e-4</span>      <span class="c1"># 0.1 mm entre modèle et simulation</span>
 <span class="n">ANGLE_TOL</span> <span class="o">=</span> <span class="mf">1e-3</span>    <span class="c1"># rad</span>
 <span class="n">REACH_TOL</span> <span class="o">=</span> <span class="mf">5e-4</span>    <span class="c1"># 0.5 mm après asservissement simulé</span>
@@ -304,7 +305,7 @@ Si l’une des deux avait besoin d’une tolérance plus large pour passer, ce s
 <h3>Comparer des tableaux avec <code class="docutils literal notranslate"><span class="pre">numpy</span></code><a class="headerlink" href="#comparer-des-tableaux-avec-numpy" title="Lien vers cette rubrique"></a></h3>
 <p>La position du stylo est un couple de coordonnées. <code class="docutils literal notranslate"><span class="pre">numpy.testing.assert_allclose</span></code> compare les deux éléments en une seule vérification et, en cas d’échec, affiche l’écart maximal et le nombre d’éléments en désaccord :</p>
 <div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-number">Code source 27 </span><span class="caption-text">Comparaison d’un couple de coordonnées à la position mesurée dans la simulation</span><a class="headerlink" href="#id5" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 28 </span><span class="caption-text">Comparaison d’un couple de coordonnées à la position mesurée dans la simulation</span><a class="headerlink" href="#id5" title="Lien vers ce code"></a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span><span class="w"> </span><span class="nf">test_home_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
         <span class="n">q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">actuated_positions</span><span class="p">()</span>
@@ -328,7 +329,7 @@ Précisez donc toujours <code class="docutils literal notranslate"><span class="
 Un test qui boucle sur 16 configurations s’arrêterait à la <strong>première</strong> erreur, et le rapport ne dirait pas laquelle.
 <code class="docutils literal notranslate"><span class="pre">subTest</span></code> résout les deux problèmes à la fois : chaque itération est signalée séparément, et la boucle <strong>continue</strong> après un échec.</p>
 <div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-number">Code source 28 </span><span class="caption-text">Un balayage de l’espace de travail, chaque itération étant identifiée</span><a class="headerlink" href="#id6" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 29 </span><span class="caption-text">Un balayage de l’espace de travail, chaque itération étant identifiée</span><a class="headerlink" href="#id6" title="Lien vers ce code"></a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span><span class="w"> </span><span class="nf">test_matches_mujoco_simulation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">q1d</span><span class="p">,</span> <span class="n">q4d</span> <span class="ow">in</span> <span class="n">Q_GRID_DEG</span><span class="p">:</span>
 <span class="hll">            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">subTest</span><span class="p">(</span><span class="n">q1_deg</span><span class="o">=</span><span class="n">q1d</span><span class="p">,</span> <span class="n">q4_deg</span><span class="o">=</span><span class="n">q4d</span><span class="p">):</span>
@@ -346,7 +347,7 @@ C’est ce qui explique une particularité des résultats que nous verrons plus 
 <h3>Invariants et cas d’erreur<a class="headerlink" href="#invariants-et-cas-d-erreur" title="Lien vers cette rubrique"></a></h3>
 <p>Les propriétés vérifiées sont exactement les mêmes qu’en C++ (voir <a class="reference internal" href="p03s02_write_tests_with_gtest.html"><span class="doc">Écrire des tests C++ avec Google Test</span></a>) : un cas nominal, un balayage, un piège à erreur connue, un invariant et les cas d’erreur.</p>
 <div class="literal-block-wrapper docutils container" id="id7">
-<div class="code-block-caption"><span class="caption-number">Code source 29 </span><span class="caption-text">L’invariant <code class="docutils literal notranslate"><span class="pre">IK</span> <span class="pre">∘</span> <span class="pre">FK</span> <span class="pre">=</span> <span class="pre">identité</span></code></span><a class="headerlink" href="#id7" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 30 </span><span class="caption-text">L’invariant <code class="docutils literal notranslate"><span class="pre">IK</span> <span class="pre">∘</span> <span class="pre">FK</span> <span class="pre">=</span> <span class="pre">identité</span></code></span><a class="headerlink" href="#id7" title="Lien vers ce code"></a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span><span class="w"> </span><span class="nf">test_inverse_of_forward_is_identity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">q1d</span><span class="p">,</span> <span class="n">q4d</span> <span class="ow">in</span> <span class="n">Q_GRID_DEG</span><span class="p">:</span>
             <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">subTest</span><span class="p">(</span><span class="n">q1_deg</span><span class="o">=</span><span class="n">q1d</span><span class="p">,</span> <span class="n">q4_deg</span><span class="o">=</span><span class="n">q4d</span><span class="p">):</span>
@@ -359,7 +360,7 @@ C’est ce qui explique une particularité des résultats que nous verrons plus 
 </div>
 </div>
 <div class="literal-block-wrapper docutils container" id="id8">
-<div class="code-block-caption"><span class="caption-number">Code source 30 </span><span class="caption-text">Les cas d’erreur — avec, en première ligne, un cas valide</span><a class="headerlink" href="#id8" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 31 </span><span class="caption-text">Les cas d’erreur — avec, en première ligne, un cas valide</span><a class="headerlink" href="#id8" title="Lien vers ce code"></a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span><span class="w"> </span><span class="nf">test_unreachable_point_returns_none</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNotNone</span><span class="p">(</span><span class="n">inverse_kinematics</span><span class="p">(</span><span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.17</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">inverse_kinematics</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="p">))</span>   <span class="c1"># trop loin</span>
@@ -388,7 +389,7 @@ C’est une erreur classique, et elle est d’autant plus facile à commettre en
 <p id="index-2"><code class="docutils literal notranslate"><span class="pre">five_bars_kinematics</span></code> est un paquet <code class="docutils literal notranslate"><span class="pre">ament_cmake</span></code> (il contient du C++) qui fournit <strong>aussi</strong> un module Python.
 Le module est installé par <code class="docutils literal notranslate"><span class="pre">ament_python_install_package</span></code>, et les tests Python sont déclarés par <code class="docutils literal notranslate"><span class="pre">ament_add_pytest_test</span></code> :</p>
 <div class="literal-block-wrapper docutils container" id="id9">
-<div class="code-block-caption"><span class="caption-number">Code source 31 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> — un seul paquet déclare la bibliothèque C++, le module Python et les deux suites de tests</span><a class="headerlink" href="#id9" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 32 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> — un seul paquet déclare la bibliothèque C++, le module Python et les deux suites de tests</span><a class="headerlink" href="#id9" title="Lien vers ce code"></a></div>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c"># --- Module Python équivalent ---</span>
 <span class="hll"><span class="nb">ament_python_install_package</span><span class="p">(</span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="p">)</span>
 </span>
@@ -434,14 +435,14 @@ C’est le pendant du <code class="docutils literal notranslate"><span class="pr
 <p><code class="docutils literal notranslate"><span class="pre">five_bars_mujoco</span></code> est un paquet purement Python. Il n’y a pas de <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> : <code class="docutils literal notranslate"><span class="pre">colcon</span></code> découvre automatiquement les fichiers <code class="docutils literal notranslate"><span class="pre">test/test_*.py</span></code> et les exécute avec <code class="docutils literal notranslate"><span class="pre">pytest</span></code>.
 Il suffit alors de déclarer la dépendance de test :</p>
 <div class="literal-block-wrapper docutils container" id="id10">
-<div class="code-block-caption"><span class="caption-number">Code source 32 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">five_bars_mujoco/package.xml</span></code></span><a class="headerlink" href="#id10" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 33 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">five_bars_mujoco/package.xml</span></code></span><a class="headerlink" href="#id10" title="Lien vers ce code"></a></div>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">&lt;test_depend&gt;</span>python3-pytest<span class="nt">&lt;/test_depend&gt;</span>
 </pre></div>
 </div>
 </div>
 <p>et, dans <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>, l’extra correspondant :</p>
 <div class="literal-block-wrapper docutils container" id="id11">
-<div class="code-block-caption"><span class="caption-number">Code source 33 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">five_bars_mujoco/setup.py</span></code></span><a class="headerlink" href="#id11" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 34 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">five_bars_mujoco/setup.py</span></code></span><a class="headerlink" href="#id11" title="Lien vers ce code"></a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span><span class="s2">"setuptools"</span><span class="p">],</span>
     <span class="n">extras_require</span><span class="o">=</span><span class="p">{</span><span class="s2">"test"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"pytest"</span><span class="p">]},</span>
 </pre></div>
@@ -488,8 +489,8 @@ Le sujet du formatage automatique est traité dans <a class="reference internal"
 <section id="lancer-les-tests-python">
 <h2>Lancer les tests Python<a class="headerlink" href="#lancer-les-tests-python" title="Lien vers cette rubrique"></a></h2>
 <p>Via <code class="docutils literal notranslate"><span class="pre">colcon</span></code>, comme tous les autres tests :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--packages-select<span class="w"> </span>five_bars_kinematics<span class="w"> </span>--event-handlers<span class="w"> </span>console_direct+
-colcon<span class="w"> </span>test-result<span class="w"> </span>--verbose
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2_test_only<span class="w"> </span>five_bars_kinematics
+ros2_view_tests
 </pre></div>
 </div>
 <p>Directement, ce qui est bien plus rapide en phase de développement :</p>
@@ -528,7 +529,7 @@ C’est le rôle de <code class="docutils literal notranslate"><span class="pre"
 <h3>Les tests du banc d’essai, qui passent<a class="headerlink" href="#les-tests-du-banc-d-essai-qui-passent" title="Lien vers cette rubrique"></a></h3>
 <p>Le paquet <code class="docutils literal notranslate"><span class="pre">five_bars_mujoco</span></code> contient les tests de la simulation elle-même. Ils passent dès le départ :</p>
 <div class="literal-block-wrapper docutils container" id="id13">
-<div class="code-block-caption"><span class="caption-number">Code source 34 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">unittest</span> <span class="pre">discover</span> <span class="pre">-s</span> <span class="pre">src/five_bars_mujoco/test</span> <span class="pre">-v</span></code></span><a class="headerlink" href="#id13" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 35 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">unittest</span> <span class="pre">discover</span> <span class="pre">-s</span> <span class="pre">src/five_bars_mujoco/test</span> <span class="pre">-v</span></code></span><a class="headerlink" href="#id13" title="Lien vers ce code"></a></div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>test_command_is_saturated (test_sim.TestFiveBarsSim) ... ok
 test_home_is_closed (test_sim.TestFiveBarsSim) ... ok
 test_kinematic_closure_matches_dynamic_simulation (test_sim.TestFiveBarsSim) ... ok
@@ -549,7 +550,7 @@ C’est le sujet de <a class="reference internal" href="p03s04_use_simulation_to
 <h3>Les tests de cinématique, qui échouent<a class="headerlink" href="#les-tests-de-cinematique-qui-echouent" title="Lien vers cette rubrique"></a></h3>
 <p>Sur le projet livré, la suite de cinématique donne ceci :</p>
 <div class="literal-block-wrapper docutils container" id="id14">
-<div class="code-block-caption"><span class="caption-number">Code source 35 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">unittest</span> <span class="pre">discover</span> <span class="pre">-s</span> <span class="pre">src/five_bars_kinematics/test</span> <span class="pre">-v</span></code></span><a class="headerlink" href="#id14" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 36 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">unittest</span> <span class="pre">discover</span> <span class="pre">-s</span> <span class="pre">src/five_bars_kinematics/test</span> <span class="pre">-v</span></code></span><a class="headerlink" href="#id14" title="Lien vers ce code"></a></div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>test_home_configuration (test_kinematics.TestForwardKinematics) ... ERROR
 test_matches_mujoco_simulation (test_kinematics.TestForwardKinematics) ... test_pen_offset_is_taken_into_account (test_kinematics.TestForwardKinematics)
 Le stylo n'est PAS en A3 : un modèle qui l'oublie doit échouer ici. ... ERROR

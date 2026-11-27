@@ -88,6 +88,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="p03s05_create_CI_for_automatically_runing_your_tests.html">Exécuter les tests automatiquement : l’intégration continue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03s06_cheatsheet_five_bars.html">Aide-mémoire : les commandes du 5 barres</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../c04_collaborate_with_coders/p04s00_index.html">Les outils nécessaires pour collaborer entre codeurs</a></li>
@@ -252,7 +253,7 @@ Cette séparation est une règle de conception générale : <strong>le calcul ne
 <summary class="sd-summary-title sd-card-header">
 <span class="sd-summary-text"><code class="docutils literal notranslate"><span class="pre">test/mujoco_five_bars.hpp</span></code> (fichier complet)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-number">Code source 36 </span><span class="caption-text">test/mujoco_five_bars.hpp</span><a class="headerlink" href="#id1" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 37 </span><span class="caption-text">test/mujoco_five_bars.hpp</span><a class="headerlink" href="#id1" title="Lien vers ce code"></a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Harnais de test : simulation MuJoCo HEADLESS du système 5 barres (API C de MuJoCo).</span>
 <span class="c1">//</span>
 <span class="c1">// Sert de vérité terrain aux tests du modèle géométrique : on asservit (q1, q4)</span>
@@ -484,7 +485,7 @@ C’est une illustration de ce que doit faire une remise à zéro : non pas « r
 <code class="docutils literal notranslate"><span class="pre">closureError()</span></code> donne la distance résiduelle entre les deux points <code class="docutils literal notranslate"><span class="pre">A3</span></code>, ce qui permet aux tests de <strong>vérifier la qualité de leur propre référence</strong> avant de s’en servir.</p>
 <p>Ces deux vérifications sont justement ce que la fixture fait systématiquement, avant de rendre la main au test :</p>
 <div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-number">Code source 37 </span><span class="caption-text">Toute mesure est accompagnée de la vérification de ses conditions de validité</span><a class="headerlink" href="#id2" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 38 </span><span class="caption-text">Toute mesure est accompagnée de la vérification de ses conditions de validité</span><a class="headerlink" href="#id2" title="Lien vers ce code"></a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="c1">/// Asservit (q1, q4) depuis 'home' ; renvoie les angles mesurés et la position du stylo.</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">JointAngles</span><span class="p">,</span><span class="w"> </span><span class="n">PenPosition</span><span class="o">&gt;</span><span class="w"> </span><span class="n">simulate</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">q1</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">q4</span><span class="p">)</span>
 <span class="w">  </span><span class="p">{</span>
@@ -511,7 +512,7 @@ Elle est utilisée à la fois par les tests, par les nœuds ROS 2 et par les int
 <summary class="sd-summary-title sd-card-header">
 <span class="sd-summary-text"><code class="docutils literal notranslate"><span class="pre">five_bars_mujoco/sim.py</span></code> (fichier complet)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-number">Code source 38 </span><span class="caption-text">five_bars_mujoco/sim.py</span><a class="headerlink" href="#id3" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 39 </span><span class="caption-text">five_bars_mujoco/sim.py</span><a class="headerlink" href="#id3" title="Lien vers ce code"></a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""Simulation MuJoCo du système 5 barres (sans dépendance ROS).</span>
 
 <span class="sd">Conventions (voir five_bars_description/config/geometry.yaml) :</span>
@@ -835,7 +836,7 @@ Les faire se confirmer l’une l’autre est l’objet d’un des tests du banc 
 <p id="index-2">Si les tests font confiance à la simulation, alors <strong>la simulation doit elle-même être testée</strong>.
 C’est la raison d’être de la suite <code class="docutils literal notranslate"><span class="pre">TestFiveBarsSim</span></code> du paquet <code class="docutils literal notranslate"><span class="pre">five_bars_mujoco</span></code>, qui doit passer dès le départ :</p>
 <div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-number">Code source 39 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">five_bars_mujoco/test/test_sim.py</span></code> — les tests du banc de test</span><a class="headerlink" href="#id4" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 40 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">five_bars_mujoco/test/test_sim.py</span></code> — les tests du banc de test</span><a class="headerlink" href="#id4" title="Lien vers ce code"></a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""Tests (qui PASSENT) du modèle de simulation : sanity checks du MJCF et du solveur de fermeture."""</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
@@ -916,7 +917,7 @@ C’est la raison d’être de la suite <code class="docutils literal notranslat
 </table>
 <p>La même précaution est reprise dans la suite de cinématique, sous le nom <code class="docutils literal notranslate"><span class="pre">SimulationHarness</span></code> (C++) ou <code class="docutils literal notranslate"><span class="pre">TestSimulationHarness</span></code> (Python), avec deux tests qui ancrent la simulation au monde réel :</p>
 <div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-number">Code source 40 </span><span class="caption-text">La simulation est comparée à une mesure faite sur la CAO</span><a class="headerlink" href="#id5" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 41 </span><span class="caption-text">La simulation est comparée à une mesure faite sur la CAO</span><a class="headerlink" href="#id5" title="Lien vers ce code"></a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TestSimulationHarness</span><span class="p">(</span><span class="n">MujocoTestCase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Vérifie le banc de test lui-même (ces tests doivent PASSER)."""</span>
 
@@ -946,7 +947,7 @@ Leur rôle est celui d’un <strong>arbitre</strong> : si une suite de cinémati
 <p>Un piège subtil guette ce genre de test : si le code testé et son oracle tiennent chacun leur propre copie des dimensions du robot, les tests échoueront dès que l’une des deux copies changera — et, pire, ils pourront passer alors que le code est faux, parce que les deux copies seront fausses ensemble.</p>
 <p>Le projet évite ce piège en désignant un fichier unique comme source de vérité :</p>
 <div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-number">Code source 41 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">five_bars_description/config/geometry.yaml</span></code> — la seule définition de la géométrie</span><a class="headerlink" href="#id6" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 42 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">five_bars_description/config/geometry.yaml</span></code> — la seule définition de la géométrie</span><a class="headerlink" href="#id6" title="Lien vers ce code"></a></div>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">l0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.13798</span><span class="w">          </span><span class="c1"># |A1A5| bâti</span>
 <span class="w">  </span><span class="nt">l1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.080000</span><span class="w">          </span><span class="c1"># |A1A2| bras gauche  (link1)</span>
 <span class="w">  </span><span class="nt">l2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.157000</span><span class="w">          </span><span class="c1"># |A2A3| avant-bras gauche (link2, porte le stylo)</span>
@@ -965,7 +966,7 @@ Leur rôle est celui d’un <strong>arbitre</strong> : si une suite de cinémati
 </div>
 <p>À partir de ce fichier, un script génère le modèle MuJoCo ; l’URDF le lit par <code class="docutils literal notranslate"><span class="pre">xacro</span></code> ; et les tests, eux, <strong>relisent la géométrie dans le modèle MuJoCo</strong> au lieu de la recopier :</p>
 <div class="literal-block-wrapper docutils container" id="id7">
-<div class="code-block-caption"><span class="caption-number">Code source 42 </span><span class="caption-text">La géométrie passée au code testé est extraite du modèle de simulation</span><a class="headerlink" href="#id7" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 43 </span><span class="caption-text">La géométrie passée au code testé est extraite du modèle de simulation</span><a class="headerlink" href="#id7" title="Lien vers ce code"></a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="c1">/// Paramètres géométriques lus dans le modèle MuJoCo (source de vérité des tests).</span>
 <span class="w">  </span><span class="n">five_bars_kinematics</span><span class="o">::</span><span class="n">Geometry</span><span class="w"> </span><span class="nf">geometry</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
 <span class="w">  </span><span class="p">{</span>
@@ -980,7 +981,7 @@ Leur rôle est celui d’un <strong>arbitre</strong> : si une suite de cinémati
 </div>
 </div>
 <div class="literal-block-wrapper docutils container" id="id8">
-<div class="code-block-caption"><span class="caption-number">Code source 43 </span><span class="caption-text">Même extraction, côté Python</span><a class="headerlink" href="#id8" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 44 </span><span class="caption-text">Même extraction, côté Python</span><a class="headerlink" href="#id8" title="Lien vers ce code"></a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_model</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">mujoco</span><span class="o">.</span><span class="n">MjModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"FiveBarsGeometry"</span><span class="p">:</span>
         <span class="n">body</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">body</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">pos</span>  <span class="c1"># noqa: E731</span>
@@ -1013,7 +1014,7 @@ Toute « source unique de vérité » doit ainsi être confrontée, au moins en 
 <section id="choisir-les-configurations">
 <h3>Choisir les configurations<a class="headerlink" href="#choisir-les-configurations" title="Lien vers cette rubrique"></a></h3>
 <div class="literal-block-wrapper docutils container" id="id9">
-<div class="code-block-caption"><span class="caption-number">Code source 44 </span><span class="caption-text">Les configurations et les cibles balayées par les tests</span><a class="headerlink" href="#id9" title="Lien vers ce code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Code source 45 </span><span class="caption-text">Les configurations et les cibles balayées par les tests</span><a class="headerlink" href="#id9" title="Lien vers ce code"></a></div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Configurations de test (degrés) : mode d'assemblage du robot, loin des singularités.</span>
 <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">jointGrid</span><span class="p">()</span>
 <span class="p">{</span>
