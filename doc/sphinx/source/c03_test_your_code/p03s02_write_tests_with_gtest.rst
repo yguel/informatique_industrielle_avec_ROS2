@@ -76,49 +76,19 @@ Le projet a besoin de **ROS 2 Jazzy** et de **MuJoCo 4.0.1**. Il y a deux façon
 * **avec Docker** : rien à installer sur votre machine à part Docker, l'image contient ROS 2, MuJoCo et Google Test. C'est la méthode **recommandée**, et c'est exactement ce que fait l'intégration continue du projet.
 * **sans Docker** : installation native. Elle n'a de sens que sur **Ubuntu 24.04** (*Noble*), la seule distribution pour laquelle ROS 2 Jazzy est distribué en paquets binaires.
 
-.. dropdown:: Comment installer Docker sur votre machine si besoin ?
+.. note::
 
-   .. tab-set::
+   **Docker est-il déjà installé chez vous ?** Si oui, ne le réinstallez pas. Une commande
+   suffit à trancher :
 
-      .. tab-item:: Installer Docker sur Linux
+   .. code-block:: bash
 
-         Suivez les instructions officielles : `installer Docker Engine <https://docs.docker.com/engine/install/>`_ (pour Ubuntu : `installer Docker Engine sur Ubuntu <https://docs.docker.com/engine/install/ubuntu/>`_).
+      docker run --rm hello-world
 
-         Ajoutez ensuite votre compte au groupe ``docker``, sans quoi il faudra préfixer chaque commande par ``sudo`` :
-
-         .. code-block:: bash
-
-            sudo usermod -aG docker $USER
-
-         Fermez puis rouvrez votre session (le changement de groupe n'est pris en compte qu'à la connexion), et vérifiez :
-
-         .. code-block:: bash
-
-            docker run --rm hello-world
-
-         Voir aussi les `étapes post-installation <https://docs.docker.com/engine/install/linux-postinstall/>`_ de la documentation Docker.
-
-      .. tab-item:: Installer Docker sur Windows
-
-         Installez `Docker Desktop pour Windows <https://docs.docker.com/desktop/setup/install/windows-install/>`_, en choisissant le moteur **WSL 2** (c'est le choix par défaut).
-
-         Puis, dans ``Settings`` → ``Resources`` → ``WSL integration``, activez l'intégration pour votre distribution ``Ubuntu-24.04``. La commande ``docker`` devient alors utilisable **depuis le terminal Ubuntu de WSL**, ce qui est ce dont nous avons besoin.
-
-         Vérifiez depuis le terminal Ubuntu :
-
-         .. code-block:: bash
-
-            docker run --rm hello-world
-
-      .. tab-item:: Installer Docker sur Mac
-
-         Installez `Docker Desktop pour Mac <https://docs.docker.com/desktop/setup/install/mac-install/>`_, en prenant la version correspondant à votre processeur (Apple Silicon ou Intel).
-
-         Vérifiez dans un terminal :
-
-         .. code-block:: bash
-
-            docker run --rm hello-world
+   ``Hello from Docker!`` : tout est en place, continuez. Autre réponse, ou Docker absent :
+   la page :doc:`../c02_first_ros2_project_pimped/p02s00_install_docker` donne la marche à
+   suivre pour Linux, Windows et macOS, et explique quoi faire selon le message obtenu.
+   C'est le seul endroit du cours où l'installation de Docker est décrite.
 
 Choisissez maintenant l'onglet qui correspond à votre machine.
 
@@ -130,11 +100,15 @@ Choisissez maintenant l'onglet qui correspond à votre machine.
 
       C'est la configuration de référence : celle des machines de la salle de cours, et celle de l'intégration continue.
 
-      Tout passe par un seul script, ``docker/start.sh``, qui construit l'image au premier appel (comptez une dizaine de minutes) :
+      Tout passe par un seul script, ``docker/start.sh``, qui construit l'image au premier appel (comptez une dizaine de minutes). Depuis le dépôt cloné plus haut :
 
       .. code-block:: bash
 
-         docker/start.sh test     # compile et lance tous les tests, headless
+         cd mujoco/five_bars_ws/docker
+         ./start.sh               # une ligne de commande dans le conteneur
+         ./start.sh test          # ou directement : compile et lance tous les tests, headless
+
+      Le script retrouve ses chemins tout seul : on peut aussi l'appeler depuis la racine du projet, ``docker/start.sh``, et c'est la forme utilisée dans la suite du chapitre.
 
       Les autres usages du script :
 
@@ -350,26 +324,37 @@ et le pantographe se referme sous vos yeux.
    .. tab-item:: Avec Docker
       :sync: linux-docker
 
+      Ouvrez d'abord une ligne de commande dans le conteneur :
+
       .. code-block:: bash
 
-         docker/start.sh ros2 run five_bars_mujoco direct_gui
+         cd ~/info_indus/informatique_industrielle_avec_ROS2/mujoco/five_bars_ws/docker
+         ./start.sh
 
       Au premier appel, le script construit l'image puis compile l'espace de travail :
-      comptez une dizaine de minutes. Ensuite, la fenêtre s'ouvre en quelques secondes.
+      comptez une dizaine de minutes. Les fois suivantes, l'invite apparaît en quelques
+      secondes.
 
-      vous plus tard lancer le docker et avoir la ligne de commande:
-
-      .. code-block:: bash
-
-         docker/start.sh
-
-      et dans la console du conteneur, vous pouvez lancer les commandes ROS 2 comme d'habitude.
+      Vous êtes maintenant **dans le conteneur**, avec ROS 2 chargé et le projet compilé.
+      Les commandes ``ros2`` s'y tapent comme sur une machine ordinaire :
 
       .. code-block:: bash
 
          ros2 run five_bars_mujoco direct_gui
 
-      Par exemple pour voir l'interface avec la simulation graphique MuJoCo.
+      ``exit`` referme le conteneur quand vous avez fini.
+
+      .. tip::
+
+         Pour une commande unique, sans ouvrir de session interactive, on peut la passer
+         directement au script — pratique pour un lancement ponctuel ou dans un alias :
+
+         .. code-block:: bash
+
+            docker/start.sh ros2 run five_bars_mujoco direct_gui
+
+         Si vous n'avez pas encore le dépôt du cours, ou pas encore Docker, tout est
+         décrit dans :doc:`../c02_first_ros2_project_pimped/p02s00_install_docker`.
 
    .. tab-item:: Sans Docker
       :sync: linux-native
