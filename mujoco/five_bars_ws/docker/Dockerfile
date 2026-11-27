@@ -41,9 +41,11 @@ RUN pip3 install --no-cache-dir --break-system-packages "mujoco==${MUJOCO_VERSIO
 ENV MUJOCO_DIR=/opt/mujoco
 
 WORKDIR /ws
-# Raccourcis ros2_build / ros2_test / fb_* du cours : chargés par entrypoint.sh pour
-# les shells non interactifs, et par ~/.bashrc pour les shells interactifs.
-COPY docker/ros2_aliases.bash /etc/ros2_aliases.bash
+# Raccourcis du cours (ros2_jazzy, ros2_build_reldebug, ros2_test ...). Le fichier
+# n'est PAS copié dans l'image : il vit dans la doc du cours
+# (doc/sphinx/source/c02_first_ros2_project_pimped/resources/code/_.bashrc) et
+# docker/start.sh le monte en lecture seule sur /etc/ros2_aliases.bash. La ligne
+# ci-dessous est donc sans effet si rien n'est monté, et charge les raccourcis sinon.
 RUN echo '[ -f /etc/ros2_aliases.bash ] && source /etc/ros2_aliases.bash' >> /root/.bashrc
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

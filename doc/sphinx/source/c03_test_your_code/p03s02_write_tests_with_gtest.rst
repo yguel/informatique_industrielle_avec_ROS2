@@ -207,30 +207,46 @@ Choisissez maintenant l'onglet qui correspond à votre machine.
 
       .. code-block:: bash
 
-         source /opt/ros/jazzy/setup.bash
-         colcon build --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo
-         source install/setup.bash
-         colcon test --event-handlers console_direct+
-         colcon test-result --verbose
+         ros2_jazzy
+         ros2_build_reldebug
+         ros2_test
+         ros2_view_tests
 
-      Le ``source /opt/ros/jazzy/setup.bash`` est à refaire dans **chaque** nouveau terminal : ajoutez-le à votre ``~/.bashrc`` si vous travaillez souvent sur le projet.
+      .. note::
+
+         Ce sont les raccourcis du cours, définis dans le ``~/.bashrc`` présenté au
+         :doc:`chapitre 2 <../c02_first_ros2_project_pimped/p02s01_pimped_pubsub>` et
+         détaillés dans :doc:`p03s01_run_ros2_tests`. ``ros2_jazzy`` remplace
+         ``source /opt/ros/jazzy/setup.bash`` et reste à relancer dans **chaque**
+         nouveau terminal ; ``ros2_build_reldebug`` enchaîne ``rosdep install``, la
+         compilation en ``RelWithDebInfo`` et ``source install/setup.bash``. |br|
+         Ils sont déjà chargés dans le conteneur Docker. En installation native,
+         installez ce ``~/.bashrc`` une fois pour toutes.
 
    .. tab-item:: Raspberry Pi 5 sans Docker
       :sync: rpi5
 
       Sur un Raspberry Pi 5 sous **Ubuntu 24.04 pour arm64**, l'installation native fonctionne : ROS 2 Jazzy est publié pour ``arm64``, et MuJoCo fournit des roues ``aarch64``.
 
-      Reprenez **à l'identique** les quatre étapes de l'onglet « Linux sans Docker ». Trois précautions s'ajoutent, propres au Pi.
-
-      .. rubric:: Compiler sans saturer la mémoire
-
-      ``colcon`` compile tous les paquets en parallèle, ce qui suffit à faire tomber un Pi à court de mémoire : le compilateur se fait tuer par le noyau et la compilation échoue avec un message peu clair. Limitez le parallélisme :
+      Reprenez **à l'identique** les quatre étapes de l'onglet « Linux sans Docker », compilation comprise :
 
       .. code-block:: bash
 
-         colcon build --parallel-workers 2 --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo
+         ros2_jazzy
+         ros2_build_reldebug
 
-      Sur un modèle 4 Go, ajoutez en plus un fichier d'échange (``swap``) d'au moins 2 Go avant de compiler.
+      Deux précautions s'ajoutent, propres au Pi.
+
+      .. rubric:: Si la compilation se fait tuer
+
+      ``colcon`` compile tous les paquets en parallèle. Avec les 8 Go d'un Pi 5 cela passe, mais sur un modèle 4 Go le compilateur peut se faire tuer par le noyau, et la compilation échoue sur un message peu clair. Dans ce cas seulement, laissez le raccourci de côté et bridez le parallélisme :
+
+      .. code-block:: bash
+
+         colcon build --parallel-workers 2 --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo --symlink-install
+         source install/setup.bash
+
+      Ajoutez aussi un fichier d'échange (``swap``) d'au moins 2 Go avant de compiler.
 
       .. rubric:: Rendu logiciel
 
@@ -317,7 +333,7 @@ Choisissez maintenant l'onglet qui correspond à votre machine.
 
 .. note::
 
-   Les sections suivantes supposent que vous savez lancer les tests, par ``docker/start.sh test`` ou par ``colcon test``. Si votre environnement n'est pas encore en place, revenez à :ref:`five_bars_installation`.
+   Les sections suivantes supposent que vous savez lancer les tests, par ``docker/start.sh test`` ou par ``ros2_test``. Si votre environnement n'est pas encore en place, revenez à :ref:`five_bars_installation`.
 
 .. _five_bars_premier_lancement:
 
@@ -360,9 +376,8 @@ et le pantographe se referme sous vos yeux.
 
       .. code-block:: bash
 
-         source /opt/ros/jazzy/setup.bash
-         colcon build --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo
-         source install/setup.bash
+         ros2_jazzy
+         ros2_build_reldebug
          ros2 run five_bars_mujoco direct_gui
 
 Déplacez les deux curseurs : les quatre barres restent assemblées, parce que la
@@ -752,16 +767,12 @@ Avec les commandes définies dans :doc:`votre fichier .bashrc <../c02_first_ros2
 
 .. code-block:: bash
 
-   ros2_build
+   ros2_jazzy
+   ros2_build_reldebug
    ros2_test_only five_bars_kinematics
    ros2_view_tests
 
-Les commandes ``colcon`` équivalentes, utiles pour ne voir que la sortie des tests :
-
-.. code-block:: bash
-
-   colcon test --packages-select five_bars_kinematics --event-handlers console_direct+
-   colcon test-result --verbose
+``ros2_test`` lance les tests de **tous** les paquets, et ``ros2_view_tests_all`` affiche aussi ceux qui passent, pas seulement les échecs. Les commandes ``colcon`` que ces raccourcis recouvrent sont rassemblées dans l':ref:`aide-mémoire <cheatsheet_five_bars>`.
 
 Pendant le développement, il est beaucoup plus rapide d'exécuter **directement l'exécutable de test** : on évite le cycle complet de ``colcon``, et on dispose des options de Google Test.
 

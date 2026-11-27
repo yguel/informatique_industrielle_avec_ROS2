@@ -58,6 +58,19 @@ DOCKER_ARGS=(--rm -it --name "$CONTAINER" --network host --ipc host
              -v "$SRC_DIR:/ws/src"
              -e "ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-0}")
 
+# Raccourcis bash du cours (ros2_jazzy, ros2_build_reldebug, ros2_test ...).
+# Le fichier de référence est celui de la doc : on le monte plutôt que de le
+# dupliquer dans l'image. S'il est absent — workspace extrait seul, hors du dépôt
+# du cours — on s'en passe sans bruit, les commandes colcon restent disponibles.
+ALIASES="$ROOT/../../doc/sphinx/source/c02_first_ros2_project_pimped/resources/code/_.bashrc"
+if [[ -f "$ALIASES" ]]; then
+  ALIASES="$(cd "$(dirname "$ALIASES")" && pwd)/$(basename "$ALIASES")"
+  DOCKER_ARGS+=(-v "$ALIASES:/etc/ros2_aliases.bash:ro")
+else
+  echo ">>> Raccourcis bash du cours introuvables ($ALIASES) : ros2_build_reldebug et"
+  echo "    ros2_test ne seront pas definis dans le conteneur."
+fi
+
 if [[ -n "${DISPLAY:-}" ]]; then
   # Allow local containers to open windows on your X server (Linux, also XWayland).
   if command -v xhost >/dev/null 2>&1; then
